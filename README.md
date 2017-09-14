@@ -1,5 +1,5 @@
 # python_class
-Python Learning @ Intel
+Python Learning @ Everywhere
 
 ## This page:  goto/python
 
@@ -7,6 +7,11 @@ Python Learning @ Intel
 * Most of this can be done from your laptop.  Download the Anaconda Python distribution from: http://continuum.io/downloads
 * Download and install a text editor with syntax highlighting, like Notepad ++: http://notepad-plus-plus.org/
 * Print out this python cheat sheet: http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf
+
+## Quick Links:
+* [Git and Github](./0_git_and_github/README.md)
+* [Python Basics](./1_python_basics/README.md)
+* [Files and Pahts](./2_files_and_paths/README.md)
 
 ## Topics Overview:
 ### Git and Github
