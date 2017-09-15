@@ -7,36 +7,36 @@
 [Github](www.github.com)  
 Don't forget about two factor authenticaion if you're going to put real code in there.  Github has free private repositories for students.  Bitbucket has free private repositories for everyone. This course uses Github, though.  
   
-### Install Git:
+**Install Git**:
 * Linux
-** apt-get install git
+  * apt-get install git
 * Mac
-** XCode
-** Homebrew
-** [Package](https://git-scm.com/)
+  * XCode
+  * Homebrew
+  * [Package](https://git-scm.com/)
 * Windows
-** [Package with installer](https://git-scm.com/) - Git comes with a convenient bash shell!
+  * [Package with installer](https://git-scm.com/) - Git comes with a convenient bash shell!
   
-### (Generate and) Sync ssh keys with Github
-
-### Clone this repository!
-
+**(Generate and) Sync ssh keys with Github**  
+  
+**Clone this repository!**  
+  
 # Info:
-## VCS
+**VCS**  
 * [Centralized vs. Decentralized](https://www.youtube.com/watch?v=yPgAfj20PT8)
   
-## Git
+**Git**  
 * Distributed
 * Fast
 * Simple Design
 * Strong support for parallel branches
 * Able to handle large projects efficiently (like the linux kernel)
 
-### Reference
+**Reference**  
 * [Git Workflow](https://www.youtube.com/watch?v=3a2x1iJFJWc)
 * [Github Overview](https://www.youtube.com/watch?v=v95nmWwR8rQ)
 * [Git Demo](https://www.youtube.com/watch?v=9pa_PV2LUlw)
-
+  
 # Assignment
 This is stolen outright from the Georgia Tech ["Software Development Process" class](https://www.udacity.com/wiki/ud957)!
 
