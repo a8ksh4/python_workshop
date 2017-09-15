@@ -9,9 +9,9 @@ Python Learning @ Everywhere
 * Print out this python cheat sheet: http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf
 
 ## Quick Links:
-* [Git and Github](./0_git_and_github/README.md)
-* [Python Basics](./1_python_basics/README.md)
-* [Files and Pahts](./2_files_and_paths/README.md)
+1. [Git and Github](./0_git_and_github/README.md)
+2. [Python Basics](./1_python_basics/README.md)
+3. [Files and Pahts](./2_files_and_paths/README.md)
 
 ## Topics Overview:
 ### Git and Github
