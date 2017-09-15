@@ -3,11 +3,11 @@
 
 # Git and Github:
 ## Setup
-### Create github account
-[Github](www.github.com)  
+**Create github account**  
+[www.github.com](www.github.com)  
 Don't forget about two factor authenticaion if you're going to put real code in there.  Github has free private repositories for students.  Bitbucket has free private repositories for everyone. This course uses Github, though.  
   
-**Install Git**:
+**Install Git**:  
 * Linux
   * apt-get install git
 * Mac
@@ -21,7 +21,7 @@ Don't forget about two factor authenticaion if you're going to put real code in 
   
 **Clone this repository!**  
   
-# Info:
+## Info:
 **VCS**  
 * [Centralized vs. Decentralized](https://www.youtube.com/watch?v=yPgAfj20PT8)
   
@@ -37,17 +37,17 @@ Don't forget about two factor authenticaion if you're going to put real code in 
 * [Github Overview](https://www.youtube.com/watch?v=v95nmWwR8rQ)
 * [Git Demo](https://www.youtube.com/watch?v=9pa_PV2LUlw)
   
-# Assignment
+## Assignment
 This is stolen outright from the Georgia Tech ["Software Development Process" class](https://www.udacity.com/wiki/ud957)!
 
 If this seems impossible, watch the "Git Demo" above. Use the GitHub "Network" view to monitor the state of your repo during the assignment. 
 
-## Setup
+### Setup
 Create a new repository in your github called "exampleprob".  
   
 If you mess this up, you can remove and re-create the repository to try again.  
   
-## Instructions:
+### Instructions:
 **Part 1 (Terminal 1)**
 1. Before you start, make sure to specify your name and email address using command “git config”, if you haven’t already.
 1. Open a terminal window
