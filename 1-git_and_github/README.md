@@ -97,4 +97,4 @@ If you mess this up, you can remove and re-create the repository to try again.
   
 At this point you are done, and your remote repository should look like the one in the figure below in the "Network" view on your github. If it doesn’t, it means that you made a mistake in one of the steps.  
   
-![Graph Reference](./.ignore/graph_refernce.png)
+![Graph Reference](./.ignore/graph_reference.png)
