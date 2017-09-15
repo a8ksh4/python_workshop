@@ -9,45 +9,46 @@ Python Learning @ Everywhere
 * Print out this python cheat sheet: http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf
 
 ## Quick Links:
-1. [Git and Github](./0_git_and_github/README.md)
-2. [Python Basics](./1_python_basics/README.md)
-3. [Files and Pahts](./2_files_and_paths/README.md)
+1. [Git and Github](./1-git_and_github/README.md) (start here)
+2. [Python Basics](./2-python_basics/README.md)
+3. [Files and Paths](./3-files_and_paths/README.md)
+4. [System and Environment](./4-system_and_env/README.md)
+5. [Data Manipulation](./5-data_manipulation/README.md)
+6. ...
+7. ...
 
 ## Topics Overview:
-### Git and Github
-### Conventions
-### Python Basics
+### 1 - Git and Github
+### 2 - Python Basics
+* python installations
 * data types
+* prompts & getpass
 * recursion & iteration
 * functions
 * scope
 * file handling
 * sorting
 * regex
-### Files and Paths
+### 3 - Files and Paths
 * create, rm, copy, move, chmod, chown
 * tar, gzip
-### System and Environment
-* python installations
+* logging
+### 4 - System and Environment
+* argparse
 * os & os.environ
 * sys & sys.args
 * setuid, setgid
 * nis & nodes
 * platform
 * subprocess
-### Logging
-* logger
-### User Interaction
-* prompts, getpass
-* argparse
-### Data Manipulation
+### 5 - Data Manipulation
 * csv, json, yaml, pickle, xlsx
 * regex
 * sql & sqlitle
-### Exception Handling
+### 6 - Exception Handling
 * methodology
 * Examles
-### Debugging
+### 7 - Debugging
 * examples
 ### QA and Unit Testing
 ### Windows Examples
