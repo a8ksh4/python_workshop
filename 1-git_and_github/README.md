@@ -22,7 +22,8 @@ Don't forget about two factor authenticaion if you're going to put real code in 
 **Clone this repository!**  
   
 ## Info:
-**VCS**  
+<a href=".ignore/git-model.png"><img src=".ignore/git-model.png" width="350" align="right"/></a>
+**VCS**
 * [Centralized vs. Decentralized](https://www.youtube.com/watch?v=yPgAfj20PT8)
   
 **Git**  
