@@ -33,6 +33,8 @@ Don't forget about two factor authenticaion if you're going to put real code in 
 * Able to handle large projects efficiently (like the linux kernel)
 
 **Reference**  
+* [The Git Parable](http://tom.preston-werner.com/2009/05/19/the-git-parable.html)
+* [A Successful Git Branching Model](http://nvie.com/posts/a-successful-git-branching-model/)
 * [Git Workflow](https://www.youtube.com/watch?v=3a2x1iJFJWc)
 * [Github Overview](https://www.youtube.com/watch?v=v95nmWwR8rQ)
 * [Git Demo](https://www.youtube.com/watch?v=9pa_PV2LUlw)
