@@ -50,6 +50,8 @@ Python Learning @ Everywhere
 * Examles
 ### 7 - Debugging
 * examples
-### QA and Unit Testing
+### 8 - QA and Unit Testing
+* http://docs.python-guide.org/en/latest/writing/tests/
+
 ### Windows Examples
 
