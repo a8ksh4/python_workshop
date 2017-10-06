@@ -4,7 +4,11 @@ Python Learning @ Everywhere
 ## This page:  goto/python
 
 ## Pre-Work:
-* Most of this can be done from your laptop.  Download the Anaconda Python distribution from: http://continuum.io/downloads
+* Most of this content is designed for & tested on linux.  It is recommended to run it in linux or in a linux VM (ubuntu?).
+* Download and install the Anaconda Python distribution from: http://continuum.io/downloads (Unless you have another distribution you prefer. Anaconda is stronly recommended.)
+* Install git:
+  * Linux:  sudo apt-get install git
+  * Windows:  https://git-scm.com/download/win
 * Download and install a text editor with syntax highlighting, like Notepad ++: http://notepad-plus-plus.org/
 * Print out this python cheat sheet: http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf
 
