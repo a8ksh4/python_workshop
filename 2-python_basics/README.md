@@ -89,6 +89,7 @@ Single quotes can contain un-escaped double quotes; double quotes can contain un
     Out[18]: 16
   
 *What kinds of things can we do with this?*  
+
     In [21]: for animal in ('cat', 'dog', 'mouse', 'fox'):
         ...:     location = a.index(animal) if animal in a else 'foobar'
         ...:     print animal, location
@@ -96,13 +97,55 @@ Single quotes can contain un-escaped double quotes; double quotes can contain un
     cat foobar
     dog 40
     mouse foobar
-    fox 16  
+    fox 16
   
 **Substrings**  
+*Hey, this works just like with lists!*  
   
+    In [23]: a[:9]
+    Out[23]: 'The quick'
+
+    In [24]: a[20:]
+    Out[24]: 'jumps over the lazy dog'
+
+    In [25]: a[9:20]
+    Out[25]: ' brown fox '
+
+    In [26]: a[9:20:3]
+    Out[26]: ' o x'
+
 **Split and Join**  
+Split works on whitespace, by default.  Join is a string operation, not a list operation, so we call it from a string that will join whatever we pass to the join commmand (a list or tuple).  
 
+    In [30]: b = a.split()
+    
+    In [31]: b
+    Out[31]: ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']
+    
+    In [32]: '_'.join(b)
+    Out[32]: 'The_quick_brown_fox_jumps_over_the_lazy_dog'
 
+    In [34]: ''.join(a.split())
+    Out[34]: 'Thequickbrownfoxjumpsoverthelazydog'
+
+Pass a character, or sequence of characters, to split to change the delimeter:  
+
+    In [35]: c = 'one,two,3,five,_,foobar'
+    
+    In [36]: c.split()
+    Out[36]: ['one,two,3,five,_,foobar']
+    
+    In [37]: c.split(',')
+    Out[37]: ['one', 'two', '3', 'five', '_', 'foobar']
+    
+    In [38]: c.split(',t')
+    Out[38]: ['one', 'wo,3,five,_,foobar']
+
+### Dictionaries
+
+### Lists and Tuples
+
+### Sets
  Syntax
 Loops
 Lists
