@@ -28,6 +28,7 @@ def divideThemInt(a, b):
 ```
 
 ## Strings
+```python
 def quoteIt():
      '''return a string with both single and double quotes inside of it.
      >>> '"' in quoteOne() and "'" in quoteOne()
@@ -63,3 +64,4 @@ def quoteIt():
              return True
      return False
      for 
+```
