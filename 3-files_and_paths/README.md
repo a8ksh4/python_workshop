@@ -29,13 +29,13 @@ l1c0,l1c1,l1c2
 l2c0,l2c1,l2c2
 
 In [39]: 
-```
+```  
 **Modes**
-* r - Open file for reading
-* w - Open file for writing; puts cursor at start of file (truncates file).
-* a - Open file for writing with cursor at end of file (appends file).
-* + - Open file for reading and writing.
-
+* r - Open file for reading  
+* w - Open file for writing; puts cursor at start of file (truncates file).  
+* a - Open file for writing with cursor at end of file (appends file).  
+* + - Open file for reading and writing.  
+  
 **Writing to a file**
 ```python
 In [39]: animals = ('dog', 'moose', 'squirrel', 'cow')
@@ -94,18 +94,59 @@ shutils.copy(src_path, dst_path)
 ```
 
 # os module
-`os.getcwd` - get the current working directory
-`os.chdir` - change directory
-*There are a bunch of useful os._ commands... to be discussed later.  Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+One of the core modules needed for any sysadmin to interact with the local environment and filesystem!  This stuff is frequenly done with system calls and really shouldn't be.  Your code will be much more reliable and maintainable if you os the proper modules and calls for this kind of stuff.  
+  
+## Basic Operations
+* **os.getcwd** - get the current working directory  
+* **os.chdir** - change directory  
+* **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
+* **os.mkdir** - create a directory  
+* **os.remove** - remove a file  
 ```python
 In [66]: os.getcwd()
 Out[66]: '/tmp'
 
-In [67]: os.chdir('/home/drnorris')
+In [67]: os.chdir('/tmp/foobar')
 
 In [68]: os.getcwd()
-```
+Out[68]: '/tmp/foobar'
 
+In [108]: os.listdir('.')
+Out[108]: ['afile.txt']
+
+In [109]: os.mkdir('new_directory')
+
+In [110]: os.remove('afile.txt')
+
+In [111]: os.listdir('.')
+Out[111]: ['new_directory']
+
+In [112]: 
+In [108]: os.listdir('.')
+Out[108]: ['afile.txt']
+
+In [109]: os.mkdir('new_directory')
+
+In [110]: os.remove('afile.txt')
+
+In [111]: os.listdir('.')
+Out[111]: ['new_directory']
+```
+* **os.rmdir** - remove a directory
+* **os.symlnik** - create a symlink
+* **os.umask** - set the umask: set permissions that are removed from newly created filesystem objects
+* **os.walk**
+
+## Permissions and stat
+
+**os.chroot** - change root directory to some path:  E.g. make your script think that a temporary working directory is the root directory ('/').  **This needs testing/verification for an example**  
+**os.chown** - change file/dir ownership  
+**os.chmod** - change file/dir permissions.  
+**os.stat** - get filesystem data for some path  
+  
+*There are a bunch of useful os._ commands... to be discussed later.  Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+  
+  
 If a path does not exist, an "OSError" exception is raised:  
 ```python
 try:
@@ -115,16 +156,18 @@ except OSError:
 ```
 
 ## os.path
-**Paths**
-os.path.join(path, *paths)
-
-**Real path of a file - traverse symlinks and find where it really is**
+**os.path.join**  
+os.path.join(path, *paths)  
+  
+**os.path.realpath** - Real path of a file - traverse symlinks and find where it really is.  
 ```python
 In [57]: p = '/home/thedude/Games/'
 
 In [58]: os.path.realpath(p)
 Out[58]: '/media/md0/thedude-extra/Games'
 ```
+**os.path.basename** - name of file at end of a given path
+**os.path.dirname** - all of a given path except for the file name at the end
 
 **Real path of running script**
 I use this all the time since my scripts are usually run from other directories and I can't count on the current working directory to be the same as the directory my script is in.  So get the script directory and then append it to access any other content/utilities that are in subdirectories, etc.  
@@ -193,6 +236,7 @@ os.chown(os.path.join(root, momo), make_uid, -1)
 CWF = os.path.realpath(__file__)
 CWD = os.path.dirname(CWF)
 
+**os.tmpfile** - return a temporary file object
 
 
 
