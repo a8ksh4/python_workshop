@@ -1,3 +1,5 @@
+https://docs.python.org/2/library/filesys.html
+
 # Opening Files
 **Reading a file**
 ```python
@@ -17,7 +19,7 @@ In [36]: print f.read()
 
 In [37]: f.close()
 ```
-The "with" convention is more pythonic than opening and closing files as above.
+The "with" convention is more pythonic than opening and closing files as above.  This will ensure that files are only open in the context that they need to be and that they are closed.  Leaving files open is poor form... 
 ```python
 In [38]: with open('blah.csv', 'r') as f:
    ....:     print f.read()
@@ -74,6 +76,58 @@ nyc
 ```python
 In [47]: open('newfile.out', 'w').close()
 ```
+
+# shutil module - High-level file operations
+https://docs.python.org/2/library/shutil.html
+
+**Move a file**
+```python
+import shutil
+src_path = '/tmp/my_file.foo'
+dst_path = '/opt/my_file.bar'
+shutils.move(src_path, dst_path)
+```
+
+**Copy a file**
+```python
+shutils.copy(src_path, dst_path)
+```
+
+# os module
+
+## os.path
+**Paths**
+os.path.join(path, *paths)
+
+**Real path of a file (e.g. traverse symlinks and find where it really is**
+```python
+In [57]: p = '/home/drnorris/Games/'
+
+In [58]: os.path.realpath(p)
+Out[58]: '/media/md0/drnorris-extra/Games'
+```
+
+**Real path of running script**
+```
+desktop:~/git/python_class$ cat realpath_example.py 
+#!/usr/bin/env python
+import os
+
+MY_PATH = os.path.realpath(__file__)
+
+if __name__ == '__main__':
+    print "My path is:", MY_PATH
+
+desktop:~/git/python_class$ ./realpath_example.py 
+My path is: /home/thedude/git/python_class/realpath_example.py
+desktop:~/git/python_class$
+```
+
+**Tests**
+os.path.isfile(path) - True if it path is a file
+os.path.isdir(path) - True if path is a directory
+os.path.islink(path) - True if path is a symlink
+os.path.ismount(path) - True if path is a mount point
 
 create/destroy
 shutil
