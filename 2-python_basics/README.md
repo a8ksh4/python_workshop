@@ -67,7 +67,17 @@ In [10]: a.
            a.count      a.find       a.isdigit    a.join       a.replace    a.rsplit     a.strip      a.zfill  
            a.decode     a.format     a.islower    a.ljust      a.rfind      a.rstrip     a.swapcase            
            a.encode     a.index      a.isspace    a.lower      a.rindex     a.split      a.title
-```  
+```
+  
+String Modifiers - these return a modified string, they do not change the string in place!  
+* `strip`, `lstrip`, `rstrip` - remove whitespace from one or both ends of a string
+* `upper`, `lower` - convert string to upper or lower case  
+  
+String Tests:  
+* `islower`, `isupper` - return True if all characters in string are lower case or upper case
+* `isalpha`, `isdigit`, `isalnum` - return true if all characaters are alphabetic, numeric, or both
+* `isspace` - return true if string contains only whitespace  
+  
 **Quoting**  
 *ipython (and the regular python repl) will echo the last value returned, even without a print statement.  In a script/program, though, you need to use print to show the value.*
   
