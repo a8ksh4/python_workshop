@@ -1,4 +1,80 @@
-File and Path
+# Opening Files
+**Reading a file**
+```python
+In [31]: f = open('foo.yaml', 'r')
+
+In [36]: print f.read()
+- module: "python basics"
+  content:
+  - name: "prob1"
+    desc: "foo"
+  - name: "prob2"
+    desc: "foo2"
+- module: "python advanced"
+  content:
+  - name: "prob 1"
+    desc: "foo3"
+
+In [37]: f.close()
+```
+The "with" convention is more pythonic than opening and closing files as above.
+```python
+In [38]: with open('blah.csv', 'r') as f:
+   ....:     print f.read()
+   ....:     
+l0c0,l0c1,l0c2
+l1c0,l1c1,l1c2
+l2c0,l2c1,l2c2
+
+In [39]: 
+```
+**Modes**
+* r - Open file for reading
+* w - Open file for writing; puts cursor at start of file (truncates file).
+* a - Open file for writing with cursor at end of file (appends file).
+* + - Open file for reading and writing.
+
+**Writing to a file**
+```python
+In [39]: animals = ('dog', 'moose', 'squirrel', 'cow')
+
+In [40]: with open('the_animals.txt', 'w') as f:
+   ....:     for animal in animals:
+   ....:         f.write(animal + '\n')
+   ....:         
+
+In [42]: print open('the_animals.txt', 'r').readlines()
+['dog\n', 'moose\n', 'squirrel\n', 'cow\n']
+
+In [43]: print open('the_animals.txt', 'r').read()
+dog
+moose
+squirrel
+cow
+```
+And with append:
+```python
+In [44]: with open('the_animals.txt', 'a') as f:
+   ....:     for city in ('sac', 'lax', 'slc', 'nyc'):
+   ....:         f.write(city + '\n')
+   ....:         
+
+In [45]: print open('the_animals.txt', 'r').read()
+dog
+moose
+squirrel
+cow
+sac
+lax
+slc
+nyc
+```
+
+**Create empty file or truncate file**
+```python
+In [47]: open('newfile.out', 'w').close()
+```
+
 create/destroy
 shutil
 shutil.copyfile(src, dst)
