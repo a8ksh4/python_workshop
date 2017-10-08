@@ -94,40 +94,82 @@ shutils.copy(src_path, dst_path)
 ```
 
 # os module
+`os.getcwd` - get the current working directory
+`os.chdir` - change directory
+*There are a bunch of useful os._ commands... to be discussed later.  Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+```python
+In [66]: os.getcwd()
+Out[66]: '/tmp'
+
+In [67]: os.chdir('/home/drnorris')
+
+In [68]: os.getcwd()
+```
+
+If a path does not exist, an "OSError" exception is raised:  
+```python
+try:
+    os.chdir(path)
+except OSError:
+    print "path does not exist: {}".format(path)
+```
 
 ## os.path
 **Paths**
 os.path.join(path, *paths)
 
-**Real path of a file (e.g. traverse symlinks and find where it really is**
+**Real path of a file - traverse symlinks and find where it really is**
 ```python
-In [57]: p = '/home/drnorris/Games/'
+In [57]: p = '/home/thedude/Games/'
 
 In [58]: os.path.realpath(p)
-Out[58]: '/media/md0/drnorris-extra/Games'
+Out[58]: '/media/md0/thedude-extra/Games'
 ```
 
 **Real path of running script**
+I use this all the time since my scripts are usually run from other directories and I can't count on the current working directory to be the same as the directory my script is in.  So get the script directory and then append it to access any other content/utilities that are in subdirectories, etc.  
+
 ```
-desktop:~/git/python_class$ cat realpath_example.py 
+desktop:~/git/python_class$ cat script_paths_example.py 
 #!/usr/bin/env python
+
+import doctest
 import os
 
 MY_PATH = os.path.realpath(__file__)
+MY_FILENAME = os.path.basename(MY_PATH)
+MY_DIR = os.path.dirname(MY_PATH)
 
 if __name__ == '__main__':
     print "My path is:", MY_PATH
+    print "My filename is:", MY_FILENAME
+    
+desktop:~/git/python_class$ ./script_paths_example.py 
+My path is: /home/thedude/git/python_class/script_path_example.py
+My filename is: script_path_example.py
+My dir is: /home/thedude/git/python_class
+desktop:~/git/python_class$ 
 
-desktop:~/git/python_class$ ./realpath_example.py 
-My path is: /home/thedude/git/python_class/realpath_example.py
-desktop:~/git/python_class$
 ```
 
 **Tests**
-os.path.isfile(path) - True if it path is a file
-os.path.isdir(path) - True if path is a directory
-os.path.islink(path) - True if path is a symlink
-os.path.ismount(path) - True if path is a mount point
+`os.path.isfile(my_path)` - True if it path is a file
+`os.path.isdir(my_path)` - True if path is a directory
+`os.path.islink(my_path)` - True if path is a symlink
+`os.path.ismount(my_path)` - True if path is a mount point
+
+```python
+def cdToSymlinkDir(sym_path):
+    '''given a symlink path to a file or directory,
+    identify the real path to that object and cd
+    to it. Raise exception if given pth is not a symlink'''
+    if not os.path.islink(sym_path):
+        raise IOError('symlink expected: {}'.format(sym_path))
+    target_file = os.path.realpath(sym_path)
+    target_dir = os.path.dirname(target_file)
+    os.path.cd(target_dir)
+    return target_file
+```
 
 create/destroy
 shutil
