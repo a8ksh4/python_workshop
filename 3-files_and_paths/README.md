@@ -1,4 +1,11 @@
-[Opening Files](#Opening-Files)  
+* [Opening Files](#Opening-Files)
+  * modes
+  * read
+  * write
+  * append
+* [os.path](#os.path)
+  * foo
+  
 [ToC]  
   
 * auto-getn TOC:
