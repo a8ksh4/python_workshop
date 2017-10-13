@@ -1,14 +1,15 @@
+# Using a uuid to uniquely identify questions
 4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
-    title: addition_example
     # This is an example question
     # It shows off the format used
+    title: addition_example
     text: |
         Write a function that takes 2 integers as parameter
         It should return the sum of the 2 ints
-    # I'm putting this in base64 for now, I think it might help readability. This codes to:
+    signature: "add(number1: int, number2:int ) -> int:"        
+    # I'm putting this in base64, I think it might help readability. This codes to:
     # def add(num_1, num_2):
     #     return num_1 + num_2
-    signature: "add(number1: int, number2:int ) -> int:"
     solution: !!binary "ZGVmIGFkZChudW1fMSwgbnVtXzIpOgogICAgcmV0dXJuIG51bV8xICsgbnVtXzI="
     unittests:
         test1:
@@ -24,6 +25,10 @@
         test4_x4:
             - "randint(-1000,1000)"
             - "randint(-1,1)"
+    # Setup scripts to prep an environment. Run before unittests
+    setup:
+    # Teardown scripts to clean up the environment. Run after unittests
+    teardown:
     # Tags can be used to sort and filter questions
     tags:
         - sample
