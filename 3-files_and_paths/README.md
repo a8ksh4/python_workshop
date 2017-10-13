@@ -305,7 +305,68 @@ Out[47]: ['d', 'e', 'b', 'a', 'c']
 ```
   
 ## gzip
-**gzip**
+gzip is a file handling wrapper for zlib, which can be used to compress arbitrary data (very conveniently)!
+```python
+In [62]: import zlib
+
+In [63]: foo = '''<TarInfo 'd' at 0x7fc1c6e3bd90>
+   ....: <TarInfo 'e' at 0x7fc1c6e3b0d0>
+   ....: <TarInfo 'b' at 0x7fc1c6e3bed0>
+   ....: <TarInfo 'a' at 0x7fc1c6e3bd50>
+   ....: <TarInfo 'c' at 0x7fc1c6e3be50>
+   ....: '''
+
+In [64]: len(foo)
+Out[64]: 160
+In [66]: zfoo = zlib.compress(foo)
+
+In [67]: print zfoo
+x��	I,��K�WPOQWH,Q0�0OK6L6K5NJ�4�㲁˧�����'�˧��'b�o�"���$�@.�
+
+In [68]: len(zfoo)
+Out[68]: 67
+
+In [69]: print zlib.decompress(zfoo)
+<TarInfo 'd' at 0x7fc1c6e3bd90>
+<TarInfo 'e' at 0x7fc1c6e3b0d0>
+<TarInfo 'b' at 0x7fc1c6e3bed0>
+<TarInfo 'a' at 0x7fc1c6e3bd50>
+<TarInfo 'c' at 0x7fc1c6e3be50>
+
+```
+**gzipping a file**
+_We have to read it to write it out with gzip..._
+```python
+In [69]: import gzip
+
+In [83]: os.stat('./somdata.txt').st_size
+Out[83]: 160
+
+In [82]: with open('somdata.txt', 'r') as f:
+   ....:     content = f.read()
+   ....:     
+
+In [85]: with gzip.open('somdata.txt.gz', 'wb') as f:
+   ....:     f.write(content)
+   ....:     
+
+In [86]: os.stat('./somdata.txt.gz').st_size
+Out[86]: 91
+```
+
+**read a gzipped file**
+```python
+In [95]: with gzip.open('somdata.txt.gz', 'rb') as f:
+   ....:     new_content = f.read()
+   ....: print new_content
+   ....: 
+<TarInfo 'd' at 0x7fc1c6e3bd90>
+<TarInfo 'e' at 0x7fc1c6e3b0d0>
+<TarInfo 'b' at 0x7fc1c6e3bed0>
+<TarInfo 'a' at 0x7fc1c6e3bd50>
+<TarInfo 'c' at 0x7fc1c6e3be50>
+
+```
 
 
 
