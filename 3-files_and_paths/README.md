@@ -6,7 +6,7 @@
   
 https://docs.python.org/2/library/filesys.html
 
-#Opening Files
+# Opening Files
 **Reading a file**
 ```python
 In [31]: f = open('foo.yaml', 'r')
