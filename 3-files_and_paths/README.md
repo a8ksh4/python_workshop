@@ -114,12 +114,11 @@ shutils.copy(src_path, dst_path)
 # os module
 One of the core modules needed for any sysadmin to interact with the local environment and filesystem!  This stuff is frequenly done with system calls and really shouldn't be.  Your code will be much more reliable and maintainable if you os the proper modules and calls for this kind of stuff.  
   
+*There are a bunch of useful os._ commands! Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+  
 ## Basic Operations
 * **os.getcwd** - get the current working directory  
-* **os.chdir** - change directory  
-* **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
-* **os.mkdir** - create a directory  
-* **os.remove** - remove a file  
+* **os.chdir** - change directory
 ```python
 In [66]: os.getcwd()
 Out[66]: '/tmp'
@@ -128,41 +127,51 @@ In [67]: os.chdir('/tmp/foobar')
 
 In [68]: os.getcwd()
 Out[68]: '/tmp/foobar'
-
+```
+* **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
+```python
 In [108]: os.listdir('.')
-Out[108]: ['afile.txt']
-
+Out[108]: ['a.out', 'afile.txt']
+```
+* **os.mkdir** - create a directory  
+```python
 In [109]: os.mkdir('new_directory')
-
+```
+* **os.remove** - remove a file  
+```python
 In [110]: os.remove('afile.txt')
 
 In [111]: os.listdir('.')
-Out[111]: ['new_directory']
-
-In [112]: 
-In [108]: os.listdir('.')
-Out[108]: ['afile.txt']
-
-In [109]: os.mkdir('new_directory')
-
-In [110]: os.remove('afile.txt')
-
-In [111]: os.listdir('.')
-Out[111]: ['new_directory']
+Out[111]: ['a.out', 'new_directory']
 ```
 * **os.rmdir** - remove a directory
+```python
+In [112]: os.rmdir('new_directory')
+
+In [111]: os.listdir('.')
+Out[111]: ['a.out']
+```
 * **os.symlnik** - create a symlink
-* **os.umask** - set the umask: set permissions that are removed from newly created filesystem objects
-* **os.walk**
+```python
+In [104]: os.symlink('a.out', 'foo.out')
+```
+* **os.readlink** - see where a symlink points
+```python
+In [105]: os.readlink('foo.out')
+Out[105]: 'a.out'
+```
+  
+### os.walk
 
 ## Permissions and stat
-
 **os.chroot** - change root directory to some path:  E.g. make your script think that a temporary working directory is the root directory ('/').  **This needs testing/verification for an example**  
 **os.chown** - change file/dir ownership  
 **os.chmod** - change file/dir permissions.  
 **os.stat** - get filesystem data for some path  
+**os.umask** - set the umask: set permissions that are removed from newly created filesystem objects
+
   
-*There are a bunch of useful os._ commands... to be discussed later.  Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+
   
   
 If a path does not exist, an "OSError" exception is raised:  
@@ -367,9 +376,3 @@ In [95]: with gzip.open('somdata.txt.gz', 'rb') as f:
 <TarInfo 'c' at 0x7fc1c6e3be50>
 
 ```
-
-
-
-
-permissions
-
