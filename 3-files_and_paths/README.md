@@ -1,18 +1,23 @@
-* [Opening Files](#Opening-Files)
-  * modes
-  * read
-  * write
-  * append
-* [os.path](#os.path)
-  * foo
+# Index:
+* [Opening Files](#opening-files)
+  * modes, read, write, append
+* [shutil module](./README.md#shutil-module---high-level-file-operations)
+* [os module](#os-module)
+  * [Basic Operations](#basic-operations)
+    * os.getcwd, chdir, listdir, mkdir, remove
+    * os.rmdir, symlink, umask
+    * os.walk
+  * [Permissions and stat](#permissions-and-stat)
+    * os.chroot, os.chown, os.cmod, os.stat
+  * [os.path](#ospath)
+    * os.path.join, realpath, basename
+    * Tests:
+      * os.pth.isfile, isdir, islink, ismount
+  * [tar and gzip](#tar-and-gzip)
   
-[ToC]  
   
-* auto-getn TOC:
-{:toc}
+https://docs.python.org/2/library/filesys.html  
   
-https://docs.python.org/2/library/filesys.html
-
 # Opening Files
 **Reading a file**
 ```python
@@ -249,8 +254,58 @@ os.chown(os.path.join(root, momo), make_uid, -1)
 CWF = os.path.realpath(__file__)
 CWD = os.path.dirname(CWF)
 
-**os.tmpfile** - return a temporary file object
 
+# tar and gzip
+## tar
+**creating and adding files**
+```python
+In [39]: os.listdir('.')
+Out[39]: ['d', 'e', 'b', 'a', 'c']
+
+In [40]: with tarfile.open('myjunk.tar', 'w') as t:
+   ....:     for fname in os.listdir('.'):
+   ....:         t.add(fname)
+   ....:         
+```  
+**list contents**
+```python
+In [41]: with tarfile.open('myjunk.tar', 'r') as t:
+   ....:     contents = t.getmembers()
+   ....:     t.list()
+   ....:     
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 d
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 e
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 b
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 a
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 c
+
+In [52]: for c in contents:
+   ....:     print c
+   ....:     
+<TarInfo 'd' at 0x7fc1c6e3bd90>
+<TarInfo 'e' at 0x7fc1c6e3b0d0>
+<TarInfo 'b' at 0x7fc1c6e3bed0>
+<TarInfo 'a' at 0x7fc1c6e3bd50>
+<TarInfo 'c' at 0x7fc1c6e3be50>
+```  
+**extracting**
+```python
+In [43]: os.mkdir('extract_here')
+
+In [44]: os.chdir('./extract_here/')
+
+In [45]: os.listdir('.')
+Out[45]: [ ]
+In [46]: with tarfile.open('../myjunk.tar', 'r') as t:
+   ....:     t.extractall()
+   ....:     
+
+In [47]: os.listdir('.')
+Out[47]: ['d', 'e', 'b', 'a', 'c']
+```
+  
+## gzip
+**gzip**
 
 
 
