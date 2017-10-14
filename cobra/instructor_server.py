@@ -24,6 +24,7 @@ class QuestionResource():
         setup = data[question_id]['setup']
         teardown = data[question_id]['teardown']
         token = str(uuid.uuid4())    # this will probably be from a user database or something, once multiuser is worked out.
+        seed = 323423                # this will eventually be randomized per session
         body = {'title': title, 
                 'text': text, 
                 'signature': signature, 
@@ -32,7 +33,8 @@ class QuestionResource():
                 'setup': setup, 
                 'teardown': teardown,
                 'imports': imports,
-                'token': token}
+                'token': token,
+                'seed': seed}
         resp.body = (json.dumps(body))
 
    

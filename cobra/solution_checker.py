@@ -28,9 +28,14 @@ def signature_check():
     
 def run_solution(solution, data):
     '''Main function, takes a text solution and yml data, and combines the two for execution'''
+    # these two lines let meta information get passed into the setup and teardown scripts.
+    # it's mostly so you can send a dynamic seed
+    data['setup'] = data['setup'].format(**data)
+    data['teardown'] = data['teardown'].format(**data)
+    
     # we need to make imports global so they can be used inside of unit tests
     # we will also run our setup scripts here since we want those imports in the setup namespace
-    import_items = findall(r'import\s+(.*)', data['imports'])[0]  
+    import_items = findall(r'import\s+(.*)', data['imports'])[0]
     exec('global {import_items}\n{imports}\n{setup}'.format(import_items=import_items, **data))
 
     # now we will get the function name (solution_name) used by the solution
