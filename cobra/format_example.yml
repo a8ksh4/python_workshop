@@ -25,10 +25,13 @@
         test4_x4:
             - "randint(-1000,1000)"
             - "randint(-1,1)"
+
+    # Used for any outside module dependancies
+    imports: "from random import randint, seed"
     # Setup scripts to prep an environment. Run before unittests
-    setup: "from random import randint"
+    setup: "seed(34234)"
     # Teardown scripts to clean up the environment. Run after unittests
-    teardown:
+    teardown: ""
     # Tags can be used to sort and filter questions
     tags:
         - sample

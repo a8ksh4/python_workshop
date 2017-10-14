@@ -20,6 +20,7 @@ class QuestionResource():
         signature = data[question_id]['signature']
         tags = data[question_id]['tags']
         unittests = data[question_id]['unittests']
+        imports = data[question_id]['imports']
         setup = data[question_id]['setup']
         teardown = data[question_id]['teardown']
         token = str(uuid.uuid4())    # this will probably be from a user database or something, once multiuser is worked out.
@@ -29,7 +30,8 @@ class QuestionResource():
                 'tags': tags, 
                 'unittests': unittests, 
                 'setup': setup, 
-                'teardown': teardown, 
+                'teardown': teardown,
+                'imports': imports,
                 'token': token}
         resp.body = (json.dumps(body))
 
