@@ -1,12 +1,22 @@
 #!/usr/bin/env python
 
+# Python2 compatibility:
+from __future__ import print_function
+from future.builtins import input
+
+# Other imports:
 import os
 import yaml
+from glob import glob
+
 
 EDITOR='/usr/bin/vi'
 
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+
 def getProbFiles():
-    return ['some_probs.yml',]
+    return glob('*.yml')
 
 def readProbsFile(problem_file):
     return yaml.load(open(problem_file, 'r'))
@@ -19,18 +29,18 @@ def promptMenu(title, options, defaults=None):
     valid_choices = [str(n) for n in range(len(options))]
     valid_choices += [n for n, o in defaults]
 
-    print "\n --- {} ---".format(title)
+    print("\n --- {} ---".format(title))
     for n, option in enumerate(options):
-        print "  {} {}".format(n, option)
-    print ""
+        print("  {} {}".format(n, option))
+    print("")
     for n, option in defaults:
-        print "  {} {}".format(n, option)
-    print ""
+        print("  {} {}".format(n, option))
+    print("")
 
     for guess in (1, 2, 3):
         answer = str(input("Select: "))
         if answer not in valid_choices:
-            print "Invalid.  Optoins are:", valid_choices
+            print("Invalid.  Optoins are:", valid_choices)
             continue
         break
     else:
@@ -43,21 +53,21 @@ def interactiveMenu(prob_sets):
     prob_set = None
     prob_id = None
     while True:
-        os.system('clear')
+        cls()
 
         # Chose a problem file
         if not prob_set_name:
             defaults = (('q', 'quit/return'), )
             title = "Choose a problem file:"
             choice = promptMenu(title, prob_sets.keys(), defaults)
-            print "CHOICE Was:", choice
+            print("CHOICE Was:", choice)
             if choice == None:
                 break
             elif choice.isdigit():
-                prob_set_name = prob_sets.keys()[int(choice)]
+                prob_set_name = list(prob_sets.keys())[int(choice)]
                 prob_set = prob_sets[prob_set_name]
             elif choice == 'q':
-                print "Quitting this fine program!"
+                print("Quitting this fine program!")
                 break
 
         # Chose a problem
@@ -98,6 +108,7 @@ def interactiveMenu(prob_sets):
             elif choice == 'c':
                 pass
             elif choice == 'n':
+                pass
 
 def mainFunc():
     prob_files = getProbFiles()
