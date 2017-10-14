@@ -1,5 +1,23 @@
-https://docs.python.org/2/library/filesys.html
-
+# Index:
+* [Opening Files](#opening-files)
+  * modes, read, write, append
+* [shutil module](./README.md#shutil-module---high-level-file-operations)
+* [os module](#os-module)
+  * [Basic Operations](#basic-operations)
+    * os.getcwd, chdir, listdir, mkdir, remove
+    * os.rmdir, symlink, umask
+    * os.walk
+  * [Permissions and stat](#permissions-and-stat)
+    * os.chroot, os.chown, os.cmod, os.stat
+  * [os.path](#ospath)
+    * os.path.join, realpath, basename
+    * Tests:
+      * os.pth.isfile, isdir, islink, ismount
+  * [tar and gzip](#tar-and-gzip)
+  
+  
+https://docs.python.org/2/library/filesys.html  
+  
 # Opening Files
 **Reading a file**
 ```python
@@ -96,12 +114,11 @@ shutils.copy(src_path, dst_path)
 # os module
 One of the core modules needed for any sysadmin to interact with the local environment and filesystem!  This stuff is frequenly done with system calls and really shouldn't be.  Your code will be much more reliable and maintainable if you os the proper modules and calls for this kind of stuff.  
   
+*There are a bunch of useful os._ commands! Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+  
 ## Basic Operations
 * **os.getcwd** - get the current working directory  
-* **os.chdir** - change directory  
-* **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
-* **os.mkdir** - create a directory  
-* **os.remove** - remove a file  
+* **os.chdir** - change directory
 ```python
 In [66]: os.getcwd()
 Out[66]: '/tmp'
@@ -110,41 +127,51 @@ In [67]: os.chdir('/tmp/foobar')
 
 In [68]: os.getcwd()
 Out[68]: '/tmp/foobar'
-
+```
+* **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
+```python
 In [108]: os.listdir('.')
-Out[108]: ['afile.txt']
-
+Out[108]: ['a.out', 'afile.txt']
+```
+* **os.mkdir** - create a directory  
+```python
 In [109]: os.mkdir('new_directory')
-
+```
+* **os.remove** - remove a file  
+```python
 In [110]: os.remove('afile.txt')
 
 In [111]: os.listdir('.')
-Out[111]: ['new_directory']
-
-In [112]: 
-In [108]: os.listdir('.')
-Out[108]: ['afile.txt']
-
-In [109]: os.mkdir('new_directory')
-
-In [110]: os.remove('afile.txt')
-
-In [111]: os.listdir('.')
-Out[111]: ['new_directory']
+Out[111]: ['a.out', 'new_directory']
 ```
 * **os.rmdir** - remove a directory
+```python
+In [112]: os.rmdir('new_directory')
+
+In [111]: os.listdir('.')
+Out[111]: ['a.out']
+```
 * **os.symlnik** - create a symlink
-* **os.umask** - set the umask: set permissions that are removed from newly created filesystem objects
-* **os.walk**
+```python
+In [104]: os.symlink('a.out', 'foo.out')
+```
+* **os.readlink** - see where a symlink points
+```python
+In [105]: os.readlink('foo.out')
+Out[105]: 'a.out'
+```
+  
+### os.walk
 
 ## Permissions and stat
-
 **os.chroot** - change root directory to some path:  E.g. make your script think that a temporary working directory is the root directory ('/').  **This needs testing/verification for an example**  
 **os.chown** - change file/dir ownership  
 **os.chmod** - change file/dir permissions.  
 **os.stat** - get filesystem data for some path  
+**os.umask** - set the umask: set permissions that are removed from newly created filesystem objects
+
   
-*There are a bunch of useful os._ commands... to be discussed later.  Do dir(os), or type os and press \<tab\> in your ipython terminal*  
+
   
   
 If a path does not exist, an "OSError" exception is raised:  
@@ -236,11 +263,116 @@ os.chown(os.path.join(root, momo), make_uid, -1)
 CWF = os.path.realpath(__file__)
 CWD = os.path.dirname(CWF)
 
-**os.tmpfile** - return a temporary file object
 
+# tar and gzip
+## tar
+**creating and adding files**
+```python
+In [39]: os.listdir('.')
+Out[39]: ['d', 'e', 'b', 'a', 'c']
 
+In [40]: with tarfile.open('myjunk.tar', 'w') as t:
+   ....:     for fname in os.listdir('.'):
+   ....:         t.add(fname)
+   ....:         
+```  
+**list contents**
+```python
+In [41]: with tarfile.open('myjunk.tar', 'r') as t:
+   ....:     contents = t.getmembers()
+   ....:     t.list()
+   ....:     
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 d
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 e
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 b
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 a
+-rw-rw-r-- fred/fred          0 2017-10-12 17:43:40 c
 
+In [52]: for c in contents:
+   ....:     print c
+   ....:     
+<TarInfo 'd' at 0x7fc1c6e3bd90>
+<TarInfo 'e' at 0x7fc1c6e3b0d0>
+<TarInfo 'b' at 0x7fc1c6e3bed0>
+<TarInfo 'a' at 0x7fc1c6e3bd50>
+<TarInfo 'c' at 0x7fc1c6e3be50>
+```  
+**extracting**
+```python
+In [43]: os.mkdir('extract_here')
 
+In [44]: os.chdir('./extract_here/')
 
-permissions
+In [45]: os.listdir('.')
+Out[45]: [ ]
+In [46]: with tarfile.open('../myjunk.tar', 'r') as t:
+   ....:     t.extractall()
+   ....:     
 
+In [47]: os.listdir('.')
+Out[47]: ['d', 'e', 'b', 'a', 'c']
+```
+  
+## gzip
+gzip is a file handling wrapper for zlib, which can be used to compress arbitrary data (very conveniently)!
+```python
+In [62]: import zlib
+
+In [63]: foo = '''<TarInfo 'd' at 0x7fc1c6e3bd90>
+   ....: <TarInfo 'e' at 0x7fc1c6e3b0d0>
+   ....: <TarInfo 'b' at 0x7fc1c6e3bed0>
+   ....: <TarInfo 'a' at 0x7fc1c6e3bd50>
+   ....: <TarInfo 'c' at 0x7fc1c6e3be50>
+   ....: '''
+
+In [64]: len(foo)
+Out[64]: 160
+In [66]: zfoo = zlib.compress(foo)
+
+In [67]: print zfoo
+x��	I,��K�WPOQWH,Q0�0OK6L6K5NJ�4�㲁˧�����'�˧��'b�o�"���$�@.�
+
+In [68]: len(zfoo)
+Out[68]: 67
+
+In [69]: print zlib.decompress(zfoo)
+<TarInfo 'd' at 0x7fc1c6e3bd90>
+<TarInfo 'e' at 0x7fc1c6e3b0d0>
+<TarInfo 'b' at 0x7fc1c6e3bed0>
+<TarInfo 'a' at 0x7fc1c6e3bd50>
+<TarInfo 'c' at 0x7fc1c6e3be50>
+
+```
+**gzipping a file**
+_We have to read it to write it out with gzip..._
+```python
+In [69]: import gzip
+
+In [83]: os.stat('./somdata.txt').st_size
+Out[83]: 160
+
+In [82]: with open('somdata.txt', 'r') as f:
+   ....:     content = f.read()
+   ....:     
+
+In [85]: with gzip.open('somdata.txt.gz', 'wb') as f:
+   ....:     f.write(content)
+   ....:     
+
+In [86]: os.stat('./somdata.txt.gz').st_size
+Out[86]: 91
+```
+
+**read a gzipped file**
+```python
+In [95]: with gzip.open('somdata.txt.gz', 'rb') as f:
+   ....:     new_content = f.read()
+   ....: print new_content
+   ....: 
+<TarInfo 'd' at 0x7fc1c6e3bd90>
+<TarInfo 'e' at 0x7fc1c6e3b0d0>
+<TarInfo 'b' at 0x7fc1c6e3bed0>
+<TarInfo 'a' at 0x7fc1c6e3bd50>
+<TarInfo 'c' at 0x7fc1c6e3be50>
+
+```
