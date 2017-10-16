@@ -5,9 +5,11 @@ from __future__ import print_function
 from future.builtins import input
 
 # Other imports:
-import os
-import yaml
 from glob import glob
+import operator
+import os
+import shutil
+import yaml
 
 
 EDITOR='/usr/bin/vi'
@@ -15,11 +17,29 @@ EDITOR='/usr/bin/vi'
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
-def getProbFiles():
+def getProbsFiles():
     return glob('*.yml')
 
 def readProbsFile(problem_file):
-    return yaml.load(open(problem_file, 'r'))
+    probs_dict = yaml.load(open(problem_file, 'r'))
+    # translate to list for more simple interaction
+    probs_list = []
+    for uuid, prob in probs_dict.items():
+        prob['uuid'] = uuid
+        probs_list.append(prob)
+    probs_list = sorted(probs_list, operator.attrgetter('uuid'))
+    probs_list = sorted(probs_list, operator.attrgetter('title'))
+    probs_list = sorted(probs_list, operator.attrgetter('tier'))
+    return probs_list
+
+def writeProbsFile(problem_file, probs_list):
+    epoch_seconds = int(time.time())
+    shutil.copy(problem_file, "{}_{}".format(problem_file, epoch_seconds))
+    # translate back into dict for storage
+    probs_dict = {}
+    for prob in probs_list:
+        probs_dict[prob['uuid']] = prob
+    open(problem_file, 'w').write(yaml.dump(probs_dict))
 
 def promptMenu(title, options, defaults=None):
     if not defaults:
@@ -48,24 +68,24 @@ def promptMenu(title, options, defaults=None):
     return answer
 
 
-def interactiveMenu(prob_sets):
-    prob_set_name = None
-    prob_set = None
+def interactiveMenu(probs_lists):
+    probs_list_name = None
+    probs_list = None
     prob_id = None
     while True:
         cls()
 
         # Chose a problem file
-        if not prob_set_name:
+        if not probs_list_name:
             defaults = (('q', 'quit/return'), )
             title = "Choose a problem file:"
-            choice = promptMenu(title, prob_sets.keys(), defaults)
+            choice = promptMenu(title, probs_lists.keys(), defaults)
             print("CHOICE Was:", choice)
             if choice == None:
                 break
             elif choice.isdigit():
-                prob_set_name = list(prob_sets.keys())[int(choice)]
-                prob_set = prob_sets[prob_set_name]
+                probs_list_name = list(probs_lists.keys())[int(choice)]
+                probs_list = probs_lists[probs_list_name]
             elif choice == 'q':
                 print("Quitting this fine program!")
                 break
@@ -75,11 +95,13 @@ def interactiveMenu(prob_sets):
             defaults = (('c', 'create new problem'),
                         ('n', 'next problem file'),
                         ('p', 'previous problem file'),
+                        ('+', 'increase tier'),
+                        ('-', 'decrease tier'),
                         ('q', 'quit/return'))
             title = "Choose a problem to work on from '{}':".format(
-                                                        prob_set_name)
-            prob_files = ['a', 'b', 'c']
-            choice = promptMenu(title, prob_files, defaults)
+                                                        probs_list_name)
+            probs_titles = [(p['tier'],p['title']) for p in probs_list]
+            choice = promptMenu(title, probs_titles, defaults)
             if choice.isdigit():
                 pass
             elif choice == 'c':
@@ -89,7 +111,7 @@ def interactiveMenu(prob_sets):
             elif choice == 'p':
                 pass
             elif choice == 'q':
-                prob_set_name = None
+                probs_list_name = None
                 continue
 
         # Problem edit menu
@@ -101,8 +123,8 @@ def interactiveMenu(prob_sets):
                         ('r', 'run the problem'),
                         ('q', 'quit/return'))
             title = "Choose a problem to work on from '{}':".format(
-                                                        prob_set_name)
-            choice = promptMenu(title, prob_files, defaults)
+                                                        probs_list_name)
+            choice = promptMenu(title, probs_files, defaults)
             if choice.isdigit():
                 pass
             elif choice == 'c':
@@ -111,12 +133,12 @@ def interactiveMenu(prob_sets):
                 pass
 
 def mainFunc():
-    prob_files = getProbFiles()
-    prob_sets = {}
-    for p_file in prob_files:
-        prob_sets[p_file] = readProbsFile(p_file)
+    probs_files = getProbsFiles()
+    probs_lists = {}
+    for p_file in probs_files:
+        probs_lists[p_file] = readProbsFile(p_file)
 
-    interactiveMenu(prob_sets)
+    interactiveMenu(probs_lists)
 
 
 if __name__ == "__main__":
