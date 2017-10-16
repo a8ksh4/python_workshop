@@ -11,6 +11,7 @@
     # def add(num_1, num_2):
     #     return num_1 + num_2
     solution: !!binary "ZGVmIGFkZChudW1fMSwgbnVtXzIpOgogICAgcmV0dXJuIG51bV8xICsgbnVtXzI="
+    tier: 1
     unittests:
         test1:
             - "int(3)"
