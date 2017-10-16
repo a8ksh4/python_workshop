@@ -1,0 +1,134 @@
+4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
+  history:
+    ab7511ee456ce56e64d69141b7e2241b:
+      code: "def add(aaa,bbb):\n    x= aaa+bbb\n    return x"
+      likes: 0
+      memory: 0
+      pep8: 0
+      size: 0
+      speed: 0
+  imports: from random import randint, seed
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def add(num_1, num_2):\n    return num_1 + num_2"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: 'Write a function that takes 2 integers as parameter
+
+    It should return the sum of the 2 ints
+
+    '
+  tier: 1
+  title: addition_example
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 4464b29f-86a1-4e4c-9261-f581d1b1c8e8
+5f9eee8e-b21b-11e7-b1e7-ac220b2cb439:
+  history:
+    ab7511ee456ce56e64d69141b7e2241b:
+      code: "def add(aaa,bbb):\n    x= aaa+bbb\n    return x"
+      likes: 0
+      memory: 0
+      pep8: 0
+      size: 0
+      speed: 0
+  imports: 'from random import randint, seed
+
+    import subprocess as sp
+
+    '
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def add(num_1, num_2):\n    total = num_1 + num_2\n    return totalsss\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: 'Write a function that takes 2 integers as parameter
+
+    It should return the sum of the 2 ints
+
+    and stuff!!!!  Am Amaze!
+
+    '
+  tier: 1
+  title: addition_example_2
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 5f9eee8e-b21b-11e7-b1e7-ac220b2cb439
+f62bae50-b22f-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: 'from random import randint, seed
+
+    import subprocess as sp
+
+    '
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def add(num_1, num_2):\n    total = num_1 + num_2\n    return totalsss\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: 'Write a function that takes 2 integers as parameter
+
+    It should return the sum of the 2 ints
+
+    and stuff!!!!  Am Amaze!
+
+    '
+  tier: 1
+  title: addition_examples_3
+  unittests:
+    test1:
+    - int(7)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: f62bae50-b22f-11e7-b1e7-ac220b2cb439

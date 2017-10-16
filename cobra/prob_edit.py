@@ -25,51 +25,81 @@ EDITOR='/usr/bin/vi'
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
+
 def generateUUID():
     return str(uuid.uuid1())
 
-#def editTempFile(content, ref_header=None):
-#    with tempfile.NamedTemporaryFile() as f:
-#        f.write(content)
-#        f.close()
-#        vi_cmd = (EDITOR, f.name)
-#        sp.call(vi_cmd, shell=False)
-#        new_content = open(f.name, 'r').read()
-#
-#    for guess in (1, 2, 3):
-#        answer = input("Save changes? (y)/n: ")
-#        if answer in ("", "y", "n"):
-#            if answer == "n":
-#                new_content = content
-#            break
-#        print("Responses accepted: 'y', 'n', or implicit y ''")
-#    else:
-#        print("Aborting!")
-#        new_content = content
-#
-#    return new_content
 
 def editTempFile(content, ref_header=None):
+    '''put "content" into a temp file and open it with the system editor.
+    if ref_header is defined, put that at the top of the file for reference.
+    a marker line follows, and the content is placed below that for editing.
+    Return the updated content.'''
+
+    marker = "\n### do not edit anything above this line ###\n\n"
     _, fname = mkstemp()
-    open(fname, 'w').write(content)
+    with open(fname, 'w') as f:
+        if ref_header != None:
+            f.write(ref_header)
+            f.write(marker)
+        f.write(content)
+
     vi_cmd = (EDITOR, fname)
     sp.call(vi_cmd, shell=False)
+
+    with open(fname, 'r') as f:
+        new_content = f.read()
+
+    if ref_header != None:
+        marker_loc = new_content.find(marker)
+        if marker_loc < 0:
+            print('Marker line not found... Aborting!')
+            time.sleep(2)
+            return content
+        #offset to end of marker line
+        marker_loc += len(marker)
+        new_content = new_content[marker_loc:]
+
     for guess in (1, 2, 3):
-        answer = input("Save changes? (y)/n: ")
+        answer = input("Save changes? [y]/n: ")
         if answer in ("", "y", "n"):
             if answer == "n":
                 new_content = content
-            else:
-                new_content = open(fname, 'r').read()
             break
         print("Responses accepted: 'y', 'n', or implicit y ''")
     else:
         print("Aborting!")
+        time.sleep(2)
         new_content = content
     return new_content
 
+
+def mergeEditYml(problem, keys_to_edit, ref_header=None):
+    content = {}
+    for key in keys_to_edit:
+        content[key] = problem[key]
+    new_content = yaml.dump(content, default_flow_style=False)
+    new_content = editTempFile(new_content, ref_header)
+    try:
+        print("Success loading yaml content...")
+        new_content = yaml.load(new_content)
+    except:
+        new_content = content
+    for key in keys_to_edit:
+        if key not in new_content:
+            print("Keys missing in returned text:", key, "from", keys_to_edit)
+            print("Aborting...")
+            time.sleep(2)
+            break
+    else:
+        print("All good...")
+        return new_content
+    return content
+
+
 def getProbsFiles():
     return glob('*.yml')
+
 
 def readProbsFile(problem_file):
     probs_dict = yaml.load(open(problem_file, 'r'))
@@ -84,17 +114,17 @@ def readProbsFile(problem_file):
         print(prob.keys())
     probs_list = sorted(probs_list,
                         key=itemgetter('uuid', 'title', 'tier'))
-    #probs_list = sorted(probs_list, key=itemgetter('uuid'))
-    #probs_list = sorted(probs_list, key=itemgetter('title'))
-    #probs_list = sorted(probs_list, key=itemgetter('tier'))
     return probs_list
+
 
 def writeProbsFile(problem_file, probs_list):
     # translate back into dict for storage
     probs_dict = {}
     for prob in probs_list:
         probs_dict[prob['uuid']] = prob
-    open(problem_file, 'w').write(yaml.dump(probs_dict))
+    with open(problem_file, 'w') as f:
+        f.write(yaml.dump(probs_dict, default_flow_style=False))
+
 
 def promptMenu(title, options, defaults=None):
     if not defaults:
@@ -172,8 +202,6 @@ def interactiveMenu(probs_lists):
             defaults = (('c', 'create new problem'),
                         ('n', 'next problem file'),
                         ('p', 'previous problem file'),
-                        ('+', 'increase tier'),
-                        ('-', 'decrease tier'),
                         ('q', 'quit/return'))
             title = "Choose a problem to work on from '{}':".format(
                                                         probs_file_name)
@@ -201,12 +229,17 @@ def interactiveMenu(probs_lists):
         else:
             prob_selected = probs_list[prob_index]
 
-            defaults = (('t', 'edit title'),
+            defaults = (
+                        ('e', 'edit all relevant fields'),
+                        ('c', 'copy the problem'),
+                        ('r', 'run the problem'),
+                        ('-', ''),
+                        ('t', 'edit title'),
                         ('x', 'edit text description'),
                         ('s', 'edit solution'),
                         ('u', 'edit unit test'),
-                        ('r', 'run the problem'),
-                        ('c', 'copy the problem'),
+                        ('+', 'increase tier'),
+                        ('-', 'decrease tier'),
                         ('q', 'quit/return'))
             title = ( "Prob Selected:  tier: {}\n"
                       "  title: {}\n"
@@ -220,12 +253,35 @@ def interactiveMenu(probs_lists):
             if choice.isdigit():
                 pass
 
+            # Edit problem title
             elif choice == 't':
                 prob_selected['title'] = input("New Title: ")
 
+            # Edit text description
             elif choice == 'x':
                 prob_selected['text'] = editTempFile(prob_selected['text'])
-                
+            
+            elif choice == 's':
+                prob_selected['solution'] = editTempFile(
+                                                prob_selected['solution'],
+                                                prob_selected['text'] )
+
+            # Edit unit tests
+            elif choice == 'u':
+                edit_keys = ('unittests', 'imports', 'setup', 'teardown')
+                content = mergeEditYml(prob_selected, edit_keys)
+                for key in edit_keys:
+                    prob_selected[key] = content[key]
+
+            # Edit all relevant fields
+            elif choice == 'e':
+                edit_keys = ('uuid', 'title', 'text', 'signature',
+                             'solution', 'tier', 'tags',
+                             'unittests', 'imports', 'setup', 'teardown')
+                content = mergeEditYml(prob_selected, edit_keys)
+                for key in edit_keys:
+                    prob_selected[key] = content[key]
+
             # Copy the current problem
             elif choice == 'c':
                 probs_list.insert(prob_index+1, copy.deepcopy(prob_selected))
@@ -234,9 +290,9 @@ def interactiveMenu(probs_lists):
                 prob_selected['title'] = prob_selected['title'] + ' copy'
                 prob_selected['uuid'] = generateUUID()
                 prob_selected['history'] = {}
-                prob_selected['ratings'] = {challenging: 0,
-                                            interesting: 0,
-                                            useful: 0}
+                prob_selected['ratings'] = {'challenging': 0,
+                                            'interesting': 0,
+                                            'useful': 0}
             elif choice == 'n':
                 pass
             elif choice == 'q':
