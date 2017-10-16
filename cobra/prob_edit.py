@@ -5,10 +5,18 @@ from __future__ import print_function
 from future.builtins import input
 
 # Other imports:
+import copy
+import filecmp
 from glob import glob
-import operator
+#import operator
+from operator import itemgetter
 import os
 import shutil
+import subprocess as sp
+#import tempfile
+from tempfile import mkstemp
+import time
+import uuid
 import yaml
 
 
@@ -16,6 +24,49 @@ EDITOR='/usr/bin/vi'
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
+
+def generateUUID():
+    return str(uuid.uuid1())
+
+#def editTempFile(content, ref_header=None):
+#    with tempfile.NamedTemporaryFile() as f:
+#        f.write(content)
+#        f.close()
+#        vi_cmd = (EDITOR, f.name)
+#        sp.call(vi_cmd, shell=False)
+#        new_content = open(f.name, 'r').read()
+#
+#    for guess in (1, 2, 3):
+#        answer = input("Save changes? (y)/n: ")
+#        if answer in ("", "y", "n"):
+#            if answer == "n":
+#                new_content = content
+#            break
+#        print("Responses accepted: 'y', 'n', or implicit y ''")
+#    else:
+#        print("Aborting!")
+#        new_content = content
+#
+#    return new_content
+
+def editTempFile(content, ref_header=None):
+    _, fname = mkstemp()
+    open(fname, 'w').write(content)
+    vi_cmd = (EDITOR, fname)
+    sp.call(vi_cmd, shell=False)
+    for guess in (1, 2, 3):
+        answer = input("Save changes? (y)/n: ")
+        if answer in ("", "y", "n"):
+            if answer == "n":
+                new_content = content
+            else:
+                new_content = open(fname, 'r').read()
+            break
+        print("Responses accepted: 'y', 'n', or implicit y ''")
+    else:
+        print("Aborting!")
+        new_content = content
+    return new_content
 
 def getProbsFiles():
     return glob('*.yml')
@@ -27,14 +78,18 @@ def readProbsFile(problem_file):
     for uuid, prob in probs_dict.items():
         prob['uuid'] = uuid
         probs_list.append(prob)
-    probs_list = sorted(probs_list, operator.attrgetter('uuid'))
-    probs_list = sorted(probs_list, operator.attrgetter('title'))
-    probs_list = sorted(probs_list, operator.attrgetter('tier'))
+        for key in ('uuid', 'title', 'tier'):
+            print(probs_list[-1][key])
+    for prob in probs_list:
+        print(prob.keys())
+    probs_list = sorted(probs_list,
+                        key=itemgetter('uuid', 'title', 'tier'))
+    #probs_list = sorted(probs_list, key=itemgetter('uuid'))
+    #probs_list = sorted(probs_list, key=itemgetter('title'))
+    #probs_list = sorted(probs_list, key=itemgetter('tier'))
     return probs_list
 
 def writeProbsFile(problem_file, probs_list):
-    epoch_seconds = int(time.time())
-    shutil.copy(problem_file, "{}_{}".format(problem_file, epoch_seconds))
     # translate back into dict for storage
     probs_dict = {}
     for prob in probs_list:
@@ -58,7 +113,7 @@ def promptMenu(title, options, defaults=None):
     print("")
 
     for guess in (1, 2, 3):
-        answer = str(input("Select: "))
+        answer = input("Select: ")
         if answer not in valid_choices:
             print("Invalid.  Optoins are:", valid_choices)
             continue
@@ -69,29 +124,51 @@ def promptMenu(title, options, defaults=None):
 
 
 def interactiveMenu(probs_lists):
-    probs_list_name = None
+    probs_file_name = None
     probs_list = None
-    prob_id = None
+    prob_index = None
+    prob_selected = None
     while True:
         cls()
+        print("probs_file_name:", probs_file_name)
+        print("prob_index:", prob_index)
 
+        # Each time menu is updated, write changes to disk
+        if not probs_file_name == None:
+            writeProbsFile(probs_file_name, probs_list)
+
+        ######################
         # Chose a problem file
-        if not probs_list_name:
+        ######################
+        if probs_file_name == None:
             defaults = (('q', 'quit/return'), )
             title = "Choose a problem file:"
             choice = promptMenu(title, probs_lists.keys(), defaults)
-            print("CHOICE Was:", choice)
+            print("Choice was:", (choice,))
+            #time.sleep(2)
             if choice == None:
                 break
             elif choice.isdigit():
-                probs_list_name = list(probs_lists.keys())[int(choice)]
-                probs_list = probs_lists[probs_list_name]
+                probs_file_name = list(probs_lists.keys())[int(choice)]
+                probs_list = probs_lists[probs_file_name]
+
+                # Make a backup copy of the problems file
+                epoch_seconds = int(time.time())
+                shutil.copy(probs_file_name, "{}_{}".format(probs_file_name,
+                                                         epoch_seconds))
+                assert( filecmp.cmp(
+                            probs_file_name,
+                            "{}_{}".format(probs_file_name, epoch_seconds) )
+                )
+
             elif choice == 'q':
                 print("Quitting this fine program!")
                 break
 
+        ######################
         # Chose a problem
-        elif not prob_id:
+        ######################
+        elif prob_index == None:
             defaults = (('c', 'create new problem'),
                         ('n', 'next problem file'),
                         ('p', 'previous problem file'),
@@ -99,11 +176,15 @@ def interactiveMenu(probs_lists):
                         ('-', 'decrease tier'),
                         ('q', 'quit/return'))
             title = "Choose a problem to work on from '{}':".format(
-                                                        probs_list_name)
+                                                        probs_file_name)
             probs_titles = [(p['tier'],p['title']) for p in probs_list]
             choice = promptMenu(title, probs_titles, defaults)
-            if choice.isdigit():
-                pass
+            print("Choice was:", (choice,))
+            #time.sleep(2)
+            if choice == None:
+                break
+            elif choice.isdigit():
+                prob_index = int(choice)
             elif choice == 'c':
                 pass
             elif choice == 'n':
@@ -111,26 +192,56 @@ def interactiveMenu(probs_lists):
             elif choice == 'p':
                 pass
             elif choice == 'q':
-                probs_list_name = None
+                probs_file_name = None
                 continue
 
+        ######################
         # Problem edit menu
+        ######################
         else:
+            prob_selected = probs_list[prob_index]
+
             defaults = (('t', 'edit title'),
-                        ('b', 'edit body (problem text)'),
+                        ('x', 'edit text description'),
                         ('s', 'edit solution'),
                         ('u', 'edit unit test'),
                         ('r', 'run the problem'),
+                        ('c', 'copy the problem'),
                         ('q', 'quit/return'))
-            title = "Choose a problem to work on from '{}':".format(
-                                                        probs_list_name)
-            choice = promptMenu(title, probs_files, defaults)
+            title = ( "Prob Selected:  tier: {}\n"
+                      "  title: {}\n"
+                      "  text: \n"
+                      "{}".format( prob_selected['tier'],
+                                   prob_selected['title'],
+                                   prob_selected['text'] ) )
+            choice = promptMenu(title, [], defaults)
+            print("Choice was:", (choice,))
+            #time.sleep(2)
             if choice.isdigit():
                 pass
+
+            elif choice == 't':
+                prob_selected['title'] = input("New Title: ")
+
+            elif choice == 'x':
+                prob_selected['text'] = editTempFile(prob_selected['text'])
+                
+            # Copy the current problem
             elif choice == 'c':
-                pass
+                probs_list.insert(prob_index+1, copy.deepcopy(prob_selected))
+                prob_index += 1
+                prob_selected = probs_list[prob_index]
+                prob_selected['title'] = prob_selected['title'] + ' copy'
+                prob_selected['uuid'] = generateUUID()
+                prob_selected['history'] = {}
+                prob_selected['ratings'] = {challenging: 0,
+                                            interesting: 0,
+                                            useful: 0}
             elif choice == 'n':
                 pass
+            elif choice == 'q':
+                prob_index = None
+                prob_selected = None
 
 def mainFunc():
     probs_files = getProbsFiles()
