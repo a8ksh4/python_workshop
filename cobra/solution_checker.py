@@ -23,9 +23,12 @@ def run_tests(function, unittests):
             test_list.append(values)   
     # run each test and save results, and time taken
     start_time = default_timer()
-    for test in test_list:
-        arguments = map(lambda argument: eval(argument), test)  # converts the yml test case string into the solution arguments
-        results.append(function(*arguments))    # the actual test is run here
+    try:
+        for test in test_list:
+            arguments = map(lambda argument: eval(argument), test)  # converts the yml test case string into the solution arguments
+            results.append(function(*arguments))    # the actual test is run here
+    except Exception as e:
+        print('{}: {}'.format(type(e).__name__, e))
     time_to_execute = default_timer() - start_time
     return results, time_to_execute
     
@@ -38,7 +41,7 @@ def check_codestyle(solution):
     solution_file = NamedTemporaryFile(delete=False, encoding='utf-8', mode='w', suffix='.py')
     solution_file.write(solution)
     solution_file.close()
-    flake = Popen([executable, '-m', 'flake8', solution_file.name], stdout=PIPE, stdin=PIPE)
+    flake = Popen([executable, '-m', 'flake8', '--disable-noqa', '--ignore=W292', solution_file.name], stdout=PIPE, stdin=PIPE)
     out, error = flake.communicate()
     remove(solution_file.name)
     print(out.decode('utf-8'))
@@ -58,11 +61,18 @@ def run_solution(solution, data):
     # now we will get the function name (solution_name) used by the solution
     # this solution is exec'd to the function variable
     # then the function is pulled out of the exec namespace
-    solution_name = findall(r'def\s+(.*)\(', solution)[0]
-    exec_script = '{solution}\nfunction = {solution_name}'.format(solution=solution, solution_name=solution_name)
+    #solution_name = findall(r'def\s+(.*)\(', solution)[0]
+    exec_script = '{}'.format(solution)
     scope = {}
-    exec(exec_script, scope)
-    function = scope['function']
+    try:
+        exec(exec_script, scope)
+    except Exception as e:
+        print('{}: {}'.format(type(e).__name__, e))
+        exec('{teardown}'.format(**data))
+        return None
+        
+    scope.pop('__builtins__')
+    function = [value for value in scope.values()][0]
     
     # now that we have the function in our namespace we can run it against our unittests
     results, time_to_execute = run_tests(function, data['unittests'])

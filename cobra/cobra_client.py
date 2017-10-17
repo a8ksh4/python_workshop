@@ -1,33 +1,41 @@
 import requests
 import json
 from solution_checker import run_solution
+from prompt_toolkit.shortcuts import create_eventloop
+from ptpython.python_input import PythonInput, PythonCommandLineInterface
+from ptpython.repl import run_config
+
+import os
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 class CobraClient():
     def __init__(self, server_socket):
         self.server_socket = server_socket
         self.data = self.get_question()
         self.get_user_input()
-    
+            
     def get_question(self):
         question = requests.get('http://{0}:{1}/getquestion'.format(*self.server_socket))
         data = json.loads(question.text)
         return data
 
     def get_user_input(self):
-        print('''\
-{title}
-{text}
-{signature}
-'''.format(**self.data))
+        cls()
+        print('{title}\n{text}\n{signature}\n'.format(**self.data))
 
-        solution = ''
-        user_input = None
-              
-        while user_input != '':
-            user_input = input()
-            solution += user_input + '\n'
-            
-        results = run_solution(solution, self.data)
+        eventloop = create_eventloop()
+        ptpython_input = PythonInput()
+        run_config(ptpython_input, config_file='ptpython_config.py')
+        
+        try:
+            cli = PythonCommandLineInterface(python_input=ptpython_input, eventloop=eventloop)
+            solution = cli.run()
+        finally:
+            eventloop.close()
+        
+        results = run_solution(solution.text, self.data)
 
         print(results)
     
