@@ -75,6 +75,11 @@ def editTempFile(content, ref_header=None):
 
 
 def mergeEditYml(problem, keys_to_edit, ref_header=None):
+    '''The idea here is to generate a string with yaml data for all
+    of the "keys_to_edit" from the problem data.  Then pas it to the
+    editTempFile function for user edit with VI, and then return 
+    the modified data.
+    '''
     content = {}
     for key in keys_to_edit:
         content[key] = problem[key]
@@ -102,6 +107,8 @@ def getProbsFiles():
 
 
 def readProbsFile(problem_file):
+    '''This is called for each file containing course problems.  Returns
+    a list of problems (dicts)'''
     probs_dict = yaml.load(open(problem_file, 'r'))
     # translate to list for more simple interaction
     probs_list = []
@@ -118,6 +125,9 @@ def readProbsFile(problem_file):
 
 
 def writeProbsFile(problem_file, probs_list):
+    '''Takes a list of problem dicts and converts them to a dict of dicts
+    using the uuid as the primary key and writes them as yaml to the
+    problem_file'''
     # translate back into dict for storage
     probs_dict = {}
     for prob in probs_list:
@@ -127,6 +137,11 @@ def writeProbsFile(problem_file, probs_list):
 
 
 def promptMenu(title, options, defaults=None):
+    '''This is mianly what the user interacts with.  It puts up a list of
+    optoins and queries for a response from the user.
+    "options" is a list of options that will be assigned numbers to chose
+    from.  "defaults" is a list of (key, description) items
+    that the user can choose from.'''
     if not defaults:
         defaults = (('n', 'next'),
                     ('p', 'previous'),
@@ -154,6 +169,10 @@ def promptMenu(title, options, defaults=None):
 
 
 def interactiveMenu(probs_lists):
+    '''this is the meat of the tool.  All of the code that make things
+    happen at each screen is included here.  Trying to keep cross-contamination
+    between variables in here to a minimum w/o having to break out seperate
+    functions for each screen.'''
     probs_file_name = None
     probs_list = None
     prob_index = None
@@ -240,6 +259,8 @@ def interactiveMenu(probs_lists):
                         ('u', 'edit unit test'),
                         ('+', 'increase tier'),
                         ('-', 'decrease tier'),
+                        ('[', 'previous problem'),
+                        (']', 'next problem'),
                         ('q', 'quit/return'))
             title = ( "Prob Selected:  tier: {}\n"
                       "  title: {}\n"
@@ -293,8 +314,17 @@ def interactiveMenu(probs_lists):
                 prob_selected['ratings'] = {'challenging': 0,
                                             'interesting': 0,
                                             'useful': 0}
-            elif choice == 'n':
-                pass
+            elif choice == '+':
+                prob_selected['tier'] += 1
+            elif choice == '-':
+                prob_selected['tier'] -= 1
+            elif choice == '[':
+                if prob_index > 0:
+                    prob_index -= 1
+            elif choice == ']':
+                if prob_index < len(probs_list) - 1:
+                    prob_index += 1
+
             elif choice == 'q':
                 prob_index = None
                 prob_selected = None
