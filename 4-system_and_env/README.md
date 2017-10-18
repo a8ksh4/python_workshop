@@ -10,6 +10,18 @@
 * [nis module](#nis-module)
 * [platform module](#platform-module)
 * [subprocess module](#subprocess-module)
+  * [shell or no shell](#shell-or-no-shell)
+  * [sp.check_output](#sp-check-output)
+  * [sp.check_call](#sp-check-call)
+  * [sp.Popen](#sp-popen)
+    * Popen.poll()
+    * Popen.wait()
+    * Popen.communicate()
+    * Popen.terminate()
+    * Popen.kill()
+    * stdin, stdout, stderr...
+    * Popen.returncode
+   
   
   
 https://docs.python.org/2/library/filesys.html  
@@ -183,7 +195,9 @@ Out[59]: '3.0.101-107-default'
 # subprocess module
 This is a big one!  This has everything you need (probably) to make system calls from python and execute any random commands needed when your program runs.  
   
-It's easy to abuse subprocess - don't use it for thigns that you should be using libraries for, like editing files, permissions, etc.
+It's easy to abuse subprocess - don't use it for thigns that you should be using libraries for, like editing files, permissions, etc.  
+  
+https://docs.python.org/2/library/subprocess.html#replacing-older-functions-with-the-subprocess-module  
   
 ## shell or no shell?
   
