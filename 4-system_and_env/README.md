@@ -1,16 +1,20 @@
 # Index:
-* [OS and Environ](#os-module-and-environ)
-* [sys module and sys.args](#sys-module-and-sys-args)
+* [os module](#os-module)
+  * os.environ
+  * os.environ\['PATH'\], os.pathsep
+* [sys module](#sys-module)
+  * sys.argv
+  * sys.exit
+  * misc stuff
 * [argparse module](#argparse-module)
-* [setuid and setgid](#setuid-and-setgid)
-* [nis and nodes](#nis-and-nodes)
+* [nis module](#nis-module)
 * [platform module](#platform-module)
 * [subprocess module](#subprocess-module)
   
   
 https://docs.python.org/2/library/filesys.html  
   
-# os module and environ
+# os module
 More os module things that weren't covered in teh files and paths content. What you see set will vary depending on your OS and more...
 
 **os.environ**
@@ -132,6 +136,103 @@ Out[27]: 1000
 ```
 
 # argparse module
-# nis and nodes
-# platform
-# subprocess
+  
+stuff goes here  
+  
+# nis module
+NIS is Network Information Service - sort of an extensin of the local system passwd, group, netgroup, etc files that are used for tracking users, groups, and other system information.  NIS is a distributed service for this content that's still used in industry today... The usage is pretty simple:
+```python
+In [36]: import nis
+
+In [37]: nis.match('thedude', 'passwd')
+Out[37]: 'thedude:passwordhash:1000:15:just.the.dude:/usr/users/home0/thedude:/bin/bash'
+
+In [38]: nis.match('users', 'group')
+Out[38]: 'users::15:thedude,andothers
+```
+# platform module
+Sort of the python equivelant of the uname command.  Also has pointeres to some important libraries that python needs.  
+```python
+In [53]: import platform
+
+In [54]: platform.uname()
+Out[54]: 
+('Linux',
+ 'fmyec0200',
+ '3.0.101-107-default',
+ '#1 SMP Thu Jun 22 14:37:55 UTC 2017 (414ea9f)',
+ 'x86_64',
+ 'x86_64')
+
+In [55]: platform.processor()
+Out[55]: 'x86_64'
+
+In [56]: platform.platform()
+Out[56]: 'Linux-3.0.101-107-default-x86_64-with-SuSE-11-x86_64'
+
+In [57]: platform.machine()
+Out[57]: 'x86_64'
+
+In [58]: platform.system()
+Out[58]: 'Linux'
+
+In [59]: platform.release()
+Out[59]: '3.0.101-107-default'
+```
+  
+# subprocess module
+This is a big one!  This has everything you need (probably) to make system calls from python and execute any random commands needed when your program runs.  
+  
+It's easy to abuse subprocess - don't use it for thigns that you should be using libraries for, like editing files, permissions, etc.
+  
+## shell or no shell?
+  
+## sp.check_output
+**Use this as a simple way to capture output from a command. **
+```python
+In [62]: output = sp.check_output(['ls', '-ld', '.'])
+
+In [63]: print output
+drwxr-sr-x 53 thedude users 16384 Oct 18 08:56 .
+
+In [64]: 
+```
+If you pass it an invalid command, it will raise an exception!  This will cause your production code to crash, so you have to either validate your commands before running them, including permiossions to run them, or call them from a try block.
+```
+In [64]: output = sp.check_output(['zls', '-ld', '.'])
+---------------------------------------------------------------------------
+OSError                                   Traceback (most recent call last)
+<ipython-input-64-7a025d6680d7> in <module>()
+----> 1 output = sp.check_output(['zls', '-ld', '.'])
+...
+
+OSError: [Errno 2] No such file or directory
+
+In [65]: 
+```
+The same thing happens if the command you run returns a non-zero exit status!
+```python
+In [66]: sp.check_output(['false'])
+---------------------------------------------------------------------------
+CalledProcessError                        Traceback (most recent call last)
+<ipython-input-66-ffd39565651e> in <module>()
+----> 1 sp.check_output(['false'])
+...
+CalledProcessError: Command '['false']' returned non-zero exit status 1
+
+In [67]: 
+
+```
+Notice the differnet exceptoins raised?  
+```python
+In [68]: try:
+    ...:     sp.check_output(['false'])
+    ...: except sp.CalledProcessError, e:
+    ...:     print "the command returned non-zer exit status for failure"
+    ...: except OSError, e:
+    ...:     print "the command was not found or not accessible"
+    ...:     
+the command returned non-zer exit status for failure
+
+In [69]: 
+```
