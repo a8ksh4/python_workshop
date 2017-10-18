@@ -2,6 +2,7 @@
 * [Opening Files](#opening-files)
   * modes, read, write, append
 * [shutil module](./README.md#shutil-module---high-level-file-operations)
+* [glob module](#glob-module)
 * [os module](#os-module)
   * [Basic Operations](#basic-operations)
     * os.getcwd, chdir, listdir, mkdir, remove
@@ -110,7 +111,22 @@ shutils.move(src_path, dst_path)
 ```python
 shutils.copy(src_path, dst_path)
 ```
+# glob module
+Provides unix-style pathname matching!
+```python
+In [146]: os.listdir('.')
+Out[146]: ['foo.txt', 'b', 'a', 'c', 'foo.out']
 
+In [150]: from glob import *
+
+In [151]: glob('[a-c]')
+Out[151]: ['b', 'a', 'c']
+
+In [152]: glob('foo*')
+Out[152]: ['foo.txt', 'foo.out']
+```
+**iglob** - returns in iterator instead of a list  
+  
 # os module
 One of the core modules needed for any sysadmin to interact with the local environment and filesystem!  This stuff is frequenly done with system calls and really shouldn't be.  Your code will be much more reliable and maintainable if you os the proper modules and calls for this kind of stuff.  
   
