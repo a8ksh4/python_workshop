@@ -33,6 +33,10 @@
     setup: "seed({seed})"
     # Teardown scripts to clean up the environment. Run after unittests
     teardown: ""
+    # Scripts to be run before individual tests take place    
+    pretest: ""
+    # Scripts to be run after infividual tests take place
+    posttest: ""
     # Tags can be used to sort and filter questions
     tags:
         - sample

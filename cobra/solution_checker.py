@@ -13,38 +13,51 @@ def loopcount(testname):
         loop = 1
     return loop
     
-def run_tests(function, unittests):
+def run_tests(function, unittests, pretest, posttest):
     '''Runs the solution against all unit tests'''
     results = []
     test_list = []
+    time_to_execute = 0
     # first implement any text case multipliers, extends the total number of tests
     for testname, values in sorted(unittests.items()):
         for _ in range(loopcount(testname)):
             test_list.append(values)   
     # run each test and save results, and time taken
-    start_time = default_timer()
-    try:
-        for test in test_list:
-            arguments = map(lambda argument: eval(argument), test)  # converts the yml test case string into the solution arguments
-            results.append(function(*arguments))    # the actual test is run here
-    except Exception as e:
-        print('{}: {}'.format(type(e).__name__, e))
-    time_to_execute = default_timer() - start_time
-    return results, time_to_execute
+
+    for test in test_list:
+        arguments = map(lambda argument: eval(argument), test)  # converts the yml test case string into the solution arguments
+        exec(pretest) # pretest script
+        start_time = default_timer()
+        try:
+            result =  function(*arguments)    # the actual test is run here
+        except Exception as e:
+            print('{}: {}'.format(type(e).__name__, e))
+        finally:            
+            time_to_execute += default_timer() - start_time
+            results.append(result)
+            exec(posttest) # posttest script
     
-def signature_check():
-    # do later, we should probably have signatures match diriectly to avoid exceptions and overwriting namespaces
-    pass
+    return results, time_to_execute  
     
 def check_codestyle(solution):
     '''Checks the solution for pep8 standards'''
     solution_file = NamedTemporaryFile(delete=False, encoding='utf-8', mode='w', suffix='.py')
     solution_file.write(solution)
     solution_file.close()
-    flake = Popen([executable, '-m', 'flake8', '--disable-noqa', '--ignore=W292', solution_file.name], stdout=PIPE, stdin=PIPE)
+    flake = Popen([executable, '-m', 'flake8',
+                '--format=row %(row)d, col %(col)d: %(text)s',
+                '--disable-noqa', '--max-line-length=150', '--ignore=W292,E731', solution_file.name],
+                stdout=PIPE, stderr=PIPE)
     out, error = flake.communicate()
+    if error:
+        print(error.decode('utf8'))
     remove(solution_file.name)
-    print(out.decode('utf-8'))
+    return out.decode('utf-8').strip()
+    
+def get_counts(solution):
+    linecount = len(solution.split('\n'))
+    charcount = len(solution)
+    return linecount, charcount
     
 def run_solution(solution, data):
     '''Main function, takes a text solution and yml data, and combines the two for execution'''
@@ -75,8 +88,15 @@ def run_solution(solution, data):
     function = [value for value in scope.values()][0]
     
     # now that we have the function in our namespace we can run it against our unittests
-    results, time_to_execute = run_tests(function, data['unittests'])
+    results, time_to_execute = run_tests(function, data['unittests'], data['pretest'], data['posttest'])
     # and finally we will run our teardown scripts
     exec('{teardown}'.format(**data))
-    check_codestyle(solution)
-    return results, time_to_execute
+    
+    # statistic checks
+    codestyle = check_codestyle(solution)
+    linecount, charcount = get_counts(solution)
+    return {'tests': results,
+            'time_to_execute': time_to_execute, 
+            'codestyle': codestyle,
+            'linecount': linecount,
+            'charcount': charcount}

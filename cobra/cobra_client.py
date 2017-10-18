@@ -4,11 +4,7 @@ from solution_checker import run_solution
 from prompt_toolkit.shortcuts import create_eventloop
 from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
-
-import os
-
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
+from utility import cls, hash_results
 
 class CobraClient():
     def __init__(self, server_socket):
@@ -37,8 +33,17 @@ class CobraClient():
         
         results = run_solution(solution.text, self.data)
 
-        print(results)
-    
+        token = self.data['token']
+        print(token)
+        
+        print(results['tests'])
+        print(results['time_to_execute'])
+        print(results['codestyle'])
+        print(results['linecount'])
+        print(results['charcount'])
+        print(hash_results(token, results['tests']))
+        
+        
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
     
