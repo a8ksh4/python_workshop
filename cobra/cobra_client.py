@@ -40,6 +40,7 @@ class CobraClient():
         print(stats.charcount)
         print(stats.violations)
         print(stats.violationcount)
+        print(results.test)
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
