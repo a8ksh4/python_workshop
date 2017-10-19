@@ -1,6 +1,6 @@
 import requests
 import json
-from solution_checker import run_solution
+from solution_checker import SolutionStats, SolutionExec
 from prompt_toolkit.shortcuts import create_eventloop
 from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
@@ -31,18 +31,15 @@ class CobraClient():
         finally:
             eventloop.close()
         
-        results = run_solution(solution.text, self.data)
-
-        token = self.data['token']
-        print(token)
-        
-        print(results['tests'])
-        print(results['time_to_execute'])
-        print(results['codestyle'])
-        print(results['linecount'])
-        print(results['charcount'])
-        print(hash_results(token, results['tests']))
-        
+        results = SolutionExec(self.data, solution.text)
+        stats = SolutionStats(solution.text)
+        results.run_solution()
+        print(results.time_to_execute)
+        print(results.tests_results)
+        print(stats.linecount)
+        print(stats.charcount)
+        print(stats.violations)
+        print(stats.violationcount)
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
