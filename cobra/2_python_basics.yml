@@ -132,3 +132,31 @@ f62bae50-b22f-11e7-b1e7-ac220b2cb439:
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: f62bae50-b22f-11e7-b1e7-ac220b2cb439
+ffeb899e-b471-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def strUpper(foo):\n    return foo.strip().upper()\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called \"strUpper\" that takes a string as an argument and\n\
+    returns the string without any whitespace on the ends and all upper case.\n\n\
+    E.g:\ndef strUpper(foo):\n    # do stuff here\n    return foo\n"
+  tier: 4
+  title: string_example_1
+  unittests:
+    test1:
+    - ' rofl this is cool '
+    test2:
+    - ' ABCDS'
+    test3:
+    - 'zABCDS '
+  uuid: ffeb899e-b471-11e7-b1e7-ac220b2cb439
