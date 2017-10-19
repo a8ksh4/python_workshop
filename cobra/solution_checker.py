@@ -53,6 +53,7 @@ class SolutionExec():
         self.exception_raised = False
         self.tests_results = []
         self.time_to_execute = 0
+        self.test = 'testing' # this is for debuging, delete it later
     
     def run_solution(self):
         '''Takes a text solution and yml data, and combines the two for execution'''    
@@ -74,6 +75,7 @@ class SolutionExec():
     def _run_tests(self):
         '''Runs the solution against all unit tests'''
         test_list = []
+        
         exec(self.imports)    
         exec(self.setup)        
         
