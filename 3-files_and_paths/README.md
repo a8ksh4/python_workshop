@@ -144,6 +144,13 @@ In [67]: os.chdir('/tmp/foobar')
 In [68]: os.getcwd()
 Out[68]: '/tmp/foobar'
 ```
+If a path does not exist, an "OSError" exception is raised:  
+```python
+try:
+    os.chdir(path)
+except OSError:
+    print "path does not exist: {}".format(path)
+```  
 * **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
 ```python
 In [108]: os.listdir('.')
@@ -178,26 +185,50 @@ Out[105]: 'a.out'
 ```
   
 ### os.walk
+os.walk is useful enough that it deserves its own mini-section.  It lets' you "walk" through a directory structure either from top-down or from bottom-up an see all of the files at each point in the process.  
+  
+You can adapt the code below to, rather than printing names of files, actually do thigns to the files.  Change permissions; remove stuff; edit them; ...  
+  
+**Recursively list contents of a directory**
+```python
+In [139]: for root, dirs, files in os.walk('.'):
+   .....:     print "where we are:", root
+   .....:     print "whats here:"
+   .....:     for f in files:
+   .....:         print "    {}/{}".format(root, f)
+   .....:     print "and any dirs:", dirs
+   .....:     print ""
+   .....:     
+where we are: .
+whats here:
+    ./foo.txt
+    ./foo.out
+and any dirs: ['b', 'a', 'c']
+
+where we are: ./b
+whats here:
+    ./b/b.txt
+    ./b/b.foobar
+and any dirs: []
+
+where we are: ./a
+whats here:
+    ./a/a.txt
+and any dirs: []
+
+where we are: ./c
+whats here:
+    ./c/c.foobar
+    ./c/c.txt
+and any dirs: []
+```
 
 ## Permissions and stat
-**os.chroot** - change root directory to some path:  E.g. make your script think that a temporary working directory is the root directory ('/').  **This needs testing/verification for an example**  
 **os.chown** - change file/dir ownership  
 **os.chmod** - change file/dir permissions.  
 **os.stat** - get filesystem data for some path  
-**os.umask** - set the umask: set permissions that are removed from newly created filesystem objects
-
+**os.umask** - set the umask: set permissions that are removed from newly created filesystem objects  
   
-
-  
-  
-If a path does not exist, an "OSError" exception is raised:  
-```python
-try:
-    os.chdir(path)
-except OSError:
-    print "path does not exist: {}".format(path)
-```
-
 ## os.path
 **os.path.join**  
 os.path.join(path, *paths)  
@@ -279,6 +310,26 @@ os.chown(os.path.join(root, momo), make_uid, -1)
 CWF = os.path.realpath(__file__)
 CWD = os.path.dirname(CWF)
 
+## Misc
+**os.chroot** - this has to be done as root; it's useful for sandboxing a process into some area of the filesystem by telling it that the root directory is actually some aribtrary path.  You can call chroot and then launch a subprocess in the altered env.  NOTE:  ipython barfs a little bit when this is used.  Still works, though. 
+```python
+In [4]: os.getcwd()
+Out[4]: '/home/drnorris/tmp/sample'
+
+In [5]: os.listdir('.')
+Out[5]: ['foo.txt', 'b', 'a', 'c', 'foo.out']
+
+In [6]: os.chroot('.')
+
+In [7]: The history saving thread hit an unexpected error (OperationalError('attempt to write a readonly database',)).History will not be written to the database.
+
+
+In [7]: os.getcwd()
+Out[7]: '/'
+
+In [8]: os.listdir('.')
+Out[8]: ['foo.txt', 'b', 'a', 'c', 'foo.out']
+```
 
 # tar and gzip
 ## tar
