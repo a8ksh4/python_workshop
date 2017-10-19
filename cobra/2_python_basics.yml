@@ -90,6 +90,98 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 5f9eee8e-b21b-11e7-b1e7-ac220b2cb439
+a13d84a0-b486-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def printSomeStuff():\n    my_string = \"\"\"'It's modulus, \"%\", not\
+    \ division, \"/\", or escaping \"\\\"!'\"\"\"\n    return my_string\n    \n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called printSomeStuff that takes no arguments and, when\n\
+    called, returns the following text (no whitespace on the ends), but with all quotes\
+    \ shown included in the string:\n\n    'It's modulus, \"%\", not division, \"\
+    /\", or escaping \"\\\"!'\n\nE.g:\ndef printSomeStuff():\n    # do stuff here\n\
+    \    return my_silly_string\n"
+  tier: 4
+  title: quoting_example_1
+  unittests:
+    test1: null
+  uuid: a13d84a0-b486-11e7-b1e7-ac220b2cb439
+ca7ae886-b485-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def justEvenChars(foo):\n    return foo[::2]\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called \"justEvenChars\" that takes a string as an argument\
+    \ and\nreturns only even numbered characters from the string. If the string is\
+    \ \"coolio\", the result would be \"coi\", treating the zeroth characte as even\
+    \ (0%2==0). \n\nE.g:\ndef justEvenChars(foo):\n    # do stuff here\n    return\
+    \ foo\n"
+  tier: 4
+  title: string_example_3
+  unittests:
+    test1:
+    - ' ro3! T2is is cool '
+    test2:
+    - ' ABCDS'
+    test3:
+    - 'zABCDS '
+    test4:
+    - '123456789'
+  uuid: ca7ae886-b485-11e7-b1e7-ac220b2cb439
+e13f7da8-b484-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def firstHalfLower(foo):\n    length = int(len(foo) / 2)\n    result\
+    \ = foo[:length].lower()\n    assert(len(result) * 2 <= len(foo))\n    return\
+    \ result\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called \"firstHalfLower\" that takes a string as an argument\
+    \ and\nreturns the first half of the string, all lower case. When calculating\
+    \ how many\ncharacters of the string to return, round down - an 11 character string\
+    \ would\nresult in 5 characters being returned.\n\nE.g:\ndef firstHalfLower(foo):\n\
+    \    # do stuff here\n    return foo\n"
+  tier: 4
+  title: string_example_2
+  unittests:
+    test1:
+    - ' ro3! T2is is cool '
+    test2:
+    - ' ABCDS'
+    test3:
+    - 'zABCDS '
+    test4:
+    - '123456789'
+  uuid: e13f7da8-b484-11e7-b1e7-ac220b2cb439
 f62bae50-b22f-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: 'from random import randint, seed
