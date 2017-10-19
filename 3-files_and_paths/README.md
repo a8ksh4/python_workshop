@@ -133,8 +133,8 @@ One of the core modules needed for any sysadmin to interact with the local envir
 *There are a bunch of useful os._ commands! Do dir(os), or type os and press \<tab\> in your ipython terminal*  
   
 ## Basic Operations
-* **os.getcwd** - get the current working directory  
-* **os.chdir** - change directory
+**os.getcwd** - get the current working directory  
+**os.chdir** - change directory  
 ```python
 In [66]: os.getcwd()
 Out[66]: '/tmp'
@@ -151,34 +151,34 @@ try:
 except OSError:
     print "path does not exist: {}".format(path)
 ```  
-* **os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
+**os.listdir** - list contents of a directory. os.walk is more comprehensive alternative to this.  
 ```python
 In [108]: os.listdir('.')
 Out[108]: ['a.out', 'afile.txt']
 ```
-* **os.mkdir** - create a directory  
+**os.mkdir** - create a directory  
 ```python
 In [109]: os.mkdir('new_directory')
 ```
-* **os.remove** - remove a file  
+**os.remove** - remove a file  
 ```python
 In [110]: os.remove('afile.txt')
 
 In [111]: os.listdir('.')
 Out[111]: ['a.out', 'new_directory']
 ```
-* **os.rmdir** - remove a directory
+**os.rmdir** - remove a directory  
 ```python
 In [112]: os.rmdir('new_directory')
 
 In [111]: os.listdir('.')
 Out[111]: ['a.out']
 ```
-* **os.symlnik** - create a symlink
+**os.symlnik** - create a symlink  
 ```python
 In [104]: os.symlink('a.out', 'foo.out')
 ```
-* **os.readlink** - see where a symlink points
+**os.readlink** - see where a symlink points  
 ```python
 In [105]: os.readlink('foo.out')
 Out[105]: 'a.out'
