@@ -148,6 +148,40 @@ ca7ae886-b485-11e7-b1e7-ac220b2cb439:
     test4:
     - '123456789'
   uuid: ca7ae886-b485-11e7-b1e7-ac220b2cb439
+dee69878-b4e5-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: 'add(number1: int, number2:int ) -> int'
+  solution: "def reverseOrder(foo):\n    foo = foo.strip()\n    foo.split()\n    foo\
+    \ = foo[::-1]\n    foo = \" \".join(foo)\n    return foo\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called \"reverseOrder\" that takes a string as an argument\
+    \ and\nreturns another string with all of the whitespace delimetered words in\
+    \ the reverse\norder, not taking any special consideration for number/symbols.\
+    \  KISS. If the string,\n\" one1 tw_o thREE four!\" is passed in, \"four! thREE\
+    \ tw_0 one1\" would be returned. \nStrip any whitespace from the ends of hte given\
+    \ string.\n\nE.g:\ndef reverseOrder(foo):\n    # do stuff here\n    return foo\n"
+  tier: 5
+  title: string_example_4
+  unittests:
+    test1:
+    - ro3! T2is is cool
+    test2:
+    - ' ABCDS'
+    test3:
+    - zABCDS one two three!
+    test4:
+    - 123456789 asdf ASDF 4 _ 123 nine? ""
+  uuid: dee69878-b4e5-11e7-b1e7-ac220b2cb439
 e13f7da8-b484-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
