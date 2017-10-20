@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 # Python2 compatibility:
-from __future__ import print_function
-from future.builtins import input
+#from __future__ import print_function
+#from future.builtins import input
 
 # Other imports:
 import copy
@@ -60,17 +60,17 @@ def editTempFile(content, ref_header=None):
         marker_loc += len(marker)
         new_content = new_content[marker_loc:]
 
-    for guess in (1, 2, 3):
-        answer = input("Save changes? [y]/n: ")
-        if answer in ("", "y", "n"):
-            if answer == "n":
-                new_content = content
-            break
-        print("Responses accepted: 'y', 'n', or implicit y ''")
-    else:
-        print("Aborting!")
-        time.sleep(2)
-        new_content = content
+    #for guess in (1, 2, 3):
+    #    answer = input("Save changes? [y]/n: ")
+    #    if answer in ("", "y", "n"):
+    #        if answer == "n":
+    #            new_content = content
+    #        break
+    #    print("Responses accepted: 'y', 'n', or implicit y ''")
+    #else:
+    #    print("Aborting!")
+    #    time.sleep(2)
+    #    new_content = content
     return new_content
 
 
@@ -120,7 +120,9 @@ def readProbsFile(problem_file):
     for prob in probs_list:
         print(prob.keys())
     probs_list = sorted(probs_list,
-                        key=itemgetter('uuid', 'title', 'tier'))
+                        key=itemgetter('tier', 'title', 'uuid'))
+    #probs_list = sorted(probs_list,
+    #                    key=itemgetter('uuid', 'title', 'tier'))
     return probs_list
 
 
@@ -224,7 +226,8 @@ def interactiveMenu(probs_lists):
                         ('q', 'quit/return'))
             title = "Choose a problem to work on from '{}':".format(
                                                         probs_file_name)
-            probs_titles = [(p['tier'],p['title']) for p in probs_list]
+            probs_titles = [(p['tier'],p['title'],p['signature']) 
+                                                        for p in probs_list]
             choice = promptMenu(title, probs_titles, defaults)
             print("Choice was:", (choice,))
             #time.sleep(2)
@@ -255,6 +258,7 @@ def interactiveMenu(probs_lists):
                         ('-', ''),
                         ('t', 'edit title'),
                         ('x', 'edit text description'),
+                        ('g', 'edit signature'),
                         ('s', 'edit solution'),
                         ('u', 'edit unit test'),
                         ('+', 'increase tier'),
@@ -264,9 +268,11 @@ def interactiveMenu(probs_lists):
                         ('q', 'quit/return'))
             title = ( "Prob Selected:  tier: {}\n"
                       "  title: {}\n"
+                      "  signature: {}\n"
                       "  text: \n"
                       "{}".format( prob_selected['tier'],
                                    prob_selected['title'],
+                                   prob_selected['signature'],
                                    prob_selected['text'] ) )
             choice = promptMenu(title, [], defaults)
             print("Choice was:", (choice,))
@@ -277,6 +283,10 @@ def interactiveMenu(probs_lists):
             # Edit problem title
             elif choice == 't':
                 prob_selected['title'] = input("New Title: ")
+
+            # Edit problem signature
+            elif choice == 'g':
+                prob_selected['signature'] = input("New Signature: ")
 
             # Edit text description
             elif choice == 'x':
