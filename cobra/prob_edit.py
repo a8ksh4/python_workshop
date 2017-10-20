@@ -204,12 +204,15 @@ def interactiveMenu(probs_lists):
                 probs_list = probs_lists[probs_file_name]
 
                 # Make a backup copy of the problems file
+                if not os.path.isdir('./backups'):
+                    os.mkdir('./backups')
                 epoch_seconds = int(time.time())
-                shutil.copy(probs_file_name, "{}_{}".format(probs_file_name,
-                                                         epoch_seconds))
+                shutil.copy( probs_file_name, 
+                             "./backups/{}_{}".format(probs_file_name,
+                                                      epoch_seconds) )
                 assert( filecmp.cmp(
                             probs_file_name,
-                            "{}_{}".format(probs_file_name, epoch_seconds) )
+                            "./backups/{}_{}".format(probs_file_name, epoch_seconds) )
                 )
 
             elif choice == 'q':
