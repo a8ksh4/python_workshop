@@ -95,9 +95,83 @@ In [43]: print mod_cfg
 # yaml module
 Yaml is functionally equivelant to json, but it is MUCH easier to write by hand.  It's a lot easier
 to write valid yaml w/o making syntax mistakes... 
-**yaml.dump**
 
 **yaml.load**
+This will accept either a string with yaml content or a file handle (2nd example), and returns
+python data. 
+```python
+In [54]: yaml_content
+Out[54]: '\n- module: "python basics"\n  content:\n  - name: "prob1"\n    desc: "foo"\n  - name: "prob2"\n    desc: "foo2"\n- module: "python advanced"\n  content:\n  - name: "prob 1"\n    desc: "foo3"\n'
+
+In [55]: print yaml_content
+
+- module: "python basics"
+  content:
+  - name: "prob1"
+    desc: "foo"
+  - name: "prob2"
+    desc: "foo2"
+- module: "python advanced"
+  content:
+  - name: "prob 1"
+    desc: "foo3"
+
+In [56]: py_content = yaml.load(yaml_content)
+
+In [57]: py_content
+Out[57]: 
+[{'content': [{'desc': 'foo', 'name': 'prob1'},
+   {'desc': 'foo2', 'name': 'prob2'}],
+  'module': 'python basics'},
+ {'content': [{'desc': 'foo3', 'name': 'prob 1'}],
+  'module': 'python advanced'}]
+```
+  
+And from a file:  
+```python
+In [64]: with open('stuff.yaml', 'r') as f:
+    ...:     py_data = yaml.load(f)
+    ...:     
+
+In [66]: py_data
+Out[66]: 
+[{'content': [{'desc': 'foo', 'name': 'prob1'},
+   {'desc': 'foo2', 'name': 'prob2'}],
+  'module': 'python basics'},
+ {'content': [{'desc': 'foo3', 'name': 'prob 1'}],
+  'module': 'python advanced'}]
+```
+
+**yaml.dump**
+This will dump to a file or return a string, dpeneding on the arguments passed to it.  
+```python
+In [69]: yaml_string = yaml.dump(py_data)
+
+In [70]: print yaml_string
+- content:
+  - {desc: foo, name: prob1}
+  - {desc: foo2, name: prob2}
+  module: python basics
+- content:
+  - {desc: foo3, name: prob 1}
+  module: python advanced
+
+In [71]: with open('data.yaml', 'w') as f:
+    ...:     yaml.dump(py_data, f)
+    ...:     
+
+In [72]: print open('data.yaml', 'r').read()
+- content:
+  - {desc: foo, name: prob1}
+  - {desc: foo2, name: prob2}
+  module: python basics
+- content:
+  - {desc: foo3, name: prob 1}
+  module: python advanced
+
+In [73]: 
+
+```
 
 # re module
 
