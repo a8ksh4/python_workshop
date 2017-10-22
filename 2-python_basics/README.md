@@ -1,3 +1,20 @@
+* (Variables and Data Types)[#variables-and-data-types]
+  * (Integer, Float, Complex)[#integer--float--complex]
+  * (Strings)[#strings]
+    * Quoting, modifiers, matching, substrings, split, join
+  * (Dictionaries)[#dictionaries]
+  * (Lists and Tuples)[#lists-and-tuples]
+  * (Sets)[#sets]
+* (Syntax and Namespace)[#syntax-and-namespace]
+  * (Loops)[#loops]
+    * for, while
+  * (List Comprehensions)[#list-comprehensions]
+  * (Branching)[#branching]
+  * (Functions)[#functions]
+  * (Modules)[#modules]
+  * (Classes)[#classes]
+  * (Generators)[#generators]
+
 ```
 In [1]: import this
 The Zen of Python, by Tim Peters
@@ -27,8 +44,8 @@ In [2]:
 ** Note that all examples are using python 2**  
 Python 3 differences will be noted periodically  
   
-## Variables and Data Types
-### Integer, Float, complex
+# Variables and Data Types
+## Integer, Float, complex
 Python 2 keeps integers as integers until a float is introduced.  
 Python 3 converts to float during division unless `//` is used instead of `/`.  
   
@@ -56,7 +73,7 @@ In [7]: m = 2 + 3j
 In [8]: 3j * m
 Out[8]: (-9+6j)
 ```  
-### Strings
+## Strings
 *Press "Tab" to get auto-complete options for a data type in ipython.*  
 ```python  
 In [9]: a = "The quick brown fox jumps over the lazy dog"
@@ -160,15 +177,24 @@ Out[37]: ['one', 'two', '3', 'five', '_', 'foobar']
 In [38]: c.split(',t')
 Out[38]: ['one', 'wo,3,five,_,foobar']
 ```  
-### Dictionaries
+## Dictionaries
 
-### Lists and Tuples
+## Lists and Tuples
 
-### Sets
- Syntax
-Loops
-Lists
-Functions
-Generators
-Classes
-Etc!
+## Sets
+
+# Syntax and Namespace
+
+## Loops
+
+## List Comprehensions
+
+## Branching
+
+## Functions
+
+## Modules
+
+## Classes
+
+## Generators
