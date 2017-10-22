@@ -213,6 +213,11 @@ stuff.yaml
 sqlite is super useful if you need a local sql-like database and no hassles to get something
 working.  It creates a DB on the local filesystem.  
 https://docs.python.org/2/library/sqlite3.html  
+  
+This is one case where it's likely not appropriate to use the "with" convention (as I have it here).
+You likely don't want to open and cose a cursor repeatedly if you're making lots of calls to the DB.
+You can do `conn = sqlite3.connect('example.db')` and call `conn.close()` later if you're
+going that route. 
 ```python
 In [95]: with sqlite3.connect('example.db') as conn:
     ...:     c = conn.cursor()
