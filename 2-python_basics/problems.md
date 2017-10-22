@@ -2,32 +2,24 @@
 
 # Variables and Data Types
 ## Basic Math
-```python
-def divideThem(a, b):
-    '''return the floating point value of a divided by b.
-    >>> divideThem(1, 2)
-    1.5
-    >>>divideThem(2, 1)
-    2.0
-    '''
-    #result = 
-    return result
-    
+* divideThem(int, int) -> float
+  * 20
+  * return the floating point value of a divided by b
+* divideThemInt(int, int) -> (int, int)
+  * 20
+  * return the integer result of a divided by b AND the modulues result of a mod b.
+```python 
 def divideThemInt(a, b):
-    '''return the integer result of a divided by b AND the
-    modulus result of a modulus b
-    >>> divideThemInt(1, 2)
-    (0, 1)
-    >>> divideThemInt(17, 5)
-    (3, 2)
-    '''
-    
+    #...
     div_result = 
     mod_result = 
     return (div_result, mod_result)
 ```
 
 ## Strings
+* quoteIt() -> string
+  * 20
+  * return a string with both single and doubel quotes inside of it. 
 ```python
 def quoteIt():
      '''return a string with both single and double quotes inside of it.
