@@ -142,7 +142,7 @@ Out[66]:
   'module': 'python advanced'}]
 ```
 
-**yaml.dump**
+**yaml.dump**  
 This will dump to a file or return a string, dpeneding on the arguments passed to it.  
 ```python
 In [69]: yaml_string = yaml.dump(py_data)
@@ -173,10 +173,65 @@ In [73]:
 
 ```
 
-# re module
+# re module - regular expressions
+The python re module uses unix/perl style regular expressions.  I often use this for validating
+user input.  
+  
+There are lots of websites that are really useful for writing/testing regular exrepssions when
+you're building one to use in a program.  Ex: https://regex101.com/  
+  
+**simple matching exmaple**
+```python
+In [88]: import re
 
+In [89]: for f in os.listdir('.'):
+    ...:     if re.match('[a-z]*.yaml', f):
+    ...:         print f
+    ...:         
+    ...:     
+data.yaml
+stuff.yaml
+```
+  
+Regular expressions can be compiled if they're going to be used a lot. This can iprove performance
+for large data sets.  
+```python
+In [90]: exp = re.compile('[a-z]*.yaml')
+
+In [91]: exp
+Out[91]: re.compile(r'[a-z]*.yaml')
+
+In [92]: for f in os.listdir('.'):
+    ...:     if exp.match(f):
+    ...:         print f
+    ...:         
+data.yaml
+stuff.yaml
+```
+  
 # sql and sqlite
+sqlite is super useful if you need a local sql-like database and no hassles to get something
+working.  It creates a DB on the local filesystem.  
+https://docs.python.org/2/library/sqlite3.html  
+```python
+In [95]: with sqlite3.connect('example.db') as conn:
+    ...:     c = conn.cursor()
+    ...:     c.execute('''CREATE TABLE stocks
+    ...:              (date text, trans text, symbol text, qty real, price real)
+    ...: ''')
+    ...:     c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100
+    ...: ,35.14)")
+    ...:     conn.commit()
+    ...:     
 
+In [98]: with sqlite3.connect('example.db') as conn:
+    ...:     c = conn.cursor()
+    ...:     c.execute('''select * from stocks''')
+    ...:     print c.fetchall()
+    ...:     
+[(u'2006-01-05', u'BUY', u'RHAT', 100.0, 35.14)]
+```
+  
 # xlsx
 
 # pandas
