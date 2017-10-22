@@ -1,19 +1,19 @@
-* (Variables and Data Types)[#variables-and-data-types]
-  * (Integer, Float, Complex)[#integer--float--complex]
-  * (Strings)[#strings]
+* [Variables and Data Types](#variables-and-data-types)
+  * [Integer, Float, Complex](#integer--float--complex)
+  * [Strings](#strings)
     * Quoting, modifiers, matching, substrings, split, join
-  * (Dictionaries)[#dictionaries]
-  * (Lists and Tuples)[#lists-and-tuples]
-  * (Sets)[#sets]
-* (Syntax and Namespace)[#syntax-and-namespace]
-  * (Loops)[#loops]
-    * for, while
-  * (List Comprehensions)[#list-comprehensions]
-  * (Branching)[#branching]
-  * (Functions)[#functions]
-  * (Modules)[#modules]
-  * (Classes)[#classes]
-  * (Generators)[#generators]
+  * [Dictionaries](#dictionaries)
+  * [Lists and Tuples](#lists-and-tuples)
+  * [Sets](#sets)
+* [Syntax and Namespace](#syntax-and-namespace)
+  * [Loops](#loops)
+    * for, for-else, while
+  * [List Comprehensions](#list-comprehensions)
+  * [Branching](#branching)
+  * [Functions](#functions)
+  * [Modules](#modules)
+  * [Classes](#classes)
+  * [Generators](#generators)
 
 ```
 In [1]: import this
