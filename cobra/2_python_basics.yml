@@ -1,3 +1,55 @@
+014cb494-b543-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: myPricesDict() -> dict
+  solution: "def myPricesDict():\n    my_prices = {\"bananna\": 4, \"apple\": 2, \"\
+    orange\": 1.5, \"pear\": 3}\n    return my_prices\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Put the following items into a prices dictionary and return it:\n    \"bananna\"\
+    : 4,\n    \"apple\": 2,\n    \"orange\": 1.5,\n    \"pear\": 3\n\nE.g:\ndef myPricesDict():\n\
+    \    #your code here\n    return my_prices\n"
+  tier: 6
+  title: dict_example_2
+  unittests:
+    test1: null
+  uuid: 014cb494-b543-11e7-b1e7-ac220b2cb439
+22041afa-b544-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: listToCSV(list) -> string
+  solution: "def listToCSV(words_list):\n    csv_string = ','.join(words_list)\n \
+    \   return csv_string\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called \"listToCSV\" that takes a list of strings and combines\n\
+    them into a single string with all words separated by a comma: \",\".  For\nexample,\
+    \ [\"one\", 'two', 'three'] becomes \"one,two,three\".\n\nE.g:\ndef listToCSV(words_list):\n\
+    \    # do stuff here\n    return csv_string\n"
+  tier: 5
+  title: string_example_5
+  unittests:
+    test1:
+    - ('one', 'two', 'three')
+    test2:
+    - ('1', ',', ':', "fiftyfive")
+  uuid: 22041afa-b544-11e7-b1e7-ac220b2cb439
 4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
   history:
     ab7511ee456ce56e64d69141b7e2241b:
@@ -13,7 +65,7 @@
     interesting: 0
     useful: 0
   setup: seed({seed})
-  signature: 'add(number1: int, number2:int ) -> int'
+  signature: add(int, int) -> int
   solution: "def add(num_1, num_2):\n    return num_1 + num_2"
   successes: 1
   tags:
@@ -26,7 +78,7 @@
 
     '
   tier: 1
-  title: addition_example
+  title: math_example_1
   unittests:
     test1:
     - int(3)
@@ -60,22 +112,18 @@
     interesting: 0
     useful: 0
   setup: seed({seed})
-  signature: 'add(number1: int, number2:int ) -> int'
-  solution: "def add(num_1, num_2):\n    total = num_1 + num_2\n    return totalsss\n"
+  signature: remainder(int, int) -> int
+  solution: "def remainder(a, b):\n    the_remainder = a%b\n    return the_remainder\n"
   successes: 1
   tags:
   - sample
   - arithmatic
   teardown: ''
-  text: 'Write a function that takes 2 integers as parameter
-
-    It should return the sum of the 2 ints
-
-    and stuff!!!!  Am Amaze!
-
-    '
+  text: "Write a function that takes 2 integers as parameters and returns the remainder\n\
+    from dividing the first number into the second number. \n\nE.g:\ndef remainder(a,\
+    \ b):\n    #your code here\n    return the_remainder\n"
   tier: 1
-  title: addition_example_2
+  title: math_example_2
   unittests:
     test1:
     - int(3)
@@ -90,6 +138,41 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 5f9eee8e-b21b-11e7-b1e7-ac220b2cb439
+95e1367a-b53e-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: mergeToDict(list, list) -> dict
+  solution: "def mergeToDict(keys, values):\n    resulting_dict = dict(zip(keys, values))\n\
+    \    return resulting_dict\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Given a list of keys and a list of corresponding values, create a dictionary\n\
+    containing them and return it as output. You may assume that both lists will\n\
+    always be the same length.\n\nFor example, if the keys were ('color', 'flavor',\
+    \ 'texture') and the values\nwere ('red', 'sour', and 'rough'), the dictionary\
+    \ would look like:\n{'color': 'red', 'flavor': 'sour', 'texture': 'rough'}\n\n\
+    E.g:\ndef mergeToDict(keys, values):\n    #your code here\n    return resulting_dict\n"
+  tier: 6
+  title: dict_example_3
+  unittests:
+    test1:
+    - (1, 2, 3, 4)
+    - (5, 6, 7, 8)
+    test2:
+    - ('1', '2', '3', '4')
+    - ('a', 'b', 'c', 'd')
+    test3:
+    - ('1', '2', '3', '4')
+    - ([1,], [2,], [3,], [4,])
+  uuid: 95e1367a-b53e-11e7-b1e7-ac220b2cb439
 a13d84a0-b486-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -98,24 +181,56 @@ a13d84a0-b486-11e7-b1e7-ac220b2cb439:
     interesting: 0
     useful: 0
   setup: ''
-  signature: 'add(number1: int, number2:int ) -> int'
-  solution: "def printSomeStuff():\n    my_string = \"\"\"'It's modulus, \"%\", not\
-    \ division, \"/\", or escaping \"\\\"!'\"\"\"\n    return my_string\n    \n"
+  signature: returnWithQuotes() -> string
+  solution: "def returnWithQuotes():\n    my_string = \"\"\"'It's modulus, \"%\",\
+    \ not division, \"/\", or escaping \"\\\"!'\"\"\"\n    return my_string\n    \n"
   successes: 1
   tags:
   - sample
   - arithmatic
   teardown: ''
-  text: "Write a function called printSomeStuff that takes no arguments and, when\n\
+  text: "Write a function called returnWithQuotes that takes no arguments and, when\n\
     called, returns the following text (no whitespace on the ends), but with all quotes\
     \ shown included in the string:\n\n    'It's modulus, \"%\", not division, \"\
-    /\", or escaping \"\\\"!'\n\nE.g:\ndef printSomeStuff():\n    # do stuff here\n\
+    /\", or escaping \"\\\"!'\n\nE.g:\ndef returnWithQuotes():\n    # do stuff here\n\
     \    return my_silly_string\n"
   tier: 4
   title: quoting_example_1
   unittests:
     test1: null
   uuid: a13d84a0-b486-11e7-b1e7-ac220b2cb439
+c9e26c9a-b544-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: undToShortCSV(string) -> string
+  solution: "def listToCSV(words_list):\n    csv_string = ','.join(words_list)\n \
+    \   return csv_string\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called \"undToShortCSV\" that takes a string with words\n\
+    separated by underscores, \"_\", changes the underscores to commas, \",\", and\n\
+    returns only the first three words.  You can assume that there will always\nbe\
+    \ more than three words separated by underscore given. \n\nFor exmaple, \"one_two_three_four_five\"\
+    \ becomes \"one,two,three\".\n\nE.g:\ndef undToShortCSV(und_sep_words):\n    #\
+    \ do stuff here\n    return csv_sep_words\n"
+  tier: 5
+  title: string_example_6
+  unittests:
+    test1:
+    - one_two_three_four_five
+    test2:
+    - _______
+    test3:
+    - 1_2_3__five_six!''_seven
+  uuid: c9e26c9a-b544-11e7-b1e7-ac220b2cb439
 ca7ae886-b485-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -124,7 +239,7 @@ ca7ae886-b485-11e7-b1e7-ac220b2cb439:
     interesting: 0
     useful: 0
   setup: ''
-  signature: 'add(number1: int, number2:int ) -> int'
+  signature: justEvenChars(string) -> (string)
   solution: "def justEvenChars(foo):\n    return foo[::2]\n"
   successes: 1
   tags:
@@ -148,6 +263,40 @@ ca7ae886-b485-11e7-b1e7-ac220b2cb439:
     test4:
     - '123456789'
   uuid: ca7ae886-b485-11e7-b1e7-ac220b2cb439
+db79345a-b537-11e7-b1e7-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: pocketContents() -> dict
+  solution: "def pocketContents():\n    inventory = {\n        'gold' : 500,\n   \
+    \     'pouch' : ['flint', 'twine', 'gemstone'],\n        'backpack' : ['xylophone','dagger',\
+    \ 'bedroll','bread loaf']\n    }\n    inventory['pocket'] = ['seashell']\n   \
+    \ return inventory\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Given the following dictionary called \"inventory\", modify the pocketContents\n\
+    function to add a 'pocket' into the dictionary with contents 'seashell'\n(a single\
+    \ string in a list).\n\nE.g:\ndef pocketContents():\n    inventory = {\n     \
+    \   'gold' : 500,\n        'pouch' : ['flint', 'twine', 'gemstone'],\n       \
+    \ 'backpack' : ['xylophone','dagger', 'bedroll','bread loaf']\n    }\n\n    return\
+    \ inventory\n"
+  tier: 6
+  title: dict_example_1
+  unittests:
+    test1:
+    - ' rofl this is cool '
+    test2:
+    - ' ABCDS'
+    test3:
+    - 'zABCDS '
+  uuid: db79345a-b537-11e7-b1e7-ac220b2cb439
 dee69878-b4e5-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -156,7 +305,7 @@ dee69878-b4e5-11e7-b1e7-ac220b2cb439:
     interesting: 0
     useful: 0
   setup: ''
-  signature: 'add(number1: int, number2:int ) -> int'
+  signature: reverseOrder(string) -> string
   solution: "def reverseOrder(foo):\n    foo = foo.strip()\n    foo.split()\n    foo\
     \ = foo[::-1]\n    foo = \" \".join(foo)\n    return foo\n"
   successes: 1
@@ -166,9 +315,9 @@ dee69878-b4e5-11e7-b1e7-ac220b2cb439:
   teardown: ''
   text: "Write a function called \"reverseOrder\" that takes a string as an argument\
     \ and\nreturns another string with all of the whitespace delimetered words in\
-    \ the reverse\norder, not taking any special consideration for number/symbols.\
-    \  KISS. If the string,\n\" one1 tw_o thREE four!\" is passed in, \"four! thREE\
-    \ tw_0 one1\" would be returned. \nStrip any whitespace from the ends of hte given\
+    \ the\nreverse order, not taking any special consideration for number/symbols.\
+    \  KISS.\nIf the string, \" one1 tw_o thREE four!\" is passed in, \"four! thREE\
+    \ tw_0 one1\"\nwould be returned.  Strip any whitespace from the ends of hte given\
     \ string.\n\nE.g:\ndef reverseOrder(foo):\n    # do stuff here\n    return foo\n"
   tier: 5
   title: string_example_4
@@ -190,7 +339,7 @@ e13f7da8-b484-11e7-b1e7-ac220b2cb439:
     interesting: 0
     useful: 0
   setup: ''
-  signature: 'add(number1: int, number2:int ) -> int'
+  signature: firstHalfLower(string) -> string
   solution: "def firstHalfLower(foo):\n    length = int(len(foo) / 2)\n    result\
     \ = foo[:length].lower()\n    assert(len(result) * 2 <= len(foo))\n    return\
     \ result\n"
@@ -228,22 +377,17 @@ f62bae50-b22f-11e7-b1e7-ac220b2cb439:
     interesting: 0
     useful: 0
   setup: seed({seed})
-  signature: 'add(number1: int, number2:int ) -> int'
-  solution: "def add(num_1, num_2):\n    total = num_1 + num_2\n    return totalsss\n"
+  signature: toInt(float) -> int
+  solution: "def toInt(a_float):\n    an_int = int(a_float)\n    return an_int\n"
   successes: 1
   tags:
   - sample
   - arithmatic
   teardown: ''
-  text: 'Write a function that takes 2 integers as parameter
-
-    It should return the sum of the 2 ints
-
-    and stuff!!!!  Am Amaze!
-
-    '
+  text: "Write a function that takes a floating point number and returns it\nas an\
+    \ integer.\n\nE.g:\ndef toInt(a_float):\n    #your code here\n    return an_int\n"
   tier: 1
-  title: addition_examples_3
+  title: math_examples_3
   unittests:
     test1:
     - int(7)
@@ -266,7 +410,7 @@ ffeb899e-b471-11e7-b1e7-ac220b2cb439:
     interesting: 0
     useful: 0
   setup: ''
-  signature: 'add(number1: int, number2:int ) -> int'
+  signature: strUpper(string) -> string
   solution: "def strUpper(foo):\n    return foo.strip().upper()\n"
   successes: 1
   tags:
