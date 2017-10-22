@@ -30,13 +30,13 @@
     # Used for any outside module dependancies
     imports: "from random import randint, seed"
     # Setup scripts to prep an environment. Run before unittests
-    setup: "seed({seed})\nprint('Here are some variabiles, x=10, y=hello')\nx = 10\ny = 'hello'\nprint(self.test)"
+    setup: "seed({seed})"
     # Teardown scripts to clean up the environment. Run after unittests
-    teardown: "print('x: ' + str(x))\nprint('y: ' + str(y))"
+    teardown: ""
     # Scripts to be run before individual tests take place    
-    pretest: "x += 10"
+    pretest: ""
     # Scripts to be run after infividual tests take place
-    posttest: "y += 'o'\nself.test ='GOODBYE'"
+    posttest: ""
     # Tags can be used to sort and filter questions
     tags:
         - sample

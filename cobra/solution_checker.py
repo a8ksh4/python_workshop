@@ -4,17 +4,33 @@ from sys import executable
 from subprocess import Popen, PIPE
 from tempfile import NamedTemporaryFile
 from os import remove
-
-class SolutionStats():
-    def __init__(self, solution):
-        self.solution = solution
+    
+class Solution():
+    def __init__(self, data, solution=None):
+        if solution:
+            self.solution = solution
+        else:
+            self.solution = data['solution']
+        self.id = data['id']
+        self._imports = data['imports']
+        # these .formats let meta information get passed into the setup and teardown scripts.        
+        # it's mostly so you can send a dynamic seed      
+        self._setup = data['setup'].format(**data)
+        self._teardown = data['teardown'].format(**data)
+        self._pretest = data['pretest'].format(**data)
+        self._posttest = data['posttest'].format(**data)
+        self._unittests = data['unittests']
+        self._function = None
+        self.exception_raised = False
+        self.tests_results = []
+        self.time_to_execute = 0
         self.linecount, self.charcount = self.get_counts()
         self.violations = self.check_codestyle()
         if self.violations == '':
             self.violationcount = 0
         else:
             self.violationcount = len(self.violations.split('\n'))
-    
+
     def check_codestyle(self):
         '''Checks the solution for pep8 standards'''
         solution_file = NamedTemporaryFile(delete=False, encoding='utf-8', mode='w', suffix='.py')
@@ -34,27 +50,7 @@ class SolutionStats():
         linecount = len(self.solution.split('\n'))
         charcount = len(self.solution)
         return linecount, charcount    
-    
-class SolutionExec():
-    def __init__(self, data, solution=None):
-        if solution:
-            self.solution = solution
-        else:
-            self.solution = data['solution']
-        self.imports = data['imports']
-        # these .formats let meta information get passed into the setup and teardown scripts.        
-        # it's mostly so you can send a dynamic seed        
-        self.setup = data['setup'].format(**data)
-        self.teardown = data['teardown'].format(**data)
-        self.pretest = data['pretest'].format(**data)
-        self.posttest = data['posttest'].format(**data)
-        self.unittests = data['unittests']
-        self.function = None
-        self.exception_raised = False
-        self.tests_results = []
-        self.time_to_execute = 0
-        self.test = 'testing' # this is for debuging, delete it later
-    
+        
     def run_solution(self):
         '''Takes a text solution and yml data, and combines the two for execution'''    
         # we need to make imports global so they can be used inside of unit tests
@@ -67,7 +63,7 @@ class SolutionExec():
             exception_raised = True
             return None
         scope.pop('__builtins__')
-        self.function = [value for value in scope.values()][0]        
+        self._function = [value for value in scope.values()][0]        
         # now that we have the function in our namespace we can run it against our unittests
         self._run_tests()
         # and finally we will run our teardown scripts
@@ -76,30 +72,30 @@ class SolutionExec():
         '''Runs the solution against all unit tests'''
         test_list = []
         
-        exec(self.imports)    
-        exec(self.setup)        
+        exec(self._imports)    
+        exec(self._setup)        
         
         # first implement any text case multipliers, extends the total number of tests
-        for testname, values in sorted(self.unittests.items()):
+        for testname, values in sorted(self._unittests.items()):
             for _ in range(self._loopcount(testname)):
                 test_list.append(values)    
         
         # run through all the unit tests if they exist
         if test_list:
             for test in test_list:
-                exec(self.pretest) # pretest script
+                exec(self._pretest) # pretest script
                 arguments = []
                 for argument in test:
                     arguments += [eval(argument)]
                 #arguments = map(lambda argument: eval(argument, locals), test) # converts the yml test case string into the solution arguments
                 self._run_test(arguments)
-                exec(self.posttest) # posttest script  
+                exec(self._posttest) # posttest script  
         # if there are no unit tests we just run the function once
         else:
-            exec(self.pretest) # pretest script
+            exec(self._pretest) # pretest script
             self_run_test([])
-            exec(self.posttest) # posttest script  
-        exec(self.teardown)
+            exec(self._posttest) # posttest script  
+        exec(self._teardown)
 
     def _loopcount(self, testname):
         '''Checks for _x in test names and returns the number following'''
@@ -113,7 +109,7 @@ class SolutionExec():
         ''' run test and save results, and time taken '''
         start_time = default_timer()
         try:
-            result = self.function(*arguments)    # the actual test is run here
+            result = self._function(*arguments)    # the actual test is run here
         except Exception as e:
             print('{}: {}'.format(type(e).__name__, e))
             result = None
