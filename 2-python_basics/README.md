@@ -2,9 +2,9 @@
   * [Integer, Float, Complex](#integer--float--complex)
   * [Strings](#strings)
     * Quoting, modifiers, matching, substrings, split, join
-  * [Dictionaries](#dictionaries)
   * [Lists and Tuples](#lists-and-tuples)
   * [Sets](#sets)
+  * [Dictionaries](#dictionaries)
 * [Syntax and Namespace](#syntax-and-namespace)
   * [Loops](#loops)
     * for, for-else, while
@@ -177,6 +177,12 @@ Out[37]: ['one', 'two', '3', 'five', '_', 'foobar']
 In [38]: c.split(',t')
 Out[38]: ['one', 'wo,3,five,_,foobar']
 ```  
+  
+## Lists and Tuples  
+  
+## Sets
+  
+  
 ## Dictionaries
 Dictionaries, `{key: val, ...}` are used for key value pairing. Most data types can be used for keys and any 
 data type can be used for values.
@@ -322,10 +328,6 @@ In [33]: print status_by_host
 {}
 
 ```
-  
-## Lists and Tuples
-
-## Sets
 
 # Syntax and Namespace
 
