@@ -178,7 +178,151 @@ In [38]: c.split(',t')
 Out[38]: ['one', 'wo,3,five,_,foobar']
 ```  
 ## Dictionaries
+Dictionaries, `{key: val, ...}` are used for key value pairing. Most data types can be used for keys and any 
+data type can be used for values.
+* Keys cannot be lists, sets, dictoinaries, but they can be tuples, strings, numbers...  
+* Values can be anything!  Nested dictionaries, lists, functions(!), or any object.  
+  
+**Creating dictionaries with values**  
+```python
+In [100]: x = {'key1': 'val1', 'key2': 'val2'}
 
+In [101]: x.keys()
+Out[101]: ['key2', 'key1']
+
+In [102]: x.values()
+Out[102]: ['val2', 'val1']
+
+In [103]: x.items()
+Out[103]: [('key2', 'val2'), ('key1', 'val1')]
+```
+  
+**Creating empty dictionaries**  
+```python
+In [1]: y = {}
+
+In [2]: y
+Out[2]: {}
+
+In [3]: y['foo'] = 'bar'
+
+In [4]: z = dict()
+
+In [5]: z
+Out[5]: {}
+```
+
+**Creating dictionaries by typecasting - "dict(zip(list1, list2))"**  
+You can use "dict()" to typecast a list of lists into a dictionary.  E.g:
+```python
+In [15]: dict( ((1, 'a'), (2, 'b'), (0, 'c'), (3, [])) )
+Out[15]: {0: 'c', 1: 'a', 2: 'b', 3: []}
+```
+Simiarly, if you typecast a dictionary to a list or tuple, you'll get the reverse:
+```python
+In [18]: tuple({0: 'c', 1: 'a', 2: 'b', 3: []}.items())
+Out[18]: ((0, 'c'), (1, 'a'), (2, 'b'), (3, []))
+
+In [19]: list({0: 'c', 1: 'a', 2: 'b', 3: []}.items())
+Out[19]: [(0, 'c'), (1, 'a'), (2, 'b'), (3, [])]
+```
+The important next step from this is building lists of key:value pairs that can be converted to 
+a dictionary. Imagine that you have a list of things, and you iterate over those things
+to collect some data into another list.  For every item in the first list, there is some data in the 
+other list at the same location in the list.  
+
+"zip" will pair up items in two lists for this. 
+
+```python
+In [6]: my_hosts = ('host1', 'host2', 'host3', 'host4')
+
+In [7]: host_status = [getStatus(h) for h in my_hosts]
+
+In [10]: host_status
+Out[10]: ['up', 'up', 'down', 'up']
+
+In [20]: zip(my_hosts, host_status)
+Out[20]: [('host1', 'up'), ('host2', 'up'), ('host3', 'down'), ('host4', 'up')]
+
+In [11]: status_by_host = dict(zip(my_hosts, host_status))
+
+In [12]: status_by_host
+Out[12]: {'host1': 'up', 'host2': 'up', 'host3': 'down', 'host4': 'up'}
+
+In [13]: status_by_host['host1']
+Out[13]: 'up'
+```
+  
+**Inserting and modifying values**  
+If the key already exists in the dictionary, it's value will be overwritten.  If the key doesn't exist already,
+it will be inserted with the given value.
+```python
+some_dictionary[the_key] = the_value
+```
+  
+**Referencing values**  
+If you reference a key that doesn't exist in the dictionary, an exception will be raised, so it's typical to check
+for keys before referencing them, unless you happen to be iterating on the dictionary or similar and know that
+the keys will be there.  
+```python
+In [25]: if 'host5' in status_by_host:
+    ...:     print status_by_host['host5']
+    ...: else:
+    ...:     print 'host5 not in dictionary'
+    ...:     
+host5 not in dictionary
+```
+  
+**Removing keys/values**  
+This is done w/ the pop method.  It happens to return the value associated with the key, so this can be used
+to process items in a dict until they are gone... see the "while True" example below. 
+```python
+In [26]: status_by_host
+Out[26]: {'host1': 'up', 'host2': 'up', 'host3': 'down', 'host4': 'up'}
+
+In [30]: status_by_host.pop('host1')
+Out[30]: 'up'
+
+In [31]: status_by_host
+Out[31]: {'host2': 'up', 'host3': 'down', 'host4': 'up'}
+```
+  
+**Iterating on dictionaries**  
+When treated as an iterator, a dictionary will provide all of its keys:
+```python
+In [35]: for key in status_by_host:
+    ...:     print "key:", key, 'and value:', status_by_host[key]
+    ...:     
+key: host4 and value: up
+key: host3 and value: down
+key: host2 and value: up
+```
+  
+Key and value can be provided as well to avoid having to look up the value each iteration of the loop:  
+```python
+In [36]: for key, val in status_by_host.items():
+    ...:     print "key:", key, 'and value:', val
+    ...:     
+key: host4 and value: up
+key: host3 and value: down
+key: host2 and value: up
+```
+  
+"pop" until gone:  
+```python
+In [32]: while status_by_host:
+    ...:     foo = status_by_host.popitem()
+    ...:     # do stuff with foo...
+    ...:     print 'one item:', foo
+one item: ('host4', 'up')
+one item: ('host3', 'down')
+one item: ('host2', 'up')
+
+In [33]: print status_by_host
+{}
+
+```
+  
 ## Lists and Tuples
 
 ## Sets
@@ -186,6 +330,41 @@ Out[38]: ['one', 'wo,3,five,_,foobar']
 # Syntax and Namespace
 
 ## Loops
+**"for" loops**  
+"for" loops can iterate over any python object with a "__iter__" method.  The __iter__ method basically says to return
+a value from the object each time it is referenced.  
+```python
+In [38]: for x in range(5):
+    ...:     print x
+    ...:     
+0
+1
+2
+3
+4
+
+In [39]: for x in ('a', 'b', 'c'):
+    ...:     print "foobar:", x
+    ...:     
+foobar: a
+foobar: b
+foobar: c
+```
+  
+**"while" loops**  
+"while" loops repeat as long as a condtion is satisfied.
+```python
+In [40]: while True:
+    ...:     print "this will repeate forever..."
+    ...:
+this will repeate forever...
+this will repeate forever...
+...
+```
+
+**break and continue**
+
+**for-else**
 
 ## List Comprehensions
 
