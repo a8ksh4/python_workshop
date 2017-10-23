@@ -349,6 +349,15 @@ In [39]: for x in ('a', 'b', 'c'):
 foobar: a
 foobar: b
 foobar: c
+
+In [40]: stuff = ( ('a', 0), ('b', 1), ('c', 99) )
+
+In [41]: for letter, total in stuff:
+    ...:     print "there are {} of {}".format(total, letter)
+    ...:     
+there are 0 of a
+there are 1 of b
+there are 99 of c
 ```
   
 **"while" loops**  
@@ -361,11 +370,83 @@ this will repeate forever...
 this will repeate forever...
 ...
 ```
+See the **Iterating on Dictionaries** section above for more examples!
 
 **break and continue**
+break exists the loop when it is called and continue skipps to the next iteration of the loop.  Some languages
+have a feature to lep you break out from multiple nested loops... this is not so in python, excep using tracking variables
+or using the for-else convention given below.  
+```python
+In [42]: for x in range(5):
+    ...:     if x%3 == 0:
+    ...:         print "found first num divisible by three: {}".format(x)
+    ...:         break
+    ...:     
+found first num divisible by three: 0
+
+In [44]: for x in range(5):
+    ...:     if x%2:
+    ...:         continue
+    ...:     print "found num divisible by two: {}".format(x)
+    ...:     
+found num divisible by two: 0
+found num divisible by two: 2
+found num divisible by two: 4
+```
 
 **for-else**
+If "break" is not called in any iteration of the loop, then "else" gets executed. This can be a little mind-warping,
+but is good for some fun interactions between nested loops, and is useful when we want to make sure something happens
+if, e.g., we don't encounter some condition during execution of our loop. 
 
+```python
+In [45]: cities = ['atlanta', 'palo cedro', 'podunk']
+
+In [47]: def theFugativeIsIn(fugative, city):
+    ...:     if (fugative == 'vince' and city == 'atlanta'):
+    ...:         return True
+    ...:     elif (fugative == 'mary' and city == "tallahassee"):
+    ...:         return True
+    ...:     else:
+    ...:         return False
+    ...:     
+
+In [48]: fugative = 'vince'
+
+In [49]: for city in cities:
+    ...:     if theFugativeIsIn(fugative, city):
+    ...:         print "Found the fugative in {}".format(city)
+    ...:         break
+    ...:     else:
+    ...:         print "Fugative not found in {}".format(city)
+    ...: else:
+    ...:     print "Fugative not found in any cities!"
+    ...:     print "Better try some different cities..."
+    ...:     
+Found the fugative in atlanta
+
+In [50]: fugative = 'mary'
+
+In [51]: for city in cities:
+    ...:     if theFugativeIsIn(fugative, city):
+    ...:         print "Found the fugative in {}".format(city)
+    ...:         break
+    ...:     else:
+    ...:         print "Fugative not found in {}".format(city)
+    ...: else:
+    ...:     print "Fugative not found in any cities!"
+    ...:     print "Better try some different cities..."
+    ...:     
+Fugative not found in atlanta
+Fugative not found in palo cedro
+Fugative not found in podunk
+Fugative not found in any cities!
+Better try some different cities...
+```
+  
+**iteritems!**  
+
+  
 ## List Comprehensions
 
 ## Branching
