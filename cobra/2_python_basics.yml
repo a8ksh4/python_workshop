@@ -42,8 +42,8 @@
     them into a single string with all words separated by a comma: \",\".  For\nexample,\
     \ [\"one\", 'two', 'three'] becomes \"one,two,three\".\n\nE.g:\ndef listToCSV(words_list):\n\
     \    # do stuff here\n    return csv_string\n"
-  tier: 5
-  title: string_example_5
+  tier: 22
+  title: strings_6
   unittests:
     test1:
     - ('one', 'two', 'three')
@@ -65,20 +65,18 @@
     interesting: 0
     useful: 0
   setup: seed({seed})
-  signature: add(int, int) -> int
-  solution: "def add(num_1, num_2):\n    return num_1 + num_2"
+  signature: addThem(int, int) -> int
+  solution: "def addThem(num_a, num_b):\n    return num_a + num_b\n"
   successes: 1
   tags:
   - sample
   - arithmatic
   teardown: ''
-  text: 'Write a function that takes 2 integers as parameter
-
-    It should return the sum of the 2 ints
-
-    '
-  tier: 1
-  title: math_example_1
+  text: "Write a function that takes 2 integers as parameter\nIt should return the\
+    \ sum of the 2 integers.\n\nE.g. \ndef addThem(num_a, num_b):\n    #your code\
+    \ here\n    return the_sum\n"
+  tier: 20
+  title: basic_math_1
   unittests:
     test1:
     - int(3)
@@ -93,6 +91,46 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 4464b29f-86a1-4e4c-9261-f581d1b1c8e8
+59890270-b868-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: 'from random import randint, seed
+
+    import subprocess as sp
+
+    '
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: divideThemInt(int, int) -> (int, int)
+  solution: "def divideThemInt(num_a, num_b):\n    return (num_a / num_b, num_a %\
+    \ num_b)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function that divides two integers and returns a tuple with the first\
+    \ value equal to the integer diviion result, and teh second value equal to the\
+    \ remainder. \n\nE.g:\ndef divideThemInt(num_a, num_b):\n    #your code here\n\
+    \    return (sum_of_them, remainder)\n"
+  tier: 20
+  title: basic_math_4
+  unittests:
+    test1:
+    - int(7)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 59890270-b868-11e7-b66a-ac220b2cb439
 5f9eee8e-b21b-11e7-b1e7-ac220b2cb439:
   history:
     ab7511ee456ce56e64d69141b7e2241b:
@@ -120,10 +158,10 @@
   - arithmatic
   teardown: ''
   text: "Write a function that takes 2 integers as parameters and returns the remainder\n\
-    from dividing the first number into the second number. \n\nE.g:\ndef remainder(a,\
-    \ b):\n    #your code here\n    return the_remainder\n"
-  tier: 1
-  title: math_example_2
+    from dividing the first number, \"a\", into the second number, \"b\". \n\nE.g:\n\
+    def remainder(a, b):\n    #your code here\n    return the_remainder\n"
+  tier: 20
+  title: basic_math_2
   unittests:
     test1:
     - int(3)
@@ -138,6 +176,76 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 5f9eee8e-b21b-11e7-b1e7-ac220b2cb439
+70f341c2-b869-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: 'from random import randint, seed
+
+    import subprocess as sp
+
+    '
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: convertCToF(int) -> float
+  solution: "def convertCToF(temp_in_c):\n    return temp_in_c/5.0 + 32.0/9.0\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function that accepts a temperature in Centigrade and returns an\n\
+    equivelant temperature in Farenheight. \n\nThe equation for this is (f = c/5 +\
+    \ 32/9)\n\nE.g:\ndef convertCToF(temp_in_c):\n    #your code here\n    return\
+    \ temp_in_f\n"
+  tier: 20
+  title: basic_math_6
+  unittests:
+    test1:
+    - int(7)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 70f341c2-b869-11e7-b66a-ac220b2cb439
+71c30c8c-b86d-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: getIndexOf(string, string) -> int
+  solution: "def getIndexOf(word, search_string):\n    if word in search_string:\n\
+    \        return search_string.index(word)\n    else:\n        return -1\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Wirte a functuion called \"getIndexOf\" that returns the index of a given\
+    \ word\ninside of a given string.  If the word is not present, it returns a -1.\
+    \ \n\nFor exmaple, if the word is \"pizza\", and the search_string is \"there\
+    \ is pizza on the plate\", then the index is 9.\n\nE.g:\ndef getIndexOf(word,\
+    \ search_string):\n    # do stuff here\n    return index \n"
+  tier: 23
+  title: strings_8
+  unittests:
+    test1:
+    - one_two_three_four_five
+    test2:
+    - _______
+    test3:
+    - 1_2_3__five_six!''_seven
+  uuid: 71c30c8c-b86d-11e7-b66a-ac220b2cb439
 95e1367a-b53e-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -194,8 +302,8 @@ a13d84a0-b486-11e7-b1e7-ac220b2cb439:
     \ shown included in the string:\n\n    'It's modulus, \"%\", not division, \"\
     /\", or escaping \"\\\"!'\n\nE.g:\ndef returnWithQuotes():\n    # do stuff here\n\
     \    return my_silly_string\n"
-  tier: 4
-  title: quoting_example_1
+  tier: 21
+  title: strings_1
   unittests:
     test1: null
   uuid: a13d84a0-b486-11e7-b1e7-ac220b2cb439
@@ -221,8 +329,8 @@ c9e26c9a-b544-11e7-b1e7-ac220b2cb439:
     \ more than three words separated by underscore given. \n\nFor exmaple, \"one_two_three_four_five\"\
     \ becomes \"one,two,three\".\n\nE.g:\ndef undToShortCSV(und_sep_words):\n    #\
     \ do stuff here\n    return csv_sep_words\n"
-  tier: 5
-  title: string_example_6
+  tier: 23
+  title: strings_7
   unittests:
     test1:
     - one_two_three_four_five
@@ -251,8 +359,8 @@ ca7ae886-b485-11e7-b1e7-ac220b2cb439:
     \ \"coolio\", the result would be \"coi\", treating the zeroth characte as even\
     \ (0%2==0). \n\nE.g:\ndef justEvenChars(foo):\n    # do stuff here\n    return\
     \ foo\n"
-  tier: 4
-  title: string_example_3
+  tier: 22
+  title: strings_4
   unittests:
     test1:
     - ' ro3! T2is is cool '
@@ -263,6 +371,44 @@ ca7ae886-b485-11e7-b1e7-ac220b2cb439:
     test4:
     - '123456789'
   uuid: ca7ae886-b485-11e7-b1e7-ac220b2cb439
+db2afcca-b868-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: 'from random import randint, seed
+
+    import subprocess as sp
+
+    '
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: divideThem(int, int) -> float
+  solution: "def divideThem(num_a, num_b):\n    return float(num_a) / float(num_b)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function that divides two integers and returns a floating point result.\n\
+    Note: the result should be a float even if the division has no remainder...\n\n\
+    E.g:\ndef divideThem(num_a, num_b):\n    #your code here\n    return the_result\n"
+  tier: 20
+  title: basic_math_5
+  unittests:
+    test1:
+    - int(7)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: db2afcca-b868-11e7-b66a-ac220b2cb439
 db79345a-b537-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -319,8 +465,8 @@ dee69878-b4e5-11e7-b1e7-ac220b2cb439:
     \  KISS.\nIf the string, \" one1 tw_o thREE four!\" is passed in, \"four! thREE\
     \ tw_0 one1\"\nwould be returned.  Strip any whitespace from the ends of hte given\
     \ string.\n\nE.g:\ndef reverseOrder(foo):\n    # do stuff here\n    return foo\n"
-  tier: 5
-  title: string_example_4
+  tier: 22
+  title: strings_5
   unittests:
     test1:
     - ro3! T2is is cool
@@ -353,8 +499,8 @@ e13f7da8-b484-11e7-b1e7-ac220b2cb439:
     \ how many\ncharacters of the string to return, round down - an 11 character string\
     \ would\nresult in 5 characters being returned.\n\nE.g:\ndef firstHalfLower(foo):\n\
     \    # do stuff here\n    return foo\n"
-  tier: 4
-  title: string_example_2
+  tier: 22
+  title: strings_3
   unittests:
     test1:
     - ' ro3! T2is is cool '
@@ -386,8 +532,8 @@ f62bae50-b22f-11e7-b1e7-ac220b2cb439:
   teardown: ''
   text: "Write a function that takes a floating point number and returns it\nas an\
     \ integer.\n\nE.g:\ndef toInt(a_float):\n    #your code here\n    return an_int\n"
-  tier: 1
-  title: math_examples_3
+  tier: 20
+  title: basic_math_3
   unittests:
     test1:
     - int(7)
@@ -420,8 +566,8 @@ ffeb899e-b471-11e7-b1e7-ac220b2cb439:
   text: "Write a function called \"strUpper\" that takes a string as an argument and\n\
     returns the string without any whitespace on the ends and all upper case.\n\n\
     E.g:\ndef strUpper(foo):\n    # do stuff here\n    return foo\n"
-  tier: 4
-  title: string_example_1
+  tier: 21
+  title: strings_2
   unittests:
     test1:
     - ' rofl this is cool '
