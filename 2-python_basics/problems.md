@@ -2,11 +2,17 @@
 
 # Variables and Data Types
 ## Basic Math
+* addThem(int, int) -> int
+  * 20
+  * return the sum of the two given values
+* remainder(int, int) -> int
+  * 20
+  * return the remainder of two vals... 
 * divideThem(int, int) -> float
   * 20
   * return the floating point value of a divided by b
 * divideThemInt(int, int) -> (int, int)
-  * 20
+  * 21
   * return the integer result of a divided by b AND the modulues result of a mod b.
 ```python 
 def divideThemInt(a, b):
@@ -20,32 +26,32 @@ def divideThemInt(a, b):
   * given a temperature in Centigrade, return the equiv. temperature in F.  (c/5 + 32/9 = f) 
 
 ## Strings
-* quoteIt() -> string
-  * 20
-  * return a string with both single and doubel quotes inside of it.'
+* returnWithQuotes() -> string
+  * 21
+  * return a string containing both types of quote:  ", '
+* strUpper(string) -> string
+  * 21
+  * return a given string converted to all upper case. 
+* firstHalfLower(string) -> string
+  * 22
+  * convert first half of string to lower case.
+* justEvenChars
+  * 22
+  * return only even numbered characters from a string.
+* reverseOrder(string) -> string
+  * 22
+  * return the string with it's order reversed. 
+* listToCSV(string) -> string
+  * 22
+  * return a list of words from a string containing comma separated values. 
+* undToShortCSV(string) -> string
+  * 23
+  * conver _sv to 3 words of csv. 
 * getIndexOf(word, my_string) -> int
-  * 20
+  * 23
   * return the index of a given word in teh given string.
-* matchAnimals(some_string) -> bool
-  * 20
-```python
- def matchAnimals(my_string):
-     animals = ('dog', 'cat', 'elephant', 'moose', 'duck')
-     for animal in animals:
-         if _put_something_here_:
-             return True
-     return False
-```
-*   0 (1, 'math_example_1', 'add(int, int) -> int')
-*   1 (1, 'math_example_2', 'remainder(int, int) -> int')
-*   2 (1, 'math_examples_3', 'toInt(float) -> int')
-*   3 (4, 'quoting_example_1', 'returnWithQuotes() -> string')
-*   4 (4, 'string_example_1', 'strUpper(string) -> string')
-*   5 (4, 'string_example_2', 'firstHalfLower(string) -> string')
-*   6 (4, 'string_example_3', 'justEvenChars(string) -> (string)')
-*   7 (5, 'string_example_4', 'reverseOrder(string) -> string')
-*   8 (5, 'string_example_5', 'listToCSV(list) -> string')
-*   9 (5, 'string_example_6', 'undToShortCSV(string) -> string')
+
+
 
 ## Lists and Tuples
 * sumAllItems(list of number) -> number
