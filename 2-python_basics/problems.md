@@ -92,6 +92,17 @@ def divideThemInt(a, b):
   * given a dictionary and a list of keys, for each key in teh list, print the key name and the value assocaited with it. 
 
 # Syntax and Namespace
+## Truthiness
+## Branching
+* getTruthiness(obj) -> string
+  * 21
+  * Given an object, return "tequilla" if the object evaluates True, or "margarita" if it evaluates false.
+* twosTruthiness(bool, bool, bool, bool) -> string
+  * 22
+  * Given four boolean values, if any two of them are true, return "twos", if any three of them are true, return "threes", or otherwise return "foobar".
+* carmenFound(dict) -> string
+  * 23
+  * given a dictionary of cities with corresponding boolean values indicating whether or not carmen is in teh city, return the name of the city if carmen is in the city.  Reuturn only the first city where carmen is found.  If carmen is in none of hte cities, return the string "false".
 ## Loops
 https://www.w3resource.com/python-exercises/python-conditional-statements-and-loop-exercises.php
 * loopStarPyramid()
@@ -124,4 +135,17 @@ https://www.w3resource.com/python-exercises/python-conditional-statements-and-lo
 * lastNumForSum(list of int, int) -> int
   * 24
   * iterate over a list of integers and return the last number before the sume of all previous numbers is more than the second arg given int. 
-* 
+  
+## List Comprehensions
+* convertToAllCaps(list of words) -> list of words
+  * 22
+  * Use a list comprehension to convert the list of words to a list of all-caps words and return it. 
+* getEvenNums(list of integers) -> list of integers
+  * 23
+  * Given a list of integers, use a list comprehension to return a new list contianing only the positive numbers from the first list. 
+* onlyCoolStuff(dictionary of product coolness, integer) -> list of products
+  * 24
+  * Given a dictionary containing products and a numeric rating of their coolness, and an integer value, return a list of products that are as cool or more cool than the integer value given. 
+* wordsHasBees(list of words) -> list of bool
+  * 24
+  * Given a list of words, use a list comprehension to return a list of boolean values indicating whether or not the corresponding words have the lower case character "b" in them. "b" is for boolean!
