@@ -6,14 +6,15 @@
   * [Sets](#sets)
   * [Dictionaries](#dictionaries)
 * [Syntax and Namespace](#syntax-and-namespace)
+  * [Truthiness](#truthiness)
+  * [Branching](#branching)
   * [Loops](#loops)
     * for, for-else, while
   * [List Comprehensions](#list-comprehensions)
-  * [Branching](#branching)
   * [Functions](#functions)
-  * [Modules](#modules)
-  * [Classes](#classes)
-  * [Generators](#generators)
+  * [Modules](#modules)  TBD
+  * [Classes](#classes)  TBD
+  * [Generators](#generators)  TBD
 
 ```
 In [1]: import this
@@ -331,6 +332,40 @@ In [33]: print status_by_host
 
 # Syntax and Namespace
 
+## Truthiness
+Understanding this is fairly essential for branching.  Most everything in python can evaluate to either `True` or `False`.  Empty objects, like lists, tuples, dictionaries, etc, evaluate False, and they are True when they have a value in them.  
+|True    | False   |
+|--------|---------|
+|[x,]    | []      |
+|1       | 0       |
+|{'a': 0}| {}      |
+|(1,)    | ()      |
+
+|this            | is equivelant to this: |
+|----------------|---------------------|
+|`(len(x) > 0)`   | `bool(x)`             |
+
+Logical operators:
+* `not`
+* `and`
+* `or`
+```python
+a and b
+(a and b) or (c and d)
+not a
+```
+  
+## Branching
+This is pretty simple...  
+```python
+if x:
+    pass
+elif y:
+    pass
+else:
+    pass
+```
+  
 ## Loops
 **"for" loops**  
 "for" loops can iterate over any python object with a "__iter__" method.  The __iter__ method basically says to return
@@ -446,13 +481,86 @@ Fugative not found in any cities!
 Better try some different cities...
 ```
   
-**iteritems!**  
-
+**enumerte!**  
+  
   
 ## List Comprehensions
+List comprehensions are a quick way of transforming data without writing out an entire loop structure on multiple lines.  Complicated operations should be written out, but simple stuff can be done w/ a comprehension much more cleanly. 
+  
+**Simple Example - capitalizing words in a list:**
+```python
+In [1]: cities = ['atlanta', 'nepal', 'tortuga', 'baseball']
 
-## Branching
+In [2]: [c.capitalize() for c in cities]
+Out[2]: ['Atlanta', 'Nepal', 'Tortuga', 'Baseball']
+```
+The equivelant operation with a normal loop would be:
+```python
+In [3]: out = []
 
+In [4]: for c in cities:
+   ...:     out.append(c.capitalize())
+   ...:     
+
+In [5]: out
+Out[5]: ['Atlanta', 'Nepal', 'Tortuga', 'Baseball']
+```
+
+Or alternately, something like this:
+```python
+In [6]: for n, city in enumerate(cities):
+   ...:     cities[n] = city.capitalize()
+   ...:     
+
+In [7]: cities
+Out[7]: ['Atlanta', 'Nepal', 'Tortuga', 'Baseball']
+```
+  
+**More complicated example**
+```python
+In [8]: ["{} is {} in the list".format(c, n) for n, c in enumerate(cities)]
+Out[8]: 
+['Atlanta is 0 in the list',
+ 'Nepal is 1 in the list',
+ 'Tortuga is 2 in the list',
+ 'Baseball is 3 in the list']
+```
+
+And an alternative:
+```python
+In [9]: out = []
+
+In [10]: for n, c in enumerate(cities):
+    ...:     out.append("{} is {} in the list".format(c, n))
+    ...:     
+
+In [11]: out
+Out[11]: 
+['Atlanta is 0 in the list',
+ 'Nepal is 1 in the list',
+ 'Tortuga is 2 in the list',
+ 'Baseball is 3 in the list']
+```
+  
+**Conditoinals in list comprehensions**
+```python
+In [12]: am_mam = {'dog': True, 'cat': True, 'liz': False, 'fish': False}
+
+In [14]: [an for an, am in am_mam.items() if am]
+Out[14]: ['dog', 'cat']
+
+In [15]: [an for an, am in am_mam.items() if not am]
+Out[15]: ['liz', 'fish']
+```
+  
+**Branching in list comprehensions**
+```python
+In [17]: people = ['fred', 'joe', 'mary', 'sue']
+
+In [20]: [p if len(p)>3 else p.upper() for p in people]
+Out[20]: ['fred', 'JOE', 'mary', 'SUE']
+```
+  
 ## Functions
 
 ## Modules
