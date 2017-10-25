@@ -10,14 +10,41 @@ from getpass import getpass
 class CobraClient():
     def __init__(self, server_socket):
         self.server_socket = server_socket
+        #self.get_lessons()
+        #self.data = self.get_questions()
         self.data = self.get_question()
         #self.get_user_input()
-        self.create_new_user()
+        #self.create_new_user()
             
+    def get_lessons(self):
+        lessons = requests.get('http://{0}:{1}/getlessons'.format(*self.server_socket))
+        data = json.loads(lessons.text)
+        print(data)
+            
+    def get_questions(self):
+        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        lesson = input('lesson: ' )
+        get_questions = requests.post('http://{0}:{1}/getquestions'.format(*self.server_socket),
+                                    json={'lesson':lesson},
+                                    headers=headers)
+        print(get_questions.text)
+    
+    def get_question(self):
+        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        lesson = input('lesson: ')
+        question = input('question: ')
+        username = input('Enter a username: ')
+        get_question = requests.post('http://{0}:{1}/getquestion'.format(*self.server_socket),
+                                    json={'lesson': lesson, 'question_label': question, 'username': username},
+                                    headers=headers)
+        print(get_question.text)    
+            
+    """
     def get_question(self):
         question = requests.get('http://{0}:{1}/getquestion'.format(*self.server_socket))      
         data = json.loads(question.text)
         return data
+    """
 
     def create_new_user(self):
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
@@ -26,7 +53,12 @@ class CobraClient():
         create_user = requests.post('http://{0}:{1}/newuser'.format(*self.server_socket),
                                     json={'username':username, 'password':encode_message(password)},
                                     headers=headers)
-        print(create_user.text)
+        print(create_user.text)      
+
+    def login(self):
+        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        username = input('Enter a username: ')
+        password = getpass('Enter password: ')
         
         
         
@@ -52,6 +84,9 @@ class CobraClient():
         print(results.charcount)
         print(results.violations)
         print(results.violationcount)
+        
+    def run(self):
+        pass
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))

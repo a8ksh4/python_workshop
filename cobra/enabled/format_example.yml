@@ -1,0 +1,60 @@
+# A label identifies the question unique to the .yml lesson
+addition_example:
+    # This is an example question
+    # It shows off the format used
+    text: |
+        Write a function that takes 2 integers as parameter
+        It should return the sum of the 2 ints
+    signature: "add(number1: int, number2: int ) -> int"        
+    # I'm putting this in base64, I think it might help readability. This codes to:
+    # def add(num_1, num_2):
+    #     return num_1 + num_2
+    solution: !!binary "ZGVmIGFkZChudW1fMSwgbnVtXzIpOgogICAgcmV0dXJuIG51bV8xICsgbnVtXzI="
+    # order to serve questions. Same tier served randomly
+    tier: 1
+    unittests:
+        test1:
+            - "int(3)"
+            - "int(5)"
+        test2:
+            - "int(-3)"
+            - "int(0)"
+        test3:
+            - "randint(-100,100)"
+            - "randint(-100,100)"
+        # The x4 will mean repeat this test 4 times
+        test4_x4:
+            - "randint(-1000,1000)"
+            - "randint(-1,1)"
+
+    # Used for any outside module dependancies
+    imports: "from random import randint, seed"
+    # Setup scripts to prep an environment. Run before unittests
+    setup: "seed({seed})"
+    # Teardown scripts to clean up the environment. Run after unittests
+    teardown: ""
+    # Scripts to be run before individual tests take place    
+    pretest: ""
+    # Scripts to be run after infividual tests take place
+    posttest: ""
+    # Tags can be used to sort and filter questions
+    tags:
+        - sample
+        - arithmatic
+    # This is how many times the challenge has been solved
+    successes: 1
+    # These are derived from user ratings, the data can be used as question feedback
+    # think of them like upvotes/downvotes, but more category specific
+    ratings:
+        challenging: 0
+        useful: 0
+        interesting: 0
+    # The solution history, every success can be stored here.
+    history:
+        ab7511ee456ce56e64d69141b7e2241b:
+            code: !!binary "ZGVmIGFkZChhYWEsYmJiKToKICAgIHg9IGFhYStiYmIKICAgIHJldHVybiB4"
+            pep8: 0
+            size: 0
+            line: 0
+            characters: 0
+            likes: 0

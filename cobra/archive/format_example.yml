@@ -1,16 +1,16 @@
-# Using a uuid to uniquely identify questions
-4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
+# A label identifies the question unique to the .yml lesson
+addition_example:
     # This is an example question
     # It shows off the format used
-    title: addition_example
     text: |
         Write a function that takes 2 integers as parameter
         It should return the sum of the 2 ints
-    signature: "add(number1: int, number2:int ) -> int"        
+    signature: "add(number1: int, number2: int ) -> int"        
     # I'm putting this in base64, I think it might help readability. This codes to:
     # def add(num_1, num_2):
     #     return num_1 + num_2
     solution: !!binary "ZGVmIGFkZChudW1fMSwgbnVtXzIpOgogICAgcmV0dXJuIG51bV8xICsgbnVtXzI="
+    # order to serve questions. Same tier served randomly
     tier: 1
     unittests:
         test1:
@@ -55,6 +55,6 @@
             code: !!binary "ZGVmIGFkZChhYWEsYmJiKToKICAgIHg9IGFhYStiYmIKICAgIHJldHVybiB4"
             pep8: 0
             size: 0
-            speed: 0
-            memory: 0
+            line: 0
+            characters: 0
             likes: 0

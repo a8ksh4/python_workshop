@@ -1,74 +1,104 @@
 from hashlib import sha256
-from tinydb import TinyDB, Query
+import yaml
 from random import randint
 from uuid import uuid4
 from time import time
 from utility import encode_message
+from os.path import isfile
+from os import listdir
 
+class Users():
+    def __init__(self):
+        self.users = {filename.rstrip('.yml'): User(filename.rstrip('.yml')) for filename in listdir('users')}
+        
+        
+class User():
+    def __init__(self, name):
+        self.name = name
+        self.filepath = 'users/{file}.yml'.format(file=self.name)
+        self.exists = False
+        if self.user_exists():
+            self.userinfo = load_yml(self.filepath)
+            self.exists = True
+        else:
+            self.userinfo = {'name': self.name, 'hash': None, 'salt': None, 'sessionid': None, 'ip': None, 'timestamp': None, 'completed': [], 'seed': 0}
+        
+    def user_exists(self): 
+        return isfile(self.filepath)
+
+    def create_user(self, password, ip):
+        if self.user_exists():
+            return False
+        salt = make_salt()
+        pwhash = hash_creds(password, salt)
+        self.update_user({'hash': pwhash, 'salt': salt, 'ip': ip, 'seed': self.new_seed()})
+        self.exists = True
+        return True        
+        
+    def update_user(self, data):
+        self.userinfo.update(data)
+        save_yml(self.filepath, self.userinfo)
+        
+    def create_new_session(self):
+        sessionid = uuid4().hex
+        salt = self.userinfo['ip']
+        sessionhash = hash_creds(sessionid, salt)
+        self.update_user({'sessionid':sessionhash, 'timestamp': time()})
+        return encode_message(sessionid)
+
+    def check_session_id(self, id, ip):
+        # timeout session if not active for over an hour
+        if self.userinfo['timestamp'] + 3600 < time():
+            return False
+        # check to see if id is valid for ip
+        elif self.userinfo['sessionid'] == hash_creds(id, ip):
+            return True
+        else:
+            return False
+
+    def login_user(self, password, ip):
+        if self.userinfo['hash'] == hash_creds(password, self.userinfo['salt']):
+            self.update_user(username, {'ip':ip})
+            return self.create_new_session()
+        else:
+            return False
+            
+    def new_seed(self):
+        self.update_user({'seed':int(make_salt())})
+        return self.get_seed()
+        
+    def get_seed(self):
+        return self.userinfo['seed']
+        
+
+class Questions():
+    def __init__(self):
+        self.questions = {filename.rstrip('.yml'): load_yml('enabled/{}'.format(filename)) for filename in listdir('enabled')}
+
+    def get_lessons(self):
+        return list(self.questions.keys())
+        
+    def get_questions(self, lesson):
+        return list(self.questions[lesson].keys())
+        
+    def get_question(self, lesson, question_label):
+        return dict(self.questions[lesson][question_label])
+        
+            
 def make_salt():
     return str(randint(0, 99999999)).zfill(8)
+    
+def save_yml(filepath, data):
+    with open(filepath, 'w') as f:
+        yaml.dump(data, f, default_flow_style=False)
 
+def load_yml(filepath):
+    with open(filepath, 'r') as f:
+        data = yaml.load(f.read())
+    return data
+   
 def hash_creds(password, salt):
     return sha256(password.encode('ascii') + salt.encode('ascii')).hexdigest()
 
-def get_user(username):
-    userdb = TinyDB('userdb.json')
-    users = userdb.table('users')
-    query = Query()
-    getinfo = users.get(query.name == username)
-    if getinfo:
-        return getinfo
-    else:
-        return False
-
-def create_new_session(username):
-    userdb = TinyDB('userdb.json')
-    users = userdb.table('users')
-    query = Query()
-    userinfo = get_user(username)
-    sessionid = uuid4().hex
-    salt = userinfo['ip']
-    sessionhash = hash_creds(sessionid, salt)
-    users.update({'sessionid':sessionhash, 'timestamp': time()}, query.name==username)
-    return encode_message(sessionid)
-
-def check_session_id(username, id, ip):
-    userinfo = get_user(username)
-    # timeout session if not active for over an hour
-    if userinfo['timestamp'] + 3600 < time():
-        return False
-    if userinfo['sessionid'] == hash_creds(id, ip):
-        return True
-    else:
-        return False
-    
-def add_user(username, password, ip):
-    # check if name already exists
-    if get_user(username):
-        return None
-    userdb = TinyDB('userdb.json')
-    users = userdb.table('users')
-    salt = make_salt()
-    pwhash = hash_creds(password, salt)
-    users.insert({'name': username, 'hash': pwhash, 'salt': salt, 'sessionid': None, 'ip': ip, 'timestamp': None, 'completed':[]})
-    return create_new_session(username)
-
-def login_user(username, password, ip):
-    userdb = TinyDB('userdb.json')
-    users = userdb.table('users')
-    query = Query()
-    userinfo = get_user(username)
-    if userinfo:
-        pass
-    else:
-        return None
-    if userinfo['hash'] == hash_creds(password, userinfo['salt']):
-        users.update({'ip':ip}, query.name==username)
-        return create_new_session(username)
-    else:
-        return None
-    
-def add_user_solution(username, solution):
-    pass
     
     
