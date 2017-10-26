@@ -4,89 +4,90 @@ from solution_checker import Solution
 from prompt_toolkit.shortcuts import create_eventloop
 from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
-from utility import cls, hash_results, encode_message
+from utility import cls, hash_results, encode_message, decode_message
 from getpass import getpass
 
 class CobraClient():
     def __init__(self, server_socket):
+        self.headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        self.username = None
+        self.sessionid = None
         self.server_socket = server_socket
-        #self.get_lessons()
-        #self.data = self.get_questions()
-        self.data = self.get_question()
-        #self.get_user_input()
-        #self.create_new_user()
+        self.run()
             
     def get_lessons(self):
-        lessons = requests.get('http://{0}:{1}/getlessons'.format(*self.server_socket))
-        data = json.loads(lessons.text)
-        print(data)
+        req = requests.get('http://{0}:{1}/getlessons'.format(*self.server_socket))
+        return json.loads(req.text)
             
-    def get_questions(self):
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        lesson = input('lesson: ' )
-        get_questions = requests.post('http://{0}:{1}/getquestions'.format(*self.server_socket),
+    def get_questions(self, lesson):
+        req = requests.post('http://{0}:{1}/getquestions'.format(*self.server_socket),
                                     json={'lesson':lesson},
-                                    headers=headers)
-        print(get_questions.text)
+                                    headers=self.headers)
+        return son.loads(req.text)
     
-    def get_question(self):
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        lesson = input('lesson: ')
-        question = input('question: ')
-        username = input('Enter a username: ')
-        get_question = requests.post('http://{0}:{1}/getquestion'.format(*self.server_socket),
-                                    json={'lesson': lesson, 'question_label': question, 'username': username},
-                                    headers=headers)
-        print(get_question.text)    
-            
-    """
-    def get_question(self):
-        question = requests.get('http://{0}:{1}/getquestion'.format(*self.server_socket))      
-        data = json.loads(question.text)
-        return data
-    """
+    def get_question(self, lesson, question_label):
+        req = requests.post('http://{0}:{1}/getquestion'.format(*self.server_socket),
+                                    json={'lesson': lesson, 'question_label': question_label, 'username': self.username},
+                                    headers=self.headers)
+        return json.loads(req.text)
 
     def create_new_user(self):
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         username = input('Enter a username: ')
         password = getpass('Enter a password: ')
-        create_user = requests.post('http://{0}:{1}/newuser'.format(*self.server_socket),
+        req = requests.post('http://{0}:{1}/newuser'.format(*self.server_socket),
                                     json={'username':username, 'password':encode_message(password)},
-                                    headers=headers)
-        print(create_user.text)      
-
+                                    headers=self.headers)
+        self.username = username
+        self.sessionid = decode_message(req.text)
+        
     def login(self):
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         username = input('Enter a username: ')
         password = getpass('Enter password: ')
+        sessionid = 0
+        req = requests.post('http://{0}:{1}/login'.format(*self.server_socket),
+                                    json={'username':username, 'password':encode_message(password), 'sessionid': encode_message('0')},
+                                    headers=self.headers)
+        self.username = username                                    
+        self.session_id = decode_message(req.text)
         
-        
-        
-    def get_user_input(self):
+    def solve_question(self, lesson, question_label):
+        question_data = self.get_question(lesson, question_label)
         cls()
-        print('{title}\n{text}\n{signature}\n'.format(**self.data))
-
+        print('{lesson}\n{title}\n{text}\n{signature}\n'.format(lesson=lesson, title=question_label, **question_data))
+        
         eventloop = create_eventloop()
         ptpython_input = PythonInput()
         run_config(ptpython_input, config_file='ptpython_config.py')
-        
         try:
             cli = PythonCommandLineInterface(python_input=ptpython_input, eventloop=eventloop)
             solution = cli.run()
         finally:
             eventloop.close()
         
-        results = Solution(self.data, solution.text)
+        results = Solution(question_data, solution.text)
         results.run_solution()
+
         print('{:f}'.format(results.time_to_execute))
-        print(results.tests_results)
+        print(results.test_results)
         print(results.linecount)
         print(results.charcount)
         print(results.violations)
         print(results.violationcount)
         
+        req = requests.post('http://{0}:{1}/submitsolution'.format(*self.server_socket),
+                                    json={'username': self.username, 'lesson': lesson, 'question_label': question_label,
+                                          'solution': results.solution, 'results': results.test_results},
+                                    headers=self.headers)
+        
     def run(self):
-        pass
+        selection = input('1) login\n2) create account\n> ')
+        if selection == '1':
+            self.login()
+        elif selection == '2':
+            self.create_new_user()
+        else:
+            pass
+        self.solve_question('format_example', 'addition_example')
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))

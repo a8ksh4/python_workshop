@@ -6,11 +6,6 @@ from time import time
 from utility import encode_message
 from os.path import isfile
 from os import listdir
-
-class Users():
-    def __init__(self):
-        self.users = {filename.rstrip('.yml'): User(filename.rstrip('.yml')) for filename in listdir('users')}
-        
         
 class User():
     def __init__(self, name):
@@ -58,7 +53,7 @@ class User():
 
     def login_user(self, password, ip):
         if self.userinfo['hash'] == hash_creds(password, self.userinfo['salt']):
-            self.update_user(username, {'ip':ip})
+            self.update_user({'ip':ip})
             return self.create_new_session()
         else:
             return False
@@ -84,7 +79,11 @@ class Questions():
     def get_question(self, lesson, question_label):
         return dict(self.questions[lesson][question_label])
         
-            
+
+def get_users():
+    return {filename.rsplit('.yml', maxsplit=1)[0]: User(filename.rsplit('.yml', maxsplit=1)[0])
+            for filename in listdir('users')}
+        
 def make_salt():
     return str(randint(0, 99999999)).zfill(8)
     

@@ -10,8 +10,7 @@ class Solution():
         if solution:
             self.solution = solution
         else:
-            self.solution = data['solution']
-        self.id = data['id']
+            self.solution = data['solution'].decode('utf-8')
         self._imports = data['imports']
         # these .formats let meta information get passed into the setup and teardown scripts.        
         # it's mostly so you can send a dynamic seed      
@@ -22,7 +21,7 @@ class Solution():
         self._unittests = data['unittests']
         self._function = None
         self.exception_raised = False
-        self.tests_results = []
+        self.test_results = []
         self.time_to_execute = 0
         self.linecount, self.charcount = self.get_counts()
         self.violations = self.check_codestyle()
@@ -116,5 +115,5 @@ class Solution():
             exception_raised = True
         finally:            
             time_to_execute = default_timer() - start_time
-        self.tests_results.append(result)
+        self.test_results.append(result)
         self.time_to_execute += time_to_execute
