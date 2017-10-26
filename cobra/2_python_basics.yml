@@ -17,11 +17,117 @@
   text: "Put the following items into a prices dictionary and return it:\n    \"bananna\"\
     : 4,\n    \"apple\": 2,\n    \"orange\": 1.5,\n    \"pear\": 3\n\nE.g:\ndef myPricesDict():\n\
     \    #your code here\n    return my_prices\n"
-  tier: 6
-  title: dict_example_2
+  tier: 24
+  title: dictionaries_2
   unittests:
     test1: null
   uuid: 014cb494-b543-11e7-b1e7-ac220b2cb439
+1c3b9d9c-b9f3-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: carmenFound(dict) -> string
+  solution: "def carmenFound(cities):\n    for city in cities:\n        if cities[city]\
+    \ == True:\n            return city\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Create a function called carmenFound that is given a dictionary with a list\
+    \ of\ncity names as keys, each associated with a boolean value indicating whether\n\
+    or not Carmen is in the city.  Return the name of the city Carmen is found in!\n\
+    \nE.g:\ndef carmenFound(cities):\n    #your code here\n    return city_name\n"
+  tier: 25
+  title: branching_3
+  unittests:
+    test1:
+    - atlanta: true
+      menphis: false
+      redding: false
+    test2:
+    - atlanta: false
+      menphis: true
+      redding: false
+  uuid: 1c3b9d9c-b9f3-11e7-b66a-ac220b2cb439
+1e4b9af2-b9ed-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: checkKeysExist(dict, keys) -> dict
+  solution: "def checkKeysExists(the_dict, keys):\n    out = {}\n    for key in keys:\n\
+    \        out[key] = key in the_dict\n    return out\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called checkKeysExists that is given a dictionary and a\
+    \ list\nof keys to look for in teh dictionary.  The function returns a new dictionary\n\
+    containing each key in the provided list with an associated boolean value\nindicating\
+    \ whether or not the key from the list was found in the given\ndictionary.\n\n\
+    As an example, if given {'a': 0, 'b': 1} and ['a', 'c'] for keys, the output\n\
+    would be {'a': True, 'c': False}. \n\nE.g:\ndef checkKeysExists(a_dictionary,\
+    \ some_keys):\n    # do stuff here\n    return exists_dict\n"
+  tier: 22
+  title: dictionaries_6
+  unittests:
+    test1:
+    - a: 12
+      b: 2
+    - - a
+      - c
+      - d
+    test2:
+    - a: 1
+      b: 2
+    - ()
+  uuid: 1e4b9af2-b9ed-11e7-b66a-ac220b2cb439
+2102c21c-b9e7-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: convTupleUniqueOrder(list) -> tuple
+  solution: "def convTupleUniqueOrder(some_items):\n    out = []\n    for item in\
+    \ some_items:\n        if item in out:\n            continue\n        out.append(item)\n\
+    \    return tuple(out)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called convTupleUniqueOrder(list) that accepts a list of\n\
+    objects and returns a tuple (not a list) with only the unique items from the\n\
+    list. Order of the returned tuple IS important. Order from the original list\n\
+    should be preserved; the first time an object is observed in the given list, \n\
+    it is in the returned tuple, and subsequent occurences are ignored. \n\nE.g:\n\
+    def convTupleUniqueOrder(some_items):\n    # do stuff here\n    return unique_items\n"
+  tier: 22
+  title: sets_2
+  unittests:
+    test1:
+    - - asfd
+      - b
+      - b
+      - c
+      - b
+      - 1
+      - 2
+      - b
+      - a
+  uuid: 2102c21c-b9e7-11e7-b66a-ac220b2cb439
 22041afa-b544-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -50,6 +156,39 @@
     test2:
     - ('1', ',', ':', "fiftyfive")
   uuid: 22041afa-b544-11e7-b1e7-ac220b2cb439
+377f8a94-b9eb-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: getDictKeys(dict) -> list
+  solution: "def getDictKeys(a_dictionary):\n    return a_dictionary.keys()\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called getDictKeys that is given a dictionary and returns\
+    \ a \nlist of keys in the given dictionary. \n\nE.g:\ndef getDictKeys(a_dictionary):\n\
+    \    # do stuff here\n    return all_the_keys\n"
+  tier: 22
+  title: dictionaries_4
+  unittests:
+    test1:
+    - a: 1
+      b: 2
+      c: 3
+    test2:
+    - a: []
+      b: {}
+      c: None
+      1: 1
+      ('a': null
+      ): 2
+  uuid: 377f8a94-b9eb-11e7-b66a-ac220b2cb439
 4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
   history:
     ab7511ee456ce56e64d69141b7e2241b:
@@ -91,6 +230,49 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 4464b29f-86a1-4e4c-9261-f581d1b1c8e8
+571207aa-b9ec-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: checkKeyExists(dict, key) -> bool
+  solution: "def getDictKeys(a_dictionary):\n    return a_dictionary.keys()\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called checkKeyExists that is given a dictionary and a key\
+    \ and\nreturns True if the key exists in the dictionary or False if it does not.\
+    \ \n\nE.g:\ndef checkKeyExists(a_dictionary, the_key):\n    # do stuff here\n\
+    \    return exists_bool\n"
+  tier: 22
+  title: dictionaries_5
+  unittests:
+    test1:
+    - a: 1
+      b: 2
+    - a
+    test2:
+    - a: 1
+      b: 2
+    - 1
+    test3:
+    - a: 1
+      b: 2
+    - b
+    test4:
+    - a: 1
+      b: 2
+    - c
+    test5:
+    - a: 1
+      b: 2
+    - '2'
+  uuid: 571207aa-b9ec-11e7-b66a-ac220b2cb439
 59890270-b868-11e7-b66a-ac220b2cb439:
   history: {}
   imports: 'from random import randint, seed
@@ -176,6 +358,43 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 5f9eee8e-b21b-11e7-b1e7-ac220b2cb439
+6dd15320-b9e6-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: smallestOfList(list of numbers) -> number
+  solution: "def smallestOfList(some_nums):\n    smallest = some_nums[0]\n    for\
+    \ num in some_nums:\n        if num<smallest:\n            smallest = num\n  \
+    \  return num\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called smallestOfList that accepts a list or tuple of numbers\
+    \ \nand returns the smallest number found in the list.\n\nE.g:\ndef smallestOfList(some_nums):\n\
+    \    # do stuff here\n    return the_smallest\n"
+  tier: 21
+  title: lists_2
+  unittests:
+    test1:
+    - - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    test2:
+    - - -5
+      - 2.2
+      - 999
+      - -1000.0
+    test3:
+    - (1, -2, 4, -6, 123.1)
+  uuid: 6dd15320-b9e6-11e7-b66a-ac220b2cb439
 70f341c2-b869-11e7-b66a-ac220b2cb439:
   history: {}
   imports: 'from random import randint, seed
@@ -215,6 +434,41 @@
     - randint(-1000,1000)
     - randint(-1,1)
   uuid: 70f341c2-b869-11e7-b66a-ac220b2cb439
+714d9cf0-b9f2-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: twosTruthiness(bool, bool, bool, bool) -> string
+  solution: "def twosTruthiness(obj0, obj1, obj2, obj3):\n    items = (obj0, obj1,\
+    \ obj2, obj3)\n    count = len([o for o in items if o == True])\n    if count\
+    \ == 2:\n        resulting_word = \"twos\"\n    elif count == 3:\n        resulting_word\
+    \ = \"threes\"\n    else:\n        resulting_word = \"foobar\"\n    return resulting_word\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Create a function called twosTruthiness that is given four boolean values.\n\
+    if any two of the four are True, then return \"twos\".  If any three of them are\n\
+    True, then return \"threes\", if less than two or four of them are True, then\n\
+    return \"foobar\"\n\nE.g:\ndef twosTruthiness(obj, obj, obj, obj):\n    #your\
+    \ code here\n    return resulting_word\n"
+  tier: 25
+  title: branching_2
+  unittests:
+    test1:
+    - (True, True, False, False)
+    test2:
+    - (False, True, False, True)
+    test3:
+    - (True, True, False, True)
+    test4:
+    - (True, True, True, True)
+  uuid: 714d9cf0-b9f2-11e7-b66a-ac220b2cb439
 71c30c8c-b86d-11e7-b66a-ac220b2cb439:
   history: {}
   imports: ''
@@ -246,6 +500,77 @@
     test3:
     - 1_2_3__five_six!''_seven
   uuid: 71c30c8c-b86d-11e7-b66a-ac220b2cb439
+729fc794-b9ee-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: printGivenKeys(dict, list)
+  solution: "def checkKeysExists(the_dict, keys):\n    out = {}\n    for key in keys:\n\
+    \        out[key] = key in the_dict\n    return out\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called printGivenKeys that is given a dictionary and a list\n\
+    of keys to look for in teh dictionary.  For each item in the list, the function\n\
+    prints the item and the value associated with it in the provided dictionary.\n\
+    If the item is not in the dictionary, None is used for the value. \n\nAs an example,\
+    \ if given {'a': 0, 'b': 1} and ['a', 'c'] for keys, it would \nprint:\na, 0\n\
+    c, None\n\nE.g:\ndef printGivenKeys(a_dictionary, some_keys):\n    # do stuff\
+    \ here\n    # return nothing\n"
+  tier: 22
+  title: dictionaries_7
+  unittests:
+    test1:
+    - a: 12
+      b: 2
+    - - a
+      - c
+      - d
+    test2:
+    - a: 1
+      b: 2
+    - ()
+  uuid: 729fc794-b9ee-11e7-b66a-ac220b2cb439
+79d269b4-b9e8-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: removeFromSet(set, obj) -> tuple
+  solution: "def removeFromSet(a_set, an_obj):\n    if an_obj in a_set:\n        a_set.remove(an_obj)\n\
+    \    return tuple(a_set)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called removeFromSet that accepts a set and an object. \
+    \ If\nthe object exists in the set, then it is removed.  The resulting set is\n\
+    converted to a tuple and returned. \n\nE.g:\ndef removeFromSet(a_set, an_obj):\n\
+    \    # do stuff here\n    return new_tuple\n"
+  tier: 21
+  title: sets_4
+  unittests:
+    test1:
+    - - asfd
+      - b
+      - b
+      - c
+      - b
+      - 1
+      - 2
+      - b
+      - a
+  uuid: 79d269b4-b9e8-11e7-b66a-ac220b2cb439
 95e1367a-b53e-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -268,8 +593,8 @@
     \ 'texture') and the values\nwere ('red', 'sour', and 'rough'), the dictionary\
     \ would look like:\n{'color': 'red', 'flavor': 'sour', 'texture': 'rough'}\n\n\
     E.g:\ndef mergeToDict(keys, values):\n    #your code here\n    return resulting_dict\n"
-  tier: 6
-  title: dict_example_3
+  tier: 24
+  title: dictionaries_3
   unittests:
     test1:
     - (1, 2, 3, 4)
@@ -433,8 +758,8 @@ db79345a-b537-11e7-b1e7-ac220b2cb439:
     \   'gold' : 500,\n        'pouch' : ['flint', 'twine', 'gemstone'],\n       \
     \ 'backpack' : ['xylophone','dagger', 'bedroll','bread loaf']\n    }\n\n    return\
     \ inventory\n"
-  tier: 6
-  title: dict_example_1
+  tier: 24
+  title: dictionaries_1
   unittests:
     test1:
     - ' rofl this is cool '
@@ -443,6 +768,39 @@ db79345a-b537-11e7-b1e7-ac220b2cb439:
     test3:
     - 'zABCDS '
   uuid: db79345a-b537-11e7-b1e7-ac220b2cb439
+dcd90164-b9e6-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: convTupleUnique(list) -> tuple
+  solution: "def convTupleUnique(some_items):\n    return tuple(set(some_items))\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called convTupleUnique(list) that accepts a list of objects\n\
+    and returns a tuple (not a list) with only the unique items from the list. \n\
+    Order of the returned list is not important.\n\nE.g:\ndef convTupleUnique(some_items):\n\
+    \    # do stuff here\n    return unique_items\n"
+  tier: 21
+  title: sets_1
+  unittests:
+    test1:
+    - - asfd
+      - b
+      - b
+      - c
+      - b
+      - 1
+      - 2
+      - b
+      - a
+  uuid: dcd90164-b9e6-11e7-b66a-ac220b2cb439
 dee69878-b4e5-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -511,6 +869,109 @@ e13f7da8-b484-11e7-b1e7-ac220b2cb439:
     test4:
     - '123456789'
   uuid: e13f7da8-b484-11e7-b1e7-ac220b2cb439
+e304e426-b9e7-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: createSet(obj, obj, obj, obj, obj) -> set
+  solution: "def createSet(obj1=None, obj2=None, obj3=None, obj4=None, obj5=None):\n\
+    \    new_set = set()\n    for obj in (obj1, obj2, obj3, obj4, obj5):\n       \
+    \ if obj != None:\n            new_set.add(obj)\n    return new_set\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called createSet that accepts up to five objects, adds them\n\
+    into a set, and returns a set of those objects. Hint: \"set\" is a data type.\
+    \ \nDo not add any of the objects fo the set if the object is equal to the None\n\
+    object.\n\nE.g:\ndef createSet(obj1=None, obj2=None, obj3=None, obj4=None, obj5=None):\n\
+    \    # do stuff here\n    return new_set\n"
+  tier: 21
+  title: sets_3
+  unittests:
+    test1:
+    - - asfd
+      - b
+      - b
+      - c
+      - b
+      - 1
+      - 2
+      - b
+      - a
+  uuid: e304e426-b9e7-11e7-b66a-ac220b2cb439
+e4edc104-b9f1-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: getTruthiness(obj) -> string
+  solution: "def getTruthiness(obj):\n    if obj:\n        resulting_word = \"tequilla\"\
+    \n    else:\n        resulting_word = \"margarita\"\n    return resulting_word\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Create a function called getTruthiness that is given an objct and, if\nthat\
+    \ object evaluates True, returns \"tequilla\", otherwise it returns,\n\"margarita\"\
+    . \n\nE.g:\ndef getTruthiness(obj):\n    #your code here\n    return resulting_word\n"
+  tier: 23
+  title: branching_1
+  unittests:
+    test1:
+    - true
+    test2:
+    - ''
+    test3:
+    - a
+    test4:
+    - ()
+  uuid: e4edc104-b9f1-11e7-b66a-ac220b2cb439
+f1e607ce-b9e5-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: sumAllItems(list of num) -> number
+  solution: "def sumAllItmes(some_nums):\n    the_sum = 0.\n    for num in some_nums:\n\
+    \        the_sum += num\n    return the_sum\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "write a function called sumAllItems that accepts a list or tuple of numbers,\
+    \ \nsumms them, and returns the sum. \n\nE.g:\ndef sumAllItmes(some_nums):\n \
+    \   # do stuff here\n    return the_sum\n"
+  tier: 21
+  title: lists_1
+  unittests:
+    test1:
+    - - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    test2:
+    - - -5
+      - 2.2
+      - 999
+      - -1000.0
+    test3:
+    - (1, -2, 4, -6, 123.1)
+  uuid: f1e607ce-b9e5-11e7-b66a-ac220b2cb439
 f62bae50-b22f-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: 'from random import randint, seed
