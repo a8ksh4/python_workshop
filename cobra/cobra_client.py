@@ -4,7 +4,7 @@ from solution_checker import Solution
 from prompt_toolkit.shortcuts import create_eventloop
 from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
-from utility import cls, hash_results, encode_message, decode_message
+from utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
 from getpass import getpass
 
 class CobraClient():
@@ -40,14 +40,19 @@ class CobraClient():
         self.username = username
         self.sessionid = decode_message(req.text)
         
-    def login(self):
-        username = input('Enter a username: ')
-        password = getpass('Enter password: ')
-        sessionid = 0
+    def login(self, continue_session=False):
+        if continue_session:
+            username, sessionid =  list(load_yml('session.yml').items())[0]
+            password = '0'
+        else:
+            username = input('Enter a username: ')
+            password = getpass('Enter password: ')
+            sessionid = '0'
         req = requests.post('http://{0}:{1}/login'.format(*self.server_socket),
-                                    json={'username':username, 'password':encode_message(password), 'sessionid': encode_message('0')},
+                                    json={'username':username, 'password':encode_message(password), 'sessionid': encode_message(sessionid)},
                                     headers=self.headers)
-        self.username = username                                    
+        self.username = username
+        save_yml('session.yml', {self.username: req.text})
         self.session_id = decode_message(req.text)
         
     def solve_question(self, lesson, question_label):
@@ -80,11 +85,13 @@ class CobraClient():
                                     headers=self.headers)
         
     def run(self):
-        selection = input('1) login\n2) create account\n> ')
+        selection = input('1) login\n2) create account\n3) continue last session\n> ')
         if selection == '1':
             self.login()
         elif selection == '2':
             self.create_new_user()
+        elif selection == '3':
+            self.login(continue_session=True)
         else:
             pass
         self.solve_question('format_example', 'addition_example')

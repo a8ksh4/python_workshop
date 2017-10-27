@@ -1,9 +1,8 @@
 from hashlib import sha256
-import yaml
 from random import randint
 from uuid import uuid4
 from time import time
-from utility import encode_message
+from utility import encode_message, load_yml, save_yml
 from os.path import isfile
 from os import listdir
         
@@ -83,18 +82,9 @@ class Questions():
 def get_users():
     return {filename.rsplit('.yml', maxsplit=1)[0]: User(filename.rsplit('.yml', maxsplit=1)[0])
             for filename in listdir('users')}
-        
+
 def make_salt():
     return str(randint(0, 99999999)).zfill(8)
-    
-def save_yml(filepath, data):
-    with open(filepath, 'w') as f:
-        yaml.dump(data, f, default_flow_style=False)
-
-def load_yml(filepath):
-    with open(filepath, 'r') as f:
-        data = yaml.load(f.read())
-    return data
    
 def hash_creds(password, salt):
     return sha256(password.encode('ascii') + salt.encode('ascii')).hexdigest()

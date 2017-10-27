@@ -51,10 +51,16 @@ class LoginUser():
         username = post_info['username']        
         password = decode_message(post_info['password'])
         sessionid = decode_message(post_info['sessionid'])
-        if users[username].login_user(password, ip):
-            sessionid = users[username].create_new_session()
+        login_pass = False
+        
+        if users[username].check_session_id(sessionid, ip):
+            login_pass = True
+        elif users[username].login_user(password, ip):
+            login_pass = True
         else:
-            raise
+            sessionid = '-1'
+        if login_pass:
+            sessionid = users[username].create_new_session()
         resp.body = encode_message(sessionid)
         
 class SubmitSolution():

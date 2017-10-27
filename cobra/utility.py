@@ -4,6 +4,7 @@ from hashlib import sha1, sha256
 from Crypto.Cipher import AES
 from Crypto import Random
 from random import randint
+import yaml
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -31,3 +32,12 @@ def hash_results(token, results):
     for result in results:
         hash.update(str(result).encode('ascii'))
     return hash.hexdigest()
+
+def save_yml(filepath, data):
+    with open(filepath, 'w') as f:
+        yaml.dump(data, f, default_flow_style=False)
+
+def load_yml(filepath):
+    with open(filepath, 'r') as f:
+        data = yaml.load(f.read())
+    return data
