@@ -22,6 +22,40 @@
   unittests:
     test1: null
   uuid: 014cb494-b543-11e7-b1e7-ac220b2cb439
+083d3a26-bab6-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: returnNoneArray(int, int) -> list of lists of None
+  solution: "def return NoneArray(rows, cols):\n    out = []\n    for row in range(rows):\n\
+    \        out.append([None for c in range(cols)])\n    return out\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Create a function called returnNoneArray that accepts two integers and\n\
+    returns a list of lists of the dimmensions given as the two integers. The \nlist\
+    \ of lists (an array) should contain None for each value. \n\nExample, two rows\
+    \ by three cols would be:\n[ [None, None, None]\n  [None, None, None] ]\n\nE.g:\n\
+    def return NoneArray(rows, cols):\n    #your code here\n    return none_array\n"
+  tier: 26
+  title: loops_3
+  unittests:
+    test1:
+    - 1
+    - 1
+    test2:
+    - 5
+    - 6
+    test3:
+    - 21
+    - 6
+  uuid: 083d3a26-bab6-11e7-b66a-ac220b2cb439
 1c3b9d9c-b9f3-11e7-b66a-ac220b2cb439:
   history: {}
   imports: ''
@@ -571,6 +605,33 @@
       - b
       - a
   uuid: 79d269b4-b9e8-11e7-b66a-ac220b2cb439
+88c88c44-bab2-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports:
+  - sys
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: loopStarPyramid()
+  solution: "def loopStarPyramid():\n    import sys\n    for depth in (0, 1, 2, 3,\
+    \ 4, 3, 2, 1, 0):\n        sys.stdout.write('*')\n        for star in range(depth):\n\
+    \            sys.stdout.write(' *')\n        sys.stdout.write('\\n')\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Create a function called loopStarPyramid that uses nested for-loops to\n\
+    print the following pattern:\n\n*\n* *\n* * *\n* * * *\n* * * * *\n* * * *\n*\
+    \ * *\n* *\n*\n\nE.g:\ndef loopStarPyramid():\n    #your code here\n    #return\
+    \ nothing\n"
+  tier: 26
+  title: loops_1
+  unittests:
+    test1: null
+  uuid: 88c88c44-bab2-11e7-b66a-ac220b2cb439
 95e1367a-b53e-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
@@ -632,6 +693,39 @@ a13d84a0-b486-11e7-b1e7-ac220b2cb439:
   unittests:
     test1: null
   uuid: a13d84a0-b486-11e7-b1e7-ac220b2cb439
+a4e079f8-bab4-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: ''
+  signature: getFibThrough(int) -> list of int
+  solution: "def getFibThrough(through_num):\n    nums = [0, 1]\n    while nums[-1]\
+    \ < through_num:\n        nums.append(sum(nums[-2:]))\n    if nums[-1] == through_num:\n\
+    \        return nums[1:]\n    return nums[1:-1]\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Create a function called getFibThrough that accepts an integer and returns\n\
+    the fibonacci series up to the given number in the form of a list. \n\nExample:\
+    \  1, 1, 2, 3, 5, 8, 13, ...\n\nE.g:\ndef getFibThrough(through_num):\n    #your\
+    \ code here\n    return fib_series\n"
+  tier: 26
+  title: loops_2
+  unittests:
+    test1:
+    - 5
+    test2:
+    - 6
+    test3:
+    - 21
+    test4:
+    - 999
+  uuid: a4e079f8-bab4-11e7-b66a-ac220b2cb439
 c9e26c9a-b544-11e7-b1e7-ac220b2cb439:
   history: {}
   imports: ''
