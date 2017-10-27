@@ -1,60 +1,230 @@
-# Using a uuid to uniquely identify questions
+1be4da78-bacc-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: appendLineToFile(path, string)
+  solution: "def appendLineToFile(path, content):\n    with open(path, 'a') as f:\n\
+    \        f.write(content)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called appendLineToFile that accepts a path and a string,\
+    \ and writes the\nstring to the end of the file (without modifying the existing\
+    \ contents in the file).\n\nE.g.\ndef appendLineToFile(path, content):\n    #your\
+    \ code here\n    #return nothing\n"
+  tier: 30
+  title: readwrite_3
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 1be4da78-bacc-11e7-b66a-ac220b2cb439
 4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
-    # This is an example question
-    # It shows off the format used
-    title: addition_example
-    text: |
-        Write a function that takes 2 integers as parameter
-        It should return the sum of the 2 ints
-    signature: "add(number1: int, number2:int ) -> int"        
-    # I'm putting this in base64, I think it might help readability. This codes to:
-    # def add(num_1, num_2):
-    #     return num_1 + num_2
-    solution: !!binary "ZGVmIGFkZChudW1fMSwgbnVtXzIpOgogICAgcmV0dXJuIG51bV8xICsgbnVtXzI="
-    tier: 1
-    unittests:
-        test1:
-            - "int(3)"
-            - "int(5)"
-        test2:
-            - "int(-3)"
-            - "int(0)"
-        test3:
-            - "randint(-100,100)"
-            - "randint(-100,100)"
-        # The x4 will mean repeat this test 4 times
-        test4_x4:
-            - "randint(-1000,1000)"
-            - "randint(-1,1)"
-
-    # Used for any outside module dependancies
-    imports: "from random import randint, seed"
-    # Setup scripts to prep an environment. Run before unittests
-    setup: "seed({seed})"
-    # Teardown scripts to clean up the environment. Run after unittests
-    teardown: ""
-    # Scripts to be run before individual tests take place    
-    pretest: ""
-    # Scripts to be run after infividual tests take place
-    posttest: ""
-    # Tags can be used to sort and filter questions
-    tags:
-        - sample
-        - arithmatic
-    # This is how many times the challenge has been solved
-    successes: 1
-    # These are derived from user ratings, the data can be used as question feedback
-    # think of them like upvotes/downvotes, but more category specific
-    ratings:
-        challenging: 0
-        useful: 0
-        interesting: 0
-    # The solution history, every success can be stored here.
-    history:
-        ab7511ee456ce56e64d69141b7e2241b:
-            code: !!binary "ZGVmIGFkZChhYWEsYmJiKToKICAgIHg9IGFhYStiYmIKICAgIHJldHVybiB4"
-            pep8: 0
-            size: 0
-            speed: 0
-            memory: 0
-            likes: 0
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: readFileToString(path) -> string
+  solution: "def readFileToString(path):\n    with open(path, 'r') as f:\n       \
+    \ contents = f.read()\n    return contents\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called readFileToString that accepts a path, opens the path,\n\
+    and returns the contents of the file as a string value. You can assume that \n\
+    you'll have access to the file, it won't be binary data, you don't need to do\n\
+    anything to the given path to open it.  \n\nE.g.\ndef readFileToString(path_to_file):\n\
+    \    #your code here\n    return contents\n"
+  tier: 30
+  title: readwrite_1
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 4464b29f-86a1-4e4c-9261-f581d1b1c8e8
+59663690-bacb-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: readLiensFromFile(path) -> list of strings
+  solution: "def readLinesFromFile(path):\n    with open(path, 'r') as f:\n      \
+    \  contents = f.readlines()\n    return contents\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called readLinesFromFiles that accepts a path, reads the\
+    \ contents, and\nreturns a list of stings for each line in the file. \n\nE.g.\n\
+    def readLinesFromFile(path_to_file):\n    #your code here\n    return contents\n"
+  tier: 30
+  title: readwrite_2
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 59663690-bacb-11e7-b66a-ac220b2cb439
+5c298aec-bacd-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: removeWhiteSpace(path)
+  solution: "def removeWhitespace(path):\n    contents = open(path, 'r').readlines()\n\
+    \    out = []\n    for line in contents:\n        line = line.strip()\n      \
+    \  if not line:\n            continue\n        out.append(line)\n    with open(path,\
+    \ 'w') as f:\n        f.writelines(out)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called removeWhitespace that accepts a file path and:\n\
+    * reads the file contents\n* removes any whitespace at the start or end of each\
+    \ line\n* removes any empty or whitespace only lines(!)\nAnd writes the modified\
+    \ content back to the orignal file replacing its contents. \n\nE.g.\ndef removeWhitespace(path):\n\
+    \    #your code here\n    #return nothing\n"
+  tier: 32
+  title: readwrite_6
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 5c298aec-bacd-11e7-b66a-ac220b2cb439
+6911ec28-bacc-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: truncateWriteFile(path, content)
+  solution: "def truncateWriteFile(path, content):\n    with open(path, 'w') as f:\n\
+    \        f.write(content)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called truncateWriteFile that accepts a path and a string,\
+    \ and writes the\nstring to the file, truncating (overwriting) any existing content\
+    \ in the file. \n\nE.g.\ndef truncateWriteFile(path, content):\n    #your code\
+    \ here\n    #return nothing\n"
+  tier: 30
+  title: readwrite_4
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 6911ec28-bacc-11e7-b66a-ac220b2cb439
+f36fe88e-bacc-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: rewriteInLower(source_path, dest_path)
+  solution: "def rewriteInLower(source_path, dest_path):\n    contents = open(source_path,\
+    \ 'r').read().lower()\n    open(dest_path, 'w').write(contents)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called rewriteInLower that accepts a source and destination\
+    \ path.  It reads\nin the source path, converts the contents to all lower case,\
+    \ and writes them to the\ndestination path. \n\nE.g.\ndef rewriteInLower(source_path,\
+    \ dest_path):\n    #your code here\n    #return nothing\n"
+  tier: 31
+  title: readwrite_5
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: f36fe88e-bacc-11e7-b66a-ac220b2cb439
