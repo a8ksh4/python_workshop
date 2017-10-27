@@ -1,1 +1,1 @@
-gunicorn3 instructor_server:app
+gunicorn3 cobra_server:app

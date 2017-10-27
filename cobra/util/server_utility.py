@@ -2,7 +2,7 @@ from hashlib import sha256
 from random import randint
 from uuid import uuid4
 from time import time
-from utility import encode_message, load_yml, save_yml
+from util.utility import encode_message, load_yml, save_yml
 from os.path import isfile
 from os import listdir
         

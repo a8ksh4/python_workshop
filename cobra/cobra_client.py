@@ -1,10 +1,10 @@
 import requests
 import json
-from solution_checker import Solution
+from util.solution_checker import Solution
 from prompt_toolkit.shortcuts import create_eventloop
 from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
-from utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
+from util.utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
 from getpass import getpass
 
 class CobraClient():
@@ -42,7 +42,7 @@ class CobraClient():
         
     def login(self, continue_session=False):
         if continue_session:
-            username, sessionid =  list(load_yml('session.yml').items())[0]
+            username, sessionid =  list(load_yml('clientdata/session.yml').items())[0]
             password = '0'
         else:
             username = input('Enter a username: ')
@@ -52,7 +52,7 @@ class CobraClient():
                                     json={'username':username, 'password':encode_message(password), 'sessionid': encode_message(sessionid)},
                                     headers=self.headers)
         self.username = username
-        save_yml('session.yml', {self.username: req.text})
+        save_yml('clientdata/session.yml', {self.username: req.text})
         self.session_id = decode_message(req.text)
         
     def solve_question(self, lesson, question_label):
@@ -62,7 +62,7 @@ class CobraClient():
         
         eventloop = create_eventloop()
         ptpython_input = PythonInput()
-        run_config(ptpython_input, config_file='ptpython_config.py')
+        run_config(ptpython_input, config_file='util/ptpython_config.py')
         try:
             cli = PythonCommandLineInterface(python_input=ptpython_input, eventloop=eventloop)
             solution = cli.run()
@@ -94,7 +94,7 @@ class CobraClient():
             self.login(continue_session=True)
         else:
             pass
-        self.solve_question('format_example', 'addition_example')
+        self.solve_question('python_basics', 'dictionaries_2')
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
