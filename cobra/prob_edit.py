@@ -22,6 +22,7 @@ import yaml
 
 
 EDITOR='/usr/bin/vi'
+EXCLUDE_FILES = ['session.yml',]
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -104,20 +105,36 @@ def mergeEditYml(problem, keys_to_edit, ref_header=None):
 
 
 def getProbsFiles():
-    return glob('*.yml')
+    all_files = glob('*.yml')
+    out_files = []
+    for f in all_files:
+        for x in EXCLUDE_FILES:
+            if x in f:
+                break
+        else:
+            out_files.append(f)
+    return out_files
 
 
 def readProbsFile(problem_file):
     '''This is called for each file containing course problems.  Returns
     a list of problems (dicts)'''
     probs_dict = yaml.load(open(problem_file, 'r'))
+    print("------- {} -------".format(problem_file))
+    print(probs_dict)
+
     # translate to list for more simple interaction
     probs_list = []
     for uuid, prob in probs_dict.items():
-        prob['uuid'] = uuid
-        probs_list.append(prob)
-        for key in ('uuid', 'title', 'tier'):
-            print(probs_list[-1][key])
+        try:
+            prob['uuid'] = uuid
+            for key in ('uuid', 'title', 'tier'):
+                print(prob[key])
+            probs_list.append(prob)
+        except:
+            print("ERROR loading file: {}".format(problem_file))
+            time.sleep(5)
+
     for prob in probs_list:
         print(prob.keys())
     probs_list = sorted(probs_list,
