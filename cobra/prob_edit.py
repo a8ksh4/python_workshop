@@ -5,6 +5,7 @@
 #from future.builtins import input
 
 # Other imports:
+from collections import OrderedDict
 import copy
 import filecmp
 from glob import glob
@@ -170,12 +171,27 @@ def promptMenu(title, options, defaults=None):
     return answer
 
 
+def backupProbsFile(probs_file_name):
+    # Make a backup copy of the problems file
+    if not os.path.isdir('./backups'):
+        os.mkdir('./backups')
+    epoch_seconds = int(time.time())
+    shutil.copy( probs_file_name, 
+                 "./backups/{}_{}".format(probs_file_name,
+                                          epoch_seconds) )
+    assert( filecmp.cmp(
+                probs_file_name,
+                "./backups/{}_{}".format(probs_file_name, epoch_seconds) )
+    )
+
+
 def interactiveMenu(probs_lists):
     '''this is the meat of the tool.  All of the code that make things
     happen at each screen is included here.  Trying to keep cross-contamination
     between variables in here to a minimum w/o having to break out seperate
     functions for each screen.'''
     probs_file_name = None
+    probs_file_index = None
     probs_list = None
     prob_index = None
     prob_selected = None
@@ -200,20 +216,10 @@ def interactiveMenu(probs_lists):
             if choice == None:
                 break
             elif choice.isdigit():
-                probs_file_name = list(probs_lists.keys())[int(choice)]
+                probs_file_index = int(choice)
+                probs_file_name = list(probs_lists.keys())[probs_file_index]
                 probs_list = probs_lists[probs_file_name]
-
-                # Make a backup copy of the problems file
-                if not os.path.isdir('./backups'):
-                    os.mkdir('./backups')
-                epoch_seconds = int(time.time())
-                shutil.copy( probs_file_name, 
-                             "./backups/{}_{}".format(probs_file_name,
-                                                      epoch_seconds) )
-                assert( filecmp.cmp(
-                            probs_file_name,
-                            "./backups/{}_{}".format(probs_file_name, epoch_seconds) )
-                )
+                backupProbsFile(probs_file_name)
 
             elif choice == 'q':
                 print("Quitting this fine program!")
@@ -224,8 +230,6 @@ def interactiveMenu(probs_lists):
         ######################
         elif prob_index == None:
             defaults = (('c', 'create new problem'),
-                        ('n', 'next problem file'),
-                        ('p', 'previous problem file'),
                         ('q', 'quit/return'))
             title = "Choose a problem to work on from '{}':".format(
                                                         probs_file_name)
@@ -239,10 +243,6 @@ def interactiveMenu(probs_lists):
             elif choice.isdigit():
                 prob_index = int(choice)
             elif choice == 'c':
-                pass
-            elif choice == 'n':
-                pass
-            elif choice == 'p':
                 pass
             elif choice == 'q':
                 probs_file_name = None
@@ -343,9 +343,10 @@ def interactiveMenu(probs_lists):
                 prob_selected = None
 
 def mainFunc():
-    probs_files = getProbsFiles()
-    probs_lists = {}
-    for p_file in probs_files:
+    probs_files = sorted(getProbsFiles())
+    print(probs_files)
+    probs_lists = OrderedDict()
+    for p_file in sorted(probs_files):
         probs_lists[p_file] = readProbsFile(p_file)
 
     interactiveMenu(probs_lists)
