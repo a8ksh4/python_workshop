@@ -29,9 +29,11 @@ Tier, description...
     or whitespace-only lines.  Then write the content back to the file replacing the original content.
 
 # os module
-## basic ops
+## os basics
 * moveAFile(source_path, dest_path)
   * 30
   * Given a source path and destination path, move the file from source to destination.
-  
+* cdAndWrite(dir_path, file_name, content)
+  * 34
+  * Change directory to the given "dir_path", then write the given content to the given file_name. 
 
