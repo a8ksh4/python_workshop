@@ -305,13 +305,15 @@ optional arguments:
   --widgets WIDGETS  number of widgets
 
 And now, you know the rest of the story!
-
+```
+```
 ../EXAMPLES> ./args.py --debug
 We can check for specific args outside of argparse.
 
 ARGS ARE:
 Namespace(debug=True, verbose=None, widgets=None)
-
+```
+```
 .../EXAMPLES> ./args.py -vv --widgets 42
 ARGS ARE:
 Namespace(debug=False, verbose=2, widgets=42)
