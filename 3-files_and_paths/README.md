@@ -227,13 +227,25 @@ and any dirs: []
 **os.chown** - change file/dir ownership  
 **os.chmod** - change file/dir permissions.  
 **os.stat** - get filesystem data for some path  
+```python
+In [48]: os.stat('server_utility.py')
+Out[48]: os.stat_result(st_mode=33204, st_ino=18221199, st_dev=2051, st_nlink=1, st_uid=1000, st_gid=1000, st_size=3060, st_atime=1509072922, st_mtime=1509072863, st_ctime=1509072863)
+```
+Each property available in stat is accessible directly.  E.g. to get the size of a file:
+```python
+In [49]: os.stat('server_utility.py').st_size
+Out[49]: 3060
+```
+st_nlink => number of hard links to a file; st_uid => user id of file owner; st_gid => group id of group owner, st_mtime => modified time of file (in seconds since epoch), etc.   
+  
 **os.umask** - set the umask: set permissions that are removed from newly created filesystem objects  
+
   
 ## os.path
 **os.path.join**  
 os.path.join(path, *paths)  
   
-**os.path.realpath** - Real path of a file - traverse symlinks and find where it really is.  
+**os.path.realpath** - Real path of a file - resolve relative path or traverse symlinks and find the actual path.  
 ```python
 In [57]: p = '/home/thedude/Games/'
 
