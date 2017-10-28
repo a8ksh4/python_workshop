@@ -258,10 +258,12 @@ We aren't giong to use this much here, but you should read about it!
 I'm kind of used to seeing people put argparse stuff at the top of their program in global namespace, but that's not really necessary; we can put it all into a function and call it at runtime to have the given argumetns processed.  
   
 Argparse works on the same data available to use in `sys.argv`, so we can reference the given args ourselves before calling argparse, which can be useful if we wan to set global obtions like "DEBUG", at the top of our program, but still use argparse to handle all of the detailed arg stuff.  
-
-Here's an example:
+  
+You'll have to go through the documentation if you want to do anything fancy w/ argparse: https://docs.python.org/3/library/argparse.html  
+  
+Here's a simple example you can start with in your own code:
 ```python
-th@dadesktop:~/git/python_class/EXAMPLES$ cat args.py 
+.../EXAMPLES> cat args.py 
 #!/usr/bin/env python
 edude
 import argparse
@@ -287,9 +289,11 @@ if __name__ == '__main__':
     args = getArgs()
     print("ARGS ARE:")
     print(args)
-drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
-drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
-drnorris@dadesktop:~/git/python_class/EXAMPLES$ ./args.py --help
+```
+  
+And a couple examples of it's output:  
+```
+.../EXAMPLES$ ./args.py --help
 usage: ./args.py [-h] [--verbose] [--debug] [--widgets WIDGETS]
 
 Test Program for Argparse These sorts of things can be very exciting.
@@ -301,12 +305,14 @@ optional arguments:
   --widgets WIDGETS  number of widgets
 
 And now, you know the rest of the story!
-drnorris@dadesktop:~/git/python_class/EXAMPLES$ ./args.py --debug
+
+../EXAMPLES> ./args.py --debug
 We can check for specific args outside of argparse.
 
 ARGS ARE:
 Namespace(debug=True, verbose=None, widgets=None)
-drnorris@dadesktop:~/git/python_class/EXAMPLES$ ./args.py -vv --widgets 42
+
+.../EXAMPLES> ./args.py -vv --widgets 42
 ARGS ARE:
 Namespace(debug=False, verbose=2, widgets=42)
 drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
@@ -323,6 +329,7 @@ Out[37]: 'thedude:passwordhash:1000:15:just.the.dude:/usr/users/home0/thedude:/b
 In [38]: nis.match('users', 'group')
 Out[38]: 'users::15:thedude,andothers
 ```
+  
 # platform module
 Sort of the python equivelant of the uname command.  Also has pointeres to some important libraries that python needs.  
 ```python
