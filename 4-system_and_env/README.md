@@ -265,7 +265,7 @@ Here's a simple example you can start with in your own code:
 ```python
 .../EXAMPLES> cat args.py 
 #!/usr/bin/env python
-edude
+
 import argparse
 import sys
 
