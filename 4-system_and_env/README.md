@@ -255,8 +255,62 @@ In [107]:
 We aren't giong to use this much here, but you should read about it!  
   
 # argparse module
+I'm kind of used to seeing people put argparse stuff at the top of their program in global namespace, but that's not really necessary; we can put it all into a function and call it at runtime to have the given argumetns processed.  
   
-stuff goes here  
+Argparse works on the same data available to use in `sys.argv`, so we can reference the given args ourselves before calling argparse, which can be useful if we wan to set global obtions like "DEBUG", at the top of our program, but still use argparse to handle all of the detailed arg stuff.  
+
+Here's an example:
+```python
+th@dadesktop:~/git/python_class/EXAMPLES$ cat args.py 
+#!/usr/bin/env python
+edude
+import argparse
+import sys
+
+if '--debug' in sys.argv:
+    print('We can check for specific args outside of argparse.\n')
+    DEBUG=True
+
+def getArgs():
+    parser = argparse.ArgumentParser(
+        prog=sys.argv[0],
+        description="Test Program for Argparse\nThese sorts of things can be\nvery exciting.",
+        epilog="And now, you know the rest of the story!")
+    parser.add_argument('--verbose', '-v', help="verbose mode", action='count')
+    parser.add_argument('--debug', help="debug mode", action='store_true')
+    parser.add_argument('--widgets', type=int, help="number of widgets", action='store')
+
+    args = parser.parse_args()
+    return args
+
+if __name__ == '__main__':
+    args = getArgs()
+    print("ARGS ARE:")
+    print(args)
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ ./args.py --help
+usage: ./args.py [-h] [--verbose] [--debug] [--widgets WIDGETS]
+
+Test Program for Argparse These sorts of things can be very exciting.
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --verbose, -v      verbose mode
+  --debug            debug mode
+  --widgets WIDGETS  number of widgets
+
+And now, you know the rest of the story!
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ ./args.py --debug
+We can check for specific args outside of argparse.
+
+ARGS ARE:
+Namespace(debug=True, verbose=None, widgets=None)
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ ./args.py -vv --widgets 42
+ARGS ARE:
+Namespace(debug=False, verbose=2, widgets=42)
+drnorris@dadesktop:~/git/python_class/EXAMPLES$ 
+```
   
 # nis module
 NIS is Network Information Service - sort of an extensin of the local system passwd, group, netgroup, etc files that are used for tracking users, groups, and other system information.  NIS is a distributed service for this content that's still used in industry today... The usage is pretty simple:
