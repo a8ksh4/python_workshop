@@ -8,16 +8,11 @@
   * misc stuff
 * [subprocess module](#subprocess-module)
   * [shell or no shell](#shell-or-no-shell)
-  * [sp.check_output](#sp-check-output)
+  * [sp.call](#sp-call)
   * [sp.check_call](#sp-check-call)
+  * [sp.check_output](#sp-check-output)
   * [sp.Popen](#sp-popen)
-    * Popen.poll()
-    * Popen.wait()
-    * Popen.communicate()
-    * Popen.terminate()
-    * Popen.kill()
-    * stdin, stdout, stderr...
-    * Popen.returncode
+    * Popen.poll, wait, communicate, terminate, kill, stdin, stdout, stderr, returncode
 * [argparse module](#argparse-module)
 * [nis module](#nis-module)
 * [platform module](#platform-module)     
