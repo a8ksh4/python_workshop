@@ -239,12 +239,13 @@ Out[49]: 3060
 st_nlink => number of hard links to a file; st_uid => user id of file owner; st_gid => group id of group owner, st_mtime => modified time of file (in seconds since epoch), etc.   
   
 **os.umask** - set the umask: set permissions that are removed from newly created filesystem objects  
+
   
 ## os.path
 **os.path.join**  
 os.path.join(path, *paths)  
   
-**os.path.realpath** - Real path of a file - traverse symlinks and find where it really is.  
+**os.path.realpath** - Real path of a file - resolve relative path or traverse symlinks and find the actual path.  
 ```python
 In [57]: p = '/home/thedude/Games/'
 
