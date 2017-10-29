@@ -10,7 +10,10 @@ class Solution():
         if solution:
             self.solution = solution
         else:
-            self.solution = data['solution'].decode('utf-8')
+            try:
+                self.solution = data['solution'].decode('utf-8')
+            except AttributeError:
+                self.solution = data['solution']
         self._imports = data['imports']
         # these .formats let meta information get passed into the setup and teardown scripts.        
         # it's mostly so you can send a dynamic seed      
@@ -75,9 +78,12 @@ class Solution():
         exec(self._setup)        
         
         # first implement any text case multipliers, extends the total number of tests
-        for testname, values in sorted(self._unittests.items()):
-            for _ in range(self._loopcount(testname)):
-                test_list.append(values)    
+        try:
+            for testname, values in sorted(self._unittests.items()):
+                for _ in range(self._loopcount(testname)):
+                    test_list.append(values)    
+        except AttributeError:
+            pass
         
         # run through all the unit tests if they exist
         if test_list:
@@ -92,7 +98,7 @@ class Solution():
         # if there are no unit tests we just run the function once
         else:
             exec(self._pretest) # pretest script
-            self_run_test([])
+            self._run_test([])
             exec(self._posttest) # posttest script  
         exec(self._teardown)
 

@@ -1,1 +1,1 @@
-waitress-serve --port=8000 instructor_server:app
+waitress-serve --port=8000 cobra_server:app

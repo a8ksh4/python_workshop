@@ -3,9 +3,9 @@ import yaml
 from random import *
 import uuid
 import json
-from utility import decode_message, encode_message
-from server_utility import Questions, User, get_users
-from solution_checker import Solution
+from util.utility import decode_message, encode_message
+from util.server_utility import Questions, User, get_users
+from util.solution_checker import Solution
 
 
 class GetLessons():
@@ -27,7 +27,7 @@ class GetQuestion():
         seed = users[username].new_seed()
         question = questions.get_question(lesson, question_label)
         question.pop('solution')
-        question.pop('history')
+        #question.pop('history')
         question.update({'seed':seed})
         resp.body = json.dumps(question)
         

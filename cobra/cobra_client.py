@@ -1,10 +1,10 @@
 import requests
 import json
-from solution_checker import Solution
+from util.solution_checker import Solution
 from prompt_toolkit.shortcuts import create_eventloop
 from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
-from utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
+from util.utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
 from getpass import getpass
 
 class CobraClient():
@@ -42,7 +42,7 @@ class CobraClient():
         
     def login(self, continue_session=False):
         if continue_session:
-            username, sessionid =  list(load_yml('session.yml').items())[0]
+            username, sessionid =  list(load_yml('clientdata/session.yml').items())[0]
             password = '0'
         else:
             username = input('Enter a username: ')
@@ -52,23 +52,22 @@ class CobraClient():
                                     json={'username':username, 'password':encode_message(password), 'sessionid': encode_message(sessionid)},
                                     headers=self.headers)
         self.username = username
-        save_yml('session.yml', {self.username: req.text})
+        save_yml('clientdata/session.yml', {self.username: req.text})
         self.session_id = decode_message(req.text)
         
     def solve_question(self, lesson, question_label):
         question_data = self.get_question(lesson, question_label)
-        cls()
         print('{lesson}\n{title}\n{text}\n{signature}\n'.format(lesson=lesson, title=question_label, **question_data))
         
         eventloop = create_eventloop()
         ptpython_input = PythonInput()
-        run_config(ptpython_input, config_file='ptpython_config.py')
+        run_config(ptpython_input, config_file='util/ptpython_config.py')
         try:
             cli = PythonCommandLineInterface(python_input=ptpython_input, eventloop=eventloop)
             solution = cli.run()
         finally:
             eventloop.close()
-        
+        print(solution.text)
         results = Solution(question_data, solution.text)
         results.run_solution()
 
@@ -85,6 +84,7 @@ class CobraClient():
                                     headers=self.headers)
         
     def run(self):
+        cls()
         selection = input('1) login\n2) create account\n3) continue last session\n> ')
         if selection == '1':
             self.login()
@@ -94,7 +94,36 @@ class CobraClient():
             self.login(continue_session=True)
         else:
             pass
-        self.solve_question('format_example', 'addition_example')
+        self.solve_question('python_basics', 'basic_math_1')
+        self.solve_question('python_basics', 'basic_math_2')
+        self.solve_question('python_basics', 'basic_math_3')
+        self.solve_question('python_basics', 'basic_math_4')
+        self.solve_question('python_basics', 'basic_math_5')
+        self.solve_question('python_basics', 'basic_math_6')
+        self.solve_question('python_basics', 'strings_1')
+        self.solve_question('python_basics', 'strings_2')
+        self.solve_question('python_basics', 'strings_3')
+        self.solve_question('python_basics', 'strings_4')
+        self.solve_question('python_basics', 'strings_5')
+        self.solve_question('python_basics', 'strings_6')
+        self.solve_question('python_basics', 'strings_7')
+        self.solve_question('python_basics', 'strings_8')
+        self.solve_question('python_basics', 'branching_1')
+        self.solve_question('python_basics', 'branching_2')
+        self.solve_question('python_basics', 'branching_3')
+        self.solve_question('python_basics', 'lists_1')
+        self.solve_question('python_basics', 'lists_2')
+        self.solve_question('python_basics', 'sets_1')
+        self.solve_question('python_basics', 'sets_2')
+        self.solve_question('python_basics', 'sets_3')
+        self.solve_question('python_basics', 'sets_4')
+        self.solve_question('python_basics', 'dictionaries_1')
+        self.solve_question('python_basics', 'dictionaries_2')
+        self.solve_question('python_basics', 'dictionaries_3')
+        self.solve_question('python_basics', 'dictionaries_4')
+        self.solve_question('python_basics', 'dictionaries_5')
+        self.solve_question('python_basics', 'dictionaries_6')
+        self.solve_question('python_basics', 'dictionaries_7')
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
