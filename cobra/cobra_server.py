@@ -27,7 +27,7 @@ class GetQuestion():
         seed = users[username].new_seed()
         question = questions.get_question(lesson, question_label)
         question.pop('solution')
-        question.pop('history')
+        #question.pop('history')
         question.update({'seed':seed})
         resp.body = json.dumps(question)
         

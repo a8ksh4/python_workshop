@@ -10,7 +10,10 @@ class Solution():
         if solution:
             self.solution = solution
         else:
-            self.solution = data['solution'].decode('utf-8')
+            try:
+                self.solution = data['solution'].decode('utf-8')
+            except AttributeError:
+                self.solution = data['solution']
         self._imports = data['imports']
         # these .formats let meta information get passed into the setup and teardown scripts.        
         # it's mostly so you can send a dynamic seed      
