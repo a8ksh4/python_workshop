@@ -64,8 +64,13 @@ class Solution():
             print('{}: {}'.format(type(e).__name__, e))       
             exception_raised = True
             return None
-        scope.pop('__builtins__')
-        self._function = [value for value in scope.values()][0]        
+        #scope.pop('__builtins__')
+        #self._function = [value for value in scope.values() if value != '__builtins__'][0]
+        for value in scope.values():
+            if isinstance(value, dict):
+                continue
+            else:
+                self._function = value
         # now that we have the function in our namespace we can run it against our unittests
         self._run_tests()
         # and finally we will run our teardown scripts
@@ -91,7 +96,9 @@ class Solution():
                 exec(self._pretest) # pretest script
                 arguments = []
                 for argument in test:
-                    arguments += [eval(argument)]
+                    #print(type(argument))
+                    arguments += [eval(str(argument))]
+                    #arguments.append(argument)
                 #arguments = map(lambda argument: eval(argument, locals), test) # converts the yml test case string into the solution arguments
                 self._run_test(arguments)
                 exec(self._posttest) # posttest script  
@@ -114,6 +121,8 @@ class Solution():
         ''' run test and save results, and time taken '''
         start_time = default_timer()
         try:
+            #print(arguments)
+            #print(self._function)
             result = self._function(*arguments)    # the actual test is run here
         except Exception as e:
             print('{}: {}'.format(type(e).__name__, e))
