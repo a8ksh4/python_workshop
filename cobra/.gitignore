@@ -2,3 +2,4 @@ __pycache__
 *.pyc
 *yml_*
 users
+session.yml

@@ -29,9 +29,29 @@ Tier, description...
     or whitespace-only lines.  Then write the content back to the file replacing the original content.
 
 # os module
-## basic ops
+## os basics
 * moveAFile(source_path, dest_path)
   * 30
   * Given a source path and destination path, move the file from source to destination.
-  
+* cdAndWrite(dir_path, file_name, content)
+  * 34
+  * Change directory to the given "dir_path", then write the given content to the given file_name. 
+* listDirFilter(dir_path, filter)
+  * 34
+  * return a list of files at a given path whos names match the given filter. 
+* createTmpDir(dir_name)
+  * 33
+  * create a directory in /tmp with the given name and return the path to the new directory
+* realPath(path)
+  * 34
+  * given a path, find out if it contains a symlink.  If so, return the actual path to where the given path points. If no symlinks, return the given path. 
+* filePaths(dir_path, files_list)
+  * 34
+  * given a directory path and a list of file, create a list of complete paths to each file (dir_path + file path)
 
+## permissions
+* tarDir(src_dir, dst_tar)
+  * 34
+  * given a source directory containing files, create a tar file at the given dst_tar (e.g. /tmp/my_stuff.tar) and add the
+  directory and its contents into the tar file. 
+# Tar

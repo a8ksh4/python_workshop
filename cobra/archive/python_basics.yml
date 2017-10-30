@@ -24,11 +24,7 @@ basic_math_1:
     - randint(-1000,1000)
     - randint(-1,1)
 basic_math_2:
-  imports: 'from random import randint, seed
-
-    import subprocess as sp
-
-    '
+  imports: from random import randint, seed
   posttest: ''
   pretest: ''
   setup: seed({seed})
@@ -44,20 +40,16 @@ basic_math_2:
     - int(3)
     - int(5)
     test2:
-    - int(-3)
-    - int(0)
+    - int(10)
+    - int(1)
     test3:
-    - randint(-100,100)
-    - randint(-100,100)
+    - randint(100,500)
+    - randint(100,200)
     test4_x4:
-    - randint(-1000,1000)
-    - randint(-1,1)
+    - randint(1000,2000)
+    - randint(1,10)
 basic_math_3:
-  imports: 'from random import randint, seed
-
-    import subprocess as sp
-
-    '
+  imports: from random import randint, seed
   posttest: ''
   pretest: ''
   setup: seed({seed})
@@ -81,11 +73,7 @@ basic_math_3:
     - randint(-1000,1000)
     - randint(-1,1)
 basic_math_4:
-  imports: 'from random import randint, seed
-
-    import subprocess as sp
-
-    '
+  imports: from random import randint, seed
   posttest: ''
   pretest: ''
   setup: seed({seed})
@@ -104,7 +92,7 @@ basic_math_4:
     - int(5)
     test2:
     - int(-3)
-    - int(0)
+    - int(1)
     test3:
     - randint(-100,100)
     - randint(-100,100)
@@ -112,11 +100,7 @@ basic_math_4:
     - randint(-1000,1000)
     - randint(-1,1)
 basic_math_5:
-  imports: 'from random import randint, seed
-
-    import subprocess as sp
-
-    '
+  imports: from random import randint, seed
   posttest: ''
   pretest: ''
   setup: seed({seed})
@@ -141,11 +125,7 @@ basic_math_5:
     - randint(-1000,1000)
     - randint(-1,1)
 basic_math_6:
-  imports: 'from random import randint, seed
-
-    import subprocess as sp
-
-    '
+  imports: from random import randint, seed
   posttest: ''
   pretest: ''
   setup: seed({seed})
@@ -163,7 +143,7 @@ basic_math_6:
     - int(5)
     test2:
     - int(-3)
-    - int(0)
+    - int(5)
     test3:
     - randint(-100,100)
     - randint(-100,100)
@@ -187,11 +167,11 @@ branching_1:
     test1:
     - true
     test2:
-    - ''
+    - '""'
     test3:
-    - a
+    - '"a"'
     test4:
-    - ()
+    - '"()"'
 branching_2:
   imports: ''
   posttest: ''
@@ -261,11 +241,11 @@ dictionaries_1:
     \ inventory\n"
   unittests:
     test1:
-    - ' rofl this is cool '
+    - '" rofl this is cool "'
     test2:
-    - ' ABCDS'
+    - '" ABCDS"'
     test3:
-    - 'zABCDS '
+    - '"zABCDS "'
 dictionaries_2:
   imports: ''
   posttest: ''
@@ -435,19 +415,9 @@ lists_1:
     \ \nsumms them, and returns the sum. \n\nE.g:\ndef sumAllItmes(some_nums):\n \
     \   # do stuff here\n    return the_sum\n"
   unittests:
-    test1:
-    - - 1
-      - 2
-      - 3
-      - 4
-      - 5
-    test2:
-    - - -5
-      - 2.2
-      - 999
-      - -1000.0
-    test3:
-    - (1, -2, 4, -6, 123.1)
+    test1: [1, 2, 3, 4, 5]
+    test2: [-5, 2.2, 999, -1000.0]
+    test3: [1, -2, 4, -6, 123.1]
 lists_2:
   imports: ''
   posttest: ''
@@ -463,19 +433,9 @@ lists_2:
     \ \nand returns the smallest number found in the list.\n\nE.g:\ndef smallestOfList(some_nums):\n\
     \    # do stuff here\n    return the_smallest\n"
   unittests:
-    test1:
-    - - 1
-      - 2
-      - 3
-      - 4
-      - 5
-    test2:
-    - - -5
-      - 2.2
-      - 999
-      - -1000.0
-    test3:
-    - (1, -2, 4, -6, 123.1)
+    test1: [1, 2, 3, 4, 5]
+    test2: [-5, 2.2, 999, -1000.0]
+    test3: [1, -2, 4, -6, 123.1]
 sets_1:
   imports: ''
   posttest: ''
@@ -490,16 +450,7 @@ sets_1:
     Order of the returned list is not important.\n\nE.g:\ndef convTupleUnique(some_items):\n\
     \    # do stuff here\n    return unique_items\n"
   unittests:
-    test1:
-    - - asfd
-      - b
-      - b
-      - c
-      - b
-      - 1
-      - 2
-      - b
-      - a
+    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
 sets_2:
   imports: ''
   posttest: ''
@@ -518,16 +469,7 @@ sets_2:
     it is in the returned tuple, and subsequent occurences are ignored. \n\nE.g:\n\
     def convTupleUniqueOrder(some_items):\n    # do stuff here\n    return unique_items\n"
   unittests:
-    test1:
-    - - asfd
-      - b
-      - b
-      - c
-      - b
-      - 1
-      - 2
-      - b
-      - a
+    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
 sets_3:
   imports: ''
   posttest: ''
@@ -545,16 +487,7 @@ sets_3:
     object.\n\nE.g:\ndef createSet(obj1=None, obj2=None, obj3=None, obj4=None, obj5=None):\n\
     \    # do stuff here\n    return new_set\n"
   unittests:
-    test1:
-    - - asfd
-      - b
-      - b
-      - c
-      - b
-      - 1
-      - 2
-      - b
-      - a
+    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
 sets_4:
   imports: ''
   posttest: ''
@@ -570,16 +503,7 @@ sets_4:
     converted to a tuple and returned. \n\nE.g:\ndef removeFromSet(a_set, an_obj):\n\
     \    # do stuff here\n    return new_tuple\n"
   unittests:
-    test1:
-    - - asfd
-      - b
-      - b
-      - c
-      - b
-      - 1
-      - 2
-      - b
-      - a
+    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
 strings_1:
   imports: ''
   posttest: ''
@@ -596,7 +520,6 @@ strings_1:
     /\", or escaping \"\\\"!'\n\nE.g:\ndef returnWithQuotes():\n    # do stuff here\n\
     \    return my_silly_string\n"
   unittests:
-    test1: null
 strings_2:
   imports: ''
   posttest: ''
@@ -611,11 +534,11 @@ strings_2:
     E.g:\ndef strUpper(foo):\n    # do stuff here\n    return foo\n"
   unittests:
     test1:
-    - ' rofl this is cool '
+    - str(' rofl this is cool ')
     test2:
-    - ' ABCDS'
+    - str' ABCDS')
     test3:
-    - 'zABCDS '
+    - str('zABCDS ')
 strings_3:
   imports: ''
   posttest: ''
@@ -634,13 +557,13 @@ strings_3:
     \    # do stuff here\n    return foo\n"
   unittests:
     test1:
-    - ' ro3! T2is is cool '
+    - str(' ro3! T2is is cool ')
     test2:
-    - ' ABCDS'
+    - str(' ABCDS')
     test3:
-    - 'zABCDS '
+    - str('zABCDS ')
     test4:
-    - '123456789'
+    - str('123456789')
 strings_4:
   imports: ''
   posttest: ''
@@ -657,13 +580,13 @@ strings_4:
     \ foo\n"
   unittests:
     test1:
-    - ' ro3! T2is is cool '
+    - str(' ro3! T2is is cool ')
     test2:
-    - ' ABCDS'
+    - str(' ABCDS')
     test3:
-    - 'zABCDS '
+    - str('zABCDS ')
     test4:
-    - '123456789'
+    - str('123456789')
 strings_5:
   imports: ''
   posttest: ''
@@ -682,13 +605,13 @@ strings_5:
     \ string.\n\nE.g:\ndef reverseOrder(foo):\n    # do stuff here\n    return foo\n"
   unittests:
     test1:
-    - ro3! T2is is cool
+    - str('ro3! T2is is cool')
     test2:
-    - ' ABCDS'
+    - str(' ABCDS')
     test3:
-    - zABCDS one two three!
+    - str('zABCDS one two three!')
     test4:
-    - 123456789 asdf ASDF 4 _ 123 nine? ""
+    - str('123456789 asdf ASDF 4 _ 123 nine? \"\"')
 strings_6:
   imports: ''
   posttest: ''
@@ -705,9 +628,9 @@ strings_6:
     \    # do stuff here\n    return csv_string\n"
   unittests:
     test1:
-    - ('one', 'two', 'three')
-    test2:
-    - ('1', ',', ':', "fiftyfive")
+        - ['one', 'two', 'three']
+    test2: 
+        - ['1', ',', ':', "fiftyfive"]
 strings_7:
   imports: ''
   posttest: ''
@@ -725,12 +648,12 @@ strings_7:
     \ becomes \"one,two,three\".\n\nE.g:\ndef undToShortCSV(und_sep_words):\n    #\
     \ do stuff here\n    return csv_sep_words\n"
   unittests:
-    test1:
-    - one_two_three_four_five
-    test2:
-    - _______
-    test3:
-    - 1_2_3__five_six!''_seven
+    test1: 
+        - str('one_two_three_four_five')
+    test2: 
+        - '_______'
+    test3: 
+        - str('1_2_3__five_six!\'\'_seven')
 strings_8:
   imports: ''
   posttest: ''
@@ -747,9 +670,9 @@ strings_8:
     \ is pizza on the plate\", then the index is 9.\n\nE.g:\ndef getIndexOf(word,\
     \ search_string):\n    # do stuff here\n    return index \n"
   unittests:
-    test1:
-    - one_two_three_four_five
-    test2:
-    - _______
-    test3:
-    - 1_2_3__five_six!''_seven
+    test1: 
+        - str('one_two_three_four_five')
+    test2: 
+        - str('_______')
+    test3: 
+        - str('1_2_3__five_six!\'\'_seven')

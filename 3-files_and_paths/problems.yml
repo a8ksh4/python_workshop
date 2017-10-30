@@ -1,60 +1,420 @@
-# Using a uuid to uniquely identify questions
+1be4da78-bacc-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: appendLineToFile(path, string)
+  solution: "def appendLineToFile(path, content):\n    with open(path, 'a') as f:\n\
+    \        f.write(content)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called appendLineToFile that accepts a path and a string,\
+    \ and writes the\nstring to the end of the file (without modifying the existing\
+    \ contents in the file).\n\nE.g.\ndef appendLineToFile(path, content):\n    #your\
+    \ code here\n    #return nothing\n"
+  tier: 30
+  title: readwrite_3
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 1be4da78-bacc-11e7-b66a-ac220b2cb439
+43cbb194-bc05-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: cdAndWrite(dir_path, file_name, content) -> file_size
+  solution: "def cdAndWrite(dir_path, file_name, content):\n    import os\n    os.chdir(dir_path)\n\
+    \    open(file_name, 'w').write(content)\n    return os.stat(file_name).st_size\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called cdAndWrite that changes directory to the given path,\
+    \ then edits a file\nand writes the given content to it. Return the size of the\
+    \ file in bytes! \n\nE.g.\ndef cdAndWrite(dir_path, file_name, content):\n   \
+    \ #your code here\n    return file_size\n"
+  tier: 35
+  title: os_basics_2
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 43cbb194-bc05-11e7-b66a-ac220b2cb439
 4464b29f-86a1-4e4c-9261-f581d1b1c8e8:
-    # This is an example question
-    # It shows off the format used
-    title: addition_example
-    text: |
-        Write a function that takes 2 integers as parameter
-        It should return the sum of the 2 ints
-    signature: "add(number1: int, number2:int ) -> int"        
-    # I'm putting this in base64, I think it might help readability. This codes to:
-    # def add(num_1, num_2):
-    #     return num_1 + num_2
-    solution: !!binary "ZGVmIGFkZChudW1fMSwgbnVtXzIpOgogICAgcmV0dXJuIG51bV8xICsgbnVtXzI="
-    tier: 1
-    unittests:
-        test1:
-            - "int(3)"
-            - "int(5)"
-        test2:
-            - "int(-3)"
-            - "int(0)"
-        test3:
-            - "randint(-100,100)"
-            - "randint(-100,100)"
-        # The x4 will mean repeat this test 4 times
-        test4_x4:
-            - "randint(-1000,1000)"
-            - "randint(-1,1)"
-
-    # Used for any outside module dependancies
-    imports: "from random import randint, seed"
-    # Setup scripts to prep an environment. Run before unittests
-    setup: "seed({seed})"
-    # Teardown scripts to clean up the environment. Run after unittests
-    teardown: ""
-    # Scripts to be run before individual tests take place    
-    pretest: ""
-    # Scripts to be run after infividual tests take place
-    posttest: ""
-    # Tags can be used to sort and filter questions
-    tags:
-        - sample
-        - arithmatic
-    # This is how many times the challenge has been solved
-    successes: 1
-    # These are derived from user ratings, the data can be used as question feedback
-    # think of them like upvotes/downvotes, but more category specific
-    ratings:
-        challenging: 0
-        useful: 0
-        interesting: 0
-    # The solution history, every success can be stored here.
-    history:
-        ab7511ee456ce56e64d69141b7e2241b:
-            code: !!binary "ZGVmIGFkZChhYWEsYmJiKToKICAgIHg9IGFhYStiYmIKICAgIHJldHVybiB4"
-            pep8: 0
-            size: 0
-            speed: 0
-            memory: 0
-            likes: 0
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: readFileToString(path) -> string
+  solution: "def readFileToString(path):\n    with open(path, 'r') as f:\n       \
+    \ contents = f.read()\n    return contents\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called readFileToString that accepts a path, opens the path,\n\
+    and returns the contents of the file as a string value. You can assume that \n\
+    you'll have access to the file, it won't be binary data, you don't need to do\n\
+    anything to the given path to open it.  \n\nE.g.\ndef readFileToString(path_to_file):\n\
+    \    #your code here\n    return contents\n"
+  tier: 30
+  title: readwrite_1
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 4464b29f-86a1-4e4c-9261-f581d1b1c8e8
+59663690-bacb-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: readLiensFromFile(path) -> list of strings
+  solution: "def readLinesFromFile(path):\n    with open(path, 'r') as f:\n      \
+    \  contents = f.readlines()\n    return contents\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called readLinesFromFiles that accepts a path, reads the\
+    \ contents, and\nreturns a list of stings for each line in the file. \n\nE.g.\n\
+    def readLinesFromFile(path_to_file):\n    #your code here\n    return contents\n"
+  tier: 30
+  title: readwrite_2
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 59663690-bacb-11e7-b66a-ac220b2cb439
+5bd069d0-bc0d-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: filePaths(dir_path, files_list) -> file_paths list
+  solution: "def filePaths(dir_path, files_list):\n    out = []\n    for fname in\
+    \ files_list:\n        fpath = os.path.realpath(os.path.join(dir_path, fname))\n\
+    \        out.append(fpath)\n    return out\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called filePaths that accepts a directory path and a list\
+    \ of files. It\nreturns a list of full paths to those files. \n\nFor example,\
+    \ if dir_path is '/tmp/' and files list is ['./foobar.txt', 'diddun.txt'], the\
+    \ output would be ['/tmp/foobar.txt', '/tmp/diddun.txt'].\n\nE.g.\ndef filePaths(dir_path,\
+    \ files_list):\n    # your code here\n    return files_paths\n"
+  tier: 34
+  title: os_basics_6
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 5bd069d0-bc0d-11e7-b66a-ac220b2cb439
+5c298aec-bacd-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: moveAFile(src_path, dst_path)
+  solution: "def moveAFile(src_path, dst_path):\n    improt shutils\n    shutils.move(src_path,\
+    \ dst_path)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called moveAFile that accepts a source file path and a dest\
+    \ file path and\nmoves the file to the destination.  \n\nE.g.\ndef moveAFile(src_path,\
+    \ dst_path):\n    #your code here\n    #return nothing\n"
+  tier: 30
+  title: os_basics_1
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 5c298aec-bacd-11e7-b66a-ac220b2cb439
+6911ec28-bacc-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: truncateWriteFile(path, content)
+  solution: "def truncateWriteFile(path, content):\n    with open(path, 'w') as f:\n\
+    \        f.write(content)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called truncateWriteFile that accepts a path and a string,\
+    \ and writes the\nstring to the file, truncating (overwriting) any existing content\
+    \ in the file. \n\nE.g.\ndef truncateWriteFile(path, content):\n    #your code\
+    \ here\n    #return nothing\n"
+  tier: 30
+  title: readwrite_4
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 6911ec28-bacc-11e7-b66a-ac220b2cb439
+7d50861e-bc06-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: listDirFilter(dir_path, regex_filter)
+  solution: "def listDirFilter(dir_path, regex_filter):\n    import re\n    out =\
+    \ []\n    for name in os.listdir(dir_path):\n        if re.match(regex_filter,\
+    \ name):\n            out.append(name)\n    return out\n\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called listDirFilter that accepts a directory path and a\
+    \ regex filter.  It\nretuns a list of files at the directory path whos names match\
+    \ the given regex.  Return only\nthe file names, not their complete path. \n\n\
+    E.g.\ndef listDirFilter(dir_path, regex_filter):\n    #your code here\n    return\
+    \ files_list\n"
+  tier: 35
+  title: os_basics_3
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 7d50861e-bc06-11e7-b66a-ac220b2cb439
+80f18338-bc09-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: realPath(path)
+  solution: "def realPath(dir_name):\n    return os.path.realpath(dir_name)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called realPath that accepts a path, checks if it has any\
+    \ symlinks in it,\nand returns the actual path (wihout symlinks) to the file or\
+    \ directory the original path\npointed to. \n\nE.g.\ndef realPath(dir_name):\n\
+    \    # your code here\n    return real_path\n"
+  tier: 31
+  title: os_basics_5
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: 80f18338-bc09-11e7-b66a-ac220b2cb439
+e69a0f90-bc07-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: createTmpDir(dir_name) -> dir_path
+  solution: "def createTmpDir(dir_name):\n    os.umask(0077)\n    dir_path = '/tmp/{}'.format(dir_name)\n\
+    \    os.mkdir(dir_path)\n    return dir_path\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called createTmpDir that accepts a directory name and creates\
+    \ it in /tmp.\nSet the permissions so that only the directory owner can read/write/execute\
+    \ it. Return the\ncomplete path to the directory.  Bonus: Can you do this in a\
+    \ way that avoids a race condition\nsecurity vulnerability? \n\nE.g.\ndef createTmpDir(dir_name):\n\
+    \    #your code here\n    return dir_path\n"
+  tier: 35
+  title: os_basics_4
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: e69a0f90-bc07-11e7-b66a-ac220b2cb439
+f36fe88e-bacc-11e7-b66a-ac220b2cb439:
+  history: {}
+  imports: from random import randint, seed
+  posttest: ''
+  pretest: ''
+  ratings:
+    challenging: 0
+    interesting: 0
+    useful: 0
+  setup: seed({seed})
+  signature: rewriteInLower(source_path, dest_path)
+  solution: "def rewriteInLower(source_path, dest_path):\n    contents = open(source_path,\
+    \ 'r').read().lower()\n    open(dest_path, 'w').write(contents)\n"
+  successes: 1
+  tags:
+  - sample
+  - arithmatic
+  teardown: ''
+  text: "Write a function called rewriteInLower that accepts a source and destination\
+    \ path.  It reads\nin the source path, converts the contents to all lower case,\
+    \ and writes them to the\ndestination path. \n\nE.g.\ndef rewriteInLower(source_path,\
+    \ dest_path):\n    #your code here\n    #return nothing\n"
+  tier: 31
+  title: readwrite_5
+  unittests:
+    test1:
+    - int(3)
+    - int(5)
+    test2:
+    - int(-3)
+    - int(0)
+    test3:
+    - randint(-100,100)
+    - randint(-100,100)
+    test4_x4:
+    - randint(-1000,1000)
+    - randint(-1,1)
+  uuid: f36fe88e-bacc-11e7-b66a-ac220b2cb439
