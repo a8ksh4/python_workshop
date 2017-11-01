@@ -18,7 +18,7 @@ Python Learning @ Everywhere
 3. [Files and Paths](./3-files_and_paths/README.md)
 4. [System and Environment](./4-system_and_env/README.md)
 5. [Data Manipulation](./5-data_manipulation/README.md)
-6. ...
+6. [Exception Handling](./6-exception_handling/README.md)
 7. ...
 
 ## Topics Overview:
