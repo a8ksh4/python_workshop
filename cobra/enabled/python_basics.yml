@@ -6,7 +6,9 @@ basic_math_1:
   signature: addThem(int, int) -> int
   solution: "def addThem(num_a, num_b):\n    return num_a + num_b\n"
   tags: ''
-  teardown: ''
+  teardown: 'open(''/tmp/teardown'',''w'').write(str(dir()))
+
+    '
   text: "Write a function that takes 2 integers as parameter\nIt should return the\
     \ sum of the 2 integers.\n\nE.g. \ndef addThem(num_a, num_b):\n    #your code\
     \ here\n    return the_sum\n"
@@ -68,7 +70,6 @@ basic_math_3:
     - randint(100,1000)/randint(100,1000)
     test4_x4:
     - (randint(1000,10000) * -1) /randint(100,1000)
-
 basic_math_4:
   imports: from random import randint, seed
   posttest: ''
@@ -408,12 +409,23 @@ lists_1:
     \ \nsumms them, and returns the sum. \n\nE.g:\ndef sumAllItmes(some_nums):\n \
     \   # do stuff here\n    return the_sum\n"
   unittests:
-    test1: 
-        - [1, 2, 3, 4, 5]
-    test2: 
-        - [-5, 2.2, 999, -1000.0]
-    test3: 
-        - [1, -2, 4, -6, 123.1]
+    test1:
+    - - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    test2:
+    - - -5
+      - 2.2
+      - 999
+      - -1000.0
+    test3:
+    - - 1
+      - -2
+      - 4
+      - -6
+      - 123.1
 lists_2:
   imports: ''
   posttest: ''
@@ -429,12 +441,23 @@ lists_2:
     \ \nand returns the smallest number found in the list.\n\nE.g:\ndef smallestOfList(some_nums):\n\
     \    # do stuff here\n    return the_smallest\n"
   unittests:
-    test1: 
-        - [1, 2, 3, 4, 5]
-    test2: 
-        - [-5, 2.2, 999, -1000.0]
-    test3: 
-        - [1, -2, 4, -6, 123.1]
+    test1:
+    - - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    test2:
+    - - -5
+      - 2.2
+      - 999
+      - -1000.0
+    test3:
+    - - 1
+      - -2
+      - 4
+      - -6
+      - 123.1
 sets_1:
   imports: ''
   posttest: ''
@@ -449,7 +472,16 @@ sets_1:
     Order of the returned list is not important.\n\nE.g:\ndef convTupleUnique(some_items):\n\
     \    # do stuff here\n    return unique_items\n"
   unittests:
-    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
+    test1:
+    - asfd
+    - b
+    - b
+    - c
+    - b
+    - '1'
+    - '2'
+    - b
+    - a
 sets_2:
   imports: ''
   posttest: ''
@@ -468,7 +500,16 @@ sets_2:
     it is in the returned tuple, and subsequent occurences are ignored. \n\nE.g:\n\
     def convTupleUniqueOrder(some_items):\n    # do stuff here\n    return unique_items\n"
   unittests:
-    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
+    test1:
+    - asfd
+    - b
+    - b
+    - c
+    - b
+    - '1'
+    - '2'
+    - b
+    - a
 sets_3:
   imports: ''
   posttest: ''
@@ -486,7 +527,16 @@ sets_3:
     object.\n\nE.g:\ndef createSet(obj1=None, obj2=None, obj3=None, obj4=None, obj5=None):\n\
     \    # do stuff here\n    return new_set\n"
   unittests:
-    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
+    test1:
+    - asfd
+    - b
+    - b
+    - c
+    - b
+    - '1'
+    - '2'
+    - b
+    - a
 sets_4:
   imports: ''
   posttest: ''
@@ -502,7 +552,16 @@ sets_4:
     converted to a tuple and returned. \n\nE.g:\ndef removeFromSet(a_set, an_obj):\n\
     \    # do stuff here\n    return new_tuple\n"
   unittests:
-    test1: ['asfd', 'b', 'b', 'c', 'b', '1', '2', 'b', 'a']
+    test1:
+    - asfd
+    - b
+    - b
+    - c
+    - b
+    - '1'
+    - '2'
+    - b
+    - a
 strings_1:
   imports: ''
   posttest: ''
@@ -518,7 +577,7 @@ strings_1:
     \ shown included in the string:\n\n    'It's modulus, \"%\", not division, \"\
     /\", or escaping \"\\\"!'\n\nE.g:\ndef returnWithQuotes():\n    # do stuff here\n\
     \    return my_silly_string\n"
-  unittests:
+  unittests: null
 strings_2:
   imports: ''
   posttest: ''
@@ -627,9 +686,14 @@ strings_6:
     \    # do stuff here\n    return csv_string\n"
   unittests:
     test1:
-        - ['one', 'two', 'three']
-    test2: 
-        - ['1', ',', ':', "fiftyfive"]
+    - - one
+      - two
+      - three
+    test2:
+    - - '1'
+      - ','
+      - ':'
+      - fiftyfive
 strings_7:
   imports: ''
   posttest: ''
@@ -647,12 +711,12 @@ strings_7:
     \ becomes \"one,two,three\".\n\nE.g:\ndef undToShortCSV(und_sep_words):\n    #\
     \ do stuff here\n    return csv_sep_words\n"
   unittests:
-    test1: 
-        - str('one_two_three_four_five')
-    test2: 
-        - '_______'
-    test3: 
-        - str('1_2_3__five_six!\'\'_seven')
+    test1:
+    - str('one_two_three_four_five')
+    test2:
+    - _______
+    test3:
+    - str('1_2_3__five_six!\'\'_seven')
 strings_8:
   imports: ''
   posttest: ''
@@ -669,9 +733,31 @@ strings_8:
     \ is pizza on the plate\", then the index is 9.\n\nE.g:\ndef getIndexOf(word,\
     \ search_string):\n    # do stuff here\n    return index \n"
   unittests:
-    test1: 
-        - str('one_two_three_four_five')
-    test2: 
-        - str('_______')
-    test3: 
-        - str('1_2_3__five_six!\'\'_seven')
+    test1:
+    - str('one_two_three_four_five')
+    test2:
+    - str('_______')
+    test3:
+    - str('1_2_3__five_six!\'\'_seven')
+strings_9:
+  imports: ''
+  posttest: ''
+  pretest: ''
+  setup: ''
+  signature: fooBarString(foo) -> bar
+  solution: "def getIndexOf(word, search_string):\n    if word in search_string:\n\
+    \        return search_string.index(word)\n    else:\n        return -2\n"
+  tags: ''
+  teardown: ''
+  text: "Wirte a functuion called \"getIndexOf\" that returns the index of a given\
+    \ word\ninside of a given string.  If the word is not present, it returns a -1.\
+    \ \n\nFor exmaple, if the word is \"pizza\", and the search_string is \"there\
+    \ is pizza\non the plate\", then the index is 9.\n\nE.g:\ndef getIndexOf(word,\
+    \ search_string):\n    # do stuff here\n    return index \n"
+  unittests:
+    test1:
+    - str('one_two_three_four_five')
+    test2:
+    - str('_______')
+    test3:
+    - str('1_2_3__five_six!\'\'_seven')
