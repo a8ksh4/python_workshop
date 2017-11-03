@@ -5,7 +5,6 @@
 #from future.builtins import input
 
 # Other imports:
-from collections import OrderedDict
 import copy
 import filecmp
 from glob import glob
@@ -18,6 +17,7 @@ import subprocess as sp
 from tempfile import mkstemp
 import time
 import yaml
+import cobra_client as cc
 
 
 EDITOR='/usr/bin/vi'
@@ -372,7 +372,32 @@ def interactiveMenu(probs_dicts):
                 for key in ESSENTIAL_KEYS:
                     prob_dict[key] = copy.deepcopy(old_dict[key])
                 probs_dict[prob_title] = prob_dict
-                
+
+            # Run the problem:
+            elif choice == 'r':
+                from ptpython.repl import run_config
+                question_data = prob_dict
+                eventloop = cc.create_eventloop()
+                ptpython_input = cc.PythonInput()
+                run_config(ptpython_input,
+                           config_file='util/ptpython_config.py')
+                try:
+                    cli = cc.PythonCommandLineInterface(
+                                    python_input=ptpython_input,
+                                    eventloop=eventloop )
+                    solution = cli.run()
+                finally:
+                    eventloop.close()
+                #try:
+                results = cc.Solution(question_data, solution.text)
+                results.run_solution()
+                print("RESULTS:")
+                print(results.test_results)
+                print(results.linecount)
+                print(results.charcount)
+                print(results.violations)
+                print(results.violationcount)
+
             # Change ordering, etc...
             elif choice == '+':
                 probs_dict = dMove(probs_dict, prob_title, 1)
