@@ -300,6 +300,7 @@ def interactiveMenu(probs_dicts):
                         ('g', 'edit signature'),
                         ('s', 'edit solution'),
                         ('u', 'edit unit test'),
+                        ('d', 'edit teardown'),
                         ('+', 'move up in order'),
                         ('-', 'move down in order'),
                         ('[', 'previous problem'),
@@ -344,9 +345,14 @@ def interactiveMenu(probs_dicts):
             # Edit unit tests
             elif choice == 'u':
                 edit_keys = ('unittests', 'imports', 'setup', 'teardown')
-                content = mergeEditYml(prob_dict, edit_keys)
+                content = mergeEditYml(prob_dict, edit_keys, prob_dict['text'])
                 for key in edit_keys:
                     prob_dict[key] = content[key]
+
+            # Edit unit test teardown
+            elif choice == 'd':
+                prob_dict['teardown'] = editTempFile( prob_dict['teardown'],
+                                                      prob_dict['text'] )
 
             # Edit all relevant fields
             elif choice == 'e':
@@ -385,14 +391,17 @@ def interactiveMenu(probs_dicts):
                 print("answer.text:  ", question_data['solution'])
                 print("------------- running ------------")
                 answer = cc.Solution(question_data, question_data['solution'])
-                answer.run_solution()
-                print("------------- RESULS: ------------")
-                print("solution: ", answer.test_results)
-                print("a.violations:", answer.violations)
-                print("a.violcount:", answer.violationcount)
-                print("teardown:", answer._teardown)
-                #import code
-                #code.InteractiveConsole(locals=locals()).interact()
+                try:
+                    answer.run_solution()
+                    print("------------- RESULS: ------------")
+                    print("solution: ", answer.test_results)
+                    print("a.violations:", answer.violations)
+                    print("a.violcount:", answer.violationcount)
+                    print("teardown:", answer._teardown)
+                    #import code
+                    #code.InteractiveConsole(locals=locals()).interact()
+                except Exception as e:
+                    print("Exception in run: {}".format(e))
 
                 input("Enter to continue...")
 
