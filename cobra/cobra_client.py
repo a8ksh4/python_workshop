@@ -99,7 +99,9 @@ class CobraClient():
             self.login(continue_session=True)
         else:
             pass
-        self.solve_question('python_basics', 'basic_math_1')
+        self.solve_question('3_files_paths', 'os_basics_1')
+        self.solve_question('2_basic_python', 'basic_math_1')
+        #self.solve_question('python_basics', 'basic_math_1')
         #self.solve_question('python_basics', 'basic_math_2')
         #self.solve_question('python_basics', 'basic_math_3')
         #self.solve_question('python_basics', 'basic_math_4')
@@ -132,15 +134,3 @@ class CobraClient():
         
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
-    
-    
-
-    
-    
-
-
-
-
-
-
-
