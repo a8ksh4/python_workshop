@@ -4,3 +4,4 @@ __pycache__
 users
 session.yml
 clientdata
+*.bak
