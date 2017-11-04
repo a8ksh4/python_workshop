@@ -377,26 +377,24 @@ def interactiveMenu(probs_dicts):
             elif choice == 'r':
                 from ptpython.repl import run_config
                 question_data = prob_dict
+                question_data['seed'] = 0
                 eventloop = cc.create_eventloop()
                 ptpython_input = cc.PythonInput()
                 run_config(ptpython_input,
                            config_file='util/ptpython_config.py')
-                try:
-                    cli = cc.PythonCommandLineInterface(
-                                    python_input=ptpython_input,
-                                    eventloop=eventloop )
-                    solution = cli.run()
-                finally:
-                    eventloop.close()
-                #try:
-                results = cc.Solution(question_data, solution.text)
-                results.run_solution()
-                print("RESULTS:")
-                print(results.test_results)
-                print(results.linecount)
-                print(results.charcount)
-                print(results.violations)
-                print(results.violationcount)
+                print("answer.text:  ", question_data['solution'])
+                print("------------- running ------------")
+                answer = cc.Solution(question_data, question_data['solution'])
+                answer.run_solution()
+                print("------------- RESULS: ------------")
+                print("solution: ", answer.test_results)
+                print("a.violations:", answer.violations)
+                print("a.violcount:", answer.violationcount)
+                print("teardown:", answer._teardown)
+                #import code
+                #code.InteractiveConsole(locals=locals()).interact()
+
+                input("Enter to continue...")
 
             # Change ordering, etc...
             elif choice == '+':

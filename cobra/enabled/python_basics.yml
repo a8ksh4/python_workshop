@@ -2,13 +2,14 @@ basic_math_1:
   imports: from random import randint, seed
   posttest: ''
   pretest: ''
+  seed: 0
   setup: seed({seed})
   signature: addThem(int, int) -> int
   solution: "def addThem(num_a, num_b):\n    return num_a + num_b\n"
   tags: ''
-  teardown: 'open(''/tmp/teardown'',''w'').write(str(dir()))
+  teardown: 'print(''foobar'')
 
-    '
+    self.test_results = [True, True, True]'
   text: "Write a function that takes 2 integers as parameter\nIt should return the\
     \ sum of the 2 integers.\n\nE.g. \ndef addThem(num_a, num_b):\n    #your code\
     \ here\n    return the_sum\n"
@@ -743,21 +744,18 @@ strings_9:
   imports: ''
   posttest: ''
   pretest: ''
+  seed: 0
   setup: ''
   signature: fooBarString(foo) -> bar
   solution: "def getIndexOf(word, search_string):\n    if word in search_string:\n\
     \        return search_string.index(word)\n    else:\n        return -2\n"
   tags: ''
-  teardown: ''
+  teardown: 'print(''foobar'')
+
+    self.test_results = [True, True, True]'
   text: "Wirte a functuion called \"getIndexOf\" that returns the index of a given\
     \ word\ninside of a given string.  If the word is not present, it returns a -1.\
     \ \n\nFor exmaple, if the word is \"pizza\", and the search_string is \"there\
     \ is pizza\non the plate\", then the index is 9.\n\nE.g:\ndef getIndexOf(word,\
     \ search_string):\n    # do stuff here\n    return index \n"
-  unittests:
-    test1:
-    - str('one_two_three_four_five')
-    test2:
-    - str('_______')
-    test3:
-    - str('1_2_3__five_six!\'\'_seven')
+  unittests: skip

@@ -78,35 +78,38 @@ class Solution():
     def _run_tests(self):
         '''Runs the solution against all unit tests'''
         test_list = []
+        print("TEST LIST:", test_list)
         
         exec(self._imports)    
         exec(self._setup)        
         
         # first implement any text case multipliers, extends the total number of tests
-        try:
-            for testname, values in sorted(self._unittests.items()):
-                for _ in range(self._loopcount(testname)):
-                    test_list.append(values)    
-        except AttributeError:
-            pass
-        
-        # run through all the unit tests if they exist
-        if test_list:
-            for test in test_list:
+        if self._unittests != 'skip':
+            try:
+                for testname, values in sorted(self._unittests.items()):
+                    for _ in range(self._loopcount(testname)):
+                        test_list.append(values)    
+            except AttributeError:
+                pass
+       
+            print("TEST LIST:", test_list)
+            # run through all the unit tests if they exist
+            if test_list:
+                for test in test_list:
+                    exec(self._pretest) # pretest script
+                    arguments = []
+                    for argument in test:
+                        #print(type(argument))
+                        arguments += [eval(str(argument))]
+                        #arguments.append(argument)
+                    #arguments = map(lambda argument: eval(argument, locals), test) # converts the yml test case string into the solution arguments
+                    self._run_test(arguments)
+                    exec(self._posttest) # posttest script  
+            # if there are no unit tests we just run the function once
+            else:
                 exec(self._pretest) # pretest script
-                arguments = []
-                for argument in test:
-                    #print(type(argument))
-                    arguments += [eval(str(argument))]
-                    #arguments.append(argument)
-                #arguments = map(lambda argument: eval(argument, locals), test) # converts the yml test case string into the solution arguments
-                self._run_test(arguments)
+                self._run_test([])
                 exec(self._posttest) # posttest script  
-        # if there are no unit tests we just run the function once
-        else:
-            exec(self._pretest) # pretest script
-            self._run_test([])
-            exec(self._posttest) # posttest script  
         exec(self._teardown)
 
     def _loopcount(self, testname):
