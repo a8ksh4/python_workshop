@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-
+#!/usr/bin/env python 
 # Python2 compatibility:
 #from __future__ import print_function
 #from future.builtins import input
@@ -16,6 +15,7 @@ import subprocess as sp
 #import tempfile
 from tempfile import mkstemp
 import time
+import traceback
 import yaml
 import cobra_client as cc
 
@@ -35,12 +35,14 @@ def editTempFile(content, ref_header=None):
     a marker line follows, and the content is placed below that for editing.
     Return the updated content.'''
 
-    marker = "\n### do not edit anything above this line ###\n\n"
+    marker = "\n### do not edit anything above this line ###\n"
     _, fname = mkstemp()
     with open(fname, 'w') as f:
         if ref_header != None:
             f.write(ref_header)
             f.write(marker)
+            if not content.startswith('\n'):
+                f.write('\n')
         f.write(content)
 
     vi_cmd = (EDITOR, fname)
@@ -53,7 +55,15 @@ def editTempFile(content, ref_header=None):
         marker_loc = new_content.find(marker)
         if marker_loc < 0:
             print('Marker line not found... Aborting!')
+            print('Will re-open the editor, please copy your stuff externally.')
+            input("enter to continue...")
             time.sleep(2)
+            with open(fname, 'a') as f:
+                f.write('\n### SAVE THIS CONTENT EXTERNALLY, FATAL ERROR ###\n')
+                f.write('\n### SAVE THIS CONTENT EXTERNALLY, FATAL ERROR ###\n')
+                f.write('\n### SAVE THIS CONTENT EXTERNALLY, FATAL ERROR ###\n')
+                f.write('\n### SAVE THIS CONTENT EXTERNALLY, FATAL ERROR ###\n')
+            sp.call(vi_cmd, shell=False)
             return content
         #offset to end of marker line
         marker_loc += len(marker)
@@ -392,7 +402,7 @@ def interactiveMenu(probs_dicts):
                 print("------------- running ------------")
                 answer = cc.Solution(question_data, question_data['solution'])
                 try:
-                    answer.run_solution()
+                    answer.run_solution(True)
                     print("------------- RESULS: ------------")
                     print("solution: ", answer.test_results)
                     print("a.violations:", answer.violations)
@@ -402,6 +412,7 @@ def interactiveMenu(probs_dicts):
                     #code.InteractiveConsole(locals=locals()).interact()
                 except Exception as e:
                     print("Exception in run: {}".format(e))
+                    traceback.print_stack()
 
                 input("Enter to continue...")
 
