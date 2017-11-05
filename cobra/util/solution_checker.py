@@ -16,7 +16,11 @@ class Solution():
                 self.solution = data['solution']
         self._imports = data['imports']
         # these .formats let meta information get passed into the setup and teardown scripts.        
-        # it's mostly so you can send a dynamic seed      
+        # it's mostly so you can send a dynamic seed
+        if 'seed' in data.keys():
+            pass
+        else:
+            data.update({'seed':0})
         self._setup = data['setup'].format(**data)
         self._teardown = data['teardown'].format(**data)
         self._pretest = data['pretest'].format(**data)
