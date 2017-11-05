@@ -1,9 +1,9 @@
 import falcon
 import yaml
-from random import *
-import uuid
+#from random import *
+#import uuid
 import json
-from util.utility import decode_message, encode_message
+from util.utility import decode_message, encode_message, hash_results, load_yml
 from util.server_utility import Questions, User, get_users
 from util.solution_checker import Solution
 
@@ -78,7 +78,27 @@ class SubmitSolution():
         master_results.run_solution()
         print(master_results.test_results)
         print(submitted_results)
-
+        if hash_results(master_results.test_results) == hash_results(submitted_results):
+            correct = [lesson, question_label]
+            users[username].update_completed(correct)
+        else:
+            correct = 'fail'
+        resp.body = json.dumps(correct)
+        
+class GetNextQuestion():
+    def on_post(self, req, resp):
+        post_info = json.loads(req.stream.read().decode('utf-8'))
+        response = [None, None]
+        question_list = load_yml('question_list.yml')
+        username = post_info['username']
+        for lesson, question_label in question_list:
+            if [lesson, question_label] in users[username].get_completed():
+                continue
+            else:
+                response = [lesson, question_label]
+                break
+        resp.body = json.dumps(response)
+        
         
 questions = Questions()
 users = get_users()
@@ -89,4 +109,5 @@ app.add_route('/getquestion', GetQuestion())
 app.add_route('/newuser', AddUser())
 app.add_route('/login', LoginUser())
 app.add_route('/submitsolution', SubmitSolution())
+app.add_route('/getnextquestion', GetNextQuestion())
 
