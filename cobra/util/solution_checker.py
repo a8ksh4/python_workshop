@@ -18,7 +18,8 @@ class Solution():
         # these .formats let meta information get passed into the setup and teardown scripts.        
         # it's mostly so you can send a dynamic seed      
         self._setup = data['setup'].format(**data)
-        self._teardown = data['teardown'].format(**data)
+        #self._teardown = data['teardown'].format(**data)
+        self._teardown = data['teardown']
         self._pretest = data['pretest'].format(**data)
         self._posttest = data['posttest'].format(**data)
         self._unittests = data['unittests']
@@ -53,7 +54,7 @@ class Solution():
         charcount = len(self.solution)
         return linecount, charcount    
         
-    def run_solution(self):
+    def run_solution(self, debug=False):
         '''Takes a text solution and yml data, and combines the two for execution'''    
         # we need to make imports global so they can be used inside of unit tests
         # we will also run our setup scripts here since we want those imports in the setup namespace        
@@ -63,6 +64,8 @@ class Solution():
         except Exception as e:
             print('{}: {}'.format(type(e).__name__, e))       
             exception_raised = True
+            if debug:
+                raise
             return None
         #scope.pop('__builtins__')
         #self._function = [value for value in scope.values() if value != '__builtins__'][0]
