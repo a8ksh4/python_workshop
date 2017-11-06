@@ -7,6 +7,7 @@ os_basics_1:
     challenging: 0
     interesting: 0
     useful: 0
+  seed: 0
   setup: ''
   signature: moveAFile(src_path, dst_path)
   solution: "def moveAFile(src_path, dst_path):\n    import shutils\n    shutils.move(src_path,\
@@ -15,7 +16,7 @@ os_basics_1:
   tags:
   - sample
   - arithmatic
-  teardown: "import random\nimport string\nimport os\nf0 = './{}'.format(''.join(random.choices(string.ascii_uppercase,\
+  teardown: "\nimport random\nimport string\nimport os\nf0 = './{}'.format(''.join(random.choices(string.ascii_uppercase,\
     \ k=10)))\nf1 = './{}'.format(''.join(random.choices(string.ascii_uppercase, k=10)))\n\
     open(f0, 'w').write('asdf\\n123')\n\ntry:\n    moveAFile(f0, f1)\nexcept:\n  \
     \  pass\n\nif os.path.isfile(f1):\n    self.test_results.append('pass')\nelse:\n\
@@ -46,7 +47,7 @@ os_basics_2:
   tags:
   - sample
   - arithmatic
-  teardown: "import random\nimport string\nimport os\ncwd = os.getcwd()\nd0 = ''.join(random.choices(string.ascii_uppercase,\
+  teardown: "\nimport random\nimport string\nimport os\ncwd = os.getcwd()\nd0 = ''.join(random.choices(string.ascii_uppercase,\
     \ k=10))\np0 = './{}'.format(d0)\nf0 = './{}'.format(''.join(random.choices(string.ascii_uppercase,\
     \ k=10)))\ncontent = 'asdf\\n123\\nfoobar\\n\\n'\nos.mkdir(d0)\n\ntry:\n    cdAndWrite(d0,\
     \ f0, content)\nexcept:\n    pass\n\nif os.getcwd().endswith(d0):\n    self.test_results.append('pass')\n\
