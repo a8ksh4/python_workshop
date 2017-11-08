@@ -412,7 +412,7 @@ def interactiveMenu(probs_dicts):
                     print("solution: ", answer.test_results)
                     print("a.violations:", answer.violations)
                     print("a.violcount:", answer.violationcount)
-                    print("teardown:", answer._teardown)
+                    #print("teardown:", answer._teardown)
                     #import code
                     #code.InteractiveConsole(locals=locals()).interact()
                 except Exception as e:

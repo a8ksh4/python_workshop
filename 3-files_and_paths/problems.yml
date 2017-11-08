@@ -1,19 +1,24 @@
 os_basics_1:
-  imports: ''
+  imports: 'import shutil
+
+    import random
+
+    import string
+
+    import os'
   posttest: ''
   pretest: ''
   seed: 0
   setup: ''
   signature: moveAFile(src_path, dst_path)
-  solution: "\ndef moveAFile(src_path, dst_path):\n    import shutils\n    shutils.move(src_path,\
-    \ dst_path)\n"
+  solution: "\ndef moveAFile(src_path, dst_path):\n    shutil.move(src_path, dst_path)\n"
   tags:
   - sample
   - arithmatic
-  teardown: "\nimport random\nimport string\nimport os\nf0 = './{{}}'.format(''.join(random.choices(string.ascii_uppercase,\
+  teardown: "\nf0 = './{{}}'.format(''.join(random.choices(string.ascii_uppercase,\
     \ k=10)))\nf1 = './{{}}'.format(''.join(random.choices(string.ascii_uppercase,\
-    \ k=10)))\nopen(f0, 'w').write('asdf\\n123')\n\ntry:\n    self.moveAFile(f0, f1)\n\
-    except Exception as e:\n    print(\"Exception: {{}}\".format(e))\n\nprint(\"SRC:\"\
+    \ k=10)))\nopen(f0, 'w').write('asdf\\n123')\n\n#try:\nmoveAFile(f0, f1)\n#except\
+    \ Exception as e:\n#    print(\"Exception: {{}}\".format(e))\n\nprint(\"SRC:\"\
     , f0)\nprint(\"DST:\", f1)\n\nif os.path.isfile(f1):\n    self.test_results.append('pass')\n\
     else:\n    self.test_results.append('failed to copy file to dst')\n\nif not os.path.isfile(f0):\n\
     \    self.test_results.append('pass')\nelse: \n    self.test_results.append('failed\

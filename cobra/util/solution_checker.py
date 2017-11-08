@@ -117,7 +117,18 @@ class Solution():
                 exec(self._pretest) # pretest script
                 self._run_test([])
                 exec(self._posttest) # posttest script  
-        exec(self._teardown)
+            exec(self._teardown)
+        else:
+            print("MERGED CODE START")
+            dumb_hack = self._imports + '\n' + self.solution + '\n' + self._teardown
+            print(dumb_hack)
+            print("MERGED CODE END")
+            try:
+                exec(dumb_hack)
+            except Exception as e:
+                self.test_results = ['Exception: {}'.format(e), ]
+
+
 
     def _loopcount(self, testname):
         '''Checks for _x in test names and returns the number following'''
