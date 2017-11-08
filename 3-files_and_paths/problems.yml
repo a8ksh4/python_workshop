@@ -31,6 +31,44 @@ os_basics_1:
     \ dst_path):\n    #your code here\n    #return nothing\n"
   tier: 30
   unittests: skip
+os_basics_1b:
+  imports: 'import shutil
+
+    import random
+
+    import string
+
+    import os'
+  posttest: ''
+  pretest: ''
+  setup: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
+
+    f1 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase, k=10)))
+
+    open(f0, ''w'').write(''asdf\n123'')
+
+    '
+  signature: moveAFile(src_path, dst_path)
+  solution: "\ndef moveAFile(src_path, dst_path):\n    shutil.move(src_path, dst_path)\n"
+  tags:
+  - sample
+  - arithmatic
+  teardown: "\nf0 = './{{}}'.format(''.join(random.choices(string.ascii_uppercase,\
+    \ k=10)))\nf1 = './{{}}'.format(''.join(random.choices(string.ascii_uppercase,\
+    \ k=10)))\nopen(f0, 'w').write('asdf\\n123')\n\n#try:\nmoveAFile(f0, f1)\n#except\
+    \ Exception as e:\n#    print(\"Exception: {{}}\".format(e))\n\nprint(\"SRC:\"\
+    , f0)\nprint(\"DST:\", f1)\n\nif os.path.isfile(f1):\n    self.test_results.append('pass')\n\
+    else:\n    self.test_results.append('failed to copy file to dst')\n\nif not os.path.isfile(f0):\n\
+    \    self.test_results.append('pass')\nelse: \n    self.test_results.append('failed\
+    \ to rm src file')\n\nif ( self.test_results[0] == 'pass'\n        and open(f1,\
+    \ 'r').read() == 'asdf\\n123' ):\n    self.test_results.append('pass')\nelse:\n\
+    \    self.test_results.append('failed preserver file contents')\n\n#cleanup\n\
+    if os.path.isfile(f0):\n    os.remove(f0)\nif os.path.isfile(f1):\n    os.remove(f0)\n"
+  text: "Write a function called moveAFile that accepts a source file path and a dest\
+    \ file path and\nmoves the file to the destination.  \n\nE.g.\ndef moveAFile(src_path,\
+    \ dst_path):\n    #your code here\n    #return nothing\n"
+  unittests: skip
 os_basics_2:
   imports: ''
   posttest: ''
