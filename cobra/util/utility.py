@@ -27,7 +27,7 @@ def decode_message(b64coded_message, key=b'Sixteen byte key'):
     cipher = AES.new(key, AES.MODE_CFB, iv)
     return cipher.decrypt(message).decode('utf-8')
        
-def hash_results(token, results):
+def hash_results(results, token='0'):
     hash = sha1(token.encode('ascii'))
     for result in results:
         hash.update(str(result).encode('ascii'))

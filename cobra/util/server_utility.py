@@ -33,6 +33,15 @@ class User():
         self.userinfo.update(data)
         save_yml(self.filepath, self.userinfo)
         
+    def get_completed(self):
+        return self.userinfo['completed']
+        
+    def update_completed(self, item):
+        if item in self.userinfo['completed']:
+            pass
+        else:
+            self.update_user({'completed': self.get_completed() + [item]})
+        
     def create_new_session(self):
         sessionid = uuid4().hex
         salt = self.userinfo['ip']
@@ -52,13 +61,13 @@ class User():
 
     def login_user(self, password, ip):
         if self.userinfo['hash'] == hash_creds(password, self.userinfo['salt']):
-            self.update_user({'ip':ip})
+            self.update_user({'ip': ip})
             return self.create_new_session()
         else:
             return False
             
     def new_seed(self):
-        self.update_user({'seed':int(make_salt())})
+        self.update_user({'seed': int(make_salt())})
         return self.get_seed()
         
     def get_seed(self):

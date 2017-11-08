@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import requests
 import json
 from util.solution_checker import Solution
@@ -8,9 +6,12 @@ from ptpython.python_input import PythonInput, PythonCommandLineInterface
 from ptpython.repl import run_config
 from util.utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
 from getpass import getpass
+import colorama as cr
+
 
 class CobraClient():
     def __init__(self, server_socket):
+        cr.init()
         self.headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         self.username = None
         self.sessionid = None
@@ -30,6 +31,12 @@ class CobraClient():
     def get_question(self, lesson, question_label):
         req = requests.post('http://{0}:{1}/getquestion'.format(*self.server_socket),
                                     json={'lesson': lesson, 'question_label': question_label, 'username': self.username},
+                                    headers=self.headers)
+        return json.loads(req.text)
+        
+    def get_next_question(self):
+        req = requests.post('http://{0}:{1}/getnextquestion'.format(*self.server_socket),
+                                    json={'username': self.username},
                                     headers=self.headers)
         return json.loads(req.text)
 
@@ -59,34 +66,42 @@ class CobraClient():
         
     def solve_question(self, lesson, question_label):
         question_data = self.get_question(lesson, question_label)
-        print('{lesson}\n{title}\n{text}\n{signature}\n'.format(lesson=lesson, title=question_label, **question_data))
-        
-        eventloop = create_eventloop()
-        ptpython_input = PythonInput()
-        run_config(ptpython_input, config_file='util/ptpython_config.py')
-        try:
-            cli = PythonCommandLineInterface(python_input=ptpython_input, eventloop=eventloop)
-            solution = cli.run()
-        finally:
-            eventloop.close()
-        #try:
-        results = Solution(question_data, solution.text)
-        results.run_solution()
-        #except:
-        #    return False
+        run_question_loop = True
+        while run_question_loop:
+            print('======================================================================')
+            print('{lesson}\n{title}\n{text}\n{signature}\n'.format(lesson=lesson, title=question_label, **question_data))
+            
+            eventloop = create_eventloop()
+            ptpython_input = PythonInput()
+            run_config(ptpython_input, config_file='util/ptpython_config.py')
+            try:
+                cli = PythonCommandLineInterface(python_input=ptpython_input, eventloop=eventloop)
+                solution = cli.run()
+            finally:
+                eventloop.close()
+            try:
+                results = Solution(question_data, solution.text)
+                results.run_solution()
+            except Exception as e:
+                print('An exception occred while running your code: {}'.format(e))
+                continue
 
-        print('{:f}'.format(results.time_to_execute))
-        print(results.test_results)
-        print(results.linecount)
-        print(results.charcount)
-        print(results.violations)
-        print(results.violationcount)
-        print('======================================================================')
-        
-        req = requests.post('http://{0}:{1}/submitsolution'.format(*self.server_socket),
-                                    json={'username': self.username, 'lesson': lesson, 'question_label': question_label,
-                                          'solution': results.solution, 'results': results.test_results},
-                                    headers=self.headers)
+            print('{:f}'.format(results.time_to_execute))
+            print('Unit Test results: {}'.format(results.test_results))
+            print('Line count: {}'.format(results.linecount))
+            print('Character count: {}'.format(results.charcount))
+            print('Format style violations: {}'.format(results.violationcount))
+            print('Violation details:\n{}'.format(results.violations))
+            
+            req = requests.post('http://{0}:{1}/submitsolution'.format(*self.server_socket),
+                                        json={'username': self.username, 'lesson': lesson, 'question_label': question_label,
+                                              'solution': results.solution, 'results': results.test_results},
+                                        headers=self.headers)
+            if req.text == '"fail"':
+                input('Your solution did not match the server results. Please try again')
+                continue
+            else:
+                run_question_loop = False
         
     def run(self):
         cls()
@@ -99,8 +114,15 @@ class CobraClient():
             self.login(continue_session=True)
         else:
             pass
-        self.solve_question('3_files_paths', 'os_basics_1')
-        self.solve_question('2_basic_python', 'basic_math_1')
+        
+        run_main_loop = True
+        while run_main_loop:
+            lesson, question_label = self.get_next_question()
+            if lesson == None and question_label == None:
+                run_main_loop = False
+            else:
+                self.solve_question(lesson, question_label)
+            
         #self.solve_question('python_basics', 'basic_math_1')
         #self.solve_question('python_basics', 'basic_math_2')
         #self.solve_question('python_basics', 'basic_math_3')
