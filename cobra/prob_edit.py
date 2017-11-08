@@ -136,6 +136,9 @@ def testUpdateYmlFormat(probs_dict):
                   'imports', 'setup', 'teardown'):
             if k not in val:
                 val[k] = ''
+        for k in ('history', 'ratings', 'successes'):
+            if k in val:
+                val.pop(k)
         out[key] = val
     return out
     
@@ -145,8 +148,10 @@ def readProbsFile(problem_file):
     '''This is called for each file containing course problems.  Returns
     a list of problems (dicts)'''
     probs_dict = yaml.load(open(problem_file, 'r'))
-    probs_dict = testUpdateYmlFormat(probs_dict)
-
+    if not isinstance(probs_dict, dict):
+        probs_dict = None
+    else:
+        probs_dict = testUpdateYmlFormat(probs_dict)
     return probs_dict
 
 
@@ -437,7 +442,9 @@ def mainFunc():
     print(probs_files)
     probs_dicts = {}
     for p_file in sorted(probs_files):
-        probs_dicts[p_file] = readProbsFile(p_file)
+        tmp = readProbsFile(p_file)
+        if tmp != None:
+            probs_dicts[p_file] = tmp
 
     interactiveMenu(probs_dicts)
 

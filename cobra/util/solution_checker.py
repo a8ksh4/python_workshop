@@ -22,8 +22,8 @@ class Solution():
         else:
             data.update({'seed':0})
         self._setup = data['setup'].format(**data)
-        #self._teardown = data['teardown'].format(**data)
-        self._teardown = data['teardown']
+        self._teardown = data['teardown'].format(**data)
+        #self._teardown = data['teardown']
         self._pretest = data['pretest'].format(**data)
         self._posttest = data['posttest'].format(**data)
         self._unittests = data['unittests']
