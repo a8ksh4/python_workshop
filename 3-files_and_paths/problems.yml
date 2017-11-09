@@ -75,7 +75,7 @@ os_basics_2:
   pretest: ''
   setup: ''
   signature: cdAndWrite(dir_path, file_name, content) -> file_size
-  solution: "def cdAndWrite(dir_path, file_name, content):\n    import os\n    os.chdir(dir_path)\n\
+  solution: "\ndef cdAndWrite(dir_path, file_name, content):\n    import os\n    os.chdir(dir_path)\n\
     \    open(file_name, 'w').write(content)\n    return os.stat(file_name).st_size\n"
   tags:
   - sample
@@ -161,7 +161,7 @@ os_basics_5:
   pretest: ''
   setup: seed({seed})
   signature: realPath(path)
-  solution: "def realPath(dir_name):\n    return os.path.realpath(dir_name)\n"
+  solution: "\ndef realPath(dir_name):\n    return os.path.realpath(dir_name)\n"
   tags:
   - sample
   - arithmatic
@@ -192,7 +192,7 @@ os_basics_6:
   pretest: ''
   setup: seed({seed})
   signature: filePaths(dir_path, files_list) -> file_paths list
-  solution: "def filePaths(dir_path, files_list):\n    out = []\n    for fname in\
+  solution: "\ndef filePaths(dir_path, files_list):\n    out = []\n    for fname in\
     \ files_list:\n        fpath = os.path.realpath(os.path.join(dir_path, fname))\n\
     \        out.append(fpath)\n    return out\n"
   tags:
@@ -224,12 +224,14 @@ readwrite_1:
   pretest: ''
   setup: seed({seed})
   signature: readFileToString(path) -> string
-  solution: "def readFileToString(path):\n    with open(path, 'r') as f:\n       \
-    \ contents = f.read()\n    return contents\n"
+  solution: "\ndef readFileToString(path):\n    with open(path, 'r') as f:\n     \
+    \   contents = f.read()\n    return contents\n"
   tags:
   - sample
   - arithmatic
-  teardown: ''
+  teardown: '
+
+    '
   text: "Write a function called readFileToString that accepts a path, opens the path,\n\
     and returns the contents of the file as a string value. You can assume that \n\
     you'll have access to the file, it won't be binary data, you don't need to do\n\
@@ -255,8 +257,8 @@ readwrite_2:
   pretest: ''
   setup: seed({seed})
   signature: readLiensFromFile(path) -> list of strings
-  solution: "def readLinesFromFile(path):\n    with open(path, 'r') as f:\n      \
-    \  contents = f.readlines()\n    return contents\n"
+  solution: "\ndef readLinesFromFile(path):\n    with open(path, 'r') as f:\n    \
+    \    contents = f.readlines()\n    return contents\n"
   tags:
   - sample
   - arithmatic
@@ -284,7 +286,7 @@ readwrite_3:
   pretest: ''
   setup: seed({seed})
   signature: appendLineToFile(path, string)
-  solution: "def appendLineToFile(path, content):\n    with open(path, 'a') as f:\n\
+  solution: "\ndef appendLineToFile(path, content):\n    with open(path, 'a') as f:\n\
     \        f.write(content)\n"
   tags:
   - sample
@@ -314,8 +316,8 @@ readwrite_4:
   pretest: ''
   setup: seed({seed})
   signature: truncateWriteFile(path, content)
-  solution: "def truncateWriteFile(path, content):\n    with open(path, 'w') as f:\n\
-    \        f.write(content)\n"
+  solution: "\ndef truncateWriteFile(path, content):\n    with open(path, 'w') as\
+    \ f:\n        f.write(content)\n"
   tags:
   - sample
   - arithmatic
