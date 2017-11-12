@@ -9,236 +9,368 @@ import string
 def _randStr(str_len=10):
     return ''.join(random.choices(string.ascii_uppercase, k=str_len))
 
-def moveAFile(src_path, dst_path):
-    '''os_basics_1
-    Write a function called moveAFile that accepts a source file path and a
-    dest file path and moves the file to the destination.
+def addThem(a, b):
+    '''basic_math_1
+    Write a function called addThem that accepts two numbers and returns
+    their sum.
+    >>> 2 == addThem(1, 1)
+    True
+    >>> 1 == addThem(-5.1, 6.1)
+    True
+    '''
+    the_sum = a + b
+    return the_sum
 
-    >>> f0 = './{}'.format(_randStr())
-    >>> f1 = './{}'.format(_randStr())
-    >>> content = 'asdf'
-    >>> len(content) == open(f0, 'w').write(content)
+
+def remainder(a, b):
+    '''basic_math_2
+    Write a function called remainder that accepts two numbers, a and b,
+    and returns the remainder of a / b. 
+    >>> 4 == remainder(9, 5)
     True
-    >>> moveAFile(f0, f1)
-    >>> content == (os.path.isfile(f1) and open(f1, 'r').read())
+    '''
+    the_remainder = a % b
+    return the_remainder
+
+
+def toInt(a_float):
+    '''basic_math_3
+    Write a function called toInt that accepts an interger or floating point
+    number and returns it as an integer.  E.g. 3.3 becomes 3.
+    >>> 3 == toInt(3.9)
     True
-    >>> os.path.isfile(f1) and os.remove(f1)
-    >>> os.path.isfile(f0) and os.remove(f0)
+    '''
+    an_integer = int(a_float)
+    return an_integer
+
+
+def divideThemInt(a, b):
+    '''basic_math_4
+    Write a function called divideThemIOnt that performs integer division
+    on two given integers, a divided by b, and return the output as an integer.
+    >>> 2 = divideThemInt(4.4 / 2)
+    True
+    >>> 2 = divideThemInt(5 / 2)
+    True
+    '''
+    integer_result = int(a//b)
+    return integer_result
+
+
+def convertCToF(temp_in_c):
+    '''basic_math_5
+    Write a function called convertCToF that accepts a temperature in
+    centigrade and returns the equivelant temperature in Farenheight.
+
+    The equation for this is: (f = c/5 + 32/9)
+    >>> 20/5.0 + 32.0/9.0 == convertCToF(20)
+    True
+    >>> -10/5.0 + 32.0/9.0 == convertCToF(-10)
+    True
+    '''
+    temp_in_f = temp_in_c/5.0 + 32.0/9.0
+    return temp_in_f
+
+
+def getTruthiness(obj):
+    '''branching_1
+    Write a function called getTruthiness that is given an object and, if
+    that object evaluates to True, returns the string "tequilla", or otherwise
+    returns the string "margarita".
+    >>> getTruthiness([])
+    False
+    >>> getTruthiness((1,))
+    True
+    >>> getTruthiness(0)
     False
     '''
-    shutil.move(src_path, dst_path)
-    # return nothing
+    if obj:
+        resulting_word = "tequilla"
+    else:
+        resulting_word = "margarita"
+    return resulting_word
 
 
-def cdAndWrite(dir_path, file_name, content):
-    '''os_basics_2
-    Write a function called cdAndWrite that changes directory to the given
-    path, then edits a file and writes the given content to it. Return the
-    size of the file in bytes! 
+def twosTruthiness(obj0, obj1, obj2, obj3):
+    '''branching_2
+    Write a function called twosTruthiness that is given four boolean values.
+    if any two of the four are True, then return "twos".  If any three of them
+    are True, then return "threes", if less than two or four of them are True,
+    then return "foobar"
+    >>> twosTruthiness([], [], [], [])
+    'foobar'
+    >>> twosTruthiness([], [], [1,], [])
+    'foobar'
+    >>> twosTruthiness([], [], [1,], [1,])
+    'twos'
+    >>> twosTruthiness([1,], [], [1,], [1,])
+    'threes'
+    >>> twosTruthiness([1,], [1,], [1,], [1,])
+    'foobar'
+    '''
+    items = (obj0, obj1, obj2, obj3)
+    count = len([o for o in items if o == True])
+    if count == 2:
+        resulting_word = "twos"
+    elif count == 3:
+        resulting_word = "threes"
+    else:
+        resulting_word = "foobar"
+    return resulting_word
+
+
+def carmenFound(cities):
+    '''branching_3
+    Create a function called carmenFound that is given a dictionary with a
+    list of city names as keys, each associated with a boolean value
+    indicating whether or not Carmen is in the city.  Return the name of the
+    city Carmen is found in!
+
+    The cities dictionary will look like: {'city_a': False, 'city_b'...}
+
+    >>> 'atlanta' == carmenFound({'atlanta': True, 'memphis': False}
+    True
+    >>> 'memphis' == carmenFound({'atlanta': False, 'memphis': True}
+    True
+    '''
+    for city in cities:
+        if cities[city] == True:
+            return city
+
+
+def pocketContent(inventory):
+    '''dictionaries_1
+    Write a function called pocketContents that accepts an inventory
+    dictiionary and adds a "pocket" to the inventory that contains a 
+    ['seashell',].
+
+    For example the inventory might look like this:
+    {'gold': 400, 'pouch': ['flint', 'twine', 'gemston']}
+
+    And the returned inventory would look like:
+    {'gold': 400, 'pouch': ['flint', 'twine'], 'pocket': ['seashell']}
+    >>> i = {'gold': 90, 'po': ['fl', 'te', 'gon']}
+    >>> r = {'gold': 90, 'po': ['fl', 'te', 'gon'], 'pocket': ['seashell']}
+    >>> r == pocketContent(i)
+    True
+    '''
+    inventory['pocket'] = ['seashell']
+    return inventory
+
+
+def myPricesDict():
+    '''dictoinaries_2
+    Write a function called myPricesDict that puts the following items and
+    prices into a dictionary and returns it:
+        "bananna": 4,
+        "apple": 2,
+        "orange": 1.5,
+        "pear": 3
+    >>> answer = {'bananna': 4, 'apple': 2, 'orange': 1.5, 'pear': 3}
+    >>> answer == myPricesDict()
+    True
+    '''
+    prices_dict = {'bananna': 4, 'apple': 2, 'orange': 1.5, 'pear': 3}
+    return prices_dict
+
+
+def mergeToDict(keys, values):
+    '''dictoinaries_3
+    Write a function called mergeToDict that accepts a list of keys and a
+    corresponding list ov values and returns a dictionary that has each
+    key and value associated.
+
+    For example, if the keys were ('color', 'flavor', 'texture') and the values
+    were ('red', 'sour', and 'rough'), the dictionary would look like:
+    {'color': 'red', 'flavor': 'sour', 'texture': 'rough'}
+    >>> keys = [1, 2, 3, 4]
+    >>> vals = [5, 6, 7, 8]
+    >>> {1: 5, 2: 6, 3: 7, 4: 8} == mergeToDict(keys, vals)
+    True
+    '''
+    merged_dict = dict(zip(keys, vals))
+    return merged_dict
+
+
+def getDictKeys(a_dictionary):
+    '''dictionaries_4
+    Write a function called getDictKeys that is given a dictionary and returns
+    the keys in the dictionary as a list. 
+    >>> [1, 2, 3, 4] == getDictKeys({1: 5, 2: 6, 3: 7, 4: 8})
+    True
+    '''
+    keys = a_dictionary.keys()
+    return keys
+
+
+def checkKeyExists(a_dictionary, the_key):
+    '''dictionaries_5
+    Write a function called checkKeyExists that is given a dictionary and a
+    key and returns True if the key exists in the dictionary or False if it
+    does not.
+    >>> checkKeyExists({'a': 0, 'b': 1}, 'a')
+    True
+    >>> checkKeyExists({'a': 0, 'b': 1}, 'z')
+    False
+    >>> checkKeyExists({'a': 0, 'b': 1}, 1)
+    False
+    >>> checkKeyExists({'a': 0, 'b': 1}, 0)
+    False
+    '''
+    exists_bool = the_key in a_dictionary
+    return exists_bool
+
+
+def checkKeysExists(a_dictionary, some_keys):
+    '''dictionaries_6
+    Write a function called checkKeysExists that is given a dictionary and a
+    list of keys to look for in teh dictionary.  The function returns a new
+    dictionary containing each key in the provided list with an associated
+    boolean value indicating whether or not the key from the list was found
+    in the given dictionary.    
+
+    As an example, if given {'a': 0, 'b': 1} and ['a', 'c'] for keys, the
+    output would be {'a': True, 'c': False}.
+    >>> ans = {'z': True, 'c': False}
+    >>> ans == checkKeysExists({'z': 0, 'b': 1}, ('z', 'c'))
+    True
+    >>> {} == checkKeysExists({'z': 0, 'b': 1}, ())
+    True
+    '''
+    out = {}
+    for key in keys:
+        out[key] = key in the_dict
+    return out
+
+
+def printGivenKeys(a_dictionary, some_keys):
+    '''dictionaries_7
+    Write a function called printGivenKeys that is given a dictionary and a
+    list of keys to look for in teh dictionary.  For each item in the list,
+    the function prints the item and the value associated with it in the
+    provided dictionary.  If the item is not in the dictionary, None is used
+    for the value. The sequence of the list should be preserve when printing.
+
+    As an example, if given {'a': 0, 'b': 1} and ['c', 'a'] for keys, it would 
+    print:
+    c, None
+    a, 0
+    >>> printGivenKeys({'a': 0, 'b': 1}, ())
+    >>> printGivenKeys({'a': 0, 'b': 1}, ('z', 'y', 'a'))
+    z, None
+    y, None
+    a, 0
+    '''
+    for key in some_keys:
+        if key in a_dictionary:
+            print(key, a_dictionary[key])
+        else:
+            print(key, None)
+    #return nothing
+
+
+def sumAllItmes(some_nums):
+    '''lists_1
+    Write a function called sumAllItems that accepts a list or tuple of
+    numbers, summs them, and returns the sum.  If the list is empty, return
+    None, rather than zero. 
+    >>> 10.1 == sumAllItems([2, 4, 20, 4.1, -20])
+    True
+    >>> 0 == sumAllItems((-1, 1))
+    True
+    >>> None == sumAllItems(())
+    True
+    >>> None == sumAllItems([])
+    True
+    '''
+    if len(some_nums) == 0:
+        the_sum = None
+    else:
+        the_sum = sum(some_nums)
+    return the_sum
+
+
+def smallestOfList(some_nums, absolute_val=False):
+    '''lists_2
+    Write a function called smallestOfList that accepts a list or tuple of
+    numbers and returns the smallest number found in the list.
     
-    >>> f0 = './{}'.format(_randStr())
-    >>> d0 = './{}'.format(_randStr())
-    >>> os.mkdir(d0)
-    >>> cwd = os.path.realpath('.')
-    >>> content = 'asdf'
-    >>> len(content) == cdAndWrite(d0, f0, content)
+    However, if absolute value is set to True, it should return the number that
+    has the smallest absolute value.
+
+    If two numbers in the list both have an absolute value that is the
+    smallest and the same, the first one encounterd should be returned.
+    >>> -5 == smallestOfList((1, 2, 3, 4, -5))
     True
-    >>> './' + os.path.realpath('.').split('/')[-1] == d0
+    >>> 1 == smallestOfList((1, 2, 3, 4, -5), True)
     True
-    >>> content == (os.path.isfile(f0) and open(f0, 'r').read())
-    True
-    >>> os.path.isfile(f0) and os.remove(f0)
-    >>> os.chdir(cwd)
-    >>> os.path.isdir(d0) and os.rmdir(d0)
-    '''
-    os.chdir(dir_path)
-    open(file_name, 'w').write(content)
-    return os.stat(file_name).st_size
-
-
-def listDirFilter(dir_path, regex_filter):
-    '''os_basics_3
-    Write a function called listDirFilter that accepts a directory path and a
-    regex filter.  It retuns a list of files at the directory path whos names
-    match the given regex.  Return only the file names, not their complete
-    path. 
-
-    >>> e0 = _randStr()
-    >>> e1 = _randStr()
-    >>> files = {e0: set(), e1: set()}
-    >>> for e in (e0, e1):
-    ...     for n in range(5):
-    ...         f = "{}.{}".format(n, e)
-    ...         files[e].add(f)
-    ...         open(f, 'w').close()
-    >>> reg_filter = '(./){0,1}[0-9].' + e0
-    >>> files[e0] == set(listDirFilter('./', reg_filter))
-    True
-    >>> for f in list(files[e0]) + list(files[e1]):
-    ...     os.remove(f)
-    '''
-    files_list = []
-    for name in os.listdir(dir_path):
-        if re.match(regex_filter, name):
-            files_list.append(name) 
-    return files_list
-
-
-def createTmpDir(dir_name):
-    '''os_basics_4
-    Write a function called createTmpDir that accepts a directory name and
-    creates it in /tmp.  Set the permissions so that only the directory owner
-    can read/write/execute it. Return the complete path to the directory.  
-
-    Bonus: Can you do this in a way that avoids a race condition security
-    vulnerability? 
-
-    >>> d0 = ''.join(random.choices(string.ascii_uppercase, k=4))
-    >>> p0 = '/tmp/{}'.format(d0)
-    >>> out = createTmpDir(d0)
-    >>> out == p0
-    True
-    >>> os.path.isdir(p0) and os.rmdir(p0)
-    '''
-    #os.umask(0077)
-    dir_path = '/tmp/{}'.format(dir_name)
-    os.mkdir(dir_path)
-    return dir_path
-
-
-def realPath(dir_name):
-    '''os_basics_5
-    Write a function called realPath that accepts a path, checks if it has
-    any symlinks in it, and returns the actual path (wihout symlinks) to the
-    file or directory the original path pointed to. 
-
-    >>> cwd = os.path.realpath('.')
-    >>> cwd == realPath('.')
+    >>> 1 == smallestOfList((2, 1, -1, 3, 4, -5), True)
     True
     '''
-    real_path = os.path.realpath(dir_name)
-    return real_path
+    smallest = some_nums[0]
+    for num in some_nums:
+        if absolute_val and abs(num)<smallest:
+            smallest = num
+        elif not absolute_val and num<smallest:
+            smallest = num
+    return num
 
 
-def filePaths(dir_path, files_list):
-    '''os_basics_6
-    Write a function called filePaths that accepts a directory path and a
-    list of files. It returns a list of full paths to those files. 
-
-    For example, if dir_path is '/tmp/' and files list is ['./foobar.txt',
-    'diddun.txt'], the output would be ['/tmp/foobar.txt', '/tmp/diddun.txt'].
-
+def convTupleUnique(some_items):
+    '''sets_1
+    Write a function called convTupleUnique(list) that accepts a list of
+    objects and returns a tuple (not a list) with only the unique items from
+    the list.  Order of the returned list is not important.
+    >>> items = (1, 1, 2, 3, 4, 4, 5, 'a', 'a', 'b', [], [])
+    >>> res = convTupleUnique(items)
+    >>> sorted(res) == sorted(tuple(set(items)))
+    True
     '''
-    return files_paths
+    unique_tuple = tuple(set(some_items))
+    return unique_tuple
 
 
-def readFileToString(file_path):
-    '''readwrite_1
-    Write a function called readFileToString that accepts a path, opens the
-    path, and returns the contents of the file as a string value. You can
-    assume that you'll have access to the file, it won't be binary data, you
-    don't need to do anything to the given path to open it.  
-
-    >>> f0 = './{}'.format(_randStr())
-    >>> c0 = '{}\\n{}\\n'.format(_randStr(), _randStr())
-    >>> len(c0) == open(f0, 'w').write(c0)
+def convTupleUniqueOrder(some_items):
+    '''sets_2
+    Write a function called convTupleUniqueOrder(list) that accepts a list of
+    objects and returns a tuple (not a list) with only the unique items from
+    the list. Order of the returned tuple IS important. Order from the
+    original list should be preserved; the first time an object is observed
+    in the given list, it is in the returned tuple, and subsequent occurences
+    are ignored. 
+    >>> items = (1, 1, 2, 3, 4, 4, 5, 'a', 'a', 'b', [], [])
+    >>> res = convTupleUnique(items)
+    >>> (1, 2, 3, 4, 5, 'a', 'b', []) == res
     True
-    >>> c0 == readFileToString(f0)
-    True
-    >>> os.remove(f0)
     '''
-    with open(file_path, 'r') as f:
-        contents = f.read()
-    return contents
+    out = []
+    for item in some_items:
+        if item in out:
+            continue
+        out.append(item)
+    return tuple(out)
 
 
-def readLinesFromFile(file_path):
-    '''readwrite_2
-    Write a function called readLinesFromFiles that accepts a path, reads the
-    contents, and returns a list of stings for each line in the file. Do not
-    include newline characters in the returned strings.
-
-    >>> f0 = './{}'.format(_randStr())
-    >>> c0 = "{}\\n{}\\n".format(_randStr(), _randStr())
-    >>> len(c0) == open(f0, 'w').write(c0)
+def createSet(obj1=None, obj2=None, obj3=None, obj4=None, obj5=None):
+    '''sets_3
+    Write a function called createSet that accepts up to five objects, adds
+    them into a set, and returns a set of those objects. Hint: "set" is a
+    data type.  Do not add any of the objects fo the set if the object is
+    equal to the None object.
+    >>> set((1, 2, 3)) == createSet(obj2=1, obj3=2, obj4=3, obj5=3)
     True
-    >>> c0.split('\\n') == readLinesFromFile(f0)
+    >>> set((1, 2, 3)) == createSet(obj2=1, obj3=2, obj5=3)
     True
-    >>> os.remove(f0)
+    >>> set() == createSet(None, None, None)
+    True
+    >>> set() == createSet()
+    True
     '''
-    contents = []
-    with open(file_path, 'r') as f:
-        for line in f.read().split('\n'):
-            contents.append(line)
-    return contents
-
-
-def appendLineToFile(file_path, content):
-    '''readwrite_3
-    Write a function called appendLineToFile that accepts a path and a string,
-    and writes the string to the end of the file (without modifying the
-    existing contents in the file).
-
-    >>> f0 = './{}'.format(_randStr())
-    >>> c0 = "{}\\n{}\\n".format(_randStr(), _randStr())
-    >>> c1 = _randStr()
-    >>> len(c0) == open(f0, 'w').write(c0)
-    True
-    >>> appendLineToFile(f0, c1)
-    >>> c0 + c1 == open(f0, 'r').read()
-    True
-    >>> os.remove(f0)
-    '''
-    with open(file_path, 'a') as f:
-        f.write(content)
-    #return nothing
-
-
-def truncateWriteFile(file_path, content):
-    '''readwrite_4
-    Write a function called truncateWriteFile that accepts a path and a
-    string, and writes the string to the file, truncating (overwriting) any
-    existing content in the file. 
-
-    >>> f0 = './{}'.format(_randStr())
-    >>> c0 = "{}\\n{}\\n".format(_randStr(), _randStr())
-    >>> c1 = _randStr()
-    >>> len(c0) == open(f0, 'w').write(c0)
-    True
-    >>> truncateWriteFile(f0, c1)
-    >>> c1 == open(f0, 'r').read()
-    True
-    >>> os.remove(f0)
-    '''
-    with open(file_path, 'w') as f:
-        f.write(content)
-    #return nothing
-
-
-def rewriteInLower(source_path, dest_path):
-    '''readwrite_5
-    Write a function called rewriteInLower that accepts a source and
-    destination path.  It reads in the source path, converts the contents to
-    all lower case, and writes them to the destination path. 
-
-    >>> f0 = './{}'.format(_randStr())
-    >>> f1 = './{}'.format(_randStr())
-    >>> c0 = "!{}\\n{}13\\n! #@\\n".format(_randStr(), _randStr()).upper()
-    >>> len(c0) == open(f0, 'w').write(c0)
-    True
-    >>> rewriteInLower(f0, f1)
-    >>> os.path.isfile(f0) and os.path.isfile(f1)
-    True
-    >>> c0.lower() == open(f1, 'r').read()
-    True
-    >>> os.remove(f0)
-    >>> os.remove(f1)
-    '''
-    with open(source_path, 'r') as f:
-        contents = f.read().lower()
-    with open(dest_path, 'w') as f:
-        f.write(contents)
-    #return nothing
+    new_set = set()
+    for obj in (obj1, obj2, obj3, obj4, obj5):
+        if obj != None:
+            new_set.add(obj)
+    return new_set
 
 
 if __name__ == '__main__':
