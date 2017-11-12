@@ -6,7 +6,7 @@ import re
 import shutil
 import string
 
-def randString(str_len=10):
+def _randStr(str_len=10):
     return ''.join(random.choices(string.ascii_uppercase, k=str_len))
 
 def moveAFile(src_path, dst_path):
@@ -14,8 +14,8 @@ def moveAFile(src_path, dst_path):
     Write a function called moveAFile that accepts a source file path and a
     dest file path and moves the file to the destination.
 
-    >>> f0 = './{}'.format(randString())
-    >>> f1 = './{}'.format(randString())
+    >>> f0 = './{}'.format(_randStr())
+    >>> f1 = './{}'.format(_randStr())
     >>> content = 'asdf'
     >>> len(content) == open(f0, 'w').write(content)
     True
@@ -36,8 +36,8 @@ def cdAndWrite(dir_path, file_name, content):
     path, then edits a file and writes the given content to it. Return the
     size of the file in bytes! 
     
-    >>> f0 = './{}'.format(randString())
-    >>> d0 = './{}'.format(randString())
+    >>> f0 = './{}'.format(_randStr())
+    >>> d0 = './{}'.format(_randStr())
     >>> os.mkdir(d0)
     >>> cwd = os.path.realpath('.')
     >>> content = 'asdf'
@@ -63,8 +63,8 @@ def listDirFilter(dir_path, regex_filter):
     match the given regex.  Return only the file names, not their complete
     path. 
 
-    >>> e0 = randString()
-    >>> e1 = randString()
+    >>> e0 = _randStr()
+    >>> e1 = _randStr()
     >>> files = {e0: set(), e1: set()}
     >>> for e in (e0, e1):
     ...     for n in range(5):
@@ -139,8 +139,8 @@ def readFileToString(file_path):
     assume that you'll have access to the file, it won't be binary data, you
     don't need to do anything to the given path to open it.  
 
-    >>> f0 = './{}'.format(randString())
-    >>> c0 = '{}\\n{}\\n'.format(randString(), randString())
+    >>> f0 = './{}'.format(_randStr())
+    >>> c0 = '{}\\n{}\\n'.format(_randStr(), _randStr())
     >>> len(c0) == open(f0, 'w').write(c0)
     True
     >>> c0 == readFileToString(f0)
@@ -158,8 +158,8 @@ def readLinesFromFile(file_path):
     contents, and returns a list of stings for each line in the file. Do not
     include newline characters in the returned strings.
 
-    >>> f0 = './{}'.format(randString())
-    >>> c0 = "{}\\n{}\\n".format(randString(), randString())
+    >>> f0 = './{}'.format(_randStr())
+    >>> c0 = "{}\\n{}\\n".format(_randStr(), _randStr())
     >>> len(c0) == open(f0, 'w').write(c0)
     True
     >>> c0.split('\\n') == readLinesFromFile(f0)
@@ -179,9 +179,9 @@ def appendLineToFile(file_path, content):
     and writes the string to the end of the file (without modifying the
     existing contents in the file).
 
-    >>> f0 = './{}'.format(randString())
-    >>> c0 = "{}\\n{}\\n".format(randString(), randString())
-    >>> c1 = randString()
+    >>> f0 = './{}'.format(_randStr())
+    >>> c0 = "{}\\n{}\\n".format(_randStr(), _randStr())
+    >>> c1 = _randStr()
     >>> len(c0) == open(f0, 'w').write(c0)
     True
     >>> appendLineToFile(f0, c1)
@@ -200,9 +200,9 @@ def truncateWriteFile(file_path, content):
     string, and writes the string to the file, truncating (overwriting) any
     existing content in the file. 
 
-    >>> f0 = './{}'.format(randString())
-    >>> c0 = "{}\\n{}\\n".format(randString(), randString())
-    >>> c1 = randString()
+    >>> f0 = './{}'.format(_randStr())
+    >>> c0 = "{}\\n{}\\n".format(_randStr(), _randStr())
+    >>> c1 = _randStr()
     >>> len(c0) == open(f0, 'w').write(c0)
     True
     >>> truncateWriteFile(f0, c1)
@@ -221,9 +221,9 @@ def rewriteInLower(source_path, dest_path):
     destination path.  It reads in the source path, converts the contents to
     all lower case, and writes them to the destination path. 
 
-    >>> f0 = './{}'.format(randString())
-    >>> f1 = './{}'.format(randString())
-    >>> c0 = "!{}\\n{}13\\n! #@\\n".format(randString(), randString()).upper()
+    >>> f0 = './{}'.format(_randStr())
+    >>> f1 = './{}'.format(_randStr())
+    >>> c0 = "!{}\\n{}13\\n! #@\\n".format(_randStr(), _randStr()).upper()
     >>> len(c0) == open(f0, 'w').write(c0)
     True
     >>> rewriteInLower(f0, f1)
