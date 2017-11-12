@@ -13,7 +13,7 @@
 
 
 # sys module
-* getScriptLoc() -> (real_path, file_name)
+* getScriptLocName() -> (real_path, file_name)
   * 41
   * Use sys.argv to get and return the path to the program that's being run and the name of the program as a tuple.
 * checkDebugArg() -> bool
