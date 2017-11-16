@@ -1,0 +1,29 @@
+test:
+  imports: 'from time import time'
+  posttest: 'posttest = "posttest: " + str(time())'
+  pretest: 'pretest = "pretest: " + str(time())'
+  setup: 'setup = "setup: " + str(time())'
+  signature: test(a,b,c)
+  solution: 'def test(a, b, c): return 0'
+  tags: ''
+  teardown: 'print("{{setup}}  teardown: {{time}}".format(setup=setup, time=time()))'
+  text: "Write a function that takes 2 integers as parameter\nIt should return the\
+    \ sum of the 2 integers.\n\nE.g. \ndef addThem(num_a, num_b):\n    #your code\
+    \ here\n    return the_sum\n"
+  unittests:
+    test1:
+    - str("a")
+    - str("a")
+    - str("a")
+    test2:
+    - str("a")
+    - str("a")
+    - str("a")
+    test3:
+    - str("a")
+    - str("a")
+    - str("a")
+    test4_x4:
+    - str("a")
+    - str("a")
+    - str("a")
