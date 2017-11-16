@@ -23,7 +23,6 @@ class Solution():
             data.update({'seed':0})
         self._setup = data['setup'].format(**data)
         self._teardown = data['teardown'].format(**data)
-        #self._teardown = data['teardown']
         self._pretest = data['pretest'].format(**data)
         self._posttest = data['posttest'].format(**data)
         self._unittests = data['unittests']
@@ -58,7 +57,7 @@ class Solution():
         charcount = len(self.solution)
         return linecount, charcount    
         
-    def run_solution(self, debug=False):
+    def run_solution(self):
         '''Takes a text solution and yml data, and combines the two for execution'''    
         # we need to make imports global so they can be used inside of unit tests
         # we will also run our setup scripts here since we want those imports in the setup namespace        
@@ -68,8 +67,6 @@ class Solution():
         except Exception as e:
             print('{}: {}'.format(type(e).__name__, e))       
             exception_raised = True
-            if debug:
-                raise
             return None
         #scope.pop('__builtins__')
         #self._function = [value for value in scope.values() if value != '__builtins__'][0]
@@ -85,50 +82,36 @@ class Solution():
     def _run_tests(self):
         '''Runs the solution against all unit tests'''
         test_list = []
-        print("TEST LIST:", test_list)
         
         exec(self._imports)    
         exec(self._setup)        
         
         # first implement any text case multipliers, extends the total number of tests
-        if self._unittests != 'skip':
-            try:
-                for testname, values in sorted(self._unittests.items()):
-                    for _ in range(self._loopcount(testname)):
-                        test_list.append(values)    
-            except AttributeError:
-                pass
-       
-            print("TEST LIST:", test_list)
-            # run through all the unit tests if they exist
-            if test_list:
-                for test in test_list:
-                    exec(self._pretest) # pretest script
-                    arguments = []
-                    for argument in test:
-                        #print(type(argument))
-                        arguments += [eval(str(argument))]
-                        #arguments.append(argument)
-                    #arguments = map(lambda argument: eval(argument, locals), test) # converts the yml test case string into the solution arguments
-                    self._run_test(arguments)
-                    exec(self._posttest) # posttest script  
-            # if there are no unit tests we just run the function once
-            else:
+        try:
+            for testname, values in sorted(self._unittests.items()):
+                for _ in range(self._loopcount(testname)):
+                    test_list.append(values)    
+        except AttributeError:
+            pass
+        
+        # run through all the unit tests if they exist
+        if test_list:
+            for test in test_list:
                 exec(self._pretest) # pretest script
-                self._run_test([])
+                arguments = []
+                for argument in test:
+                    #print(type(argument))
+                    arguments += [eval(str(argument))]
+                    #arguments.append(argument)
+                #arguments = map(lambda argument: eval(argument, locals), test) # converts the yml test case string into the solution arguments
+                self._run_test(arguments)
                 exec(self._posttest) # posttest script  
-            exec(self._teardown)
+        # if there are no unit tests we just run the function once
         else:
-            print("MERGED CODE START")
-            dumb_hack = self._imports + '\n' + self.solution + '\n' + self._teardown
-            print(dumb_hack)
-            print("MERGED CODE END")
-            try:
-                exec(dumb_hack)
-            except Exception as e:
-                self.test_results = ['Exception: {}'.format(e), ]
-
-
+            exec(self._pretest) # pretest script
+            self._run_test([])
+            exec(self._posttest) # posttest script  
+        exec(self._teardown)
 
     def _loopcount(self, testname):
         '''Checks for _x in test names and returns the number following'''
