@@ -254,8 +254,6 @@ dictionaries_2:
   text: "Put the following items into a prices dictionary and return it:\n    \"bananna\"\
     : 4,\n    \"apple\": 2,\n    \"orange\": 1.5,\n    \"pear\": 3\n\nE.g:\ndef myPricesDict():\n\
     \    #your code here\n    return my_prices\n"
-  unittests:
-    test1: null
 dictionaries_3:
   imports: ''
   posttest: ''
@@ -312,7 +310,7 @@ dictionaries_5:
   pretest: ''
   setup: ''
   signature: checkKeyExists(dict, key) -> bool
-  solution: "def getDictKeys(a_dictionary):\n    return a_dictionary.keys()\n"
+  solution: "def getDictKeys(a_dictionary, key):\n    return a_dictionary.keys()\n"
   tags: ''
   teardown: ''
   text: "Write a function called checkKeyExists that is given a dictionary and a key\
@@ -321,25 +319,9 @@ dictionaries_5:
     \    return exists_bool\n"
   unittests:
     test1:
-    - a: 1
-      b: 2
-    - a
-    test2:
-    - a: 1
-      b: 2
-    - 1
-    test3:
-    - a: 1
-      b: 2
-    - b
-    test4:
-    - a: 1
-      b: 2
-    - c
-    test5:
-    - a: 1
-      b: 2
-    - '2'
+    - !!binary "eydhJzogMSwgJ2InOiAyfQ=="
+    - str('a')
+
 dictionaries_6:
   imports: ''
   posttest: ''
@@ -474,15 +456,8 @@ sets_1:
     \    # do stuff here\n    return unique_items\n"
   unittests:
     test1:
-    - asfd
-    - b
-    - b
-    - c
-    - b
-    - '1'
-    - '2'
-    - b
-    - a
+    - ['a','s','f','a']
+
 sets_2:
   imports: ''
   posttest: ''
@@ -502,15 +477,8 @@ sets_2:
     def convTupleUniqueOrder(some_items):\n    # do stuff here\n    return unique_items\n"
   unittests:
     test1:
-    - asfd
-    - b
-    - b
-    - c
-    - b
-    - '1'
-    - '2'
-    - b
-    - a
+    - list([1,1,1,1,12,2,2,2,3,4,2,5,26,2,2,1])
+
 sets_3:
   imports: ''
   posttest: ''
@@ -529,15 +497,12 @@ sets_3:
     \    # do stuff here\n    return new_set\n"
   unittests:
     test1:
-    - asfd
-    - b
-    - b
-    - c
-    - b
-    - '1'
-    - '2'
-    - b
-    - a
+    - str('asfd')
+    - str('b')
+    - str('b')
+    - str('c')
+    - str('b')
+
 sets_4:
   imports: ''
   posttest: ''
@@ -554,15 +519,8 @@ sets_4:
     \    # do stuff here\n    return new_tuple\n"
   unittests:
     test1:
-    - asfd
-    - b
-    - b
-    - c
-    - b
-    - '1'
-    - '2'
-    - b
-    - a
+    - list(['a','s','f','d'])
+    - str('a')
 strings_1:
   imports: ''
   posttest: ''
@@ -578,7 +536,6 @@ strings_1:
     \ shown included in the string:\n\n    'It's modulus, \"%\", not division, \"\
     /\", or escaping \"\\\"!'\n\nE.g:\ndef returnWithQuotes():\n    # do stuff here\n\
     \    return my_silly_string\n"
-  unittests: null
 strings_2:
   imports: ''
   posttest: ''
@@ -715,7 +672,7 @@ strings_7:
     test1:
     - str('one_two_three_four_five')
     test2:
-    - _______
+    - str('_______')
     test3:
     - str('1_2_3__five_six!\'\'_seven')
 strings_8:
@@ -758,4 +715,7 @@ strings_9:
     \ \n\nFor exmaple, if the word is \"pizza\", and the search_string is \"there\
     \ is pizza\non the plate\", then the index is 9.\n\nE.g:\ndef getIndexOf(word,\
     \ search_string):\n    # do stuff here\n    return index \n"
-  unittests: skip
+  unittests:
+    test1:
+        - str('hello world')
+        - str('world')
