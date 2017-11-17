@@ -25,7 +25,10 @@ class Solution():
         self._teardown = data['teardown'].format(**data)
         self._pretest = data['pretest'].format(**data)
         self._posttest = data['posttest'].format(**data)
-        self._unittests = data['unittests']
+        try:
+            self._unittests = data['unittests']
+        except KeyError:
+            self._unittests = {}
         self._function = None
         self.exception_raised = False
         self.test_results = []

@@ -40,7 +40,10 @@ def print_question_data(yml_file, question_label):
 {results}'''.format(h5=cr.Fore.RED + cr.Back.WHITE, results=check_solution(yml_file, question_label)))
 
 def print_unti_tests(yml_file, question_label):
-    unittests = load_yml(yml_file)[question_label]['unittests']
+    try:
+        unittests = load_yml(yml_file)[question_label]['unittests']
+    except KeyError:
+        unittests = {}
     for label, parameters in sorted(unittests.items()):
         print('{h3}{label}:{reset}'.format(
             h3=cr.Style.BRIGHT + cr.Fore.YELLOW + cr.Back.BLUE,
