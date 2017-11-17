@@ -7,28 +7,37 @@ from os import remove
     
 class Solution():
     def __init__(self, data, solution=None):
-        if solution:
-            self.solution = solution
-        else:
-            try:
-                self.solution = data['solution'].decode('utf-8')
-            except AttributeError:
-                self.solution = data['solution']
-        self._imports = data['imports']
-        # these .formats let meta information get passed into the setup and teardown scripts.        
-        # it's mostly so you can send a dynamic seed
         if 'seed' in data.keys():
             pass
         else:
             data.update({'seed':0})
-        self._setup = data['setup'].format(**data)
-        self._teardown = data['teardown'].format(**data)
-        self._pretest = data['pretest'].format(**data)
-        self._posttest = data['posttest'].format(**data)
+
+        for key, value in data.items():
+            try:
+                data[key] = value.decode('utf-8')
+            except AttributeError:
+                pass
+            try:
+                data[key] = value.format(**data)
+            except KeyError:
+                pass
+            except AttributeError:
+                pass            
+            
+        if solution:
+            self.solution = solution
+        else:
+            self.solution = data['solution']
+        self._imports = data['imports']
+        self._setup = data['setup']
+        self._teardown = data['teardown']
+        self._pretest = data['pretest']
+        self._posttest = data['posttest']
         try:
             self._unittests = data['unittests']
         except KeyError:
             self._unittests = {}
+            
         self._function = None
         self.exception_raised = False
         self.test_results = []

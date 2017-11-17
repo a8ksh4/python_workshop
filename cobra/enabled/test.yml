@@ -39,3 +39,13 @@ test2:
   text: "Write a function that takes 2 integers as parameter\nIt should return the\
     \ sum of the 2 integers.\n\nE.g. \ndef addThem(num_a, num_b):\n    #your code\
     \ here\n    return the_sum\n"
+myPricesDict:
+  imports: !!binary "aW1wb3J0IG9zDQppbXBvcnQgcmFuZG9tDQppbXBvcnQgcmUNCmltcG9ydCBzaHV0aWwNCmltcG9ydCBzdHJpbmcNCg0KZGVmIF9yYW5kU3RyKHN0cl9sZW49MTApOg0KICAgIHJldHVybiAnJy5qb2luKHJhbmRvbS5jaG9pY2VzKHN0cmluZy5hc2NpaV91cHBlcmNhc2UsIGs9c3RyX2xlbikpDQoNCg=="
+  posttest: !!binary "YW5zd2VyID0geydiYW5hbm5hJzogNCwgJ2FwcGxlJzogMiwgJ29yYW5nZSc6IDEuNSwgJ3BlYXInOiAzfQ0Kc2VsZi50ZXN0X3Jlc3VsdHMuYXBwZW5kKGFuc3dlciA9PSBzZWxmLl9mdW5jdGlvbigpKQ=="
+  pretest: ''
+  setup: ''
+  signature: !!binary "ZGVmIG15UHJpY2VzRGljdCgpOiAtPiAgICAgcmV0dXJuIHByaWNlc19kaWN0DQoNCg=="
+  solution: !!binary "ZGVmIG15UHJpY2VzRGljdCgpOg0KICAgIHByaWNlc19kaWN0ID0geydiYW5hbm5hJzogNCwgJ2FwcGxlJzogMiwgJ29yYW5nZSc6IDEuNSwgJ3BlYXInOiAzfQ0KICAgIHJldHVybiBwcmljZXNfZGljdA=="
+  tags: ''
+  teardown: ''
+  text: !!binary "V3JpdGUgYSBmdW5jdGlvbiBjYWxsZWQgbXlQcmljZXNEaWN0IHRoYXQgcHV0cyB0aGUgZm9sbG93aW5nIGl0ZW1zIGFuZCBwcmljZXMgaW50byBhIGRpY3Rpb25hcnkgYW5kIHJldHVybnMgaXQ6DQoiYmFuYW5uYSI6IDQsDQoiYXBwbGUiOiAyLA0KIm9yYW5nZSI6IDEuNSwNCiJwZWFyIjogMyc="

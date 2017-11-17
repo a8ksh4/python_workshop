@@ -10,6 +10,13 @@ def get_question_labels(yml_file):
     
 def print_question_data(yml_file, question_label):
     question = load_yml(yml_file)[question_label]
+    
+    for key, value in question.items():
+        try:
+            question[key] = value.decode('utf-8')
+        except AttributeError:
+            pass    
+            
     print('''\
 {h1}----==========={question_label}===========----
 {h2}imports (modules loaded before all tests)------------------------------------:
