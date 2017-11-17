@@ -2,6 +2,8 @@
 
 import sys
 import yaml
+import time
+from base64 import b64encode
 
 #def getFolders(base_path):
 #    for item in os.path.list(base_path):
@@ -39,6 +41,7 @@ def grokProb(pre, prob_lines):
     assert(len(prob_lines) > 8)
 
     # everything in pre gets executed in the library code block
+    func_name = prob_lines[0].split('def ')[1].split('(')[0]
     prob = {'imports': '\n'.join(pre) }
     prob['signature'] = '{} -> {}'.format(prob_lines[0], prob_lines[-1])
     #prob['name'] = definition.split()[1].split('(')[0]
@@ -88,14 +91,23 @@ def grokProb(pre, prob_lines):
 
     for loc in ('text', 'solution', 'posttest'):
         prob[loc] = '\n'.join(prob[loc])
-        prob[loc] = prob[loc].replace('{}', '{{}}')
+        #prob[loc] = prob[loc].replace('{}', '{{}}')
+        prob[loc] = prob[loc].replace('{', '{{')
+        prob[loc] = prob[loc].replace('}', '}}')
 
+    print("FUNC_NAME:", func_name)
+    print("FUNCTION:", 'self._function')
+    #time.sleep(10)
+    prob['posttest'] = prob['posttest'].replace(func_name, 'self._function')
     # add any missing fields needed for the yml format...
     prob['unittests'] = {}
     prob['tags'] = ''
     prob['setup'] = ''
     prob['pretest'] = ''
     prob['teardown'] = ''
+
+    #for loc in ('solution', 'posttest'):
+    #    prob[loc] = b64encode(prob[loc].encode('ascii'))
 
     return prob
 

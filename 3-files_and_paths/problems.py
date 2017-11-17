@@ -210,20 +210,20 @@ def checkKeyExists(a_dictionary, the_key):
     does not.
     >>> checkKeyExists({'a': 0, 'b': 1}, 'a')
     True
-    >>> checkKeyExists({'a': 0, 'b': 1}, 'z')
-    False
-    >>> checkKeyExists({'a': 0, 'b': 1}, 1)
-    False
-    >>> checkKeyExists({'a': 0, 'b': 1}, 0)
-    False
+    >>> not checkKeyExists({'a': 0, 'b': 1}, 'z')
+    True
+    >>> not checkKeyExists({'a': 0, 'b': 1}, 1)
+    True
+    >>> not checkKeyExists({'a': 0, 'b': 1}, 0)
+    True
     '''
     exists_bool = the_key in a_dictionary
     return exists_bool
 
 
-def checkKeysExists(a_dictionary, some_keys):
+def checkKeysExist(a_dictionary, some_keys):
     '''dictionaries_6
-    Write a function called checkKeysExists that is given a dictionary and a
+    Write a function called checkKeysExist that is given a dictionary and a
     list of keys to look for in teh dictionary.  The function returns a new
     dictionary containing each key in the provided list with an associated
     boolean value indicating whether or not the key from the list was found
@@ -232,11 +232,13 @@ def checkKeysExists(a_dictionary, some_keys):
     As an example, if given {'a': 0, 'b': 1} and ['a', 'c'] for keys, the
     output would be {'a': True, 'c': False}.
     >>> ans = {'z': True, 'c': False}
-    >>> ans == checkKeysExists({'z': 0, 'b': 1}, ('z', 'c'))
+    >>> ans.items() == checkKeysExist((('z',0), ('b', 1)), ('z', 'c')).items()
     True
-    >>> {} == checkKeysExists({'z': 0, 'b': 1}, ())
+    >>> (len(checkKeysExist({'z': 0, 'b': 1}, ['f',]).keys()) == 1)
     True
     '''
+    if isinstance(a_dictionary, tuple):
+        a_dictionary = dict(a_dictionary)
     out = {}
     for key in some_keys:
         out[key] = key in a_dictionary

@@ -2,9 +2,9 @@ addThem:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(2 == addThem(1, 1))
+  posttest: 'self.test_results.append(2 == self._function(1, 1))
 
-    self.test_results.append(1 == addThem(-5.1, 6.1))'
+    self.test_results.append(1 == self._function(-5.1, 6.1))'
   pretest: ''
   setup: ''
   signature: 'def addThem(a, b): ->     return the_sum'
@@ -20,11 +20,11 @@ carmenFound:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(''atlanta'' == carmenFound({''atlanta'': True,
-    ''memphis'': False}))
+  posttest: 'self.test_results.append(''atlanta'' == self._function({{''atlanta'':
+    True, ''memphis'': False}}))
 
-    self.test_results.append(''memphis'' == carmenFound({''atlanta'': False, ''memphis'':
-    True}))'
+    self.test_results.append(''memphis'' == self._function({{''atlanta'': False, ''memphis'':
+    True}}))'
   pretest: ''
   setup: ''
   signature: 'def carmenFound(cities): ->             return city'
@@ -40,26 +40,20 @@ carmenFound:
 
     city Carmen is found in!
 
-    The cities dictionary will look like: {''city_a'': False, ''city_b''...}'
+    The cities dictionary will look like: {{''city_a'': False, ''city_b''...}}'
   title: branching_3
   unittests: {}
 checkKeyExists:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(checkKeyExists({''a'': 0, ''b'': 1}, ''a''))
+  posttest: 'self.test_results.append(self._function({{''a'': 0, ''b'': 1}}, ''a''))
 
-    checkKeyExists({''a'': 0, ''b'': 1}, ''z'')
+    self.test_results.append(not self._function({{''a'': 0, ''b'': 1}}, ''z''))
 
-    False
+    self.test_results.append(not self._function({{''a'': 0, ''b'': 1}}, 1))
 
-    checkKeyExists({''a'': 0, ''b'': 1}, 1)
-
-    False
-
-    checkKeyExists({''a'': 0, ''b'': 1}, 0)
-
-    False'
+    self.test_results.append(not self._function({{''a'': 0, ''b'': 1}}, 0))'
   pretest: ''
   setup: ''
   signature: 'def checkKeyExists(a_dictionary, the_key): ->     return exists_bool'
@@ -74,24 +68,26 @@ checkKeyExists:
     does not.'
   title: dictionaries_5
   unittests: {}
-checkKeysExists:
+checkKeysExist:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'ans = {''z'': True, ''c'': False}
+  posttest: 'ans = {{''z'': True, ''c'': False}}
 
-    self.test_results.append(ans == checkKeysExists({''z'': 0, ''b'': 1}, (''z'',
-    ''c'')))
+    self.test_results.append(ans.items() == self._function(((''z'',0), (''b'', 1)),
+    (''z'', ''c'')).items())
 
-    self.test_results.append({{}} == checkKeysExists({''z'': 0, ''b'': 1}, ()))'
+    self.test_results.append((len(self._function({{''z'': 0, ''b'': 1}}, [''f'',]).keys())
+    == 1))'
   pretest: ''
   setup: ''
-  signature: 'def checkKeysExists(a_dictionary, some_keys): ->     return out'
-  solution: "def checkKeysExists(a_dictionary, some_keys):\n    out = {{}}\n    for\
+  signature: 'def checkKeysExist(a_dictionary, some_keys): ->     return out'
+  solution: "def checkKeysExist(a_dictionary, some_keys):\n    if isinstance(a_dictionary,\
+    \ tuple):\n        a_dictionary = dict(a_dictionary)\n    out = {{}}\n    for\
     \ key in some_keys:\n        out[key] = key in a_dictionary\n    return out"
   tags: ''
   teardown: ''
-  text: 'Write a function called checkKeysExists that is given a dictionary and a
+  text: 'Write a function called checkKeysExist that is given a dictionary and a
 
     list of keys to look for in teh dictionary.  The function returns a new
 
@@ -101,9 +97,9 @@ checkKeysExists:
 
     in the given dictionary.
 
-    As an example, if given {''a'': 0, ''b'': 1} and [''a'', ''c''] for keys, the
+    As an example, if given {{''a'': 0, ''b'': 1}} and [''a'', ''c''] for keys, the
 
-    output would be {''a'': True, ''c'': False}.'
+    output would be {{''a'': True, ''c'': False}}.'
   title: dictionaries_6
   unittests: {}
 convTupleUnique:
@@ -112,7 +108,7 @@ convTupleUnique:
     \ k=str_len))\n"
   posttest: 'items = (9, 1, 1, 9, 2, 3, 4, 4, 5)
 
-    res = convTupleUnique(items)
+    res = self._function(items)
 
     self.test_results.append(sorted(res) == sorted(set(items)))'
   pretest: ''
@@ -163,9 +159,9 @@ convertCToF:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(20/5.0 + 32.0/9.0 == convertCToF(20))
+  posttest: 'self.test_results.append(20/5.0 + 32.0/9.0 == self._function(20))
 
-    self.test_results.append(-10/5.0 + 32.0/9.0 == convertCToF(-10))'
+    self.test_results.append(-10/5.0 + 32.0/9.0 == self._function(-10))'
   pretest: ''
   setup: ''
   signature: 'def convertCToF(temp_in_c): ->     return temp_in_f'
@@ -184,14 +180,14 @@ createSet:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(set((1, 2, 3)) == createSet(obj2=1, obj3=2,
+  posttest: 'self.test_results.append(set((1, 2, 3)) == self._function(obj2=1, obj3=2,
     obj4=3, obj5=3))
 
-    self.test_results.append(set((1, 2, 3)) == createSet(obj2=1, obj3=2, obj5=3))
+    self.test_results.append(set((1, 2, 3)) == self._function(obj2=1, obj3=2, obj5=3))
 
-    self.test_results.append(set() == createSet(None, None, None))
+    self.test_results.append(set() == self._function(None, None, None))
 
-    self.test_results.append(set() == createSet())'
+    self.test_results.append(set() == self._function())'
   pretest: ''
   setup: ''
   signature: 'def createSet(obj1=None, obj2=None, obj3=None, obj4=None, obj5=None):
@@ -214,9 +210,9 @@ divideThemInt:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(2 == divideThemInt(4.4, 2))
+  posttest: 'self.test_results.append(2 == self._function(4.4, 2))
 
-    self.test_results.append(2 == divideThemInt(5, 2))'
+    self.test_results.append(2 == self._function(5, 2))'
   pretest: ''
   setup: ''
   signature: 'def divideThemInt(a, b): ->     return integer_result'
@@ -235,15 +231,15 @@ firstHalfLower:
     \ k=str_len))\n"
   posttest: 'foo = "asdF12345"
 
-    out = firstHalfLower(foo)
+    out = self._function(foo)
 
     self.test_results.append(foo[:len(foo)//2].lower() == out)
 
-    self.test_results.append("" == firstHalfLower("A"))
+    self.test_results.append("" == self._function("A"))
 
     foo = "aS1dF2"
 
-    out = firstHalfLower(foo)
+    out = self._function(foo)
 
     self.test_results.append(foo[:len(foo)//2].lower() == out)'
   pretest: ''
@@ -266,8 +262,8 @@ getDictKeys:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append([1, 2, 3, 4] == getDictKeys({1: 5, 2: 6, 3:
-    7, 4: 8}))'
+  posttest: 'self.test_results.append([1, 2, 3, 4] == self._function({{1: 5, 2: 6,
+    3: 7, 4: 8}}))'
   pretest: ''
   setup: ''
   signature: 'def getDictKeys(a_dictionary): ->     return keys'
@@ -284,10 +280,11 @@ getIndexOf:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(9 == getIndexOf(''pizza'', ''there is pizza
+  posttest: 'self.test_results.append(9 == self._function(''pizza'', ''there is pizza
     on the plate''))
 
-    self.test_results.append(-1 == getIndexOf(''PIZZA'', ''there is pizza on the plate''))'
+    self.test_results.append(-1 == self._function(''PIZZA'', ''there is pizza on the
+    plate''))'
   pretest: ''
   setup: ''
   signature: 'def getIndexOf(word, search_string): ->         return -1'
@@ -312,11 +309,11 @@ getTruthiness:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append("margarita" == getTruthiness([]))
+  posttest: 'self.test_results.append("margarita" == self._function([]))
 
-    self.test_results.append("tequilla" == getTruthiness((1,)))
+    self.test_results.append("tequilla" == self._function((1,)))
 
-    self.test_results.append("margarita" == getTruthiness(0))'
+    self.test_results.append("margarita" == self._function(0))'
   pretest: ''
   setup: ''
   signature: 'def getTruthiness(obj): ->     return resulting_word'
@@ -335,11 +332,11 @@ justEvenChars:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(''zBD '' == justEvenChars(''zABCDS ''))
+  posttest: 'self.test_results.append(''zBD '' == self._function(''zABCDS ''))
 
-    self.test_results.append(''13579'' == justEvenChars(''123456789''))
+    self.test_results.append(''13579'' == self._function(''123456789''))
 
-    self.test_results.append('' o!Ti sco '' == justEvenChars('' ro3! T2is is cool
+    self.test_results.append('' o!Ti sco '' == self._function('' ro3! T2is is cool
     ''))'
   pretest: ''
   setup: ''
@@ -361,11 +358,11 @@ listToCSV:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'out = listToCSV([''one'', '' '', ''two'', '''', ''three'', ''''])
+  posttest: 'out = self._function([''one'', '' '', ''two'', '''', ''three'', ''''])
 
     self.test_results.append(out == "one, ,two,,three,")
 
-    out = listToCSV([''1'', '','', '':'', ''fiftyfive''])
+    out = self._function([''1'', '','', '':'', ''fiftyfive''])
 
     self.test_results.append(out == ''1,,,:,fiftyfive'')'
   pretest: ''
@@ -390,7 +387,7 @@ mergeToDict:
 
     vals = [5, 6, 7, 8]
 
-    self.test_results.append({1: 5, 2: 6, 3: 7, 4: 8} == mergeToDict(keys, vals))'
+    self.test_results.append({{1: 5, 2: 6, 3: 7, 4: 8}} == self._function(keys, vals))'
   pretest: ''
   setup: ''
   signature: 'def mergeToDict(keys, values): ->     return merged_dict'
@@ -408,21 +405,21 @@ mergeToDict:
 
     were (''red'', ''sour'', and ''rough''), the dictionary would look like:
 
-    {''color'': ''red'', ''flavor'': ''sour'', ''texture'': ''rough''}'
+    {{''color'': ''red'', ''flavor'': ''sour'', ''texture'': ''rough''}}'
   title: dictoinaries_3
   unittests: {}
 myPricesDict:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'answer = {''bananna'': 4, ''apple'': 2, ''orange'': 1.5, ''pear'': 3}
+  posttest: 'answer = {{''bananna'': 4, ''apple'': 2, ''orange'': 1.5, ''pear'': 3}}
 
-    self.test_results.append(answer == myPricesDict())'
+    self.test_results.append(answer == self._function())'
   pretest: ''
   setup: ''
   signature: 'def myPricesDict(): ->     return prices_dict'
-  solution: "def myPricesDict():\n    prices_dict = {'bananna': 4, 'apple': 2, 'orange':\
-    \ 1.5, 'pear': 3}\n    return prices_dict"
+  solution: "def myPricesDict():\n    prices_dict = {{'bananna': 4, 'apple': 2, 'orange':\
+    \ 1.5, 'pear': 3}}\n    return prices_dict"
   tags: ''
   teardown: ''
   text: 'Write a function called myPricesDict that puts the following items and
@@ -442,11 +439,11 @@ pocketContent:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'i = {''gold'': 90, ''po'': [''fl'', ''te'', ''gon'']}
+  posttest: 'i = {{''gold'': 90, ''po'': [''fl'', ''te'', ''gon'']}}
 
-    r = {''gold'': 90, ''po'': [''fl'', ''te'', ''gon''], ''pocket'': [''seashell'']}
+    r = {{''gold'': 90, ''po'': [''fl'', ''te'', ''gon''], ''pocket'': [''seashell'']}}
 
-    self.test_results.append(r == pocketContent(i))'
+    self.test_results.append(r == self._function(i))'
   pretest: ''
   setup: ''
   signature: 'def pocketContent(inventory): ->     return inventory'
@@ -462,20 +459,20 @@ pocketContent:
 
     For example the inventory might look like this:
 
-    {''gold'': 400, ''pouch'': [''flint'', ''twine'', ''gemston'']}
+    {{''gold'': 400, ''pouch'': [''flint'', ''twine'', ''gemston'']}}
 
     And the returned inventory would look like:
 
-    {''gold'': 400, ''pouch'': [''flint'', ''twine''], ''pocket'': [''seashell'']}'
+    {{''gold'': 400, ''pouch'': [''flint'', ''twine''], ''pocket'': [''seashell'']}}'
   title: dictionaries_1
   unittests: {}
 printGivenKeys:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'printGivenKeys({''a'': 0, ''b'': 1}, ())
+  posttest: 'self._function({{''a'': 0, ''b'': 1}}, ())
 
-    printGivenKeys({''a'': 0, ''b'': 1}, (''z'', ''y'', ''a''))
+    self._function({{''a'': 0, ''b'': 1}}, (''z'', ''y'', ''a''))
 
     z, None
 
@@ -501,7 +498,8 @@ printGivenKeys:
 
     for the value. The sequence of the list should be preserve when printing.
 
-    As an example, if given {''a'': 0, ''b'': 1} and [''c'', ''a''] for keys, it would
+    As an example, if given {{''a'': 0, ''b'': 1}} and [''c'', ''a''] for keys, it
+    would
 
     print:
 
@@ -514,7 +512,7 @@ remainder:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: self.test_results.append(4 == remainder(9, 5))
+  posttest: self.test_results.append(4 == self._function(9, 5))
   pretest: ''
   setup: ''
   signature: 'def remainder(a, b): ->     return the_remainder'
@@ -532,11 +530,11 @@ removeFromSet:
     \ k=str_len))\n"
   posttest: 'foo = (1, 2, 3, 4, 5, 6)
 
-    new = removeFromSet(set(foo), 6)
+    new = self._function(set(foo), 6)
 
     self.test_results.append(sorted((1, 2, 3, 4, 5)) == sorted(new))
 
-    new = removeFromSet(set(foo), 7)
+    new = self._function(set(foo), 7)
 
     self.test_results.append(sorted(new) == sorted(foo))'
   pretest: ''
@@ -559,7 +557,7 @@ returnWithQuotes:
     \ k=str_len))\n"
   posttest: 'foo = """''It''s modulus, "%", not division, "/", or escaping "\"!''"""
 
-    out = returnWithQuotes()
+    out = self._function()
 
     self.test_results.append(foo == out)'
   pretest: ''
@@ -582,15 +580,15 @@ reverseOrder:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'out = reverseOrder(''ro3! T2is is cool'')
+  posttest: 'out = self._function(''ro3! T2is is cool'')
 
     self.test_results.append(''cool is T2is ro3!'' == out)
 
-    out = reverseOrder('' ABCDS'')
+    out = self._function('' ABCDS'')
 
     self.test_results.append(''ABCDS'' == out)
 
-    out = reverseOrder(''123456789 asdf ASDF 4 _ 123 nine? \"\"'')
+    out = self._function(''123456789 asdf ASDF 4 _ 123 nine? \"\"'')
 
     self.test_results.append(''\"\" nine? 123 _ 4 ASDF asdf 123456789'' == out)'
   pretest: ''
@@ -618,13 +616,13 @@ smallestOfList:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(-5 == smallestOfList((1, 2, 3, 4, -5)))
+  posttest: 'self.test_results.append(-5 == self._function((1, 2, 3, 4, -5)))
 
-    self.test_results.append(1 == smallestOfList((1, 2, 3, 4, -5), True))
+    self.test_results.append(1 == self._function((1, 2, 3, 4, -5), True))
 
-    self.test_results.append(1 == smallestOfList((2, 1, -1, 3, 4, -5), True))
+    self.test_results.append(1 == self._function((2, 1, -1, 3, 4, -5), True))
 
-    self.test_results.append(1 == smallestOfList((-2, 1, -1, 3, 4, -5), True))'
+    self.test_results.append(1 == self._function((-2, 1, -1, 3, 4, -5), True))'
   pretest: ''
   setup: ''
   signature: 'def smallestOfList(some_nums, absolute_val=False): ->     return smallest'
@@ -654,23 +652,23 @@ strUpper:
     \ k=str_len))\n"
   posttest: 'foo = "   asfd"
 
-    self.test_results.append(foo.upper().strip() == strUpper(foo))
+    self.test_results.append(foo.upper().strip() == self._function(foo))
 
     foo = "123%asf d "
 
-    self.test_results.append(foo.upper().strip() == strUpper(foo))
+    self.test_results.append(foo.upper().strip() == self._function(foo))
 
     foo = "ASDF"
 
-    self.test_results.append(foo == strUpper(foo))
+    self.test_results.append(foo == self._function(foo))
 
     foo = ""
 
-    self.test_results.append(foo == strUpper(foo))
+    self.test_results.append(foo == self._function(foo))
 
     foo = "   \\n"
 
-    self.test_results.append(foo.strip() == strUpper(foo))'
+    self.test_results.append(foo.strip() == self._function(foo))'
   pretest: ''
   setup: ''
   signature: 'def strUpper(a_string): ->     return upper_stripped'
@@ -689,14 +687,14 @@ sumAllItems:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'self.test_results.append(0.0000001 > 10.1 - sumAllItems([2, 4, 20, 4.1,
-    -20]))
+  posttest: 'self.test_results.append(0.0000001 > 10.1 - self._function([2, 4, 20,
+    4.1, -20]))
 
-    self.test_results.append(0 == sumAllItems((-1, 1)))
+    self.test_results.append(0 == self._function((-1, 1)))
 
-    self.test_results.append(None == sumAllItems(()))
+    self.test_results.append(None == self._function(()))
 
-    self.test_results.append(None == sumAllItems([]))'
+    self.test_results.append(None == self._function([]))'
   pretest: ''
   setup: ''
   signature: 'def sumAllItems(some_nums): ->     return the_sum'
@@ -715,7 +713,7 @@ toInt:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: self.test_results.append(3 == toInt(3.9))
+  posttest: self.test_results.append(3 == self._function(3.9))
   pretest: ''
   setup: ''
   signature: 'def toInt(a_float): ->     return an_integer'
@@ -731,23 +729,23 @@ twosTruthiness:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'twosTruthiness([], [], [], [])
+  posttest: 'self._function([], [], [], [])
 
     ''foobar''
 
-    twosTruthiness([], [], [1,], [])
+    self._function([], [], [1,], [])
 
     ''foobar''
 
-    twosTruthiness([], [], [1,], [1,])
+    self._function([], [], [1,], [1,])
 
     ''twos''
 
-    twosTruthiness([1,], [], [1,], [1,])
+    self._function([1,], [], [1,], [1,])
 
     ''threes''
 
-    twosTruthiness([1,], [1,], [1,], [1,])
+    self._function([1,], [1,], [1,], [1,])
 
     ''foobar'''
   pretest: ''
@@ -772,15 +770,15 @@ undToShortCSV:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
     \ k=str_len))\n"
-  posttest: 'out = undToShortCSV(''one_two_three_four_five'')
+  posttest: 'out = self._function(''one_two_three_four_five'')
 
     self.test_results.append(out == ''one,two,three'')
 
-    out = undToShortCSV(''one_two_ '')
+    out = self._function(''one_two_ '')
 
     self.test_results.append(out == ''one,two, '')
 
-    out = undToShortCSV('' _ __ _ '')
+    out = self._function('' _ __ _ '')
 
     self.test_results.append(out == '' , ,'')'
   pretest: ''
