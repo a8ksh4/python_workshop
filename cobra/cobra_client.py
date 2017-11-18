@@ -93,15 +93,28 @@ class CobraClient():
             print('Format style violations: {}'.format(results.violationcount))
             print('Violation details:\n{}'.format(results.violations))
             
+            stats = {   'runtime': results.time_to_execute,
+                        'linecount': results.linecount, 
+                        'charcount': results.charcount, 
+                        'violations': results.violationcount}
+            
             req = requests.post('http://{0}:{1}/submitsolution'.format(*self.server_socket),
                                         json={'username': self.username, 'lesson': lesson, 'question_label': question_label,
-                                              'solution': results.solution, 'results': results.test_results},
+                                              'solution': results.solution, 'results': results.test_results, 'stats': stats},
                                         headers=self.headers)
             if req.text == '"fail"':
                 input('Your solution did not match the server results. Please try again')
                 continue
             else:
                 run_question_loop = False
+                req = requests.post('http://{0}:{1}/gethistory'.format(*self.server_socket),
+                                        json={'username': self.username, 'lesson': lesson, 'question_label': question_label},
+                                        headers=self.headers)
+                history = json.loads(req.text)
+                self.print_history(history)
+    
+    def print_history(self, history):
+        print(history)
         
     def run(self):
         cls()

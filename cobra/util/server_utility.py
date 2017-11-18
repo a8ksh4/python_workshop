@@ -41,7 +41,13 @@ class User():
             pass
         else:
             self.update_user({'completed': self.get_completed() + [item]})
-        
+    
+    def check_completed(self, item):
+        if item in self.userinfo['completed']:
+            return True
+        else:
+            return False
+    
     def create_new_session(self):
         sessionid = uuid4().hex
         salt = self.userinfo['ip']
@@ -97,6 +103,22 @@ def make_salt():
    
 def hash_creds(password, salt):
     return sha256(password.encode('ascii') + salt.encode('ascii')).hexdigest()
-
     
+def update_history(item, user, solution, stats):
+    print(item)
+    yml_file = 'history/{0}__{1}.yml'.format(*item)
+    if isfile(yml_file):
+        history_data = load_yml(yml_file)
+    else:
+        history_data = {}
+    print(history_data)
+    history_data[user] = {'solution': solution, 'stats': stats}
+    save_yml(yml_file, history_data)
     
+def get_history(item):
+    yml_file = 'history/{0}__{1}.yml'.format(*item)
+    if isfile(yml_file):
+        history_data = load_yml(yml_file)
+        return history_data
+    else:
+        return False
