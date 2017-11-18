@@ -5,9 +5,17 @@ import random
 import re
 import shutil
 import string
+import sys
 
 def _randStr(str_len=10):
+    #import random, string
     return ''.join(random.choices(string.ascii_uppercase, k=str_len))
+
+def _stdRdr(func, args, path):
+    orig = sys.stdout
+    with open(path, 'w') as sys.stdout:
+        func(*args)
+    sys.stdout = orig
 
 def addThem(a, b):
     '''basic_math_1
@@ -257,11 +265,14 @@ def printGivenKeys(a_dictionary, some_keys):
     print:
     c, None
     a, 0
-    >>> printGivenKeys({'a': 0, 'b': 1}, ())
-    >>> printGivenKeys({'a': 0, 'b': 1}, ('z', 'y', 'a'))
-    z, None
-    y, None
-    a, 0
+    >>> p0 = './{}'.format(_randStr())
+    >>> _stdRdr(printGivenKeys, ({'a': 0, 'b': 1}, ()), p0)
+    >>> '' == open(p0, 'r').read()
+    True
+    >>> _stdRdr(printGivenKeys, ({'a': 0, 'b': 1}, ('z', 'y','a')), p0)
+    >>> 'z, None\\ny, None\\na, 0\\n' == open(p0, 'r').read()
+    True
+    >>> os.remove(p0)
     '''
     for key in some_keys:
         if key in a_dictionary:
@@ -345,7 +356,7 @@ def convTupleUniqueOrder(some_items):
     in the given list, it is in the returned tuple, and subsequent occurences
     are ignored. 
     >>> items = (1, 1, 2, 3, 4, 4, 5) 
-    >>> res = convTupleUnique(items)
+    >>> res = convTupleUniqueOrder(items)
     >>> (1, 2, 3, 4, 5) == res
     True
     '''

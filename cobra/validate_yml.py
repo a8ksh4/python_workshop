@@ -7,8 +7,8 @@ def validate(yml):
 if __name__ == '__main__':
     #files = ['enabled/2_basic_python.yml', 'enabled/3_files_paths.yml']
     #files = ['enabled/test.yml']
-    #files = ['enabled/3_problems.yml']
+    files = ['enabled/2_problems.yml']
     #files = ['enabled/2_basic_python.yml']
-    files = ['enabled/test.yml']
+    #files = ['enabled/test.yml']
     for file in files:
         validate(file)

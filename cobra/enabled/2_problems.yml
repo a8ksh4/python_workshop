@@ -1,7 +1,9 @@
 addThem:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(2 == self._function(1, 1))
 
     self.test_results.append(1 == self._function(-5.1, 6.1))'
@@ -17,9 +19,11 @@ addThem:
   title: basic_math_1
   unittests: {}
 carmenFound:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(''atlanta'' == self._function({{''atlanta'':
     True, ''memphis'': False}}))
 
@@ -44,9 +48,11 @@ carmenFound:
   title: branching_3
   unittests: {}
 checkKeyExists:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(self._function({{''a'': 0, ''b'': 1}}, ''a''))
 
     self.test_results.append(not self._function({{''a'': 0, ''b'': 1}}, ''z''))
@@ -69,9 +75,11 @@ checkKeyExists:
   title: dictionaries_5
   unittests: {}
 checkKeysExist:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'ans = {{''z'': True, ''c'': False}}
 
     self.test_results.append(ans.items() == self._function(((''z'',0), (''b'', 1)),
@@ -103,9 +111,11 @@ checkKeysExist:
   title: dictionaries_6
   unittests: {}
 convTupleUnique:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'items = (9, 1, 1, 9, 2, 3, 4, 4, 5)
 
     res = self._function(items)
@@ -126,12 +136,14 @@ convTupleUnique:
   title: sets_1
   unittests: {}
 convTupleUniqueOrder:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'items = (1, 1, 2, 3, 4, 4, 5)
 
-    res = convTupleUnique(items)
+    res = self._function(items)
 
     self.test_results.append((1, 2, 3, 4, 5) == res)'
   pretest: ''
@@ -156,9 +168,11 @@ convTupleUniqueOrder:
   title: sets_2
   unittests: {}
 convertCToF:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(20/5.0 + 32.0/9.0 == self._function(20))
 
     self.test_results.append(-10/5.0 + 32.0/9.0 == self._function(-10))'
@@ -177,9 +191,11 @@ convertCToF:
   title: basic_math_5
   unittests: {}
 createSet:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(set((1, 2, 3)) == self._function(obj2=1, obj3=2,
     obj4=3, obj5=3))
 
@@ -207,9 +223,11 @@ createSet:
   title: sets_3
   unittests: {}
 divideThemInt:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(2 == self._function(4.4, 2))
 
     self.test_results.append(2 == self._function(5, 2))'
@@ -226,9 +244,11 @@ divideThemInt:
   title: basic_math_4
   unittests: {}
 firstHalfLower:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'foo = "asdF12345"
 
     out = self._function(foo)
@@ -259,9 +279,11 @@ firstHalfLower:
   title: strings_3
   unittests: {}
 getDictKeys:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append([1, 2, 3, 4] == self._function({{1: 5, 2: 6,
     3: 7, 4: 8}}))'
   pretest: ''
@@ -277,9 +299,11 @@ getDictKeys:
   title: dictionaries_4
   unittests: {}
 getIndexOf:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(9 == self._function(''pizza'', ''there is pizza
     on the plate''))
 
@@ -306,9 +330,11 @@ getIndexOf:
   title: strings_8
   unittests: {}
 getTruthiness:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append("margarita" == self._function([]))
 
     self.test_results.append("tequilla" == self._function((1,)))
@@ -329,9 +355,11 @@ getTruthiness:
   title: branching_1
   unittests: {}
 justEvenChars:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(''zBD '' == self._function(''zABCDS ''))
 
     self.test_results.append(''13579'' == self._function(''123456789''))
@@ -355,9 +383,11 @@ justEvenChars:
   title: strings_4
   unittests: {}
 listToCSV:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'out = self._function([''one'', '' '', ''two'', '''', ''three'', ''''])
 
     self.test_results.append(out == "one, ,two,,three,")
@@ -380,9 +410,11 @@ listToCSV:
   title: strings_6
   unittests: {}
 mergeToDict:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'keys = [1, 2, 3, 4]
 
     vals = [5, 6, 7, 8]
@@ -409,9 +441,11 @@ mergeToDict:
   title: dictoinaries_3
   unittests: {}
 myPricesDict:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'answer = {{''bananna'': 4, ''apple'': 2, ''orange'': 1.5, ''pear'': 3}}
 
     self.test_results.append(answer == self._function())'
@@ -436,9 +470,11 @@ myPricesDict:
   title: dictoinaries_2
   unittests: {}
 pocketContent:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'i = {{''gold'': 90, ''po'': [''fl'', ''te'', ''gon'']}}
 
     r = {{''gold'': 90, ''po'': [''fl'', ''te'', ''gon''], ''pocket'': [''seashell'']}}
@@ -467,18 +503,22 @@ pocketContent:
   title: dictionaries_1
   unittests: {}
 printGivenKeys:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'self._function({{''a'': 0, ''b'': 1}}, ())
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
+  posttest: 'p0 = ''./{{}}''.format(_randStr())
 
-    self._function({{''a'': 0, ''b'': 1}}, (''z'', ''y'', ''a''))
+    _stdRdr(self._function, ({{''a'': 0, ''b'': 1}}, ()), p0)
 
-    z, None
+    self.test_results.append('''' == open(p0, ''r'').read())
 
-    y, None
+    _stdRdr(self._function, ({{''a'': 0, ''b'': 1}}, (''z'', ''y'',''a'')), p0)
 
-    a, 0'
+    self.test_results.append(''z, None\\ny, None\\na, 0\\n'' == open(p0, ''r'').read())
+
+    os.remove(p0)'
   pretest: ''
   setup: ''
   signature: 'def printGivenKeys(a_dictionary, some_keys): ->     #return nothing'
@@ -509,9 +549,11 @@ printGivenKeys:
   title: dictionaries_7
   unittests: {}
 remainder:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: self.test_results.append(4 == self._function(9, 5))
   pretest: ''
   setup: ''
@@ -525,9 +567,11 @@ remainder:
   title: basic_math_2
   unittests: {}
 removeFromSet:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'foo = (1, 2, 3, 4, 5, 6)
 
     new = self._function(set(foo), 6)
@@ -552,9 +596,11 @@ removeFromSet:
   title: sets_4
   unittests: {}
 returnWithQuotes:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'foo = """''It''s modulus, "%", not division, "/", or escaping "\"!''"""
 
     out = self._function()
@@ -577,9 +623,11 @@ returnWithQuotes:
   title: strings_1
   unittests: {}
 reverseOrder:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'out = self._function(''ro3! T2is is cool'')
 
     self.test_results.append(''cool is T2is ro3!'' == out)
@@ -613,9 +661,11 @@ reverseOrder:
   title: strings_5
   unittests: {}
 smallestOfList:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(-5 == self._function((1, 2, 3, 4, -5)))
 
     self.test_results.append(1 == self._function((1, 2, 3, 4, -5), True))
@@ -647,9 +697,11 @@ smallestOfList:
   title: lists_2
   unittests: {}
 strUpper:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'foo = "   asfd"
 
     self.test_results.append(foo.upper().strip() == self._function(foo))
@@ -684,9 +736,11 @@ strUpper:
   title: strings_2
   unittests: {}
 sumAllItems:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self.test_results.append(0.0000001 > 10.1 - self._function([2, 4, 20,
     4.1, -20]))
 
@@ -710,9 +764,11 @@ sumAllItems:
   title: lists_1
   unittests: {}
 toInt:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: self.test_results.append(3 == self._function(3.9))
   pretest: ''
   setup: ''
@@ -726,9 +782,11 @@ toInt:
   title: basic_math_3
   unittests: {}
 twosTruthiness:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'self._function([], [], [], [])
 
     ''foobar''
@@ -767,9 +825,11 @@ twosTruthiness:
   title: branching_2
   unittests: {}
 undToShortCSV:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\
+    import sys\n\ndef _randStr(str_len=10):\n    #import random, string\n    return\
+    \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
+    \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
+    \        func(*args)\n    sys.stdout = orig\n"
   posttest: 'out = self._function(''one_two_three_four_five'')
 
     self.test_results.append(out == ''one,two,three'')

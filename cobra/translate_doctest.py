@@ -26,7 +26,7 @@ def pull_probs(fpath):
         elif line.startswith('def ') and not line.startswith('def _'):
             loc = line.split()[1].split('(')[0]
             probs[loc] = []
-        print(loc, line)
+        #print(loc, line)
         probs[loc].append(line)
 
     pre = probs.pop('PRE')
@@ -69,7 +69,7 @@ def grokProb(pre, prob_lines):
             else:
                 line = line[4:]
 
-        print(prob['title'], loc, line)
+        #print(prob['title'], loc, line)
         prob[loc].append(line)
 
     # adapt test code around self.test_results
@@ -96,7 +96,6 @@ def grokProb(pre, prob_lines):
         prob[loc] = prob[loc].replace('}', '}}')
 
     print("FUNC_NAME:", func_name)
-    print("FUNCTION:", 'self._function')
     #time.sleep(10)
     prob['posttest'] = prob['posttest'].replace(func_name, 'self._function')
     # add any missing fields needed for the yml format...
