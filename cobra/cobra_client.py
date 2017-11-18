@@ -93,15 +93,60 @@ class CobraClient():
             print('Format style violations: {}'.format(results.violationcount))
             print('Violation details:\n{}'.format(results.violations))
             
+            stats = {   'runtime': results.time_to_execute,
+                        'linecount': results.linecount, 
+                        'charcount': results.charcount, 
+                        'violations': results.violationcount}
+            
             req = requests.post('http://{0}:{1}/submitsolution'.format(*self.server_socket),
                                         json={'username': self.username, 'lesson': lesson, 'question_label': question_label,
-                                              'solution': results.solution, 'results': results.test_results},
+                                              'solution': results.solution, 'results': hash_results(results.test_results), 'stats': stats},
                                         headers=self.headers)
             if req.text == '"fail"':
                 input('Your solution did not match the server results. Please try again')
                 continue
             else:
                 run_question_loop = False
+    
+    def history_menu(self):
+        req = requests.post('http://{0}:{1}/getcompleted'.format(*self.server_socket),
+                                json={'username': self.username},
+                                headers=self.headers)
+        completed = json.loads(req.text)
+
+        while True:
+            for index, item in enumerate(completed, 1):
+                print('{}) {}: {}'.format(index, item[0], item[1]))
+            print('0) Back')
+            try:
+                selection = int(input('Select a question to view it\'s submissions: '))
+                if selection == 0:
+                    break
+                item = dict(enumerate(completed, 1))[selection]
+                self.print_history(item[0], item[1])
+            except KeyError:
+                pass
+            except ValueError:
+                pass
+
+    def print_history(self, lesson, question_label):
+        req = requests.post('http://{0}:{1}/gethistory'.format(*self.server_socket),
+                                json={'username': self.username, 'lesson': lesson, 'question_label': question_label},
+                                headers=self.headers)
+        history = json.loads(req.text)    
+        for name, info in history.items():
+            print('{}:'.format(name))
+            print('SOLUTION:')
+            print(info['solution'])
+            print('RUNTIME:')
+            print(info['stats']['runtime'])
+            print('LINES:')
+            print(info['stats']['linecount'])
+            print('CHARACTERS:')
+            print(info['stats']['charcount'])
+            print('VIOLATIONS:')
+            print(info['stats']['violations'])
+            
         
     def run(self):
         cls()
@@ -117,6 +162,20 @@ class CobraClient():
         
         run_main_loop = True
         while run_main_loop:
+            while True:
+                print('1) Get next question')
+                print('2) Review qestion solutions')
+                try:
+                    selection = int(input('Select an option: '))
+                    if selection == 2:
+                        self.history_menu()
+                    if selection == 1:
+                        break
+                except KeyError:
+                    pass
+                except ValueError:
+                    pass
+            
             lesson, question_label = self.get_next_question()
             if lesson == None and question_label == None:
                 run_main_loop = False

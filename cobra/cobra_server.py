@@ -4,7 +4,7 @@ import yaml
 #import uuid
 import json
 from util.utility import decode_message, encode_message, hash_results, load_yml
-from util.server_utility import Questions, User, get_users
+from util.server_utility import Questions, User, get_users, update_history, get_history
 from util.solution_checker import Solution
 
 
@@ -72,15 +72,17 @@ class SubmitSolution():
         question_label = post_info['question_label']
         solution = post_info['solution']
         submitted_results = post_info['results']
+        stats = post_info['stats']
         question = questions.get_question(lesson, question_label)
         question.update({'seed': users[username].get_seed()})
         master_results = Solution(question)
         master_results.run_solution()
         print(master_results.test_results)
         print(submitted_results)
-        if hash_results(master_results.test_results) == hash_results(submitted_results):
+        if hash_results(master_results.test_results) == submitted_results:
             correct = [lesson, question_label]
             users[username].update_completed(correct)
+            update_history(correct, username, solution, stats)
         else:
             correct = 'fail'
         resp.body = json.dumps(correct)
@@ -99,6 +101,29 @@ class GetNextQuestion():
                 break
         resp.body = json.dumps(response)
         
+class GetHistory():
+    def on_post(self, req, resp):
+        post_info = json.loads(req.stream.read().decode('utf-8'))
+        lesson = post_info['lesson']
+        question_label = post_info['question_label']
+        username = post_info['username']
+        question_item = [lesson, question_label]
+        if question_item in users[username].get_completed():
+            history = get_history(question_item)
+            if history:
+                pass
+            else:
+                history = {}
+        else:
+            history = {}
+        resp.body = json.dumps(history)
+
+class GetCompleted():
+    def on_post(self, req, resp):
+        post_info = json.loads(req.stream.read().decode('utf-8'))
+        username = post_info['username']
+        completed = users[username].get_completed()
+        resp.body = json.dumps(completed)
         
 questions = Questions()
 users = get_users()
@@ -110,4 +135,5 @@ app.add_route('/newuser', AddUser())
 app.add_route('/login', LoginUser())
 app.add_route('/submitsolution', SubmitSolution())
 app.add_route('/getnextquestion', GetNextQuestion())
-
+app.add_route('/gethistory', GetHistory())
+app.add_route('/getcompleted', GetCompleted())
