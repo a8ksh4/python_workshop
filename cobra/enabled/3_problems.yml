@@ -1,0 +1,309 @@
+appendLineToFile:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
+
+    c1 = _randStr()
+
+    self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
+
+    self._function(f0, c1)
+
+    self.test_results.append(c0 + c1 == open(f0, ''r'').read())
+
+    os.remove(f0)'
+  pretest: ''
+  setup: ''
+  signature: 'def appendLineToFile(file_path, content): ->     #return nothing'
+  solution: "def appendLineToFile(file_path, content):\n    with open(file_path, 'a')\
+    \ as f:\n        f.write(content)\n    #return nothing"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called appendLineToFile that accepts a path and a string,
+
+    and writes the string to the end of the file (without modifying the
+
+    existing contents in the file).'
+  title: readwrite_3
+  unittests: {}
+cdAndWrite:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    d0 = ''./{{}}''.format(_randStr())
+
+    os.mkdir(d0)
+
+    cwd = os.path.realpath(''.'')
+
+    content = ''asdf''
+
+    self.test_results.append(len(content) == self._function(d0, f0, content))
+
+    self.test_results.append(''./'' + os.path.realpath(''.'').split(''/'')[-1] ==
+    d0)
+
+    self.test_results.append(content == (os.path.isfile(f0) and open(f0, ''r'').read()))
+
+    os.path.isfile(f0) and os.remove(f0)
+
+    os.chdir(cwd)
+
+    os.path.isdir(d0) and os.rmdir(d0)'
+  pretest: ''
+  setup: ''
+  signature: 'def cdAndWrite(dir_path, file_name, content): ->     return os.stat(file_name).st_size'
+  solution: "def cdAndWrite(dir_path, file_name, content):\n    os.chdir(dir_path)\n\
+    \    open(file_name, 'w').write(content)\n    return os.stat(file_name).st_size"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called cdAndWrite that changes directory to the given
+
+    path, then edits a file and writes the given content to it. Return the
+
+    size of the file in bytes!'
+  title: os_basics_2
+  unittests: {}
+createTmpDir:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'd0 = ''''.join(random.choices(string.ascii_uppercase, k=4))
+
+    p0 = ''/tmp/{{}}''.format(d0)
+
+    out = self._function(d0)
+
+    self.test_results.append(out == p0)
+
+    os.path.isdir(p0) and os.rmdir(p0)'
+  pretest: ''
+  setup: ''
+  signature: 'def createTmpDir(dir_name): ->     return dir_path'
+  solution: "def createTmpDir(dir_name):\n    #os.umask(0077)\n    dir_path = '/tmp/{{}}'.format(dir_name)\n\
+    \    os.mkdir(dir_path)\n    return dir_path"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called createTmpDir that accepts a directory name and
+
+    creates it in /tmp.  Set the permissions so that only the directory owner
+
+    can read/write/execute it. Return the complete path to the directory.
+
+    Bonus: Can you do this in a way that avoids a race condition security
+
+    vulnerability?'
+  title: os_basics_4
+  unittests: {}
+listDirFilter:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: "e0 = _randStr()\ne1 = _randStr()\nfiles = {{e0: set(), e1: set()}}\n\
+    for e in (e0, e1):\n    for n in range(5):\n        f = \"{{}}.{{}}\".format(n,\
+    \ e)\n        files[e].add(f)\n        open(f, 'w').close()\nreg_filter = '(./){{0,1}}[0-9].'\
+    \ + e0\nself.test_results.append(files[e0] == set(self._function('./', reg_filter)))\n\
+    for f in list(files[e0]) + list(files[e1]):\n    os.remove(f)"
+  pretest: ''
+  setup: ''
+  signature: 'def listDirFilter(dir_path, regex_filter): ->     return files_list'
+  solution: "def listDirFilter(dir_path, regex_filter):\n    files_list = []\n   \
+    \ for name in os.listdir(dir_path):\n        if re.match(regex_filter, name):\n\
+    \            files_list.append(name) \n    return files_list"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called listDirFilter that accepts a directory path and a
+
+    regex filter.  It retuns a list of files at the directory path whos names
+
+    match the given regex.  Return only the file names, not their complete
+
+    path.'
+  title: os_basics_3
+  unittests: {}
+moveAFile:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    f1 = ''./{{}}''.format(_randStr())
+
+    content = ''asdf''
+
+    self.test_results.append(len(content) == open(f0, ''w'').write(content))
+
+    self._function(f0, f1)
+
+    self.test_results.append(content == (os.path.isfile(f1) and open(f1, ''r'').read()))
+
+    self.test_results.append(os.path.isfile(f1) and os.remove(f1) or True)
+
+    self.test_results.append(not (os.path.isfile(f0) and os.remove(f0)))'
+  pretest: ''
+  setup: ''
+  signature: 'def moveAFile(src_path, dst_path): ->     # return nothing'
+  solution: "def moveAFile(src_path, dst_path):\n    shutil.move(src_path, dst_path)\n\
+    \    # return nothing"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called moveAFile that accepts a source file path and a
+
+    dest file path and moves the file to the destination.'
+  title: os_basics_1
+  unittests: {}
+readFileToString:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    c0 = ''{{}}\\n{{}}\\n''.format(_randStr(), _randStr())
+
+    self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
+
+    self.test_results.append(c0 == self._function(f0))
+
+    os.remove(f0)'
+  pretest: ''
+  setup: ''
+  signature: 'def readFileToString(file_path): ->     return contents'
+  solution: "def readFileToString(file_path):\n    with open(file_path, 'r') as f:\n\
+    \        contents = f.read()\n    return contents"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called readFileToString that accepts a path, opens the
+
+    path, and returns the contents of the file as a string value. You can
+
+    assume that you''ll have access to the file, it won''t be binary data, you
+
+    don''t need to do anything to the given path to open it.'
+  title: readwrite_1
+  unittests: {}
+readLinesFromFile:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
+
+    self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
+
+    self.test_results.append(c0.split(''\\n'') == self._function(f0))
+
+    os.remove(f0)'
+  pretest: ''
+  setup: ''
+  signature: 'def readLinesFromFile(file_path): ->     return contents'
+  solution: "def readLinesFromFile(file_path):\n    contents = []\n    with open(file_path,\
+    \ 'r') as f:\n        for line in f.read().split('\\n'):\n            contents.append(line)\n\
+    \    return contents"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called readLinesFromFiles that accepts a path, reads the
+
+    contents, and returns a list of stings for each line in the file. Do not
+
+    include newline characters in the returned strings.'
+  title: readwrite_2
+  unittests: {}
+realPath:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'cwd = os.path.realpath(''.'')
+
+    self.test_results.append(cwd == self._function(''.''))'
+  pretest: ''
+  setup: ''
+  signature: 'def realPath(dir_name): -> #    return files_paths'
+  solution: "def realPath(dir_name):\n    real_path = os.path.realpath(dir_name)\n\
+    \    return real_path\n#def filePaths(dir_path, files_list):\n#    '''os_basics_6\n\
+    #    Write a function called filePaths that accepts a directory path and a\n#\
+    \    list of files. It returns a list of full paths to those files. \n#    For\
+    \ example, if dir_path is '/tmp/' and files list is ['./foobar.txt',\n#    'diddun.txt'],\
+    \ the output would be ['/tmp/foobar.txt', '/tmp/diddun.txt'].\n#    '''\n#   \
+    \ return files_paths"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called realPath that accepts a path, checks if it has
+
+    any symlinks in it, and returns the actual path (wihout symlinks) to the
+
+    file or directory the original path pointed to.'
+  title: os_basics_5
+  unittests: {}
+rewriteInLower:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    f1 = ''./{{}}''.format(_randStr())
+
+    c0 = "!{{}}\\n{{}}13\\n! #@\\n".format(_randStr(), _randStr()).upper()
+
+    self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
+
+    self._function(f0, f1)
+
+    self.test_results.append(os.path.isfile(f0) and os.path.isfile(f1))
+
+    self.test_results.append(c0.lower() == open(f1, ''r'').read())
+
+    os.remove(f0)
+
+    os.remove(f1)'
+  pretest: ''
+  setup: ''
+  signature: 'def rewriteInLower(source_path, dest_path): ->     #return nothing'
+  solution: "def rewriteInLower(source_path, dest_path):\n    with open(source_path,\
+    \ 'r') as f:\n        contents = f.read().lower()\n    with open(dest_path, 'w')\
+    \ as f:\n        f.write(contents)\n    #return nothing"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called rewriteInLower that accepts a source and
+
+    destination path.  It reads in the source path, converts the contents to
+
+    all lower case, and writes them to the destination path.'
+  title: readwrite_5
+  unittests: {}
+truncateWriteFile:
+  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
+    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
+    \ k=str_len))\n"
+  posttest: 'f0 = ''./{{}}''.format(_randStr())
+
+    c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
+
+    c1 = _randStr()
+
+    self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
+
+    self._function(f0, c1)
+
+    self.test_results.append(c1 == open(f0, ''r'').read())
+
+    os.remove(f0)'
+  pretest: ''
+  setup: ''
+  signature: 'def truncateWriteFile(file_path, content): ->     #return nothing'
+  solution: "def truncateWriteFile(file_path, content):\n    with open(file_path,\
+    \ 'w') as f:\n        f.write(content)\n    #return nothing"
+  tags: ''
+  teardown: ''
+  text: 'Write a function called truncateWriteFile that accepts a path and a
+
+    string, and writes the string to the file, truncating (overwriting) any
+
+    existing content in the file.'
+  title: readwrite_4
+  unittests: {}
