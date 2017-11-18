@@ -79,7 +79,7 @@ class SubmitSolution():
         master_results.run_solution()
         print(master_results.test_results)
         print(submitted_results)
-        if hash_results(master_results.test_results) == hash_results(submitted_results):
+        if hash_results(master_results.test_results) == submitted_results:
             correct = [lesson, question_label]
             users[username].update_completed(correct)
             update_history(correct, username, solution, stats)
@@ -118,6 +118,12 @@ class GetHistory():
             history = {}
         resp.body = json.dumps(history)
 
+class GetCompleted():
+    def on_post(self, req, resp):
+        post_info = json.loads(req.stream.read().decode('utf-8'))
+        username = post_info['username']
+        completed = users[username].get_completed()
+        resp.body = json.dumps(completed)
         
 questions = Questions()
 users = get_users()
@@ -130,3 +136,4 @@ app.add_route('/login', LoginUser())
 app.add_route('/submitsolution', SubmitSolution())
 app.add_route('/getnextquestion', GetNextQuestion())
 app.add_route('/gethistory', GetHistory())
+app.add_route('/getcompleted', GetCompleted())
