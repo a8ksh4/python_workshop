@@ -1,6 +1,6 @@
 test:
   imports: "from time import time"
-  posttest: "print('DIR:', dir())\ndef _dirInFunc(): return str(dir())\nprint('DIR in func:', _dirInFunc())"
+  posttest: "print('DIR:', dir())\ndef _dirInFunc(locals): print(locals); return str(dir())\nprint('DIR in func:', _dirInFunc(locals()))"
   pretest: 'pretest = "pretest: " + str(time()); print(time())'
   setup: 'setup = "setup: " + str(time()); print(time())'
   signature: test(a,b,c)
