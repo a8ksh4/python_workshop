@@ -1,6 +1,6 @@
 test:
-  imports: 'from time import time'
-  posttest: 'posttest = "posttest: " + str(time()); print(time())'
+  imports: "from time import time\nprint('DIR:', dir())\ndef _getTime():\n    return str(time())\n"
+  posttest: 'posttest = "posttest: " + _getTime(); print(_getTime())'
   pretest: 'pretest = "pretest: " + str(time()); print(time())'
   setup: 'setup = "setup: " + str(time()); print(time())'
   signature: test(a,b,c)
