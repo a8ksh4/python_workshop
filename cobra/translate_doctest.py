@@ -64,7 +64,7 @@ def grokProb(pre, prob_lines):
         if loc in ('text', ):
             line = line.strip()
         elif loc == 'posttest':
-            if line.startswith('    >>> '):
+            if line.startswith('    >>> ') or line.startswith('    ... '):
                 line = line[8:]
             else:
                 line = line[4:]
@@ -73,8 +73,9 @@ def grokProb(pre, prob_lines):
         prob[loc].append(line)
 
     # adapt test code around self.test_results
-    test = [ n.strip()[4:] if n.startswith('    >>> ') else n.strip()
-                     for n in prob['posttest'] ] + [None,]
+    #test = [ n.strip()[4:] if n.startswith('    >>> ') else n.strip()
+    #                 for n in prob['posttest'] ] + [None,]
+    test = prob['posttest'] + [None,]
 
     # generate post test starting with function definition line
     prob['posttest'] = []
