@@ -141,11 +141,8 @@ convTupleUniqueOrder:
     \ ''.join(random.choices(string.ascii_uppercase, k=str_len))\n\ndef _stdRdr(func,\
     \ args, path):\n    orig = sys.stdout\n    with open(path, 'w') as sys.stdout:\n\
     \        func(*args)\n    sys.stdout = orig\n"
-  posttest: 'items = (1, 1, 2, 3, 4, 4, 5)
-
-    res = self._function(items)
-
-    self.test_results.append((1, 2, 3, 4, 5) == res)'
+  posttest: "items = (1, 1, 2, 3, 4, 4, 5) \nres = self._function(items)\nself.test_results.append((1,\
+    \ 2, 3, 4, 5) == res)"
   pretest: ''
   setup: ''
   signature: 'def convTupleUniqueOrder(some_items): ->     return tuple(out)'
