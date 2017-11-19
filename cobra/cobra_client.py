@@ -7,6 +7,7 @@ from ptpython.repl import run_config
 from util.utility import cls, hash_results, encode_message, decode_message, load_yml, save_yml
 from getpass import getpass
 import colorama as cr
+from time import sleep
 
 
 class CobraClient():
@@ -48,6 +49,7 @@ class CobraClient():
                                     headers=self.headers)
         self.username = username
         self.sessionid = decode_message(req.text)
+        sleep(1)
         
     def login(self, continue_session=False):
         if continue_session:
