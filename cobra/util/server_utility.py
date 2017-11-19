@@ -73,7 +73,8 @@ class User():
             return False
             
     def new_seed(self):
-        self.update_user({'seed': int(make_salt())})
+        #self.update_user({'seed': int(make_salt())})
+        self.update_user({'seed': int(111)}) # static seed until I can figure out a bug
         return self.get_seed()
         
     def get_seed(self):
