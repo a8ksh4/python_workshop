@@ -1,0 +1,152 @@
+first half lower:
+    imports: |
+        global random
+        import random
+    setup: |
+        random.seed({seed})
+        random_string = lambda: ''.join([chr(random.choice([random.randint(65,90), random.randint(97,122)])) for _ in range(0, random.randint(3,30))])
+    teardown: ''
+    pretest: ''
+    posttest: ''
+    signature: 'def first_half_lower(a_string: str) -> str'
+    solution: |
+        def firstHalfLower(a_string):
+            length = int(len(a_string) / 2)
+            result = a_string[:length].lower()
+            return result    
+    text: |
+        Write a function called "firstHalfLower" that takes a string as an
+        argument and returns the first half of the string, all lower case. When
+        calculating how many characters of the string to return, round down:
+        An 11 character string would result in 5 characters being returned.
+    unittests:
+        test1:
+            - str('HELLO WORLD :)')
+        test2_x6:
+            - random_string()
+    tags:
+        - strings
+add them:
+    imports: |
+        import random
+    setup: |
+        random.seed({seed})
+    teardown: ''
+    pretest: ''
+    posttest: ''
+    signature: 'def add_them(a: int, b: int) -> int'
+    solution: |
+        def addThem(a, b):
+            the_sum = a + b
+            return the_sum    
+    text: |
+        Write a function called addThem that accepts two numbers and returns
+        their sum.
+    unittests:
+        test1:
+            - int(10)
+            - int(20)
+        test2_x3:
+            - random.randint(-1000,1000)
+            - random.randint(-1000,1000)
+    tags:
+        - math   
+
+just even character:
+    imports: |
+        global random
+        import random    
+    setup: |
+        random.seed({seed})
+        random_string = lambda: ''.join([chr(random.choice([random.randint(65,90), random.randint(97,122)])) for _ in range(0, random.randint(3,30))])
+    teardown: ''
+    pretest: ''
+    posttest: ''
+    signature: 'def just_even_character(a_string: str) -> str'
+    solution: |
+        def justEvenChars(a_string):
+            even_num_chars = a_string[::2]
+            return even_num_chars    
+    text: |
+        Write a function called "justEvenChars" that takes a string as an
+        argument and returns only even numbered characters from the string. If
+        the string is "coolio", the result would be "coi", treating the zeroth
+        characte as even (0%2==0).    
+    unittests:
+        test1:
+            - str('Hello World :)')
+        test2_x8:
+            - random_string()
+    tags:
+        - strings      
+        
+reverse order:
+    imports: |
+        global random
+        import random    
+    setup: |
+        random.seed({seed})
+        random_string = lambda: ''.join([chr(random.choice([random.randint(65,90), random.randint(97,122)])) for _ in range(0, random.randint(3,30))])
+    teardown: ''
+    pretest: ''
+    posttest: ''
+    signature: 'def reverse_order(a_string: str) -> str'
+    solution: |
+        def reverseOrder(a_string):
+            switched = a_string.strip()
+            switched = switched.split()
+            switched = switched[::-1]
+            switched = " ".join(switched)
+            return switched   
+    text: |
+        Write a function called "reverseOrder" that takes a string as an
+        argument and returns another string with all of the whitespace
+        delimetered words in the reverse order, not taking any special
+        consideration for number/symbols.  KISS.  If the string, " one1 tw_o
+        thREE four!" is passed in, "four! thREE tw_0 one1" would be returned.
+        Strip any whitespace from the ends of the given string.   
+    unittests:
+        test1:
+            - str('Hello World :)')
+        test2:
+            - str('one1 tw_o thREE four')
+        test3_x2:
+            - str('{} {} {} {} {}'.format(random_string(), random_string(), random_string(), random_string(), random_string()))
+    tags:
+        - strings
+        
+convert C to F:
+    imports: |
+        import random
+    setup: |
+        random.seed({seed})
+    teardown: ''
+    pretest: ''
+    posttest: |
+        try:
+            result = self.test_results[-1]
+            self.test_results[-1] = round(result, 4)
+        except Exception:
+            pass
+    signature: 'def convertCToF(temp_in_c: float) -> float'
+    solution: |
+        def convertCToF(temp_in_c):
+            temp_in_f = (temp_in_c * (9/5)) + 32
+            return temp_in_f
+    text: |
+        Write a function called convertCToF that accepts a temperature in
+        centigrade and returns the equivelant temperature in Farenheight.
+        The equation for this is: (f = c/5 + 32/9)
+    unittests:
+        test1:
+            - int(10)
+        test2_x3:
+            - random.randint(-100,100)
+        test3:
+            - int(-40)
+        test4:
+            - int(0)
+    tags:
+        - math
+        
+        
