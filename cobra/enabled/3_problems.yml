@@ -33,8 +33,9 @@ appendLineToFile:
 cdAndWrite:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
     def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
-  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
-    k=10)))
+  posttest: 'print("test code dir:", dir())
+
+    f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase, k=10)))
 
     d0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase, k=10)))
 
@@ -59,8 +60,9 @@ cdAndWrite:
   pretest: ''
   setup: ''
   signature: 'def cdAndWrite(dir_path, file_name, content): ->     return os.stat(file_name).st_size'
-  solution: "def cdAndWrite(dir_path, file_name, content):\n    os.chdir(dir_path)\n\
-    \    open(file_name, 'w').write(content)\n    return os.stat(file_name).st_size"
+  solution: "def cdAndWrite(dir_path, file_name, content):\n    print('cdAndWrite\
+    \ Dir:', dir())\n    os.chdir(dir_path)\n    open(file_name, 'w').write(content)\n\
+    \    return os.stat(file_name).st_size"
   tags: ''
   teardown: ''
   text: 'Write a function called cdAndWrite that changes directory to the given

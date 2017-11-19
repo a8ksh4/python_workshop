@@ -35,6 +35,7 @@ def cdAndWrite(dir_path, file_name, content):
     Write a function called cdAndWrite that changes directory to the given
     path, then edits a file and writes the given content to it. Return the
     size of the file in bytes! 
+    >>> print("test code dir:", dir())
     >>> f0 = './{}'.format(''.join(random.choices(string.ascii_uppercase, k=10)))
     >>> d0 = './{}'.format(''.join(random.choices(string.ascii_uppercase, k=10)))
     >>> os.mkdir(d0)
@@ -50,6 +51,7 @@ def cdAndWrite(dir_path, file_name, content):
     >>> os.chdir(cwd)
     >>> os.path.isdir(d0) and os.rmdir(d0)
     '''
+    print('cdAndWrite Dir:', dir())
     os.chdir(dir_path)
     open(file_name, 'w').write(content)
     return os.stat(file_name).st_size
