@@ -6,7 +6,7 @@ import json
 from util.utility import decode_message, encode_message, hash_results, load_yml
 from util.server_utility import Questions, User, get_users, update_history, get_history
 from util.solution_checker import Solution
-
+from time import sleep
 
 class GetLessons():
     def on_get(self, req, resp):
@@ -24,6 +24,10 @@ class GetQuestion():
         username = post_info['username']
         lesson = post_info['lesson']
         question_label = post_info['question_label']
+        print('Recieved the following information:')
+        print('username: {}'.format(username))
+        print('lesson: {}'.format(lesson))
+        print('question: {}'.format(question_label))
         seed = users[username].new_seed()
         question = questions.get_question(lesson, question_label)
         question.pop('solution')
