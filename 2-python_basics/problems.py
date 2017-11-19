@@ -569,7 +569,6 @@ def getIndexOf(word, search_string):
     >>> -1 == getIndexOf('PIZZA', 'there is pizza on the plate')
     True
     '''
-    print('ARGV', sys.argv)
     if word in search_string:
         return search_string.index(word)
     else:

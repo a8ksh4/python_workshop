@@ -309,9 +309,8 @@ getIndexOf:
   pretest: ''
   setup: ''
   signature: 'def getIndexOf(word, search_string): ->         return -1'
-  solution: "def getIndexOf(word, search_string):\n    print('ARGV', sys.argv)\n \
-    \   if word in search_string:\n        return search_string.index(word)\n    else:\n\
-    \        return -1"
+  solution: "def getIndexOf(word, search_string):\n    if word in search_string:\n\
+    \        return search_string.index(word)\n    else:\n        return -1"
   tags: ''
   teardown: ''
   text: 'Wirte a functuion called "getIndexOf" that returns the index of a given
