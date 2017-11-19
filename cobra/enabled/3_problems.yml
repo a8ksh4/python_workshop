@@ -1,12 +1,13 @@
 appendLineToFile:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
+    c0 = "{{}}\\n{{}}\\n".format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)), ''''.join(random.choices(string.ascii_uppercase, k=10)))
 
-    c1 = _randStr()
+    c1 = ''''.join(random.choices(string.ascii_uppercase, k=10))
 
     self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
 
@@ -31,11 +32,11 @@ appendLineToFile:
   unittests: {}
 cdAndWrite:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    d0 = ''./{{}}''.format(_randStr())
+    d0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase, k=10)))
 
     os.mkdir(d0)
 
@@ -71,8 +72,7 @@ cdAndWrite:
   unittests: {}
 createTmpDir:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
   posttest: 'd0 = ''''.join(random.choices(string.ascii_uppercase, k=4))
 
     p0 = ''/tmp/{{}}''.format(d0)
@@ -102,13 +102,13 @@ createTmpDir:
   unittests: {}
 listDirFilter:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: "e0 = _randStr()\ne1 = _randStr()\nfiles = {{e0: set(), e1: set()}}\n\
-    for e in (e0, e1):\n    for n in range(5):\n        f = \"{{}}.{{}}\".format(n,\
-    \ e)\n        files[e].add(f)\n        open(f, 'w').close()\nreg_filter = '(./){{0,1}}[0-9].'\
-    \ + e0\nself.test_results.append(files[e0] == set(self._function('./', reg_filter)))\n\
-    for f in list(files[e0]) + list(files[e1]):\n    os.remove(f)"
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: "e0 = ''.join(random.choices(string.ascii_uppercase, k=10))\ne1 = ''.join(random.choices(string.ascii_uppercase,\
+    \ k=10))\nfiles = {{e0: set(), e1: set()}}\nfor e in (e0, e1):\n    for n in range(5):\n\
+    \        f = \"{{}}.{{}}\".format(n, e)\n        files[e].add(f)\n        open(f,\
+    \ 'w').close()\nreg_filter = '(./){{0,1}}[0-9].' + e0\nself.test_results.append(files[e0]\
+    \ == set(self._function('./', reg_filter)))\nfor f in list(files[e0]) + list(files[e1]):\n\
+    \    os.remove(f)"
   pretest: ''
   setup: ''
   signature: 'def listDirFilter(dir_path, regex_filter): ->     return files_list'
@@ -128,11 +128,11 @@ listDirFilter:
   unittests: {}
 moveAFile:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    f1 = ''./{{}}''.format(_randStr())
+    f1 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase, k=10)))
 
     content = ''asdf''
 
@@ -159,11 +159,12 @@ moveAFile:
   unittests: {}
 readFileToString:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    c0 = ''{{}}\\n{{}}\\n''.format(_randStr(), _randStr())
+    c0 = ''{{}}\\n{{}}\\n''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)), ''''.join(random.choices(string.ascii_uppercase, k=10)))
 
     self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
 
@@ -188,11 +189,12 @@ readFileToString:
   unittests: {}
 readLinesFromFile:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
+    c0 = "{{}}\\n{{}}\\n".format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)), ''''.join(random.choices(string.ascii_uppercase, k=10)))
 
     self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
 
@@ -216,8 +218,7 @@ readLinesFromFile:
   unittests: {}
 realPath:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
   posttest: 'cwd = os.path.realpath(''.'')
 
     self.test_results.append(cwd == self._function(''.''))'
@@ -242,13 +243,14 @@ realPath:
   unittests: {}
 rewriteInLower:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    f1 = ''./{{}}''.format(_randStr())
+    f1 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase, k=10)))
 
-    c0 = "!{{}}\\n{{}}13\\n! #@\\n".format(_randStr(), _randStr()).upper()
+    c0 = "!{{}}\\n{{}}13\\n! #@\\n".format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)), ''''.join(random.choices(string.ascii_uppercase, k=10))).upper()
 
     self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
 
@@ -278,13 +280,14 @@ rewriteInLower:
   unittests: {}
 truncateWriteFile:
   imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
-  posttest: 'f0 = ''./{{}}''.format(_randStr())
+    def _randStr():\n    return ''.join(random.choices(string.ascii_uppercase, k=10))\n"
+  posttest: 'f0 = ''./{{}}''.format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)))
 
-    c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
+    c0 = "{{}}\\n{{}}\\n".format(''''.join(random.choices(string.ascii_uppercase,
+    k=10)), ''''.join(random.choices(string.ascii_uppercase, k=10)))
 
-    c1 = _randStr()
+    c1 = ''''.join(random.choices(string.ascii_uppercase, k=10))
 
     self.test_results.append(len(c0) == open(f0, ''w'').write(c0))
 
