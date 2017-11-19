@@ -24,7 +24,7 @@ class GetQuestion():
         username = post_info['username']
         lesson = post_info['lesson']
         question_label = post_info['question_label']
-        print('Recieved the following information:')
+        print('Recieved the following information for getquestion:')
         print('username: {}'.format(username))
         print('lesson: {}'.format(lesson))
         print('question: {}'.format(question_label))
@@ -41,6 +41,8 @@ class AddUser():
         ip = req.remote_addr
         username = post_info['username']
         password = decode_message(post_info['password'])
+        print('Recieved the following information for adduser:')
+        print('username: {}'.format(username))
         users.update({username: User(username)})
         if users[username].create_user(password, ip):
             sessionid = users[username].create_new_session()
@@ -55,6 +57,8 @@ class LoginUser():
         username = post_info['username']        
         password = decode_message(post_info['password'])
         sessionid = decode_message(post_info['sessionid'])
+        print('Recieved the following information for loginuser:')
+        print('username: {}'.format(username))
         login_pass = False
         
         if users[username].check_session_id(sessionid, ip):
@@ -77,6 +81,10 @@ class SubmitSolution():
         solution = post_info['solution']
         submitted_results = post_info['results']
         stats = post_info['stats']
+        print('Recieved the following information for submitsolution:')
+        print('username: {}'.format(username))
+        print('lesson: {}'.format(lesson))
+        print('question: {}'.format(question_label))        
         question = questions.get_question(lesson, question_label)
         question.update({'seed': users[username].get_seed()})
         master_results = Solution(question)
@@ -97,6 +105,8 @@ class GetNextQuestion():
         response = [None, None]
         question_list = load_yml('question_list.yml')
         username = post_info['username']
+        print('Recieved the following information for getnextquestion:')
+        print('username: {}'.format(username))
         for lesson, question_label in question_list:
             if [lesson, question_label] in users[username].get_completed():
                 continue
