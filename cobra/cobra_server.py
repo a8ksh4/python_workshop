@@ -48,6 +48,8 @@ class AddUser():
             sessionid = users[username].create_new_session()
         else:
             raise
+        print('Current users: ')
+        print(users.keys())
         resp.body = encode_message(sessionid)
        
 class LoginUser():
@@ -107,6 +109,8 @@ class GetNextQuestion():
         username = post_info['username']
         print('Recieved the following information for getnextquestion:')
         print('username: {}'.format(username))
+        print('Current users: ')
+        print(users.keys())
         for lesson, question_label in question_list:
             if [lesson, question_label] in users[username].get_completed():
                 continue

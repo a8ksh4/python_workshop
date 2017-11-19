@@ -161,7 +161,7 @@ class CobraClient():
             self.login(continue_session=True)
         else:
             pass
-        sleep(3)
+        sleep(1)
         run_main_loop = True
         while run_main_loop:
             while True:
