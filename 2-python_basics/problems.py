@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 
+global os
 import os
+global random
 import random
+global re
 import re
+global shutil
 import shutil
+global string
 import string
+global sys
 import sys
 
 def _randStr(str_len=10):
-    #import random, string
     return ''.join(random.choices(string.ascii_uppercase, k=str_len))
 
 def _stdRdr(func, args, path):
@@ -556,7 +561,6 @@ def getIndexOf(word, search_string):
     Wirte a functuion called "getIndexOf" that returns the index of a given
     word inside of a given string.  If the word is not present, it returns
     a -1. 
-
     For exmaple, if the word is "pizza", and the search_string is:
         "there is pizza on the plate"
     then the index is 9.

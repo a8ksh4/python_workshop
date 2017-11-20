@@ -1,6 +1,6 @@
 test:
-  imports: "from time import time"
-  posttest: "print('DIR:', dir())\ndef _dirInFunc(locals): print(locals); return str(dir())\nprint('DIR in func:', _dirInFunc(locals()))"
+  imports: "from time import time\nimport random\nimport string\n_randStr = '''''.join(random.choices(string.ascii_uppercase, k=10))'''"
+  posttest: "print('DIR:', dir())\nprint('locals:', locals())\nprint(exec(_randStr))"
   pretest: 'pretest = "pretest: " + str(time()); print(time())'
   setup: 'setup = "setup: " + str(time()); print(time())'
   signature: test(a,b,c)

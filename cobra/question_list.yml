@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 - [milestone2, add them]
 - [milestone2, first half lower]
 - [milestone2, just even character]
 - [milestone2, reverse order]
 - [milestone2, convert C to F]
+=======
+- [2_problems, addThem]
+- [2_problems, carmenFound]
+- [2_problems, checkKeyExists]
+- [2_problems, checkKeysExist]
+- [2_problems, convTupleUnique]
+- [2_problems, convTupleUniqueOrder]
+>>>>>>> d080acc88c3803a5e6b70b41d5c82d44c3a1a669

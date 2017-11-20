@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 
+global os
 import os
+global random
 import random
+global re
 import re
+global shutil
 import shutil
+global string
 import string
 
 def _randStr(str_len=10):

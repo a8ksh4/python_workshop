@@ -1,7 +1,7 @@
 appendLineToFile:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
@@ -30,9 +30,9 @@ appendLineToFile:
   title: readwrite_3
   unittests: {}
 cdAndWrite:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     d0 = ''./{{}}''.format(_randStr())
@@ -70,9 +70,9 @@ cdAndWrite:
   title: os_basics_2
   unittests: {}
 createTmpDir:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'd0 = ''''.join(random.choices(string.ascii_uppercase, k=4))
 
     p0 = ''/tmp/{{}}''.format(d0)
@@ -101,9 +101,9 @@ createTmpDir:
   title: os_basics_4
   unittests: {}
 listDirFilter:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: "e0 = _randStr()\ne1 = _randStr()\nfiles = {{e0: set(), e1: set()}}\n\
     for e in (e0, e1):\n    for n in range(5):\n        f = \"{{}}.{{}}\".format(n,\
     \ e)\n        files[e].add(f)\n        open(f, 'w').close()\nreg_filter = '(./){{0,1}}[0-9].'\
@@ -127,9 +127,9 @@ listDirFilter:
   title: os_basics_3
   unittests: {}
 moveAFile:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     f1 = ''./{{}}''.format(_randStr())
@@ -158,9 +158,9 @@ moveAFile:
   title: os_basics_1
   unittests: {}
 readFileToString:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     c0 = ''{{}}\\n{{}}\\n''.format(_randStr(), _randStr())
@@ -187,9 +187,9 @@ readFileToString:
   title: readwrite_1
   unittests: {}
 readLinesFromFile:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
@@ -215,9 +215,9 @@ readLinesFromFile:
   title: readwrite_2
   unittests: {}
 realPath:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'cwd = os.path.realpath(''.'')
 
     self.test_results.append(cwd == self._function(''.''))'
@@ -241,9 +241,9 @@ realPath:
   title: os_basics_5
   unittests: {}
 rewriteInLower:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     f1 = ''./{{}}''.format(_randStr())
@@ -277,9 +277,9 @@ rewriteInLower:
   title: readwrite_5
   unittests: {}
 truncateWriteFile:
-  imports: "\nimport os\nimport random\nimport re\nimport shutil\nimport string\n\n\
-    def _randStr(str_len=10):\n    return ''.join(random.choices(string.ascii_uppercase,\
-    \ k=str_len))\n"
+  imports: "\nglobal os\nimport os\nglobal random\nimport random\nglobal re\nimport\
+    \ re\nglobal shutil\nimport shutil\nglobal string\nimport string\n\ndef _randStr(str_len=10):\n\
+    \    return ''.join(random.choices(string.ascii_uppercase, k=str_len))\n"
   posttest: 'f0 = ''./{{}}''.format(_randStr())
 
     c0 = "{{}}\\n{{}}\\n".format(_randStr(), _randStr())
