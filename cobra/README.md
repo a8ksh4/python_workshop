@@ -25,6 +25,9 @@ if __name__ == '__main__':
 ```
   
 # Creating Content
+A video demo of this is hosted here:  
+[![test](https://img.youtube.com/vi/fzwtEEb42D0/hqdefault.jpg)](https://www.youtube.com/watch?v=fzwtEEb42D0)  
+  
 All of the student problems start out in doctest format.  See the "problems.py" in each of the content directories above the cobra directory.  E.g. 3-files_and_paths/problems.py.  Starting with doctest lets us validate all of our problems and the test cases in an easy-to-use format before we port them to the format needed for the client-server tool.  Then we run a translate tool and a validate tool to get them into yml format to use.
 
 1. **Create problems.py in doctest format**.  
@@ -54,10 +57,10 @@ All of the student problems start out in doctest format.  See the "problems.py" 
     used to generate the description of the problem for the user
     tool so needs to follow these requirements. 
 2. **Run problems.py and verify no doctest errors**.  
-3. Translate the problem to yml format:  
+3. **Translate the problem to yml format**:  
  * The format is "translate_doctest.py <source doctest file> <dest yml file>":
  * `./translate_doctest.py ../3-files_and_paths/problems.py ./enabled/3_problems.yml`
-4. **Validate** the ouptut yml file:  
+4. **Validate the ouptut yml file**:  
   This will iterate over all of the problesm in teh file and 
   execute them the same way that they would be run when a user 
   submits a solution.  It will halt on any errors if found, and
@@ -65,3 +68,12 @@ All of the student problems start out in doctest format.  See the "problems.py" 
   again, and re-run validate.  
   * The format is "validate_yml.py <yml file path>"
   * `./validate_yml.py ./enabled/3_problems.yml`
+5. **Add completed problems to question_list.yml**  
+  These are the problems that will be delivered to the user when they run the 
+  tool during class. Format is like [file name without extension, problem_name]:
+```
+$ cat question_list.yml 
+- [2_problems, addThem]
+- [2_problems, carmenFound]
+...
+```
