@@ -25,7 +25,7 @@ This page:  goto/python
 4. [System and Environment](./4-system_and_env/README.md)
 5. [Data Manipulation](./5-data_manipulation/README.md)
 6. [Exception Handling](./6-exception_handling/README.md)
-7. [Unit Testing](./7-unit-testing/README.md)
+7. [Unit Testing](./7-unit_testing/README.md)
 
 ## Topics Overview:
 ### 1 - Git and Github
