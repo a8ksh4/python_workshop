@@ -130,8 +130,47 @@ def dictToCSVFile(csv_path, data):
     #return nothing
 
 
+def readingFormat(file_path, file_format):
+    '''data_4
+    Write a function caled readingFormat that accepts a file path to a json
+    or yaml formatted file and a string, either "json" or "yaml", and
+    reads in the file as the corresponding type and resturns the resulting
+    python data structure. 
+    >>> f0 = _randStr()
+    >>> json.dump(open(f0, 'w'), DATA_LDL)
+    >>> DATA_LDL == readingFormat(f0, 'json')
+    True
+    >>> os.remove(f0)
+    >>> f1 = _randStr()
+    >>> open(f1, 'w').write(yaml.dump(DATA_LDL))
+    >>> DATA_LDL == readingFormat(f1, 'yaml')
+    True
+    >>> os.remove(f1) 
+    '''
+    with open(file_path, 'r') as f:
+        result_data = yaml.load(f.read())
+    return result_data
 
-
+def writingFormat(file_path, data_object, file_format='json'):
+    '''data_5
+    Write a function called writingFormat that accepts a file path, a
+    python object and a string, either 'json' or 'yaml', and writes
+    the data object to the given file path in the corresponding format.
+    >>> f0 = _randStr()
+    >>> writingFormat(f0, DATA_LDL, 'json')
+    >>> DATA_LDL == json.load(open(f0, 'r'))
+    True
+    >>> os.path.exists(f0) and os.remove(f0)
+    >>> writingFormat(f0, DATA_LDL, 'yaml')
+    >>> DATA_LDL == yaml.load(open(f0, 'r').read())
+    True
+    >>> os.remove(f0)
+    '''
+    if file_format == 'json':
+        json.dump(open(file_path, 'w'), data_object)
+    elif file_format == 'yaml':
+        open(file_path, 'w').write(yaml.dump(data_object))
+    #return nothing
 
 
 if __name__ == '__main__':
