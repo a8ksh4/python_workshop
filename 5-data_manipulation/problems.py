@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-import argparse
+import json
 import os
 import random
 import re
 import shutil
 import string
-import subprocess as sp
-import sys
+import yaml
 
 DATA_C = '''name,age,favorite_color
 dan,90,green
@@ -171,7 +170,32 @@ def writingFormat(file_path, data_object, file_format='json'):
     elif file_format == 'yaml':
         open(file_path, 'w').write(yaml.dump(data_object))
     #return nothing
-
+           
+def somethingWithRegex(content, regex_str):
+    '''data_6
+    foo
+    '''
+    pass
+    #return bool
+           
+class dbHandler(extends Object):
+    '''Create a class called dbHndler that abstracts interaction with a
+    sqlite database into a couple of methods.  On __init__, the path to
+    the qslite db is given with the table name to interact with, and,
+    optoinally, the headers to create the table with.  If the table does
+    not already exist, headers are required or an exceptoin should be raised.
+    '''
+    def __init__(self, db_path, table_name, headers=None):
+        # initialize db cursor
+        #self.cursor = foobar
+        self.table = table_name
+    def writeLine(content):
+        '''append a row onto the db table'''
+        pass
+    def readLines():
+        '''return a list of dictoinaries continaing all rows in the table.
+        '''
+        pass
 
 if __name__ == '__main__':
     import doctest
