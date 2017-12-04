@@ -4,7 +4,7 @@ import yaml
 #import uuid
 import json
 from util.utility import decode_message, encode_message, hash_results, load_yml
-from util.server_utility import Questions, User, get_users, update_history, get_history
+from util.server_utility import Questions, User, get_users, update_history, get_history, leaderboard
 from util.solution_checker import Solution
 from time import sleep
 
@@ -143,6 +143,11 @@ class GetCompleted():
         completed = users[username].get_completed()
         resp.body = json.dumps(completed)
         
+class Leaderboard():
+    def on_get(self, req, resp):
+        resp.content_type = 'text/html'
+        resp.body = leaderboard()
+        
 questions = Questions()
 users = get_users()
 app = falcon.API()
@@ -155,3 +160,4 @@ app.add_route('/submitsolution', SubmitSolution())
 app.add_route('/getnextquestion', GetNextQuestion())
 app.add_route('/gethistory', GetHistory())
 app.add_route('/getcompleted', GetCompleted())
+app.add_route('/leaderboard', Leaderboard())

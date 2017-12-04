@@ -123,3 +123,24 @@ def get_history(item):
         return history_data
     else:
         return False
+        
+def leaderboard():
+    board = {}
+    for filename in listdir('users'):
+        if filename[-4:] != '.yml':
+            continue
+        yml_file = 'users/{}'.format(filename)
+        data = load_yml(yml_file)
+        completed = len(data['completed'])
+        board[filename[:-4]] = completed
+        
+    html_body = '<html><body><h1>Completed Questions:</h1><table>'
+    for name, score in sorted(board.items(), key=lambda item: item[1], reverse=True):
+        html_body += '<tr><td>{name}</td><td>{score}</td></tr>'.format(name=name, score=score)
+    html_body += '</table></body></html>'
+    return html_body
+        
+        
+        
+    
+    
