@@ -82,6 +82,9 @@ class CobraClient():
             finally:
                 eventloop.close()
             try:
+                print('Running the following parameters into your function:')
+                for parameter in question_data['unittests']:
+                    print(str(parameter))
                 results = Solution(question_data, solution.text)
                 results.run_solution()
             except Exception as e:
@@ -184,37 +187,6 @@ class CobraClient():
             else:
                 self.solve_question(lesson, question_label)
             
-        #self.solve_question('python_basics', 'basic_math_1')
-        #self.solve_question('python_basics', 'basic_math_2')
-        #self.solve_question('python_basics', 'basic_math_3')
-        #self.solve_question('python_basics', 'basic_math_4')
-        #self.solve_question('python_basics', 'basic_math_5')
-        #self.solve_question('python_basics', 'basic_math_6')
-        #self.solve_question('python_basics', 'strings_1')
-        #self.solve_question('python_basics', 'strings_2')
-        #self.solve_question('python_basics', 'strings_3')
-        #self.solve_question('python_basics', 'strings_4')
-        #self.solve_question('python_basics', 'strings_5')
-        #self.solve_question('python_basics', 'strings_6')
-        #self.solve_question('python_basics', 'strings_7')
-        #self.solve_question('python_basics', 'strings_8')
-        #self.solve_question('python_basics', 'branching_1')
-        #self.solve_question('python_basics', 'branching_2')
-        #self.solve_question('python_basics', 'branching_3')
-        #self.solve_question('python_basics', 'lists_1')
-        #self.solve_question('python_basics', 'lists_2')
-        #self.solve_question('python_basics', 'sets_1')
-        #self.solve_question('python_basics', 'sets_2')
-        #self.solve_question('python_basics', 'sets_3')
-        #self.solve_question('python_basics', 'sets_4')
-        #self.solve_question('python_basics', 'dictionaries_1')
-        #self.solve_question('python_basics', 'dictionaries_2')
-        #self.solve_question('python_basics', 'dictionaries_3')
-        #self.solve_question('python_basics', 'dictionaries_4')
-        #self.solve_question('python_basics', 'dictionaries_5')
-        #self.solve_question('python_basics', 'dictionaries_6')
-        #self.solve_question('python_basics', 'dictionaries_7')
-        
 if __name__ == '__main__':
     CobraClient(('127.0.0.1', '8000'))
     

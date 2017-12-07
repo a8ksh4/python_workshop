@@ -9,6 +9,6 @@ if __name__ == '__main__':
     #files = ['enabled/test.yml']
     #files = ['enabled/2_problems.yml']
     #files = ['enabled/2_problems.yml']
-    files = ['enabled/milestone2.yml']
+    files = ['enabled/final.yml']
     for file in files:
         validate(file)

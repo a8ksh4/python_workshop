@@ -148,5 +148,41 @@ convert C to F:
             - int(0)
     tags:
         - math
+
+smallest int:
+    imports: |
+        from random import seed, randint
+    posttest: ''
+    pretest: ''
+    setup: |
+        seed({seed})
+    signature: 'def smallest_int(int_list: list[int], absolute_value=False: bool): -> int'
+    solution: |
+        def smallest_int(int_list, absolute_value=False):
+            if absolute_value:
+                int_list = map(lambda item: abs(item), int_list)
+            return min(int_list)
+    tags:
+        -math
+    teardown: ''
+    text: |
+        Write a function called smallestOfList that accepts a list or tuple of
+        numbers and returns the smallest number found in the list.
+        However, if absolute value is set to True, it should return the number that
+        has the smallest absolute value.
         
-        
+        If two numbers in the list both have an absolute value that is the
+        smallest and the same, the first one encounterd should be returned.
+    unittests:
+        test1:
+            - list([1,2,3,4,5,6,7,8,9,10])
+        test2:
+            - list([-1,-2,-3,-4,-5,-6,-7,-8,-9,-10])
+        test3:
+            - list([-1,-2,-3,-4,-5,-6,-7,-8,-9,-10])
+            - True
+        test3_x4:
+            - list([randint(-100,100), randint(-100,100), randint(-100,100), randint(-100,100), randint(-100,100)])
+        test4_x4:
+            - list([randint(-100,100), randint(-100,100), randint(-100,100), randint(-100,100), randint(-100,100)])
+            - True
