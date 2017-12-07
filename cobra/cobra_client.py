@@ -70,8 +70,13 @@ class CobraClient():
         question_data = self.get_question(lesson, question_label)
         run_question_loop = True
         while run_question_loop:
-            print('======================================================================')
-            print('{lesson}\n{title}\n{text}\n{signature}\n'.format(lesson=lesson, title=question_label, **question_data))
+            print('{}======================================================================'.format(cr.Style.RESET_ALL))
+            print('{lesson_color}{lesson}\n{title_color}{title}\n{text_color}{text}\n{signature_color}{signature}{reset}\n'.format(
+                lesson=lesson, title=question_label, 
+                lesson_color=cr.Back.BLUE + cr.Fore.YELLOW, title_color=cr.Back.BLUE + cr.Fore.WHITE,
+                text_color=cr.Back.BLACK + cr.Fore.CYAN, signature_color=cr.Back.BLACK + cr.Fore.MAGENTA,
+                reset=cr.Style.RESET_ALL,
+                **question_data))
             
             eventloop = create_eventloop()
             ptpython_input = PythonInput()
@@ -83,20 +88,22 @@ class CobraClient():
                 eventloop.close()
             try:
                 print('Running the following parameters into your function:')
-                for parameter in question_data['unittests']:
-                    print(str(parameter))
+                for parameter in question_data['unittests'].values():
+                    print('({}'.format(cr.Fore.YELLOW), end='')
+                    print(', '.join(map(lambda item: str(item), parameter)), end='')
+                    print('{})'.format(cr.Style.RESET_ALL))
                 results = Solution(question_data, solution.text)
                 results.run_solution()
             except Exception as e:
-                print('An exception occred while running your code: {}'.format(e))
+                print('{}An exception occred while running your code: {}{}'.format(cr.Fore.RED, e, cr.Style.RESET_ALL))
                 continue
 
-            print('{:f}'.format(results.time_to_execute))
-            print('Unit Test results: {}'.format(results.test_results))
-            print('Line count: {}'.format(results.linecount))
-            print('Character count: {}'.format(results.charcount))
-            print('Format style violations: {}'.format(results.violationcount))
-            print('Violation details:\n{}'.format(results.violations))
+            print('Time to execute: {}{:f}{}'.format(cr.Fore.GREEN, results.time_to_execute, cr.Style.RESET_ALL))
+            print('Unit Test results: {}{}{}'.format(cr.Fore.GREEN, results.test_results, cr.Style.RESET_ALL))
+            print('Line count: {}{}{}'.format(cr.Fore.GREEN, results.linecount, cr.Style.RESET_ALL))
+            print('Character count: {}{}{}'.format(cr.Fore.GREEN, results.charcount, cr.Style.RESET_ALL))
+            print('Format style violations: {}{}{}'.format(cr.Fore.RED, results.violationcount, cr.Style.RESET_ALL))
+            print('Violation details:\n{}{}{}'.format(cr.Fore.RED, results.violations, cr.Style.RESET_ALL))
             
             stats = {   'runtime': results.time_to_execute,
                         'linecount': results.linecount, 
@@ -140,17 +147,17 @@ class CobraClient():
                                 headers=self.headers)
         history = json.loads(req.text)    
         for name, info in history.items():
-            print('{}:'.format(name))
+            print('{}{}:{}'.format(cr.Back.MAGENTA + cr.Fore.CYAN, name, cr.Style.RESET_ALL))
             print('SOLUTION:')
-            print(info['solution'])
+            print('{}{}{}'.format(cr.Fore.CYAN, info['solution'], cr.Style.RESET_ALL))
             print('RUNTIME:')
-            print(info['stats']['runtime'])
+            print('{}{}{}'.format(cr.Fore.GREEN, info['stats']['runtime'], cr.Style.RESET_ALL))
             print('LINES:')
-            print(info['stats']['linecount'])
+            print('{}{}{}'.format(cr.Fore.GREEN, info['stats']['linecount'], cr.Style.RESET_ALL))
             print('CHARACTERS:')
-            print(info['stats']['charcount'])
+            print('{}{}{}'.format(cr.Fore.GREEN, info['stats']['charcount'], cr.Style.RESET_ALL))
             print('VIOLATIONS:')
-            print(info['stats']['violations'])
+            print('{}{}{}'.format(cr.Fore.RED, info['stats']['violations'], cr.Style.RESET_ALL))
             
         
     def run(self):

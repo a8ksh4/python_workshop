@@ -83,7 +83,9 @@ class User():
 
 class Questions():
     def __init__(self):
-        self.questions = {filename.rstrip('.yml'): load_yml('enabled/{}'.format(filename)) for filename in listdir('enabled')}
+        self.questions = {filename[:-4]: load_yml('enabled/{}'.format(filename)) for filename in listdir('enabled') if filename[-4:] == '.yml'}
+        print('loaded these question files:')
+        print(self.questions.keys())
 
     def get_lessons(self):
         return list(self.questions.keys())
