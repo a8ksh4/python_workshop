@@ -1,8 +1,8 @@
 # python_class
 Python Learning @ Everywhere
-This page:  goto/python
-**NOTE:** If you found this content in a zip file, please navigate to our github for the best experience: https://github.com/a8ksh4/python_class/
-
+This page:  goto/python  
+**NOTE:** If you found this content in a zip file, please navigate to our github for the best experience: https://github.com/a8ksh4/python_class/  
+  
 **Instructor documentation**: [here](./cobra/README.md)
 * How to start problem server
 * How to run client
