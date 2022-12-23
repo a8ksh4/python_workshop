@@ -42,7 +42,8 @@ You need somewhere to run your python code, please make sure to have one of thes
 * Print out this python cheat sheet: http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf
 
 ## Quick Links:
-1. [Git and Github](./1-git_and_github/README.md) (start here)
+0. [Curriculum](./0-curricullum/README.md)
+1. [Git and Github](./1-git_and_github/README.md)
 2. [Python Basics](./2-python_basics/README.md)
 3. [Files and Paths](./3-files_and_paths/README.md)
 4. [System and Environment](./4-system_and_env/README.md)
@@ -51,6 +52,13 @@ You need somewhere to run your python code, please make sure to have one of thes
 7. [Unit Testing](./7-unit_testing/README.md)
 
 ## Topics Overview:
+### 0 - Curriculum
+* Week 1 - Gettin notebook working, comp-sci intro, python data types, and basic math & string stuff.
+* Week 2 - Branching and loops
+* Week 3 - Modules
+* Week 4
+
+
 ### 1 - Git and Github
 ### 2 - Python Basics
 * python installations
