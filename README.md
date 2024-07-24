@@ -31,12 +31,21 @@ If you're working from your own laptop and want to open notebooks locally rather
 * Week 3: Introducing functions and modules in Python. Basic introduction to pandas for data analysis, focusing on importing data and initial data exploration.
 * Week 4: Building on pandas skills with more advanced data manipulation and introduction to data visualization using pandas and matplotlib for generating graphs.
 
-* Create a ChatGPT account and try asking it a few questions - it can be very helpful for figuring out how to do things, why things work the way they do, etc:
-  * https://chat.openai.com/chat
-  * Example questions:
-    * How do I use for loops in python?
-    * How do I configure VS Code to use my Anaconda python interpreter?
-    * etc!  
+### Next Steps
+* Online Courses
+* Weekend projects
+* Automate something at work
+
+## Resources
+* https://docs.python.org/3/
+* https://www.w3schools.com/python/default.asp
+* https://google.github.io/styleguide/pyguide.html
+* https://github.com/jsantarc/cognitiveclass.ai-Python-for-Data-Science
+* https://replit.com/
+
+### Notes on AI like ChatGPT
+These tools are very helpful for learning.  For this course, use them to explain how things work, but don't ask them to write code for you.  If you don't experiment and learn for yourself, you won't retain much.  
+
 
 ### Optional Pre-Work
 * Create a ChatGPT account and try asking it a few questions - it can be very helpful for figuring out how to do things, why things work the way they do, etc:
