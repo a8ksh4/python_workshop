@@ -54,18 +54,13 @@ Python 3 converts to float during division unless `//` is used instead of `/`.
 In [1]: x = 1
 
 In [2]: x / 2
+Out[2]: 0.5
+
+In [2]: x // 2
 Out[2]: 0
 
 In [3]: x % 2
 Out[3]: 1
-
-In [4]: x = 1.0
-
-In [5]: x / 2
-Out[5]: 0.5
-
-In [6]: x % 2
-Out[6]: 1.0
 ```
 Python has built in support for complex numbers.  
 ```python
