@@ -10,7 +10,7 @@ We have coursework ready to learn a few things:
 * ... Will add more to this list...
 
 ## Getting Started
-You need a place to run python code and open "ipython notebooks".
+You need a place to run python code and open "ipython notebooks".  Let us know if you need a laptop to use during class.
 
 Our recommended mode of work will be in notebooks on google Colab: https://colab.research.google.com/
 * Sign up for a google account if you don't have one.
@@ -18,12 +18,17 @@ Our recommended mode of work will be in notebooks on google Colab: https://colab
 * Open the week one notebook that we'll be working from:
   * Go to File -> Open Notebook -> Github, and paste in "a8ksh4/Python_Class".
   * Open the Library Week 1 notebook file
-*   There's a nice intro video for collabe here: https://www.youtube.com/watch?v=inN8seMm7UI
+* There's a nice intro video for colab here: https://www.youtube.com/watch?v=inN8seMm7UI
  
 If you're working from your own laptop and want to open notebooks locally rather than in colab, I'd recommend insalling the the Anaconda Python distribution from here: https://www.anaconda.com/products/distribution
   * In windows, I'd recommend NOT running the installer as administrator - Install for only a single user when prompted.  It's easier to install packages if it is installed in your home directory rather than a shared area for all users.
   * Anaconda is available for Windows, Mac, and Linux!
   * You can use any python distribution, but Anaconda is highly recommended becuase its package manager works so well and it has support for so many libraries out-of-the-box.
+
+It's also nice editing notebooks and code in VS Code.  I think that works well with a plain python instal on your computer, so you'd want to use these:
+* Python: 
+* VS Code: 
+  * Install extensions
 
 ## Curriculum
 These notebooks will be renamed to remove the week # convention.  
