@@ -1,17 +1,17 @@
-# python class
+# Python Workshop
 
-Welcome to the Library Pythong Intrductory course.  Over four weeks, we'll learn the basics of the Python programming language and get to the point where we can open a spreadsheet with pandas and do some basic data analysis.
+Welcome to the Library Python Workshop!
 
-We'll use google colab to open and work from python notebooks for this course.  https://colab.research.google.com/  This is so anyone attending can work from the library's loaner notebooks if needed, and continue work on a machine at home.  You're welcome to install python locally on your own laptop if you prefer.  I'd recommend installing the anaconda python distribution as it has everything configured automatically for working with notebooks. 
+We meet once a week to learn how to program in the Python progamming language.  This is intended to be a work at your own pace environment, just bring any questions and stuff you'd like to look at each week and we all benefit as a group looking at it. 
 
-## Background Info and To-Do
-This guide was originally assembled with scripting and system-automation in mind, but the whole Jupyter Notebook mode of work, I think, makes python more approachable for data manipulation, automating office tasks, etc. And working with python might feel a little more consistent cross-platform when you're working in notebooks, so it's a good format for learning.  My to-do list includes:
-* Incorporating Python 3.x changes (print, f-strings, encoding, etc.) in the examples
-* Adding notebooks for each of four weeks with problems to work on.
-* Prioritizing Notebook Use and adding a variety of data science examples.
-* Adding modules for micropython, pygame or pygamezero, ...
-  
-## Student Pre-Work:
+We have coursework ready to learn a few things:
+* Basics
+* Data analysis with "Pandas"
+* ... Will add more to this list...
+
+## Getting Started
+You need a place to run python code and open "ipython notebooks".
+
 Our recommended mode of work will be in notebooks on google Colab: https://colab.research.google.com/
 * Sign up for a google account if you don't have one.
 * Log in to https://colab.research.google.com and skim over the readme info
@@ -26,6 +26,7 @@ If you're working from your own laptop and want to open notebooks locally rather
   * You can use any python distribution, but Anaconda is highly recommended becuase its package manager works so well and it has support for so many libraries out-of-the-box.
 
 ## Curriculum
+These notebooks will be renamed to remove the week # convention.  
 * Week 1: Introduction to Python and Google Colab. Covering variables and data types (numeric, strings, boolean), truthiness, and basic control flow (if-else statements).
 * Week 2: Exploring more complex data types (lists, tuples, dictionaries) and advanced control flow (loops: for and while).
 * Week 3: Introducing functions and modules in Python. Basic introduction to pandas for data analysis, focusing on importing data and initial data exploration.
