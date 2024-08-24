@@ -29,7 +29,7 @@ Our recommended mode of work will be in notebooks on google Colab: https://colab
 * Sign up for a google account if you don't have one.
 * Log in to https://colab.research.google.com and skim over the readme info
 * Open the week one notebook that we'll be working from:
-  * Go to File -> Open Notebook -> Github, and paste in "a8ksh4/Python_Class".
+  * Go to File -> Open Notebook -> Github, and paste in "a8ksh4/python_workshop".
   * Open the Library Week 1 notebook file
 * There's a nice intro video for colab here: https://www.youtube.com/watch?v=inN8seMm7UI
  
