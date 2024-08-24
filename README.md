@@ -1,13 +1,26 @@
-# Python Workshop
+# Python Programming Workshop
 
-Welcome to the Library Python Workshop!
+Welcome to the Library Python Programming Workshop!
 
-We meet once a week to learn how to program in the Python progamming language.  This is intended to be a work at your own pace environment, just bring any questions and stuff you'd like to look at each week and we all benefit as a group looking at it. 
+We meet once a week to learn how to program in the Python progamming language.  This is a work at your own pace and collaborate with others environment; Just bring any questions and stuff you'd like to look at each week and we all benefit as a group looking at it. 
 
-We have coursework ready to learn a few things:
-* Basics
+We have a bunch of coureswork ready to use, including:
+* Python Basics 
 * Data analysis with "Pandas"
-* ... Will add more to this list...
+
+See the Notebooks list below for a more detailed list.
+
+## Current Schedule:
+* Monday Aug 26th 4-5PM
+* Thursday Aug 29th 4:30-6:30PM
+* Wednesday Sep 4th 4-5PM
+* TBD (probably not) Sep 11th and 18th
+* Wednesday Sep 25th 4-5PM
+* Wednesday Oct 2nd 4-5PM
+* Each wednesday from 4-5PM ongoing.  
+
+Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
+* Set "limit by location" to "Cameron Park Library".
 
 ## Getting Started
 You need a place to run python code and open "ipython notebooks".  Let us know if you need a laptop to use during class.
@@ -30,109 +43,54 @@ It's also nice editing notebooks and code in VS Code.  I think that works well w
 * VS Code: 
   * Install extensions
 
-## Curriculum
-These notebooks will be renamed to remove the week # convention.  
-* Week 1: Introduction to Python and Google Colab. Covering variables and data types (numeric, strings, boolean), truthiness, and basic control flow (if-else statements).
-* Week 2: Exploring more complex data types (lists, tuples, dictionaries) and advanced control flow (loops: for and while).
-* Week 3: Introducing functions and modules in Python. Basic introduction to pandas for data analysis, focusing on importing data and initial data exploration.
-* Week 4: Building on pandas skills with more advanced data manipulation and introduction to data visualization using pandas and matplotlib for generating graphs.
+## Notebooks Summary
+We have a series of python notebooks ready to work through to learn from.  They include all of the information you need to learn, links to additional resources, and programming problems to work through for each topic.  
 
-### Next Steps
-* Online Courses
-* Weekend projects
-* Automate something at work
+* A-Getting_Started.ipynb - Introduction to Python and Google Colab. Covering variables and data types (numeric, strings, boolean), truthiness, and basic control flow (if-else statements).
+* B-Dictionaries_and_Loops.ipynb - Exploring more complex data types (lists, tuples, dictionaries) and advanced control flow (loops: for and while).  Opening files and intro to json.
+* C-Functions_and_Pandas_Intro.ipynb - Introducing functions and modules in Python. Basic introduction to pandas for data analysis, focusing on importing data and initial data exploration
+* D-Pandas.ipynb - Building on pandas skills with more advanced data manipulation and introduction to data visualization using pandas and matplotlib for generating graphs.
+
+**In Development:**
+* E-Writing_Scripts.ipynb - Installing python locally, environment, structure of a script, and argparse
+* F-Microcontrollers_Intro.ipynb - Circuitpython and Micropython on common microcontroller boards.
+* G-Exception_Handling.ipynb - Try/Except blocks and Error Handing.
+* H-Unit_Tests.ipynb - Writing test cases to verify your code works as designed.
 
 ## Resources
-* https://docs.python.org/3/
-* https://www.w3schools.com/python/default.asp
-* https://google.github.io/styleguide/pyguide.html
-* https://github.com/jsantarc/cognitiveclass.ai-Python-for-Data-Science
+**Documentation**
+* https://docs.python.org/3/ - Python Documentation
+* https://www.w3schools.com/python/default.asp - Great documentation and Examples
+* https://peps.python.org/pep-0008/ - "Pep 8" style guide
+* https://google.github.io/styleguide/pyguide.html - Google style guide
+* https://github.com/jsantarc/cognitiveclass.ai-Python-for-Data-Science - Data science notebooks
+
+**Online Programming Tools**
 * https://replit.com/
 
 ### Notes on AI like ChatGPT
-These tools are very helpful for learning.  For this course, use them to explain how things work, but don't ask them to write code for you.  If you don't experiment and learn for yourself, you won't retain much.  
+These tools are **very** helpful for learning.  For this course, use them to explain how things work, but don't ask them to write code for you.  If you don't experiment and learn for yourself, you won't retain as much.  Keep all of your code and use your past code as the start for each more complicated problem.  You'll build a toolkit of libraries and code bits that you understand and make all kinds of things from.
 
+* https://chat.openai.com/chat
+* Example questions:
+  * How do I use for loops in python?
+  * How do I configure VS Code to use my Anaconda python interpreter?
+  * etc!  
 
-### Optional Pre-Work
-* Create a ChatGPT account and try asking it a few questions - it can be very helpful for figuring out how to do things, why things work the way they do, etc:
-  * https://chat.openai.com/chat
-  * Example questions:
-    * How do I use for loops in python?
-    * How do I configure VS Code to use my Anaconda python interpreter?
-    * etc!  
+## Github
+This content is hosted here in a Git repository. You can check out a copy to your computer and "pull" updates with a git client:
 * Make a github.com account and install git. 
   * Linux:  sudo apt-get install git
   * Windows:  https://git-scm.com/download/win
   * Check out this repository in your project area: git clone https://github.com/a8ksh4/python_class.git`
-  * Feel free to open "bug reports" in this repo for content you'd like to see added, changes needed, or corrections.
 
-* Install a text editor with code highlighting or an IDE for writing code in:
-    * Notepad ++: http://notepad-plus-plus.org/
-    * VS Code: https://code.visualstudio.com/
+Feel free to open "bug reports" in this repo for content you'd like to see added, changes needed, or corrections.  Or make  an improvement and submit a pull request and I'll merge your changes into the repo.
 
-* Print out this python cheat sheet: tbd
+## Code Editors
+Install a text editor with code highlighting or an IDE for writing code in:
+* Notepad ++: http://notepad-plus-plus.org/
+* VS Code: https://code.visualstudio.com/
 
-## Quick Links:
-0. [Coursework](./0-coursework/README.md)
-1. [Git and Github](./1-git_and_github/README.md)
-2. [Python Basics](./2-python_basics/README.md)
-3. [Files and Paths](./3-files_and_paths/README.md)
-4. [System and Environment](./4-system_and_env/README.md)
-5. [Data Manipulation](./5-data_manipulation/README.md)
-6. [Exception Handling](./6-exception_handling/README.md)
-7. [Unit Testing](./7-unit_testing/README.md)
-
-## Topics Overview:
-### 0 - Coursework
-There are four notebooks here, one for each week of the class.  
-
-### 1 - Git and Github
-
-### 2 - Python Basics
-* python installations
-* data types
-* prompts & getpass
-* recursion & iteration
-* functions
-* scope
-* file handling
-* sorting
-* regex
-
-### 3 - Files and Paths
-* create, rm, copy, move, chmod, chown
-* tar, gzip
-* logging
-
-### 4 - System and Environment
-* argparse
-* os & os.environ
-* sys & sys.args
-* setuid, setgid
-* nis & nodes
-* platform
-* subprocess
-
-### 5 - Data Manipulation
-* csv, json, yaml, pickle, xlsx
-* regex
-* sql & sqlite
-
-### 6 - Exception Handling
-* methodology
-* Examles
-
-### 7 - QA and Unit Testing
-* examples
-
-### 8 - Debugging
-* http://docs.python-guide.org/en/latest/writing/tests/
-
-### 9 - Data Science with pandas
-* Importing a Spreadsheet
-* Basic column manipulation
-* ...
-* ...
-
-### Windows Examples
+If you're programming circuitpython or micropython on a microcontroller, Thonny is the best editor to start with.  It has a built in serial console for seeing output from your code, and helps handle updating the code files on the board for you. An IDE like VS Code or IntelliJ with a Micropython or Circuitpython extension would be more powerful, but more complicated to set up.
+* https://thonny.org/
 
