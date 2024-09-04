@@ -11,10 +11,8 @@ We have a bunch of coureswork ready to use, including:
 See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
-* Monday Aug 26th 4-5PM
-* Thursday Aug 29th 4:30-6:30PM
 * Wednesday Sep 4th 4-5PM
-* TBD (probably not) Sep 11th and 18th
+* NO WORKSHOP on Sep 11th and 18th
 * Wednesday Sep 25th 4-5PM
 * Wednesday Oct 2nd 4-5PM
 * Each wednesday from 4-5PM ongoing.  
