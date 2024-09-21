@@ -11,7 +11,6 @@ We have a bunch of coureswork ready to use, including:
 See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
-* Wednesday Sep 4th 4-5PM
 * NO WORKSHOP on Sep 11th and 18th
 * Wednesday Sep 25th 4-5PM
 * Wednesday Oct 2nd 4-5PM
@@ -46,10 +45,15 @@ We have a series of python notebooks ready to work through to learn from.  They 
 
 * A-Getting_Started.ipynb - Introduction to Python and Google Colab. Covering variables and data types (numeric, strings, boolean), truthiness, and basic control flow (if-else statements).
 * B-Dictionaries_and_Loops.ipynb - Exploring more complex data types (lists, tuples, dictionaries) and advanced control flow (loops: for and while).  Opening files and intro to json.
-* C-Functions_and_Pandas_Intro.ipynb - Introducing functions and modules in Python. Basic introduction to pandas for data analysis, focusing on importing data and initial data exploration
-* D-Pandas.ipynb - Building on pandas skills with more advanced data manipulation and introduction to data visualization using pandas and matplotlib for generating graphs.
+* C-Functions_and_Module_Imports.ipynb - Introducing functions and modules in Python.
+* D0-Pandas_Example.ipynb - An example of importing data and doing some anaylsis and graphing to get a feel for how pandas works. 
+* D1-Pandas_Intro_and_Data_selection.ipynb - Some pandas basics including imoprting data, manipulating columns of data, learning ways to select rows and columns of data, and exporting data to file. 
 
-**In Development:**
+**In Development**
+* D2-Data_Cleaning.ipynb - Setting column data types, removing missing or invalid data, interpolation, etc tools for preparing data for analysis.
+* D3-Pandas_Graphing.ipynb - Goes over a bunch of plot types multi-axis plots, and graphs with multiple plots. 
+* D4-Advanced_Pandas.ipynb - Pivot, stack, unstack, join, concatenate, etc. 
+* D5-Machine_Learning.ipynb - Methods to use machine learning to model data using pandas and common ML libraries. Building on pandas skills with more advanced data manipulation and introduction to data visualization using pandas and matplotlib for generating graphs.
 * E-Writing_Scripts.ipynb - Installing python locally, environment, structure of a script, and argparse
 * F-Microcontrollers_Intro.ipynb - Circuitpython and Micropython on common microcontroller boards.
 * G-Exception_Handling.ipynb - Try/Except blocks and Error Handing.
