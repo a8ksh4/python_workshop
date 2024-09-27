@@ -58,6 +58,9 @@ We have a series of python notebooks ready to work through to learn from.  They 
 * F-Microcontrollers_Intro.ipynb - Circuitpython and Micropython on common microcontroller boards.
 * G-Exception_Handling.ipynb - Try/Except blocks and Error Handing.
 * H-Unit_Tests.ipynb - Writing test cases to verify your code works as designed.
+* S-Subprocess_and_System_Calls.ipynb - Usage of the subprocess module for running commands outside of python
+* T-Datetime.ipynb - Python Datetime Objects
+* V-Virtual_Environments.ipynb - 
 
 ## Resources
 **Documentation**
