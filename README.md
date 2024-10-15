@@ -11,10 +11,7 @@ We have a bunch of coureswork ready to use, including:
 See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
-* NO WORKSHOP on Sep 11th and 18th
-* Wednesday Sep 25th 4-5PM
-* Wednesday Oct 2nd 4-5PM
-* Each wednesday from 4-5PM ongoing.  
+As of October, we're continuing to meet each wednesday from 4-5PM.  
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
 * Set "limit by location" to "Cameron Park Library".
