@@ -48,6 +48,7 @@ We have a series of python notebooks ready to work through to learn from.  They 
 * C-Functions_and_Module_Imports.ipynb - Introducing functions and modules in Python.
 * D0-Pandas_Example.ipynb - An example of importing data and doing some anaylsis and graphing to get a feel for how pandas works. 
 * D1-Pandas_Intro_and_Data_selection.ipynb - Some pandas basics including imoprting data, manipulating columns of data, learning ways to select rows and columns of data, and exporting data to file. 
+* N-Numpy - Basics using numpy.  Need to add some vectorization problems where we convert python code to numpy code...
 
 **In Development**
 * D2-Data_Cleaning.ipynb - Setting column data types, removing missing or invalid data, interpolation, etc tools for preparing data for analysis.
@@ -87,7 +88,7 @@ This content is hosted here in a Git repository. You can check out a copy to you
 * Make a github.com account and install git. 
   * Linux:  sudo apt-get install git
   * Windows:  https://git-scm.com/download/win
-  * Check out this repository in your project area: git clone https://github.com/a8ksh4/python_class.git`
+  * Check out this repository in your project area: git clone https://github.com/a8ksh4/python_workshop.git`
 
 Feel free to open "bug reports" in this repo for content you'd like to see added, changes needed, or corrections.  Or make  an improvement and submit a pull request and I'll merge your changes into the repo.
 
