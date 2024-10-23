@@ -45,11 +45,12 @@ We have a series of python notebooks ready to work through to learn from.  They 
 * C-Functions_and_Module_Imports.ipynb - Introducing functions and modules in Python.
 * D0-Pandas_Example.ipynb - An example of importing data and doing some anaylsis and graphing to get a feel for how pandas works. 
 * D1-Pandas_Intro_and_Data_selection.ipynb - Some pandas basics including imoprting data, manipulating columns of data, learning ways to select rows and columns of data, and exporting data to file. 
+* D3-Pandas_Graphing.ipynb - Goes over a bunch of plot types multi-axis plots, and graphs with multiple plots using pd.plot (wrapper for matplotlib pyplot)
 * N-Numpy - Basics using numpy.  Need to add some vectorization problems where we convert python code to numpy code...
 
 **In Development**
 * D2-Data_Cleaning.ipynb - Setting column data types, removing missing or invalid data, interpolation, etc tools for preparing data for analysis.
-* D3-Pandas_Graphing.ipynb - Goes over a bunch of plot types multi-axis plots, and graphs with multiple plots. 
+
 * D4-Advanced_Pandas.ipynb - Pivot, stack, unstack, join, concatenate, etc. 
 * D5-Machine_Learning.ipynb - Methods to use machine learning to model data using pandas and common ML libraries. Building on pandas skills with more advanced data manipulation and introduction to data visualization using pandas and matplotlib for generating graphs.
 * E-Writing_Scripts.ipynb - Installing python locally, environment, structure of a script, and argparse
