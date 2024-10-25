@@ -15,12 +15,12 @@ We were meeting on wednesdays during October, but due to a scheduling conflict, 
 * Wednesday Oct 23 4PM-5PM
 * Wednesday Oct 30 4PM-5PM
 * Thursday Nov 7 4:30PM to 5:30PM
-* Thursday Nov 14 - NO MEETING?
+* Thursday Nov 14 - 4:30 to 5:30PM (in the quiet room)
 * Thursday Nov 21 4:30PM to 5:30PM
 * Thursday Nov 28 - NO MEETING Thanksgiving
 * Thursday Dec 5 -  4:30PM to 5:30PM
 * Thursday Dec 12 -  4:30PM to 5:30PM
-* Thursday Dec 19 - NO MEETING?
+* Thursday Dec 19 - 4:30P to 5:30PM (in the quiet room)
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
 * Set "limit by location" to "Cameron Park Library".
