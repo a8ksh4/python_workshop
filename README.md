@@ -11,7 +11,16 @@ We have a bunch of coureswork ready to use, including:
 See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
-As of October, we're continuing to meet each wednesday from 4-5PM.  
+We were meeting on wednesdays during October, but due to a scheduling conflict, we'll bo moving to Thursdays.
+* Wednesday Oct 23 4PM-5PM
+* Wednesday Oct 30 4PM-5PM
+* Thursday Nov 7 4:30PM to 5:30PM
+* Thursday Nov 14 - NO MEETING?
+* Thursday Nov 21 4:30PM to 5:30PM
+* Thursday Nov 28 - NO MEETING Thanksgiving
+* Thursday Dec 5 -  4:30PM to 5:30PM
+* Thursday Dec 12 -  4:30PM to 5:30PM
+* Thursday Dec 19 - NO MEETING?
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
 * Set "limit by location" to "Cameron Park Library".
