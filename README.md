@@ -12,8 +12,6 @@ See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
 We were meeting on wednesdays during October, but due to a scheduling conflict, we'll bo moving to Thursdays.
-* Thursday Nov 07 - 4:30PM to 5:30PM
-* Thursday Nov 14 - 4:30PM to 5:30PM (in the quiet room)
 * Thursday Nov 21 - 4:30PM to 5:30PM
 * Thursday Nov 28 - NO MEETING Thanksgiving
 * Thursday Dec 05 - 4:30PM to 5:30PM
