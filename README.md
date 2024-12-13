@@ -12,11 +12,12 @@ See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
 We were meeting on wednesdays during October, but due to a scheduling conflict, we'll bo moving to Thursdays.
-* Thursday Nov 21 - 4:30PM to 5:30PM
-* Thursday Nov 28 - NO MEETING Thanksgiving
-* Thursday Dec 05 - 4:30PM to 5:30PM
 * Thursday Dec 12 - 4:30PM to 5:30PM
 * Thursday Dec 19 - NO MEETING Library Winter Wonderland Event
+* Thursday Dec 26 - 4:30PM to 5:30PM
+* Thursday Jan 02 - NO MEETING Vacation
+* Thursday Jan 09 - 4:30PM to 5:30PM
+* Thursdays ongoing. 
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
 * Set "limit by location" to "Cameron Park Library".
