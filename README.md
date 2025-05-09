@@ -19,6 +19,10 @@ We were meeting on wednesdays during October, but due to a scheduling conflict, 
 * Thursday May 29 - NO MEETING (special event)
 * Thursday Jun 05 - 5:30PM
 * Thursday Jun 12 - 5:30PM
+* Thursday Jun 19 - NO MEETING (writers group)
+* Thursday Jun 26 - NO MEETING (schedule conflict)
+* Thursday Jul 03 - 5:30PM
+* Thursday Jul 10 - 5:30PM
 * Thursdays ongoing at 5:30PM except third thursday of each month and special events. 
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
@@ -79,6 +83,9 @@ We have a series of python notebooks ready to work through to learn from.  They 
 
 **Online Programming Tools**
 * https://replit.com/
+
+**Online Classes, videos, etc***
+There are sooo many good resources online.  This course is assembled by a great instructor at GATech and is recommended pre-cursor to their online Masters in Comp Sci program:  https://www.edx.org/certificates/professional-certificate/the-georgia-institute-of-technology-introduction-to-python-programming
 
 ### Notes on AI like ChatGPT
 These tools are **very** helpful for learning.  For this course, use them to explain how things work, but don't ask them to write code for you.  If you don't experiment and learn for yourself, you won't retain as much.  Keep all of your code and use your past code as the start for each more complicated problem.  You'll build a toolkit of libraries and code bits that you understand and make all kinds of things from.
