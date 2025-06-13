@@ -12,17 +12,16 @@ See the Notebooks list below for a more detailed list.
 
 ## Current Schedule:
 We were meeting on wednesdays during October, but due to a scheduling conflict, we'll bo moving to Thursdays.
-* Thursday May 01 - 5:30PM New Time!
-* Thursday May 08 - 5:30PM
-* Thursday May 15 - NO MEETING (writers group)
-* Thursday May 22 - 5:30PM
-* Thursday May 29 - NO MEETING (special event)
-* Thursday Jun 05 - 5:30PM
 * Thursday Jun 12 - 5:30PM
 * Thursday Jun 19 - NO MEETING (writers group)
 * Thursday Jun 26 - NO MEETING (schedule conflict)
 * Thursday Jul 03 - 5:30PM
 * Thursday Jul 10 - 5:30PM
+* Thursday Jul 17 - NO MEETING (writers group)
+* Thursday Jul 24 - NO MEETING (schedule conflict)
+* Thursday Jul 30 - NO MEETING (schedule conflict)
+* Thursday Aug 07 - 5:30PM
+* Thursday Aug 14 - 5:30PM
 * Thursdays ongoing at 5:30PM except third thursday of each month and special events. 
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
