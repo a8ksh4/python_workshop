@@ -14,7 +14,7 @@ See the Notebooks list below for a more detailed list.
 We were meeting on wednesdays during October, but due to a scheduling conflict, we'll bo moving to Thursdays.
 * Thursday Jun 12 - 5:30PM
 * Thursday Jun 19 - NO MEETING (writers group)
-* Thursday Jun 26 - NO MEETING (schedule conflict)
+* Thursday Jun 26 - 5:30PM
 * Thursday Jul 03 - 5:30PM
 * Thursday Jul 10 - 5:30PM
 * Thursday Jul 17 - NO MEETING (writers group)
