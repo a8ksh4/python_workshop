@@ -84,7 +84,14 @@ We have a series of python notebooks ready to work through to learn from.  They 
 * https://replit.com/
 
 **Online Classes, videos, etc***
-There are sooo many good resources online.  This course is assembled by a great instructor at GATech and is recommended pre-cursor to their online Masters in Comp Sci program:  https://www.edx.org/certificates/professional-certificate/the-georgia-institute-of-technology-introduction-to-python-programming
+* Kaggle Courses; e.g. Intro to Programming:
+  * https://www.kaggle.com/learn
+* Many Youtube Python Programming tutorials:
+  * https://www.youtube.com/watch?v=eWRfhZUzrAc&list=PLWKjhJtqVAbnqBxcdjVGgT3uVR10bzTEB
+  * https://www.youtube.com/watch?v=K5KVEU3aaeQ
+  * ... search ... 
+* More structured fancy courses/programs.  This one is assembled by a great instructor at GATech and is recommended pre-cursor to their online Masters in Comp Sci program
+  * https://www.edx.org/certificates/professional-certificate/the-georgia-institute-of-technology-introduction-to-python-programming
 
 ### Notes on AI like ChatGPT
 These tools are **very** helpful for learning.  For this course, use them to explain how things work, but don't ask them to write code for you.  If you don't experiment and learn for yourself, you won't retain as much.  Keep all of your code and use your past code as the start for each more complicated problem.  You'll build a toolkit of libraries and code bits that you understand and make all kinds of things from.
