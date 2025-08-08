@@ -22,7 +22,7 @@ We were meeting on wednesdays during October, but due to a scheduling conflict, 
 * Thursday Jul 30 - NO MEETING (schedule conflict)
 * Thursday Aug 07 - 5:30PM
 * Thursday Aug 14 - 5:30PM
-* Thursdays ongoing at 5:30PM except third thursday of each month and special events. 
+* THE END, doing other stuff for a while...
 
 Please check the library calendar here to confirm dates/times: **https://engagedpatrons.org/EventsCalendar.cfm?SiteID=7839**
 * Set "limit by location" to "Cameron Park Library".
